@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HealthSafetyApp.Views.LandingPageDetail"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:fontAwesone="clr-namespace:HealthSafetyApp.FontAwesomeIcons"
+             ios:Page.UseSafeArea="true"
+             xmlns:controls="clr-namespace:HealthSafetyApp.Controls"
+             NavigationPage.HasNavigationBar="False">
+    <StackLayout Orientation="Vertical">
+        <Grid ColumnDefinitions="50,*" HeightRequest="40" Margin="10">
+            <Image Grid.Column="0" HorizontalOptions="Center" >
+                        <Image.Source>
+                            <FontImageSource
+                                FontFamily="fontAwesomeSolid"
+                                Glyph="{x:Static fontAwesone:FontAwesomeIcons.Bars}"
+                                Size="Large"
+                                Color="Black" />
+                        </Image.Source>
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_3"></TapGestureRecognizer>
+                </Image.GestureRecognizers>
+            </Image>
+            
+            <Label Grid.Column="1" Text="Health and Safety topics" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+        </Grid>
+    <ScrollView BackgroundColor="LightGray" >
+        <StackLayout HorizontalOptions="FillAndExpand" Padding="5,15" Spacing="5" >
+            <Button Padding="10" ClassId="0" x:Name="BTN01" Clicked="OnTap_Nav_List" FontSize="Small" BackgroundColor="#64a8d9" BorderColor="#f0f0f0" TextColor="#f0f0f0" BorderWidth="1" BorderRadius="20" Text="Dynamic Risk Assessment Tool ©" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Image="P1.png"></Button>
+            <Button Padding="10" ClassId="1" x:Name="BTN2" Clicked="OnTap_Nav_List" FontSize="Small" BackgroundColor="#64a8d9" BorderColor="#f0f0f0" TextColor="#f0f0f0" BorderWidth="1" BorderRadius="20" Text="COSHH Assessment Tool ©" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Image="P2.png"/>
+            <Button Padding="10" ClassId="2" x:Name="BTN3" Clicked="OnTap_Nav_List" FontSize="Small" BackgroundColor="#64a8d9" BorderColor="#f0f0f0" TextColor="#f0f0f0" BorderWidth="1" BorderRadius="20" Text="WorkStation Assessment Tool ©" FontAttributes="Bold" HorizontalOptions="FillAndExpand"  VerticalOptions="CenterAndExpand" Image="P3.png"/>
+            <Button Padding="10" ClassId="3" x:Name="BTN4" Clicked="OnTap_Nav_List" FontSize="Small" BackgroundColor="#64a8d9" BorderColor="#f0f0f0" TextColor="#f0f0f0" BorderWidth="1" BorderRadius="20" Text="Manual Handling Risk Assessment Tool ©" FontAttributes="Bold"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Image="P4.png"/>
+            <Button Padding="10" ClassId="4" x:Name="BTN5" Clicked="OnTap_Nav_List" FontSize="Small" BackgroundColor="#64a8d9" BorderColor="#f0f0f0" TextColor="#f0f0f0" BorderWidth="1" BorderRadius="20" Text="ACCIDENT RECORD FORM Tool ©" FontAttributes="Bold"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Image="P5.png"/>
+            <Button Padding="10" ClassId="5" x:Name="BTN6" Clicked="OnTap_Nav_List" FontSize="Small" BackgroundColor="#64a8d9" BorderColor="#f0f0f0" TextColor="#f0f0f0" BorderWidth="1" BorderRadius="20" Text="Safe Systems of Work Tool ©" FontAttributes="Bold"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Image="P6.png"/>
+            <Button Padding="10" ClassId="7" x:Name="BTN8" Clicked="OnTap_Nav_List" FontSize="Small" BackgroundColor="#64a8d9" BorderColor="#f0f0f0" TextColor="#f0f0f0" BorderWidth="1" BorderRadius="20" Text="AUDIT FORM Tool ©" FontAttributes="Bold"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Image="P8.png"/>
+            <Button Padding="10" ClassId="6" x:Name="BTN7" Clicked="OnTap_Nav_List" FontSize="Small" BackgroundColor="#64a8d9" BorderColor="#f0f0f0" TextColor="#f0f0f0" BorderWidth="1" BorderRadius="20" Text="TOOLBOX TALKS" FontAttributes="Bold"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Image="P7.png"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" >
+                <BoxView HeightRequest="0.5" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black" />
+                <Label Text="Output folders">
+                </Label>
+                <BoxView HeightRequest="0.5" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black" />
+            </StackLayout>
+            <StackLayout Orientation="Vertical" HorizontalOptions="Fill"  Spacing="5">
+                <Button Padding="10" ClassId="0" x:Name="BTN10" Clicked="OnTap_openpdffolderAsync" FontSize="Small" BackgroundColor="#64a8d9" BorderColor="#f0f0f0" TextColor="#f0f0f0" BorderWidth="1" BorderRadius="20" Text="PDFs output folder" FontAttributes="Bold"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Image="fillableform1_pdf_icon.png"/>
+                <Button Padding="10" ClassId="0" x:Name="BTN11" Clicked="OnTap_opendraftrsfolderAsync" FontSize="Small" BackgroundColor="#64a8d9" BorderColor="#f0f0f0" TextColor="#f0f0f0" BorderWidth="1" BorderRadius="20" Text="Drafts output folder" FontAttributes="Bold"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Image="fillableform1_save_icon.png"/>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+    </StackLayout>
+</ContentPage>

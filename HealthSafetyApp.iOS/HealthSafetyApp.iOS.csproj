@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1FECDC38-1DEA-44D2-AB39-17A8EB005B3E}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TemplateGuid>{6143fdea-f3c2-4a09-aafa-6e230626515e}</TemplateGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>HealthSafetyApp.iOS</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>HealthSafetyApp.iOS</AssemblyName>
+    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <ProvisioningType>automatic</ProvisioningType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchLink>None</MtouchLink>
+    <MtouchArch>x86_64</MtouchArch>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>None</MtouchLink>
+    <MtouchInterpreter>-all</MtouchInterpreter>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignKey>iPhone Distribution: HAS APP LTD (K62Q774Z57)</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignProvision>Health &amp; Safety</CodesignProvision>
+    <MtouchLink>SdkOnly</MtouchLink>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <None Include="Entitlements.plist" />
+    <None Include="Info.plist" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderers\BorderlessEntryRenderer.cs" />
+    <Compile Include="Renderers\MyButtonRenderer.cs" />
+    <Compile Include="Renderers\CheckBoxView.cs" />
+    <Compile Include="Renderers\CustomCheckBoxRenderer.cs" />
+    <Compile Include="SplashViewController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\40.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\60.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\58.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\87.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\80.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\120.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\120-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\180.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\20.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\40-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\29.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\58-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\40-2.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\80-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\76.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\152.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\167.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1024.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\120-2.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\180-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\48.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\55.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\58-2.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\87-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\80-2.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\88.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\100.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\172.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\196.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\216.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1024-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\16.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\32.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\32-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\64.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\128.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\256.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\256-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\512.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\512-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1024-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SaturdayMP.XPlugins.iOS.BEMCheckBox">
+      <Version>1.4.3</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2478" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
+    <PackageReference Include="Xamarin.Forms.Visual.Material">
+      <Version>5.0.0.2478</Version>
+    </PackageReference>
+    <PackageReference Include="XLabs.Forms">
+      <Version>2.0.5782</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\HealthSafetyApp\HealthSafetyApp.csproj">
+      <Project>{2070002A-7B86-44EF-A53B-A60F7B025D2D}</Project>
+      <Name>HealthSafetyApp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\AcuteToxicity.png" />
+    <BundleResource Include="Resources\BackgroundShape.png" />
+    <BundleResource Include="Resources\backgroundstyle.xml" />
+    <BundleResource Include="Resources\camera.png" />
+    <BundleResource Include="Resources\Chat.png" />
+    <BundleResource Include="Resources\CheckBoxCheckedImg.png" />
+    <BundleResource Include="Resources\contactus1.png" />
+    <BundleResource Include="Resources\contactus11.png" />
+    <BundleResource Include="Resources\Corrosive.png" />
+    <BundleResource Include="Resources\DangerousToTheEnvironment.png" />
+    <BundleResource Include="Resources\dustmask.png" />
+    <BundleResource Include="Resources\Explosive.png" />
+    <BundleResource Include="Resources\ExtremelyFlammable.png" />
+    <BundleResource Include="Resources\facebook.png" />
+    <BundleResource Include="Resources\fillableform1_pdf_icon_active.png" />
+    <BundleResource Include="Resources\fillableform1_pdf_icon.png" />
+    <BundleResource Include="Resources\fillableform1_pdf_icon1.png" />
+    <BundleResource Include="Resources\fillableform1_pictures_icon_active.png" />
+    <BundleResource Include="Resources\fillableform1_pictures_icon.png" />
+    <BundleResource Include="Resources\fillableform1_pictures_icon1.png" />
+    <BundleResource Include="Resources\fillableform1_save_icon_active.png" />
+    <BundleResource Include="Resources\fillableform1_save_icon.png" />
+    <BundleResource Include="Resources\fillableform1_save_icon1.png" />
+    <BundleResource Include="Resources\Flammable.png" />
+    <BundleResource Include="Resources\Footwear.png" />
+    <BundleResource Include="Resources\frame_1.png" />
+    <BundleResource Include="Resources\frame_2.png" />
+    <BundleResource Include="Resources\frame_3.png" />
+    <BundleResource Include="Resources\frame_4.png" />
+    <BundleResource Include="Resources\frame_5.png" />
+    <BundleResource Include="Resources\frame_6.png" />
+    <BundleResource Include="Resources\frame_7.png" />
+    <BundleResource Include="Resources\frame_8.png" />
+    <BundleResource Include="Resources\frame_9.png" />
+    <BundleResource Include="Resources\frame_10.png" />
+    <BundleResource Include="Resources\frame_11.png" />
+    <BundleResource Include="Resources\frame_12.png" />
+    <BundleResource Include="Resources\frame_13.png" />
+    <BundleResource Include="Resources\frame_14.png" />
+    <BundleResource Include="Resources\frame_15.png" />
+    <BundleResource Include="Resources\frame_16.png" />
+    <BundleResource Include="Resources\frame_17.png" />
+    <BundleResource Include="Resources\frame_18.png" />
+    <BundleResource Include="Resources\frame_19.png" />
+    <BundleResource Include="Resources\frame_20.png" />
+    <BundleResource Include="Resources\frame_21.png" />
+    <BundleResource Include="Resources\frame_22.png" />
+    <BundleResource Include="Resources\frame_23.png" />
+    <BundleResource Include="Resources\frame_24.png" />
+    <BundleResource Include="Resources\frame_25.png" />
+    <BundleResource Include="Resources\frame_26.png" />
+    <BundleResource Include="Resources\frame_27.png" />
+    <BundleResource Include="Resources\frame_28.png" />
+    <BundleResource Include="Resources\frame_29.png" />
+    <BundleResource Include="Resources\frame_30.png" />
+    <BundleResource Include="Resources\frame_31.png" />
+    <BundleResource Include="Resources\frame_32.png" />
+    <BundleResource Include="Resources\frame_33.png" />
+    <BundleResource Include="Resources\frame_34.png" />
+    <BundleResource Include="Resources\frame_35.png" />
+    <BundleResource Include="Resources\frame_36.png" />
+    <BundleResource Include="Resources\frame_37.png" />
+    <BundleResource Include="Resources\frame_38.png" />
+    <BundleResource Include="Resources\frame_39.png" />
+    <BundleResource Include="Resources\gallery.png" />
+    <BundleResource Include="Resources\GassesUnderPressure.png" />
+    <BundleResource Include="Resources\Gloves.png" />
+    <BundleResource Include="Resources\Goggles.png" />
+    <BundleResource Include="Resources\Harmful.png" />
+    <BundleResource Include="Resources\HighlyFlammable.png" />
+    <BundleResource Include="Resources\icon.png" />
+    <BundleResource Include="Resources\icon1.png" />
+    <BundleResource Include="Resources\icon2.png" />
+    <BundleResource Include="Resources\images.jpg" />
+    <BundleResource Include="Resources\images1.png" />
+    <BundleResource Include="Resources\line.png" />
+    <BundleResource Include="Resources\linkedin1.png" />
+    <BundleResource Include="Resources\ManualHandlingImg.png" />
+    <BundleResource Include="Resources\menu.png" />
+    <BundleResource Include="Resources\Other.png" />
+    <BundleResource Include="Resources\Overalls.png" />
+    <BundleResource Include="Resources\Oxidising.png" />
+    <BundleResource Include="Resources\P1.png" />
+    <BundleResource Include="Resources\P2.png" />
+    <BundleResource Include="Resources\P3.png" />
+    <BundleResource Include="Resources\P4.png" />
+    <BundleResource Include="Resources\P5.png" />
+    <BundleResource Include="Resources\P6.png" />
+    <BundleResource Include="Resources\P7.png" />
+    <BundleResource Include="Resources\P8.png" />
+    <BundleResource Include="Resources\pageImage.png" />
+    <BundleResource Include="Resources\pdf_icon.png" />
+    <BundleResource Include="Resources\Phone.png" />
+    <BundleResource Include="Resources\Respirator.png" />
+    <BundleResource Include="Resources\RespiratorySensitiser.png" />
+    <BundleResource Include="Resources\RespiratorySensitiser2.png" />
+    <BundleResource Include="Resources\RiskAssessmentInfo.pdf" />
+    <BundleResource Include="Resources\SeriousEyeIrritation.png" />
+    <BundleResource Include="Resources\SeriousLongTermHealth.png" />
+    <BundleResource Include="Resources\SeriousLongTermHealth1.png" />
+    <BundleResource Include="Resources\splash_Centered_1.xml" />
+    <BundleResource Include="Resources\splash_Centered.xml" />
+    <BundleResource Include="Resources\splash_CenteredCopy.xml" />
+    <BundleResource Include="Resources\splashscreen.png" />
+    <BundleResource Include="Resources\splashscreen2.jpg" />
+    <BundleResource Include="Resources\splashscreen3.jpg" />
+    <BundleResource Include="Resources\splashscreen21.jpg" />
+    <BundleResource Include="Resources\TM.png" />
+    <BundleResource Include="Resources\tool_calendar_icon.png" />
+    <BundleResource Include="Resources\topics_name_back_icon.png" />
+    <BundleResource Include="Resources\topics_name_bg_img1.png" />
+    <BundleResource Include="Resources\topics_name_icon.png" />
+    <BundleResource Include="Resources\twitter.png" />
+    <BundleResource Include="Resources\twitter1.png" />
+    <BundleResource Include="Resources\VeryToxic.png" />
+    <BundleResource Include="Resources\visor.png" />
+    <BundleResource Include="Resources\youtube.png" />
+    <BundleResource Include="Resources\youtube1.png" />
+  </ItemGroup>
+  <ItemGroup />
+</Project>

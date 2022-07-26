@@ -1,0 +1,683 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:chkbx="clr-namespace:HealthSafetyApp.Controls"
+             xmlns:local="clr-namespace:Core"
+             x:Class="HealthSafetyApp.Views.Topics.Topic2">
+    <ScrollView x:Name="myscrollview" Orientation="Vertical" VerticalOptions="StartAndExpand">
+        <Grid RowSpacing="1.5" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+
+            <Grid Grid.Row="0" >
+                <StackLayout >
+                    <StackLayout BackgroundColor="DarkGray">
+                        <Label HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="DarkGray"  Text="COSHH assessment form" FontSize="Large" TextColor="White"/>
+                    </StackLayout>
+
+
+
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".7*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text="Date:" FontSize="Medium"/>
+                        <DatePicker Grid.Column="1" TextColor="Black" x:Name="datepicker" />
+                        <Image Grid.Column="2"  Source="tool_calendar_icon.png" ></Image>
+                    </Grid>
+                </StackLayout>
+            </Grid>
+            <Grid Grid.Row="1">
+                <StackLayout>
+                    <Label Text="Name of COSHH assessor:" FontSize="Medium"  TextColor="#0086b7" />
+                    <!--<StackLayout x:Name="stack1" VerticalOptions="Fill" HorizontalOptions="StartAndExpand" >-->
+                    <Editor  x:Name="txt_name" Text="" VerticalOptions="FillAndExpand" Keyboard="Chat"/>
+                    <!--</StackLayout>-->
+                    <!--<Entry x:Name="txt_name" Placeholder="Name" PlaceholderColor="#939393"/>-->
+
+                    <Label Text="Department:" FontSize="Medium"  TextColor="#0086b7"/>
+                    <Entry x:Name="txt_projname" Placeholder="" PlaceholderColor="#939393"/>
+
+
+                    <Label Text="Location:" FontSize="Medium"  TextColor="#0086b7"/>
+                    <Entry x:Name="txt_Check1_text" Placeholder="" PlaceholderColor="#939393"/>
+
+
+                    <Label Text="Task description:" FontSize="Medium"  TextColor="#0086b7"/>
+                    <Entry x:Name="txt_GroundMaintenance" Placeholder="-" PlaceholderColor="#939393"/>
+
+
+                    <Label Text="Review date:" FontSize="Medium"  TextColor="#0086b7"/>
+                    <DatePicker TextColor="Black" x:Name="txt_Check2_text" />
+                    <!--<Entry x:Name="txt_Check2_text" Placeholder="" PlaceholderColor="#939393"/>-->
+
+                    <StackLayout BackgroundColor="Gray" HorizontalOptions="Fill" Orientation="Horizontal">
+                        <Label Text="1." BackgroundColor="LightBlue" HorizontalOptions="Start" FontSize="Medium" VerticalOptions="CenterAndExpand"/>
+                        <Label TextColor="White" FontSize="Medium" Text="Elimination" HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" BackgroundColor="WhiteSmoke">
+                        <Label Text="Is it possible to avoid the need to use hazardous substances?"/>
+                        <!--<chkbx:CheckBox DefaultText="Yes" x:Name="option1_yes" TextColor="Green"/>-->
+                        <chkbx:CheckText DefaultText="Yes" x:Name="option1_yes" Color="Green" TextColor="Green"  Visual="Material" CheckedChanged="option1_yes_CheckedChanged"/>
+                        <chkbx:CheckText x:Name="option1_No" DefaultText="No" TextColor="Red" Color="Red" Visual="Material" CheckedChanged="option1_No_CheckedChanged"/>
+                        
+                    </StackLayout>
+
+                    <StackLayout BackgroundColor="Gray" HorizontalOptions="Fill" Orientation="Horizontal">
+                        <Label Text="2." BackgroundColor="LightBlue" HorizontalOptions="Start" FontSize="Medium" VerticalOptions="CenterAndExpand"/>
+                        <Label TextColor="White" FontSize="Medium" Text="Activity details" HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                    <StackLayout>
+                        <Label FontSize="Small" Text="Before beginning work on the COSHH assessment process ensure you have a copy of the latest manufacturers safety data sheet (MSDS) for the substance. MSDS's are available from suppliers and manufacturers of products"  TextColor="DeepSkyBlue"/>
+                        <Label FontSize="Medium" Text="Describe the activity or work process."/>
+                        <Label FontSize="Small" FontAttributes="Italic" Text="Note: Include how long the task will take, how often it will be repeated and how much of the substance is used" />
+
+                        <Label Text="Activity:"/>
+                        <Entry x:Name="Activity_txt"  />
+
+
+                        <Label Text="How long activity will take?"/>
+                        <Entry x:Name="HowLong_txt"/>
+
+                        <Label Text="How often activity will be repeated?"/>
+                        <Entry x:Name="Howoften_txt"/>
+
+                        <Label Text="How much substance will be used?"/>
+                        <Entry x:Name="HowMuch_txt"/>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Location of work:" />
+                        <Entry x:Name="txt_sitename" PlaceholderColor="#939393" FontSize="Small"/>
+                        <Label Text="Persons at Risk:" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" >
+                        <chkbx:CheckText x:Name="chkbx1" DefaultText="Employees" Visual="Material" Color="Red"/>
+                        <chkbx:CheckText x:Name="chkbx2" DefaultText="Students" Visual="Material" Color="Red"/>
+                        <chkbx:CheckText x:Name="Others_CB" DefaultText="Others" Visual="Material" Color="Red"/>
+                        <chkbx:CheckText x:Name="Valnerable_CB" DefaultText="Vulnerable Persons" Visual="Material" Color="Red"/>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Name of the substance and supplier:" />
+                        <Entry x:Name="txt_substance"  PlaceholderColor="#939393"/>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Substance application:" />
+                        <Entry x:Name="txt_substance_app"  PlaceholderColor="#939393"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Safety data sheet details:" />
+                        <Entry x:Name="txt_safety_DS"  PlaceholderColor="#939393"/>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Management emergency contact numbers:" />
+                        <Entry x:Name="txt_Emergency_contact"  PlaceholderColor="#939393" Keyboard="Telephone"/>
+                    </StackLayout>
+                    
+                   
+                    
+                    <StackLayout BackgroundColor="DarkGray">
+                        <Label Text="Classification of the substanse" HorizontalOptions="Center" TextColor="White" FontSize="Large" />
+                    </StackLayout>
+
+                    <StackLayout BackgroundColor="LightGray" >
+                        <Label Text="Tick the appropriate sign" HorizontalOptions="Center" TextColor="Black" FontSize="Medium" />
+                    </StackLayout>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".33*"/>
+                                <ColumnDefinition Width=".33*"/>
+                                <ColumnDefinition Width=".33*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackLayout  BackgroundColor="LightGray">
+                                <Image Grid.Column="0" Source="AcuteToxicity.png" 
+                                        Scale=".6"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText x:Name="cb211" Checked="False" DefaultText="Acute Toxicity" Visual="Material" Color="Red"/>
+                            </StackLayout>
+
+                            <StackLayout Grid.Column="1" BackgroundColor="WhiteSmoke" >
+                                <Image  Source="SeriousEyeIrritation.png" 
+                                        Scale=".6"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText  x:Name="cb212" Checked="False" DefaultText="Serious eye irritation" Visual="Material" Color="Red"/>
+                            </StackLayout>
+
+
+
+                            <StackLayout Grid.Column="2" BackgroundColor="LightGray" >
+                                <Image  Source="HighlyFlammable.png" 
+                                        Scale=".6"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText x:Name="cb213" Checked="False" DefaultText="Highly Flammable" Visual="Material" Color="Red"/>
+                            </StackLayout>
+
+
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".33*"/>
+                                <ColumnDefinition Width=".33*"/>
+                                <ColumnDefinition Width=".33*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackLayout Grid.Column="0" BackgroundColor="WhiteSmoke" >
+                                <Image  Source="VeryToxic.png" 
+                                        Scale=".6"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText x:Name="cb221" Checked="False" DefaultText="Very Toxic (Fatal)" Visual="Material" Color="Red"/>
+                            </StackLayout>
+
+
+
+                            <StackLayout Grid.Column="1" BackgroundColor="LightGray" >
+                                <Image  Source="RespiratorySensitiser.png" 
+                                        Scale=".6"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText x:Name="cb222" Checked="False" DefaultText="Respiratory Sensitiser" Color="Red"
+                                                 Visual="Material"/>
+                            </StackLayout>
+
+
+                            <StackLayout Grid.Column="2" BackgroundColor="WhiteSmoke" >
+                                <Image  Source="ExtremelyFlammable.png" 
+                                        Scale=".6"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText  x:Name="cb223" Checked="False" DefaultText="Extremely Flammable" Visual="Material"
+                                                  Color="Red"/>
+                            </StackLayout>
+
+
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".33*"/>
+                                <ColumnDefinition Width=".33*"/>
+                                <ColumnDefinition Width=".33*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackLayout  BackgroundColor="LightGray">
+                                <Image Grid.Column="0" Source="Corrosive.png" 
+                                        Scale=".6"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText x:Name="cb231" Checked="False" DefaultText="Corrosive" Visual="Material"
+                                                 Color="Red"/>
+                            </StackLayout>
+
+                            <StackLayout Grid.Column="1" BackgroundColor="WhiteSmoke" >
+                                <Image  Source="RespiratorySensitiser.png" 
+                                        Scale=".6"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText  x:Name="cb232" Checked="False" DefaultText="Serious Long Term Health Hazard" Visual="Material"
+                                                  Color="Red"/>
+                            </StackLayout>
+
+
+
+                            <StackLayout Grid.Column="2" BackgroundColor="LightGray" >
+                                <Image  Source="DangerousToTheEnvironment.png" 
+                                        Scale=".6"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText  x:Name="cb233" Checked="False" DefaultText="Dangerous To The Environment" Visual="Material"
+                                                  Color="Red"/>
+                            </StackLayout>
+
+
+                        </Grid>
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".33*"/>
+                                <ColumnDefinition Width=".33*"/>
+                                <ColumnDefinition Width=".33*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackLayout Grid.Column="0" BackgroundColor="WhiteSmoke" >
+                                <Image  Source="Harmful.png" 
+                                        Scale=".6"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText x:Name="cb241" Checked="False" DefaultText="Harmful" Visual="Material" 
+                                                 Color="Red"/>
+                            </StackLayout>
+
+
+
+                            <StackLayout Grid.Column="1" BackgroundColor="LightGray" >
+                                <Image  Source="Oxidising.png" 
+                                        Scale=".6"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText x:Name="cb242" Checked="False" DefaultText="Oxidising" Visual="Material"
+                                                 Color="Red"/>
+                            </StackLayout>
+
+
+                            <StackLayout Grid.Column="2" BackgroundColor="WhiteSmoke" >
+                                <Image  Source="GassesUnderPressure.png" 
+                                        Scale=".6"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText x:Name="cb243" Checked="False" DefaultText="Gasses Under Pressure" Visual="Material"
+                                                 Color="Red"/>
+                            </StackLayout>
+                        </Grid>
+                        <Grid Grid.Row="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".33*"/>
+                                <ColumnDefinition Width=".33*"/>
+                                <ColumnDefinition Width=".33*"/>
+                            </Grid.ColumnDefinitions>
+
+
+                            <StackLayout  BackgroundColor="LightGray">
+                                <Image Grid.Column="0" Source="Explosive.png" 
+                                        Scale=".6"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText x:Name="cb251" Checked="False" DefaultText="Explosive" Visual="Material" Color="Red"/>
+                            </StackLayout>
+
+                            <StackLayout Grid.Column="1" BackgroundColor="WhiteSmoke" >
+                                <Image  Source="Flammable.png" 
+                                        Scale=".6"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText x:Name="cb252" Checked="False" DefaultText="Flammable" Visual="Material" Color="Red"/>
+                            </StackLayout>
+
+
+                        </Grid>
+
+                    </Grid>
+                    <StackLayout>
+                    <StackLayout BackgroundColor="Gray" HorizontalOptions="Fill" Orientation="Horizontal">
+                            <Label Text="3." BackgroundColor="LightBlue" HorizontalOptions="Start" FontSize="Medium" VerticalOptions="CenterAndExpand"/>
+                            <Label Text="Subtitution" TextColor="White" FontSize="Medium" HorizontalOptions="FillAndExpand" />
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" BackgroundColor="WhiteSmoke">
+                            <Label Text="Is it possible to use a less harmful substance to do the work?"/>
+                            <chkbx:CheckText DefaultText="Yes" x:Name="option3_yes" TextColor="Green" Visual="Material" Color="Green"  CheckedChanged="option3_yes_CheckedChanged"/>
+                            <chkbx:CheckText x:Name="option3_No" DefaultText="No" TextColor="Red" Visual="Material" Color="Red" CheckedChanged="option3_No_CheckedChanged"/>
+                        </StackLayout>
+
+
+                        <Label BackgroundColor="LightGray" FontSize="Medium"  Text="Which form the substance takes?"/>
+                        <StackLayout Orientation="Horizontal" BackgroundColor="WhiteSmoke">
+                            <chkbx:CheckText DefaultText="Gas" x:Name="opt_Gas" Visual="Material" Color="Red"/>
+                            <chkbx:CheckText  DefaultText="Vapour" x:Name="opt_Vapour" Visual="Material" Color="Red"/>
+                            <chkbx:CheckText DefaultText="Mist" x:Name="opt_Mist" Visual="Material"  Color="Red"/>
+                            <chkbx:CheckText  DefaultText="Fume" x:Name="opt_Fume" Visual="Material" Color="Red"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" BackgroundColor="WhiteSmoke">
+                            <chkbx:CheckText DefaultText="Dust" x:Name="opt_Dust" Visual="Material" Color="Red"/>
+                            <chkbx:CheckText  DefaultText="Liquid" x:Name="opt_Liquid" Visual="Material" Color="Red"/>
+                            <chkbx:CheckText DefaultText="Solid" x:Name="opt_Solid" Visual="Material" Color="Red"/>
+                        </StackLayout>
+                        <!--<StackLayout Orientation="Horizontal" BackgroundColor="LightGray">-->
+                        <Label Text="Other(state):" HorizontalOptions="Start"/>
+                        <Entry x:Name="opt_other" HorizontalOptions="Fill"/>
+                        <!--</StackLayout>-->
+
+
+
+                        <Label BackgroundColor="LightGray" FontSize="Medium"  Text="Indicate below which route(s) of exposure the substance takes"/>
+                        <StackLayout Orientation="Horizontal" BackgroundColor="WhiteSmoke">
+                            <chkbx:CheckText DefaultText="Inhalation" x:Name="opt_Inhalation" Visual="Material" Color="Red"/>
+                            <chkbx:CheckText  DefaultText="Skin" x:Name="opt_Skin" Visual="Material" Color="Red"/>
+                            <chkbx:CheckText DefaultText="Eyes" x:Name="opt_eyes" Visual="Material" Color="Red"/>
+                            <chkbx:CheckText  DefaultText="Ingestion" x:Name="opt_ingestion" Visual="Material" Color="Red"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" BackgroundColor="WhiteSmoke">
+                            <Label Text="Other(state):" HorizontalOptions="Start"/>
+                        <Entry x:Name="opt2_other" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Vertical" BackgroundColor="LightGray">
+                            <Label FontSize="Medium" Text="Workplace exposure limits(WELs):" HorizontalOptions="Start"/>
+                            <chkbx:CheckText DefaultText="Long-term exposure level(8hrs TWA)" x:Name="opt_expolmt_long" Visual="Material" Color="Red"/>
+                            <chkbx:CheckText  DefaultText="Short-term exposure level(15 mins)" x:Name="opt_expolmt_short" Visual="Material" Color="Red"/>
+                        </StackLayout>
+
+                        <Label Text="List the risks to health below from exposure to the substance:" FontSize="Medium"  TextColor="#0086b7" />
+                        <Frame x:Name="stack2" HasShadow="False" Padding="0" BorderColor="LightGray" VerticalOptions="Fill" HorizontalOptions="FillAndExpand" >
+                        <local:ExpandableEditor x:Name="txt_list1" Text="" VerticalOptions="FillAndExpand" Keyboard="Chat"/>
+                        </Frame>
+
+                        <Label Text="List below the contol measures e.g extraction, ventilation, supervision, include addditional chkbx for vulnerable person where necessary" FontSize="Medium"  TextColor="#0086b7" />
+                        <Frame x:Name="stack3" HasShadow="False" Padding="0" BorderColor="LightGray" VerticalOptions="Fill" HorizontalOptions="FillAndExpand" >
+                        <local:ExpandableEditor x:Name="txt_list2" Text="" VerticalOptions="FillAndExpand" Keyboard="Chat"/>
+                        </Frame>
+                        <Label Text="Certain substances can react adversley when they come into contact with others, please list any compatibility warnings here:" FontSize="Medium"  TextColor="#0086b7" />
+                    
+                        <Frame x:Name="stack4" HasShadow="False" Padding="0" BorderColor="LightGray" VerticalOptions="Fill" HorizontalOptions="FillAndExpand" >
+                        <local:ExpandableEditor x:Name="txt_list3" Text="" VerticalOptions="FillAndExpand" Keyboard="Chat"/>
+                        </Frame>
+                   
+                    <Label FontSize="Medium" Text="Is health surveillance or monitoring required? "/>
+                        <Label FontSize="Small" FontAttributes="Italic" Text="(Remember health surveillance may be required for vulnerable persons eg pregnant/young workers those with asthma, dermatitis etc?)"/>
+                    
+                    <StackLayout Margin="0,0,0,5"  Orientation="Horizontal" BackgroundColor="WhiteSmoke">
+                            <chkbx:CheckText DefaultText="Yes" x:Name="option4_yes" TextColor="Green" Visual="Material"  Color="Green" CheckedChanged="option4_yes_CheckedChanged"/>
+                            <chkbx:CheckText x:Name="option4_No" DefaultText="No" TextColor="Red" Visual="Material" Color="Red" CheckedChanged="option4_No_CheckedChanged"/>
+                        </StackLayout>
+                    </StackLayout>
+                    <BoxView HeightRequest="50"/>
+                </StackLayout>
+            </Grid>
+        
+        <Grid Grid.Row="2">
+
+
+                <StackLayout >
+                    <StackLayout BackgroundColor="Gray">
+                    <Label TextColor="White" FontSize="Medium" Text="Personal protective equipment (PPE) identify type and specification."/>
+                    </StackLayout>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".33*"/>
+                                <ColumnDefinition Width=".33*"/>
+                                <ColumnDefinition Width=".33*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackLayout Grid.Column="0" BackgroundColor="LightGray" >
+                                <Image  Source="dustmask.png" 
+                                       Scale=".5"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText x:Name="chk311" Checked="False" DefaultText="Dust mask" Visual="Material" Color="Red"/>
+                            </StackLayout>
+
+                            <StackLayout Grid.Column="1" BackgroundColor="WhiteSmoke" >
+                                <Image  Source="visor.png" 
+                                       Scale=".5"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText x:Name="chk312" Checked="False" DefaultText="Visor" Visual="Material" Color="Red"/>
+                            </StackLayout>
+
+                            <StackLayout Grid.Column="2" BackgroundColor="LightGray" >
+                                <Image  Source="Respirator.png" 
+                                       Scale=".5"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText x:Name="chk313" Checked="False" DefaultText="Respirator" Visual="Material" Color="Red"/>
+                            </StackLayout>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".33*"/>
+                                <ColumnDefinition Width=".33*"/>
+                                <ColumnDefinition Width=".33*"/>
+
+                            </Grid.ColumnDefinitions>
+
+                            <StackLayout Grid.Column="0" BackgroundColor="WhiteSmoke" >
+                                <Image  Source="Goggles.png" 
+                                       Scale=".5"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText x:Name="chk321" Checked="False" DefaultText="Goggles" Visual="Material" Color="Red"/>
+                            </StackLayout>
+
+
+
+
+                            <StackLayout Grid.Column="1"  BackgroundColor="LightGray" >
+                                <Image  Source="Gloves.png" 
+                                       Scale=".5"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText x:Name="chk322" Checked="False" DefaultText="Gloves" Visual="Material" Color="Red"/>
+                            </StackLayout>
+
+                            <StackLayout  Grid.Column="2"  BackgroundColor="WhiteSmoke">
+                                <Image Source="Overalls.png" 
+                                       Scale=".5"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText x:Name="chk323" Checked="False" DefaultText="Overalls" Visual="Material" Color="Red"/>
+                            </StackLayout>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".33*"/>
+                                <ColumnDefinition Width=".33*"/>
+                                <ColumnDefinition Width=".33*"/>
+                            </Grid.ColumnDefinitions>
+
+
+                            <StackLayout Grid.Column="0"  BackgroundColor="LightGray" >
+                                <Image  Source="Footwear.png" 
+                                       Scale=".5"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText x:Name="chk331" Checked="False" DefaultText="Footwear" Visual="Material" Color="Red"/>
+                            </StackLayout>
+
+
+                            <StackLayout Grid.Column="1"  BackgroundColor="WhiteSmoke" >
+                                <Image  Source="Other.png" 
+                                       Scale=".5"
+                                       VerticalOptions="Start"
+                                       Margin="0,0,0,0"
+                                       HorizontalOptions="Center"/>
+
+                                <chkbx:CheckText x:Name="chk332" Checked="False" DefaultText="Other" Visual="Material" Color="Red"/>
+                            </StackLayout>
+                        </Grid>
+                    </Grid>
+
+                    <StackLayout>
+                        <Label Text="First aid measures and requirements:" FontSize="Medium"  TextColor="#0086b7" />
+                        <Frame x:Name="stack5" HasShadow="False" BorderColor="LightGray" Padding="0" VerticalOptions="Fill" HorizontalOptions="FillAndExpand" >
+                            <local:ExpandableEditor x:Name="txt_list4" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" />
+                        </Frame>
+
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Identify appropriate fire extiguishers" FontSize="Medium"  TextColor="#0086b7" />
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Fill" HorizontalOptions="FillAndExpand" >
+                            <chkbx:CheckText  x:Name="opt_fireext_dry" DefaultText="Dry powder" Visual="Material" Color="Red"/>
+                            <chkbx:CheckText x:Name="opt_fireext_co2" DefaultText="CO2" Visual="Material" Color="Red"/>
+                            <chkbx:CheckText  x:Name="opt_fireext_water" DefaultText="Water" Visual="Material" Color="Red"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Fill" HorizontalOptions="FillAndExpand" >
+                            <chkbx:CheckText  x:Name="opt_fireext_foam" DefaultText="Foam" Visual="Material" Color="Red"/>
+                            <chkbx:CheckText  x:Name="opt_fireext_fireblanket" DefaultText="Fire blanket" Visual="Material" Color="Red"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="During combustion substances may give rise to harmful vapours/gases etc please detail below" FontSize="Medium"  TextColor="#0086b7" />
+                        <Frame x:Name="stack6" HasShadow="False" BorderColor="LightGray" Padding="0" VerticalOptions="Fill" HorizontalOptions="FillAndExpand"  >
+                            <local:ExpandableEditor x:Name="txt_list5" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" />
+                        </Frame>
+
+                    </StackLayout>
+
+                    <Label Text="Storage:" FontSize="Medium"  TextColor="#0086b7"/>
+                    <Entry x:Name="txt_storage_text" Placeholder="" PlaceholderColor="#939393"/>
+
+                    <StackLayout>
+                        <Label Text="Disposal of waste substances and containers please indicate below " FontSize="Medium"  TextColor="#0086b7" />
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Fill" HorizontalOptions="FillAndExpand" >
+                            <chkbx:CheckText  x:Name="opt_dispose_hazardous" DefaultText="Hazardous waste" Visual="Material" Color="Red"/>
+                            <chkbx:CheckText  x:Name="opt_dispose_general" DefaultText="General waste" Visual="Material" Color="Red"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Fill" HorizontalOptions="FillAndExpand" >
+                            <chkbx:CheckText  x:Name="opt_dispose_biological" DefaultText="Biological waste" Visual="Material" Color="Red"/>
+                            <chkbx:CheckText  x:Name="opt_dispose_returntosupplier" DefaultText="Return to supplier" Visual="Material" Color="Red"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Fill" HorizontalOptions="StartAndExpand" >
+                            <chkbx:CheckText  x:Name="opt_dispose_other" DefaultText="Other" Visual="Material" Color="Red"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" BackgroundColor="LightGray">
+                        <Label Text="Is exposure adequately controlled?"/>
+                        <chkbx:CheckText DefaultText="Yes" x:Name="opt_exposure_yes" TextColor="Green" Visual="Material"  Color="Green" CheckedChanged="opt_exposure_yes_CheckedChanged"/>
+                        <chkbx:CheckText x:Name="opt_exposure_No" DefaultText="No" TextColor="Red" Visual="Material" Color="Red" CheckedChanged="opt_exposure_No_CheckedChanged"/>
+                    </StackLayout>
+
+                </StackLayout>
+            </Grid>
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <StackLayout BackgroundColor="SkyBlue"  Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Attachments"/>
+                        <Label HorizontalOptions="End" x:Name="lbl_from" Text="0"/>
+                        <Label HorizontalOptions="End"  Text="of"/>
+                        <Label HorizontalOptions="End"  x:Name="lbl_to" Text="0"/>
+                        <Label HorizontalOptions="End"  Text="of total 10"/>
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Image  x:Name="Image1"/>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".3*"/>
+                        <ColumnDefinition Width=".4*"/>
+                        <ColumnDefinition Width=".3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" x:Name="Prv" Text="Prev" FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Clicked="OnClick_Prev"/>
+                    <Button Grid.Column="1" x:Name="DeletePhoto"  FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Text="Delete Photo" Clicked="OnClick_deletepicture"/>
+                    <Button Grid.Column="2" x:Name="Nxt"  FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Text="Next" Clicked="OnClick_Nxt"/>
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".5*"/>
+                        <ColumnDefinition Width=".5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" x:Name="takePhoto" FontSize="Micro"  ContentLayout="Left,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="camera.png" Text="Take Photo" Clicked="OnClick_takepicture"/>
+                    <Button Grid.Column="1" x:Name="pickPhoto" FontSize="Micro"  ContentLayout="Left,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="gallery.png" Text="Pick Photo" Clicked="OnClick_pickPicture"/>
+
+
+                </Grid>
+                <Grid Grid.Row="4" IsVisible="False">
+                    <StackLayout>
+                        <Label x:Name="img1"/>
+                        <Label x:Name="img2"/>
+                        <Label x:Name="img3"/>
+                        <Label x:Name="img4"/>
+                        <Label x:Name="img5"/>
+                        <Label x:Name="img6"/>
+                        <Label x:Name="img7"/>
+                        <Label x:Name="img8"/>
+                        <Label x:Name="img9"/>
+                        <Label x:Name="img10"/>
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Row="5" IsVisible="False">
+                    <Label x:Name="ActImg"/>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="4" Margin="0,20,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".35*"/>
+                    <ColumnDefinition Width=".35*"/>
+                    <ColumnDefinition Width=".35*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Text="Open Drafts" FontSize="Micro"  ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="fillableform1_pictures_icon.png" Clicked="OnClick_OpenDraft" />
+                <Button Grid.Column="1" Text="Save as Draft" FontSize="Micro" ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" HorizontalOptions="FillAndExpand" Image="fillableform1_save_icon.png" Clicked="OnClick_SaveDraft"/>
+                <Button Grid.Column="2" Text="Save as PDF" FontSize="Micro" ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" HorizontalOptions="FillAndExpand" Image="fillableform1_pdf_icon.png" Clicked="OnClick_SavePDF"/>
+            </Grid>
+
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

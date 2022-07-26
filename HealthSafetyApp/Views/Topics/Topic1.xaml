@@ -1,0 +1,2151 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:chkbx="clr-namespace:HealthSafetyApp.Controls"
+             BackgroundColor="Transparent"
+             x:Class="HealthSafetyApp.Views.Topics.Topic1">
+               
+        <ScrollView x:Name="myscrollview" Orientation="Vertical" VerticalOptions="FillAndExpand">
+        <StackLayout>
+
+
+
+            <StackLayout BackgroundColor="DarkGray">
+                <Label Text="Maintenace dynamic/Point of work risk assessment" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"   FontSize="Medium"  BackgroundColor="DarkGray"   TextColor="White" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" BackgroundColor="WhiteSmoke">
+                <Label Text="For use on:" FontSize="Medium"  TextColor="#0086b7" />
+                <Label Text="Un-planned maintenance tasks including breakdowns.To supplement a generic risk assessment on planned tasks"  TextColor="Gray"   />
+            </StackLayout>
+
+            <Label Text="Name:" TextColor="#0086b7" />
+            <Entry x:Name="txt_name"  Placeholder="" PlaceholderColor="#939393" />
+
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".1*"/>
+                    <ColumnDefinition Width=".8*"/>
+                    <ColumnDefinition Width=".1*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="Date"   TextColor="#0086b7"/>
+                <DatePicker Grid.Column="1" TextColor="Black" x:Name="datepicker"  />
+                <Image Grid.Column="2"  Source="tool_calendar_icon.png"  ></Image>
+            </Grid>
+
+            <Label Text="Location name:" TextColor="#0086b7"/>
+            <Entry x:Name="txt_projname" Placeholder="" PlaceholderColor="#939393"/>
+
+
+            <Label Text="Task description:" TextColor="#0086b7"/>
+            <Entry x:Name="txt_sitename" Placeholder="" PlaceholderColor="#939393"/>
+
+
+            <!--step 1-->
+
+            <Grid RowSpacing="0" ColumnSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" BackgroundColor="DarkGray" Padding="0,0,1,1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="7*"/>
+
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="Step 1 - Stop"  HorizontalTextAlignment="Start" FontSize="Medium"  BackgroundColor="SkyBlue" TextColor="White" />
+                    <Label Grid.Column="1" Text="Before starting work think through the task" HorizontalTextAlignment="Center"  HorizontalOptions="CenterAndExpand" VerticalOptions="Center"   FontSize="Medium"  BackgroundColor="DarkGray"   TextColor="White" />
+                </Grid>
+
+                <Grid Grid.Row="1" BackgroundColor="LightGray" Padding="0,0,1,1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="1" Text="Yes/No/NA" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"  VerticalOptions="Center" FontSize="Medium"  />
+                </Grid>
+
+                <Grid Grid.Row="2" RowSpacing="0" ColumnSpacing="0" BackgroundColor="WhiteSmoke" Padding="0,0,1,1" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="Are you fit and suitably competent to carry out the task(s)?" HorizontalTextAlignment="Start" HorizontalOptions="CenterAndExpand"   FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick_1" VerticalOptions="Center" HorizontalOptions="FillAndExpand"  TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>Yes</x:String>
+                            <x:String>No</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items><Picker.SelectedIndex>0</Picker.SelectedIndex>
+
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="3" ColumnSpacing="0" Padding="0,0,1,1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0"  Text="Do you have the relevant permit and documentation?" HorizontalTextAlignment="Start" HorizontalOptions="CenterAndExpand"   FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick_2" VerticalOptions="Center" HorizontalOptions="FillAndExpand"  TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>Yes</x:String>
+                            <x:String>No</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items><Picker.SelectedIndex>0</Picker.SelectedIndex>
+
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="4" BackgroundColor="WhiteSmoke" Padding="0,0,1,1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="2*"/>
+
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Do you have the correct PPE and tools for the tasks?" HorizontalTextAlignment="Start" HorizontalOptions="CenterAndExpand"   FontSize="Medium" />
+                    <Picker Grid.Column="1" x:Name="pick_3" VerticalOptions="Center" HorizontalOptions="FillAndExpand"  TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>Yes</x:String>
+                            <x:String>No</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="5" ColumnSpacing="0" Padding="0,0,1,1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="2*"/>
+
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Do you have suitable access into the work area?" HorizontalTextAlignment="Start" HorizontalOptions="CenterAndExpand"   FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick_4" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black">
+                        <Picker.Items>
+                            <x:String>Yes</x:String>
+                            <x:String>No</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="6" ColumnSpacing="0" BackgroundColor="LightGray" Padding="0,0,1,1">
+
+                    <Label Grid.Column="0" Text="if you have answered No to any of above, Please inform your team leader" HorizontalTextAlignment="Center"  HorizontalOptions="CenterAndExpand"   FontSize="Small"     TextColor="Red" />
+
+                </Grid>
+
+            </Grid>
+
+
+            <!--step 2-->
+
+            <Grid RowSpacing="0" ColumnSpacing="0">
+                <Grid Grid.Row="0" BackgroundColor="DarkGray" Padding="0,0,1,1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="7*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Step 2 - Think"  HorizontalTextAlignment="Start"  FontSize="Medium"  BackgroundColor="SkyBlue" TextColor="White" />
+                    <Label Grid.Column="1" Text="Spot the hazards" HorizontalTextAlignment="Center"  HorizontalOptions="CenterAndExpand" VerticalOptions="Center"   FontSize="Medium"  BackgroundColor="DarkGray"   TextColor="White" />
+                </Grid>
+
+                <Grid Grid.Row="1" BackgroundColor="LightGray" Padding="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Slip, Trip and Falls" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_1" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="2" BackgroundColor="WhiteSmoke">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Work at height" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_2" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="3" BackgroundColor="LightGray">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Risk of fall from height" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_3" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black">
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="4" BackgroundColor="WhiteSmoke">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Lifting operations / cranes" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_4" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+                <Grid Grid.Row="5" BackgroundColor="LightGray">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Falling / Ejected Objects" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_5" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black">
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="6" BackgroundColor="WhiteSmoke">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Moving vehicles" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_6" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+
+
+                <Grid Grid.Row="7" BackgroundColor="LightGray">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Overturning / Collapse" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_7" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="8" BackgroundColor="WhiteSmoke">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Electricity (HV/LV)" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_8" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+                <Grid Grid.Row="9" BackgroundColor="LightGray">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Pressurised equipment" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_9" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="10" BackgroundColor="WhiteSmoke">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Sharp objects" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_10" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="11" BackgroundColor="LightGray">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Manual handling / Ergonomics" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_11" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="12" BackgroundColor="WhiteSmoke">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Confined / Restricted space" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_12" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="13" BackgroundColor="LightGray">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Poor lighting" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_13" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="14" BackgroundColor="WhiteSmoke">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Fire / Explosion risk" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_14" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="15" BackgroundColor="LightGray">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Dust, Fumes, Gases , Vapours" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_15" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="16" BackgroundColor="WhiteSmoke">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Hazardous materials / Waste" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_16" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="17" BackgroundColor="LightGray">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Noise" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_17" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="18" BackgroundColor="WhiteSmoke">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Vibration" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_18" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="19" BackgroundColor="LightGray">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="High / Low humidity" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_19" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="20" BackgroundColor="WhiteSmoke">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Hot / Cold temperatures" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_20" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="21" BackgroundColor="LightGray">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Lone working" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_21" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="22" BackgroundColor="WhiteSmoke">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Specialist equipment required" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_22" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="23" BackgroundColor="LightGray" IsVisible="False" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Moving vehicles" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_23" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="24" BackgroundColor="LightGray">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Risk to you from others" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
+                    <Picker Grid.Column="1" x:Name="pick2_24" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                        <Picker.Items>
+                            <x:String>No</x:String>
+                            <x:String>Yes</x:String>
+                            <x:String>NA</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                </Grid>
+
+                <Grid Grid.Row="25" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="8*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="Others:"  HorizontalTextAlignment="Start" VerticalOptions="Center"   FontSize="Medium"  BackgroundColor="DarkGray"   TextColor="White" />
+                    <Entry Grid.Column="1"  x:Name="step2_other" Placeholder="" PlaceholderColor="#939393"  HorizontalOptions="FillAndExpand"/>
+                </Grid>
+
+            </Grid>
+            <StackLayout BackgroundColor="LightGray">
+                <Label Text="Where a hazard is identified it should be covered by a generic or specific risk assessment" HorizontalTextAlignment="Center"  HorizontalOptions="CenterAndExpand"   FontSize="Small"  BackgroundColor="LightGray"    TextColor="Red" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" >
+                <Label Text="Are you and your colleagues safe?" HorizontalOptions="Start" VerticalOptions="Center"/>
+                <Picker Grid.Column="1" x:Name="pick3_1" VerticalOptions="Center" HorizontalOptions="End"   TextColor="Black" >
+                    <Picker.Items>
+                        <x:String>Yes</x:String>
+                        <x:String>No</x:String>
+                    </Picker.Items>
+                    <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                </Picker>
+            </StackLayout>
+
+            <!--step 3-->
+            <StackLayout Orientation="Horizontal" IsVisible="False" >
+            
+                <!--<chkbx:CustomCheckbox x:Name="chkbx1" Checked="chkbx1_CheckedChanged" Color="Green"/>-->
+                <CheckBox x:Name="chkbx1" CheckedChanged="chkbx1_CheckedChanged" Color="Green" Visual="Material"/>
+                <Entry x:Name="txt_Check1_text" Placeholder="" PlaceholderColor="#939393"  HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" IsVisible="False">
+
+                <!--<chkbx:CustomCheckbox x:Name="chkbx2" Checked="chkbx2_CheckedChanged" Color="Green"/>-->
+                <CheckBox x:Name="chkbx2" CheckedChanged="chkbx2_CheckedChanged" Color="Green"/>
+                <Entry x:Name="txt_Check2_text" Placeholder="" PlaceholderColor="#939393"  HorizontalOptions="FillAndExpand"/>
+                
+            </StackLayout>
+
+            <Grid RowSpacing="0" ColumnSpacing="0" Padding="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" BackgroundColor="DarkGray">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="7*"/>
+
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="Step 3 - Actions"  HorizontalTextAlignment="Start"    FontSize="Medium"  BackgroundColor="SkyBlue" TextColor="White" />
+                    <Label Grid.Column="1" Text="Assess the risk of any significant hazards indentified earlier" HorizontalTextAlignment="Center"  HorizontalOptions="CenterAndExpand"   FontSize="Medium"  BackgroundColor="DarkGray"   TextColor="White" />
+                </Grid>
+                <Grid Grid.Row="1" BackgroundColor="WhiteSmoke">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="Apply further control to reduce the risk to as low as reasonably practicable (ALARP)"  HorizontalTextAlignment="Center" VerticalOptions="Center" FontSize="Small"   TextColor="Gray"  />
+                </Grid>
+
+                <Grid Grid.Row="2" BackgroundColor="DarkGray"  VerticalOptions="Center" Padding="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".5*"/>
+                        <ColumnDefinition Width=".2*"/>
+                        <ColumnDefinition Width=".2*"/>
+                        <ColumnDefinition Width=".1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" FontSize="Small"  TextColor="White" Text="Hazard Identified/Control measures"/>
+                    <Label Grid.Column="1" FontSize="Small" TextColor="White" Text="Likelihood"/>
+                    <Label Grid.Column="2"  FontSize="Small" TextColor="White" Text="Severity"/>
+                    <Label Grid.Column="3" FontSize="Small" TextColor="White" Text="Residual risk"/>
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".5*"/>
+                        <ColumnDefinition Width=".2*"/>
+                        <ColumnDefinition Width=".2*"/>
+                        <ColumnDefinition Width=".1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Entry Grid.Column="0" x:Name="txt_fill1" VerticalOptions="Center" HorizontalOptions="StartAndExpand"  Placeholder="Enter hazard Identified" PlaceholderColor="#939393" />
+                    <!--<Picker Grid.Column="1" x:Name="pick_a_up" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="OnSelectedIndexChanged_pick_a_up">-->
+                    <Picker Grid.Column="1" x:Name="pick_a_up" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">    
+                        <Picker.Items>
+                            <x:String>0</x:String> 
+                            <x:String>1</x:String>
+                            <x:String>2</x:String>
+                            <x:String>3</x:String>
+                            <x:String>4</x:String>
+                            <x:String>5</x:String>
+                        </Picker.Items>
+                        
+                    </Picker>
+
+                    <Picker Grid.Column="2" x:Name="pick_b_up" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"  TextColor="Black"  SelectedIndexChanged="Chg_Pick">
+                        <Picker.Items>
+                                <x:String>0</x:String> 
+                            <x:String>1</x:String>
+                            <x:String>2</x:String>
+                            <x:String>3</x:String>
+                            <x:String>4</x:String>
+                            <x:String>5</x:String>
+                        </Picker.Items>
+                        
+                    </Picker>
+
+                    <Label Grid.Column="3"   x:Name="txt_resultup" HorizontalOptions="CenterAndExpand"   TextColor="Black"/>
+
+
+                </Grid>
+
+
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".5*"/>
+                        <ColumnDefinition Width=".2*"/>
+                        <ColumnDefinition Width=".2*"/>
+                        <ColumnDefinition Width=".1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Entry Grid.Column="0" x:Name="txt_fill2" VerticalOptions="Center" HorizontalOptions="StartAndExpand"   Placeholder="Enter control measures detail" PlaceholderColor="#939393"/>
+                    <Picker Grid.Column="1" x:Name="pick_a_low" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"  TextColor="Black"  SelectedIndexChanged="Chg_Pick">
+                        <Picker.Items>
+                                <x:String>0</x:String> <x:String>1</x:String>
+                            <x:String>2</x:String>
+                            <x:String>3</x:String>
+                            <x:String>4</x:String>
+                            <x:String>5</x:String>
+                        </Picker.Items>
+                        
+                    </Picker>
+
+                    <Picker Grid.Column="2" x:Name="pick_b_low" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"  TextColor="Black"  SelectedIndexChanged="Chg_Pick">
+                        <Picker.Items>
+                                <x:String>0</x:String> <x:String>1</x:String>
+                            <x:String>2</x:String>
+                            <x:String>3</x:String>
+                            <x:String>4</x:String>
+                            <x:String>5</x:String>
+                        </Picker.Items>
+                        
+                    </Picker>
+
+                    <Label Grid.Column="3" HorizontalOptions="CenterAndExpand" x:Name="txt_resultlow"   TextColor="Black" />
+
+
+                </Grid>
+            </Grid>
+          
+            <Grid>
+                <Grid Grid.Row="0" Grid.RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" x:Name="Add_btn1" BackgroundColor="LightGray">
+
+                        <Button x:Name="btn_newline" Clicked="OnClicked_NewLine" Text="Add Line +"  BackgroundColor="Transparent" TextColor="DarkGray"  BorderColor="Transparent" BorderWidth="0"/>
+                    </Grid>
+                    <Grid Grid.Row="1" IsVisible="False" x:Name="fill_text_11" BackgroundColor="LightGray">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0">
+                            <!--<Label Text="Fillable Text Box" FontSize="18" TextColor="#0086b7"/>-->
+                            <Entry x:Name="txt_Check_text11" VerticalOptions="Center" HorizontalOptions = "StartAndExpand"  Placeholder="Enter hazard Identified" PlaceholderColor="#939393" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!--<Label Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_a_up1"  TextColor="Black" HorizontalOptions="CenterAndExpand"  SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                                
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2" >
+                            <!--<Label Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_b_up1" TextColor="Black" HorizontalOptions="CenterAndExpand"  SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                                
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3">
+                            <!--<Label Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Label x:Name="txt_resultup1" HorizontalOptions="CenterAndExpand" VerticalTextAlignment="End"  HorizontalTextAlignment="Center" />
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="2" IsVisible="False"  x:Name="fill_text_12" BackgroundColor="LightGray">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" >
+                            <!--<Label Text="Fillable Text Box" FontSize="18" TextColor="#0086b7"/>-->
+                            <Entry x:Name="txt_Check_text12"  VerticalOptions="Center" HorizontalOptions="StartAndExpand"   Placeholder="Enter control measures detail" PlaceholderColor="#939393" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!--<Label Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_a_low1" HorizontalOptions="CenterAndExpand" TextColor="Black"  SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                                
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2">
+                            <!--<Label Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_b_low1" HorizontalOptions="CenterAndExpand" TextColor="Black"  SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                                
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3">
+                            <!--<Label Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Label x:Name="txt_resultlow1" TextColor="#01DF01" HorizontalOptions="CenterAndExpand" VerticalTextAlignment="End"  HorizontalTextAlignment="Center" />
+
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="3" IsVisible="False" x:Name="Add_btn2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" x:Name="btn_delline2" Clicked="OnClicked_DelLine2" Text="Delete Line -"  BackgroundColor="Transparent" TextColor="DarkGray"  BorderColor="Transparent" BorderWidth="0"/>
+                        <Button Grid.Column="1" x:Name="btn_newline2" Clicked="OnClicked_NewLine2" Text="New Line +"  BackgroundColor="Transparent" TextColor="#01DF01" BorderColor="Transparent" BorderWidth="0"/>
+                    </Grid>
+                    <Grid Grid.Row="4" IsVisible="False" x:Name="fill_text_21" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0">
+                            <!--<Label Text="Fillable Text Box" FontSize="18" TextColor="#0086b7"/>-->
+                            <Entry x:Name="txt_Check_text21" VerticalOptions="Center" HorizontalOptions="StartAndExpand"  Placeholder="Enter hazard Identified" PlaceholderColor="#939393" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!--<Label Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_a_up2"  TextColor="Black" HorizontalOptions="CenterAndExpand"  SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2" >
+                            <!--<Label Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_b_up2" TextColor="Black" HorizontalOptions="CenterAndExpand"  SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3">
+                            <!--<Label Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Label x:Name="txt_resultup2" HorizontalOptions="CenterAndExpand"  VerticalTextAlignment="End"  HorizontalTextAlignment="Center" />
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="5" IsVisible="False"  x:Name="fill_text_22">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" >
+                            <!--<Label Text="Fillable Text Box" FontSize="18" TextColor="#0086b7"/>-->
+                            <Entry x:Name="txt_Check_text22"  VerticalOptions="Center" HorizontalOptions="StartAndExpand"   Placeholder="Enter control measures detail" PlaceholderColor="#939393" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!--<Label Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_a_low2" HorizontalOptions="CenterAndExpand" TextColor="Black"  SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2">
+                            <!--<Label Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_b_low2" HorizontalOptions="CenterAndExpand" TextColor="Black"  SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3">
+                            <!--<Label Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Label x:Name="txt_resultlow2" HorizontalOptions="CenterAndExpand" TextColor="#01DF01" VerticalTextAlignment="End"  HorizontalTextAlignment="Center" />
+
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="6" IsVisible="False" x:Name="Add_btn3" BackgroundColor="LightGray">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" x:Name="btn_delline3" Clicked="OnClicked_DelLine3" Text="Delete Line -"  BackgroundColor="Transparent" TextColor="DarkGray"  BorderColor="Transparent" BorderWidth="0"/>
+                        <Button Grid.Column="1" x:Name="btn_newline3" Clicked="OnClicked_NewLine3" Text="New Line +"  BackgroundColor="Transparent" TextColor="#01DF01" BorderColor="Transparent" BorderWidth="0"/>
+                    </Grid>
+                    <Grid Grid.Row="7" IsVisible="False" x:Name="fill_text_31" BackgroundColor="LightGray">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0">
+                            <!--<Label Text="Fillable Text Box" FontSize="18" TextColor="#0086b7"/>-->
+                            <Entry x:Name="txt_Check_text31" VerticalOptions="Center" HorizontalOptions="StartAndExpand"  Placeholder="Enter hazard Identified" PlaceholderColor="#939393" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!--<Label Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_a_up3" HorizontalOptions="CenterAndExpand"  TextColor="Black"  SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2" >
+                            <!--<Label Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_b_up3" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3">
+                            <!--<Label Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Label x:Name="txt_resultup3"  VerticalTextAlignment="End"  HorizontalTextAlignment="Center" />
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="8" IsVisible="False"  x:Name="fill_text_32" BackgroundColor="LightGray">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" >
+                            <!--<Label Text="Fillable Text Box" FontSize="18" TextColor="#0086b7"/>-->
+                            <Entry x:Name="txt_Check_text32"  VerticalOptions="Center" HorizontalOptions="StartAndExpand"   Placeholder="Enter control measures detail" PlaceholderColor="#939393" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!--<Label Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_a_low3" HorizontalOptions="CenterAndExpand" TextColor="Black"  SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2">
+                            <!--<Label Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_b_low3" HorizontalOptions="CenterAndExpand" TextColor="Black"  SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3">
+                            <!--<Label Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Label x:Name="txt_resultlow3" TextColor="#01DF01" VerticalTextAlignment="End"  HorizontalTextAlignment="Center" />
+
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="9" IsVisible="False" x:Name="Add_btn4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" x:Name="btn_delline4" Clicked="OnClicked_DelLine4" Text="Delete Line -"  BackgroundColor="Transparent" TextColor="DarkGray"  BorderColor="Transparent" BorderWidth="0"/>
+                        <Button Grid.Column="1" x:Name="btn_newline4" Clicked="OnClicked_NewLine4" Text="New Line +"  BackgroundColor="Transparent" TextColor="#01DF01" BorderColor="Transparent" BorderWidth="0"/>
+                    </Grid>
+                    <Grid Grid.Row="10" IsVisible="False" x:Name="fill_text_41" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0">
+                            <!--<Label Text="Fillable Text Box" FontSize="18" TextColor="#0086b7"/>-->
+                            <Entry x:Name="txt_Check_text41" VerticalOptions="Center" HorizontalOptions="StartAndExpand"  Placeholder="Enter hazard Identified" PlaceholderColor="#939393" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!--<Label Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_a_up4" HorizontalOptions="CenterAndExpand"  TextColor="Black"  SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2" >
+                            <!--<Label Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_b_up4" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3">
+                            <!--<Label Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Label x:Name="txt_resultup4" HorizontalOptions="CenterAndExpand"  VerticalTextAlignment="End"  HorizontalTextAlignment="Center" />
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="11" IsVisible="False"  x:Name="fill_text_42">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" >
+                            <!--<Label Text="Fillable Text Box" FontSize="18" TextColor="#0086b7"/>-->
+                            <Entry x:Name="txt_Check_text42"  VerticalOptions="Center" HorizontalOptions="StartAndExpand"  Placeholder="Enter control measures detail" PlaceholderColor="#939393" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!--<Label Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_a_low4" HorizontalOptions="CenterAndExpand" TextColor="Black"  SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2">
+                            <!--<Label Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_b_low4" HorizontalOptions="CenterAndExpand" TextColor="Black"  SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3">
+                            <!--<Label Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Label x:Name="txt_resultlow4" HorizontalOptions="CenterAndExpand" TextColor="#01DF01" VerticalTextAlignment="End"  HorizontalTextAlignment="Center" />
+
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="12" IsVisible="False" x:Name="Add_btn5" BackgroundColor="LightGray">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" x:Name="btn_delline5" Clicked="OnClicked_DelLine5" Text="Delete Line -"  BackgroundColor="Transparent" TextColor="DarkGray"  BorderColor="Transparent" BorderWidth="0"/>
+                        <Button Grid.Column="1" x:Name="btn_newline5" Clicked="OnClicked_NewLine5" Text="New Line +"  BackgroundColor="Transparent" TextColor="#01DF01" BorderColor="Transparent" BorderWidth="0"/>
+                    </Grid>
+                    <Grid Grid.Row="13" IsVisible="False" x:Name="fill_text_51" BackgroundColor="LightGray">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0">
+                            <!--<Label Text="Fillable Text Box" FontSize="18" TextColor="#0086b7"/>-->
+                            <Entry x:Name="txt_Check_text51" VerticalOptions="Center" HorizontalOptions="StartAndExpand"  Placeholder="Enter hazard Identified" PlaceholderColor="#939393" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!--<Label Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_a_up5" HorizontalOptions="CenterAndExpand"  TextColor="Black"  SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2" >
+                            <!--<Label Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_b_up5" HorizontalOptions="CenterAndExpand" TextColor="Black"  SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3">
+                            <!--<Label Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Label x:Name="txt_resultup5"  HorizontalOptions="CenterAndExpand" VerticalTextAlignment="End"  HorizontalTextAlignment="Center" />
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="14" IsVisible="False"  x:Name="fill_text_52" BackgroundColor="LightGray">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" >
+                            <!--<Label Text="Fillable Text Box" FontSize="18" TextColor="#0086b7"/>-->
+                            <Entry x:Name="txt_Check_text52"  VerticalOptions="Center" HorizontalOptions="StartAndExpand"   Placeholder="Enter control measures detail" PlaceholderColor="#939393" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!--<Label Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_a_low5" HorizontalOptions="CenterAndExpand" TextColor="Black"  SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2">
+                            <!--<Label Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_b_low5" HorizontalOptions="CenterAndExpand" TextColor="Black"  SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3">
+                            <!--<Label Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Label x:Name="txt_resultlow5" HorizontalOptions="CenterAndExpand" TextColor="#01DF01" VerticalTextAlignment="End"  HorizontalTextAlignment="Center" />
+
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="15" IsVisible="False" x:Name="Add_btn6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" x:Name="btn_delline6" Clicked="OnClicked_DelLine6" Text="Delete Line -"  BackgroundColor="Transparent" TextColor="DarkGray"  BorderColor="Transparent" BorderWidth="0"/>
+                        <Button Grid.Column="1" x:Name="btn_newline6" Clicked="OnClicked_NewLine6" Text="New Line +"  BackgroundColor="Transparent" TextColor="#01DF01" BorderColor="Transparent" BorderWidth="0"/>
+                    </Grid>
+                    <Grid Grid.Row="16" IsVisible="False" x:Name="fill_text_61" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0">
+                            <!--<Label Text="Fillable Text Box" FontSize="18" TextColor="#0086b7"/>-->
+                            <Entry x:Name="txt_Check_text61" VerticalOptions="Center" HorizontalOptions="StartAndExpand"  Placeholder="Enter hazard Identified" PlaceholderColor="#939393" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!--<Label Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_a_up6" HorizontalOptions="CenterAndExpand"  TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2" >
+                            <!--<Label Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_b_up6" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3">
+                            <!--<Label Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Label x:Name="txt_resultup6" HorizontalOptions="CenterAndExpand"  VerticalTextAlignment="End"  HorizontalTextAlignment="Center" />
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="17" IsVisible="False"  x:Name="fill_text_62">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" >
+                            <!--<Label Text="Fillable Text Box" FontSize="18" TextColor="#0086b7"/>-->
+                            <Entry x:Name="txt_Check_text62"  VerticalOptions="Center" HorizontalOptions="StartAndExpand"   Placeholder="Enter control measures detail" PlaceholderColor="#939393" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!--<Label Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_a_low6" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2">
+                            <!--<Label Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_b_low6" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3">
+                            <!--<Label Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Label x:Name="txt_resultlow6" HorizontalOptions="CenterAndExpand" TextColor="#01DF01" VerticalTextAlignment="End"  HorizontalTextAlignment="Center" />
+
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="18" IsVisible="False" x:Name="Add_btn7" BackgroundColor="LightGray">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" x:Name="btn_delline7" Clicked="OnClicked_DelLine7" Text="Delete Line -"  BackgroundColor="Transparent" TextColor="DarkGray"  BorderColor="Transparent" BorderWidth="0"/>
+                        <Button Grid.Column="1" x:Name="btn_newline7" Clicked="OnClicked_NewLine7" Text="New Line +"  BackgroundColor="Transparent" TextColor="#01DF01" BorderColor="Transparent" BorderWidth="0"/>
+                    </Grid>
+                    <Grid Grid.Row="19" IsVisible="False" x:Name="fill_text_71" BackgroundColor="LightGray" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0">
+                            <!--<Label Text="Fillable Text Box" FontSize="18" TextColor="#0086b7"/>-->
+                            <Entry x:Name="txt_Check_text71" VerticalOptions="Center" HorizontalOptions="StartAndExpand"  Placeholder="Enter hazard Identified" PlaceholderColor="#939393" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!--<Label Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_a_up7"  HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2" >
+                            <!--<Label Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_b_up7" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3">
+                            <!--<Label Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Label x:Name="txt_resultup7" HorizontalOptions="CenterAndExpand"  VerticalTextAlignment="End"  HorizontalTextAlignment="Center" />
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="20" IsVisible="False"  x:Name="fill_text_72" BackgroundColor="LightGray">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" >
+                            <!--<Label Text="Fillable Text Box" FontSize="18" TextColor="#0086b7"/>-->
+                            <Entry x:Name="txt_Check_text72"  VerticalOptions="Center" HorizontalOptions="StartAndExpand"  Placeholder="Enter control measures detail" PlaceholderColor="#939393" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!--<Label Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_a_low7" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2">
+                            <!--<Label Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_b_low7" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3">
+                            <!--<Label Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Label x:Name="txt_resultlow7" HorizontalOptions="CenterAndExpand" TextColor="#01DF01" VerticalTextAlignment="End"  HorizontalTextAlignment="Center" />
+
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="21" IsVisible="False" x:Name="Add_btn8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" x:Name="btn_delline8" Clicked="OnClicked_DelLine8" Text="Delete Line -"  BackgroundColor="Transparent" TextColor="DarkGray"  BorderColor="Transparent" BorderWidth="0"/>
+                        <Button Grid.Column="1" x:Name="btn_newline8" Clicked="OnClicked_NewLine8" Text="New Line +"  BackgroundColor="Transparent" TextColor="#01DF01" BorderColor="Transparent" BorderWidth="0"/>
+                    </Grid>
+                    <Grid Grid.Row="22" IsVisible="False" x:Name="fill_text_81" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0">
+                            <!--<Label Text="Fillable Text Box" FontSize="18" TextColor="#0086b7"/>-->
+                            <Entry x:Name="txt_Check_text81" VerticalOptions="Center" HorizontalOptions="StartAndExpand"  Placeholder="Enter hazard Identified" PlaceholderColor="#939393" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!--<Label Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_a_up8" HorizontalOptions="CenterAndExpand"  TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2" >
+                            <!--<Label Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_b_up8" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3">
+                            <!--<Label Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Label x:Name="txt_resultup8"  VerticalTextAlignment="End"  HorizontalTextAlignment="Center" />
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="23" IsVisible="False"  x:Name="fill_text_82">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" >
+                            <!--<Label Text="Fillable Text Box" FontSize="18" TextColor="#0086b7"/>-->
+                            <Entry x:Name="txt_Check_text82"  VerticalOptions="Center" HorizontalOptions="StartAndExpand"   Placeholder="Enter control measures detail" PlaceholderColor="#939393" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!--<Label Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_a_low8" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2">
+                            <!--<Label Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_b_low8" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3">
+                            <!--<Label Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Label x:Name="txt_resultlow8" TextColor="#01DF01" VerticalTextAlignment="End"  HorizontalTextAlignment="Center" />
+
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="24" IsVisible="False" x:Name="Add_btn9" BackgroundColor="LightGray">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" x:Name="btn_delline9" Clicked="OnClicked_DelLine9" Text="Delete Line -"  BackgroundColor="Transparent" TextColor="DarkGray"  BorderColor="Transparent" BorderWidth="0"/>
+                        <Button Grid.Column="1" x:Name="btn_newline9" Clicked="OnClicked_NewLine9" Text="New Line +"  BackgroundColor="Transparent" TextColor="#01DF01" BorderColor="Transparent" BorderWidth="0"/>
+                    </Grid>
+                    <Grid Grid.Row="25" IsVisible="False" x:Name="fill_text_91" BackgroundColor="LightGray">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0">
+                            <!--<Label Text="Fillable Text Box" FontSize="18" TextColor="#0086b7"/>-->
+                            <Entry x:Name="txt_Check_text91" VerticalOptions="Center" HorizontalOptions="StartAndExpand"  Placeholder="Enter hazard Identified" PlaceholderColor="#939393" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!--<Label Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_a_up9" HorizontalOptions="CenterAndExpand"  TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2" >
+                            <!--<Label Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_b_up9" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3">
+                            <!--<Label Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Label x:Name="txt_resultup9"  VerticalTextAlignment="End"  HorizontalTextAlignment="Center" />
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="26" IsVisible="False"  x:Name="fill_text_92" BackgroundColor="LightGray">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" >
+                            <!--<Label Text="Fillable Text Box" FontSize="18" TextColor="#0086b7"/>-->
+                            <Entry x:Name="txt_Check_text92"  VerticalOptions="Center" HorizontalOptions="StartAndExpand"  Placeholder="Enter control measures detail" PlaceholderColor="#939393" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!--<Label Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_a_low9" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2">
+                            <!--<Label Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_b_low9" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3">
+                            <!--<Label Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Label x:Name="txt_resultlow9" HorizontalOptions="CenterAndExpand" TextColor="#01DF01" VerticalTextAlignment="End"  HorizontalTextAlignment="Center" />
+
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="27" IsVisible="False" x:Name="Add_btn10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" x:Name="btn_delline10" Clicked="OnClicked_DelLine10" Text="Delete Line -"  BackgroundColor="Transparent" TextColor="DarkGray"  BorderColor="Transparent" BorderWidth="0"/>
+                        <Button Grid.Column="1" x:Name="btn_newline10" Clicked="OnClicked_NewLine10" Text="New Line +"  BackgroundColor="Transparent" TextColor="#01DF01" BorderColor="Transparent" BorderWidth="0"/>
+                    </Grid>
+                    <Grid Grid.Row="28" IsVisible="False" x:Name="fill_text_101" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0">
+                            <!--<Label Text="Fillable Text Box" FontSize="18" TextColor="#0086b7"/>-->
+                            <Entry x:Name="txt_Check_text101" VerticalOptions="Center" HorizontalOptions="StartAndExpand"  Placeholder="Enter hazard Identified" PlaceholderColor="#939393" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!--<Label Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_a_up10" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2" >
+                            <!--<Label Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_b_up10" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3">
+                            <!--<Label Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Label x:Name="txt_resultup10"  VerticalTextAlignment="End"  HorizontalTextAlignment="Center" />
+                        </StackLayout>
+                    </Grid>
+                    <Grid Grid.Row="29" IsVisible="False"  x:Name="fill_text_102">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".2*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" >
+                            <!--<Label Text="Fillable Text Box" FontSize="18" TextColor="#0086b7"/>-->
+                            <Entry x:Name="txt_Check_text102"  VerticalOptions="Center" HorizontalOptions="StartAndExpand"   Placeholder="Enter control measures detail" PlaceholderColor="#939393" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+                            <!--<Label Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_a_low10" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="2">
+                            <!--<Label Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Picker x:Name="pick_b_low10" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">
+                                <Picker.Items>
+                                        <x:String>0</x:String> <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Grid.Column="3">
+                            <!--<Label Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18" TextColor="#0086b7"/>-->
+                            <Label x:Name="txt_resultlow10" HorizontalOptions="CenterAndExpand" TextColor="#01DF01" VerticalTextAlignment="End"  HorizontalTextAlignment="Center" />
+
+                        </StackLayout>
+
+
+
+                    </Grid>
+                    
+                        <Grid Grid.Row="30" IsVisible="False"  x:Name="Add_btn11" BackgroundColor="LightGray">
+
+                            <Button x:Name="btn_delline11" Clicked="OnClicked_DelLine11" Text="Delete Line -"  BackgroundColor="Transparent" TextColor="DarkGray"  BorderColor="Transparent" BorderWidth="0"/>
+                        </Grid>
+                    <BoxView HeightRequest="5" Grid.Row="31"/>
+                    <Grid Grid.Row="32" ColumnSpacing="1" RowSpacing="1" BackgroundColor="Black" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackLayout BackgroundColor="DarkGray"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8">
+                            <Label Text="Likelihood" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        
+                        <StackLayout BackgroundColor="DarkGray"  Grid.Row="1" Grid.Column="0" >
+                            <Label Text="" FontSize="Small" />
+                        </StackLayout>
+                        <StackLayout BackgroundColor="LightGray"  Grid.Row="1" Grid.Column="1" >
+                            <Label Text="" FontSize="Small" />
+                        </StackLayout>
+                        <StackLayout BackgroundColor="LightGray"  Grid.Row="1" Grid.Column="2" >
+                            <Label Text="Zero to very low" FontSize="Small" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="LightGray"  Grid.Row="1" Grid.Column="3" >
+                            <Label Text="Very Unlikely" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="LightGray"  Grid.Row="1" Grid.Column="4" >
+                            <Label Text="Unlikely" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="LightGray"  Grid.Row="1" Grid.Column="5" >
+                            <Label Text="Likely" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="LightGray"  Grid.Row="1" Grid.Column="6" >
+                            <Label Text="Very Likely" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="LightGray"  Grid.Row="1" Grid.Column="7" >
+                            <Label Text="Almost Certain" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+<!--ROW 3-->
+                        <StackLayout BackgroundColor="DarkGray"  Grid.Row="2" Grid.Column="0" >
+                            <Label Text="SEVERITY" FontSize="Small" />
+                        </StackLayout>
+                        <StackLayout BackgroundColor="LightGray" Grid.Row="2" Grid.Column="1" >
+                            <Label Text="" FontSize="Small" />
+                        </StackLayout>
+                        <StackLayout BackgroundColor="LightGray"  Grid.Row="2" Grid.Column="2" >
+                            <Label Text="0" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="LightGray"  Grid.Row="2" Grid.Column="3" >
+                            <Label Text="1" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="LightGray"  Grid.Row="2" Grid.Column="4" >
+                            <Label Text="2" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="LightGray"  Grid.Row="2" Grid.Column="5" >
+                            <Label Text="3" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="LightGray"  Grid.Row="2" Grid.Column="6" >
+                            <Label Text="4" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="LightGray"  Grid.Row="2" Grid.Column="7" >
+                            <Label Text="5" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+
+                        <!--ROW 4-->
+                        <StackLayout BackgroundColor="DarkGray"  Grid.Row="3" Grid.Column="0" >
+                            <Label Text="Fatality ,Disabling injury ,etc" FontSize="Small" />
+                        </StackLayout>
+                        <StackLayout BackgroundColor="LightGray" Grid.Row="3" Grid.Column="1" >
+                            <Label Text="5" FontSize="Small" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#01DF01" Grid.Row="3" Grid.Column="2" >
+                            <Label Text="0" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#ffb240" Grid.Row="3" Grid.Column="3" >
+                            <Label Text="5" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#f22626" Grid.Row="3" Grid.Column="4" >
+                            <Label Text="10" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#f22626"  Grid.Row="3" Grid.Column="5" >
+                            <Label Text="15" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#f22626"  Grid.Row="3" Grid.Column="6" >
+                            <Label Text="20" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#f22626"  Grid.Row="3" Grid.Column="7" >
+                            <Label Text="25" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <!--ROW 5-->
+                        <StackLayout BackgroundColor="DarkGray"  Grid.Row="4" Grid.Column="0" >
+                            <Label Text="Major injury or illness" FontSize="Small" />
+                        </StackLayout>
+                        <StackLayout BackgroundColor="LightGray" Grid.Row="4" Grid.Column="1" >
+                            <Label Text="4" FontSize="Small" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#01DF01"  Grid.Row="4" Grid.Column="2" >
+                            <Label Text="0" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#ffb240"  Grid.Row="4" Grid.Column="3" >
+                            <Label Text="4" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#f22626" Grid.Row="4" Grid.Column="4" >
+                            <Label Text="8" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#f22626"  Grid.Row="4" Grid.Column="5" >
+                            <Label Text="12" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#f22626"  Grid.Row="4" Grid.Column="6" >
+                            <Label Text="16" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#f22626"  Grid.Row="4" Grid.Column="7" >
+                            <Label Text="20" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <!--ROW 6-->
+                        <StackLayout BackgroundColor="DarkGray"  Grid.Row="5" Grid.Column="0" >
+                            <Label Text="7 day Injury or illness" FontSize="Small" />
+                        </StackLayout>
+                        <StackLayout BackgroundColor="LightGray" Grid.Row="5" Grid.Column="1" >
+                                <Label Text="3" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#01DF01"  Grid.Row="5" Grid.Column="2" >
+                            <Label Text="0" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#ffb240"  Grid.Row="5" Grid.Column="3" >
+                            <Label Text="3" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#ffb240"  Grid.Row="5" Grid.Column="4" >
+                            <Label Text="6" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#f22626"  Grid.Row="5" Grid.Column="5" >
+                            <Label Text="9" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#f22626" Grid.Row="5" Grid.Column="6" >
+                            <Label Text="12" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#f22626"  Grid.Row="5" Grid.Column="7" >
+                            <Label Text="15" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <!--ROW 7-->
+                        <StackLayout BackgroundColor="DarkGray"  Grid.Row="6" Grid.Column="0" >
+                            <Label Text="Minor injury or illness" FontSize="Small" />
+                        </StackLayout>
+                        <StackLayout BackgroundColor="LightGray" Grid.Row="6" Grid.Column="1" >
+                            <Label Text="2" FontSize="Small" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#01DF01" Grid.Row="6" Grid.Column="2" >
+                            <Label Text="0" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#01DF01" Grid.Row="6" Grid.Column="3" >
+                            <Label Text="2" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#ffb240"  Grid.Row="6" Grid.Column="4" >
+                            <Label Text="4" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#ffb240"  Grid.Row="6" Grid.Column="5" >
+                            <Label Text="6" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#f22626"  Grid.Row="6" Grid.Column="6" >
+                            <Label Text="8" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#f22626"  Grid.Row="6" Grid.Column="7" >
+                            <Label Text="10" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <!--ROW 8-->
+                        <StackLayout BackgroundColor="DarkGray"  Grid.Row="7" Grid.Column="0" >
+                            <Label Text="First aid injury or illness" FontSize="Small" />
+                        </StackLayout>
+                        <StackLayout BackgroundColor="LightGray" Grid.Row="7" Grid.Column="1" >
+                            <Label Text="1" FontSize="Small" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#01DF01"   Grid.Row="7" Grid.Column="2" >
+                            <Label Text="0" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#01DF01"   Grid.Row="7" Grid.Column="3" >
+                            <Label Text="1" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#01DF01"   Grid.Row="7" Grid.Column="4" >
+                            <Label Text="2" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#ffb240"  Grid.Row="7" Grid.Column="5" >
+                            <Label Text="3" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#ffb240"  Grid.Row="7" Grid.Column="6" >
+                            <Label Text="4" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#ffb240"  Grid.Row="7" Grid.Column="7" >
+                            <Label Text="5" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <!--ROW 8-->
+                        <StackLayout BackgroundColor="DarkGray"  Grid.Row="8" Grid.Column="0" >
+                            <Label Text="No injury or illness" FontSize="Small" />
+                        </StackLayout>
+                        <StackLayout BackgroundColor="LightGray" Grid.Row="8" Grid.Column="1" >
+                            <Label Text="0" FontSize="Small" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#01DF01"  Grid.Row="8" Grid.Column="2" >
+                            <Label Text="0" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#01DF01"  Grid.Row="8" Grid.Column="3" >
+                            <Label Text="0" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#01DF01"  Grid.Row="8" Grid.Column="4" >
+                            <Label Text="0" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#01DF01"  Grid.Row="8" Grid.Column="5" >
+                            <Label Text="0" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#01DF01"  Grid.Row="8" Grid.Column="6" >
+                            <Label Text="0" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="#01DF01"  Grid.Row="8" Grid.Column="7" >
+                            <Label Text="0" FontSize="Small"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="DarkGray"  Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="8">
+                            <Label Text="" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                    </Grid>
+                  
+                    <!--<dg:DataGrid x:Name="pdfdatagridtest"
+                RowHeight="50" HeaderHeight="50" BorderColor="#CCCCCC" HeaderBackground="DarkGray">
+                            <dg:DataGrid.HeaderFontSize>
+                                <OnIdiom  x:TypeArguments="x:Double">
+                                    <OnIdiom.Tablet>15</OnIdiom.Tablet>
+                                    <OnIdiom.Phone>12</OnIdiom.Phone>
+                                </OnIdiom>
+                            </dg:DataGrid.HeaderFontSize>
+                            <dg:DataGrid.Columns>
+                                <dg:DataGridColumn Title="" PropertyName="Logo" Width=".38*" ></dg:DataGridColumn>-->
+                               <!-- <dg:DataGridColumn Title="Likelihood" PropertyName="Logo" Width="1*" ></dg:DataGridColumn>
+                            </dg:DataGrid.Columns>
+                        </dg:DataGrid>
+                    </Grid>
+                    <Grid Grid.Row="32">
+                        <dg:DataGrid x:Name="pdfdatagridtest1"
+                RowHeight="50" HeaderHeight="50" BorderColor="#CCCCCC" HeaderBackground="#E0E6F8">
+                            <dg:DataGrid.HeaderFontSize>
+                                <OnIdiom  x:TypeArguments="x:Double">
+                                    <OnIdiom.Tablet>13</OnIdiom.Tablet>
+                                    <OnIdiom.Phone>10</OnIdiom.Phone>
+                                </OnIdiom>
+                            </dg:DataGrid.HeaderFontSize>
+                            <dg:DataGrid.Columns>
+                                <dg:DataGridColumn Title="" PropertyName="Logo" Width="100" ></dg:DataGridColumn>
+                                <dg:DataGridColumn Title="" PropertyName="Logo" Width="1*" ></dg:DataGridColumn>
+                                <dg:DataGridColumn Title="Zero to very low" PropertyName="Logo" Width="1*" ></dg:DataGridColumn>
+                                <dg:DataGridColumn Title="Very Unlikely" PropertyName="Logo" Width="1*" ></dg:DataGridColumn>
+                                <dg:DataGridColumn Title="Unlikely" PropertyName="Logo" Width="1*" ></dg:DataGridColumn>
+                                <dg:DataGridColumn Title="Likely" PropertyName="Logo" Width="1*" ></dg:DataGridColumn>
+                                <dg:DataGridColumn Title="Very Likely" PropertyName="Logo" Width="1*" ></dg:DataGridColumn>
+                                <dg:DataGridColumn Title="Almost Certain" PropertyName="Logo" Width="1*" ></dg:DataGridColumn>
+                            </dg:DataGrid.Columns>
+                        </dg:DataGrid>
+                    </Grid>
+                    <Grid Grid.Row="33">
+                        <dg:DataGrid x:Name="pdfdatagrid" ItemsSource="{Binding Teams}" SelectionEnabled="True" SelectedItem="{Binding SelectedTeam}" RowHeight="50" HeaderHeight="50" BorderColor="#CCCCCC" HeaderBackground="#E0E6F8"
+                  PullToRefreshCommand="{Binding RefreshCommand}"  IsRefreshing="{Binding IsRefreshing}">
+                            <dg:DataGrid.HeaderFontSize>
+                                <OnIdiom  x:TypeArguments="x:Double">
+                                    <OnIdiom.Tablet>13</OnIdiom.Tablet>
+                                    <OnIdiom.Phone>10</OnIdiom.Phone>
+                                </OnIdiom>
+                            </dg:DataGrid.HeaderFontSize>
+
+                            <dg:DataGrid.Columns>
+
+                                <dg:DataGridColumn Title="SEVERITY" PropertyName="Logo" Width="100" >
+                                    <dg:DataGridColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Text="{Binding Logo}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
+                                        </DataTemplate>
+                                    </dg:DataGridColumn.CellTemplate>
+                                </dg:DataGridColumn>
+                                <dg:DataGridColumn Title="" PropertyName="Name" Width="1*">
+                                    <dg:DataGridColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ContentView HorizontalOptions="Fill" VerticalOptions="Fill">
+                                                <Label Text="{Binding SNo}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
+                                            </ContentView>
+                                        </DataTemplate>
+                                    </dg:DataGridColumn.CellTemplate>
+                                </dg:DataGridColumn>
+
+                                <dg:DataGridColumn Title="0" PropertyName="Name" Width="1*">
+                                    <dg:DataGridColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ContentView HorizontalOptions="Fill" VerticalOptions="Fill"
+                                 BackgroundColor="{Binding Name,Converter={StaticResource StreakToColorConverter}}">
+
+                                                <Label Text="{Binding Name}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
+                                            </ContentView>
+                                        </DataTemplate>
+                                    </dg:DataGridColumn.CellTemplate>
+                                </dg:DataGridColumn>
+
+                                <dg:DataGridColumn Title="1" PropertyName="Win" Width="1*">
+                                    <dg:DataGridColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ContentView HorizontalOptions="Fill" VerticalOptions="Fill"
+                                 BackgroundColor="{Binding Win,Converter={StaticResource StreakToColorConverter}}">
+                                                <Label Text="{Binding Win}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
+                                            </ContentView>
+                                        </DataTemplate>
+                                    </dg:DataGridColumn.CellTemplate>
+                                </dg:DataGridColumn>
+
+                                <dg:DataGridColumn Title="2" PropertyName="Loose"  Width="1*">
+                                    <dg:DataGridColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ContentView HorizontalOptions="Fill" VerticalOptions="Fill"
+                                 BackgroundColor="{Binding Loose,Converter={StaticResource StreakToColorConverter}}">
+                                                <Label Text="{Binding Loose}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
+                                            </ContentView>
+                                        </DataTemplate>
+                                    </dg:DataGridColumn.CellTemplate>
+                                </dg:DataGridColumn>
+
+                                <dg:DataGridColumn Title="3" PropertyName="Home">
+                                    <dg:DataGridColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ContentView HorizontalOptions="Fill" VerticalOptions="Fill"
+                                 BackgroundColor="{Binding Home,Converter={StaticResource StreakToColorConverter}}">
+                                                <Label Text="{Binding Home}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
+                                            </ContentView>
+                                        </DataTemplate>
+                                    </dg:DataGridColumn.CellTemplate>
+                                </dg:DataGridColumn>
+
+                                <dg:DataGridColumn Title="4" PropertyName="Percentage"  Width="1*">
+                                    <dg:DataGridColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ContentView HorizontalOptions="Fill" VerticalOptions="Fill"
+                                 BackgroundColor="{Binding Percentage,Converter={StaticResource StreakToColorConverter}}">
+                                                <Label Text="{Binding Percentage}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
+                                            </ContentView>
+                                        </DataTemplate>
+                                    </dg:DataGridColumn.CellTemplate>
+                                </dg:DataGridColumn>
+
+                                <dg:DataGridColumn Title="5" PropertyName="Streak" Width="1*">
+                                    <dg:DataGridColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ContentView HorizontalOptions="Fill" VerticalOptions="Fill"
+                                 BackgroundColor="{Binding Streak,Converter={StaticResource StreakToColorConverter}}">
+                                                <Label Text="{Binding Streak}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
+                                            </ContentView>
+                                        </DataTemplate>
+                                    </dg:DataGridColumn.CellTemplate>
+                                </dg:DataGridColumn>
+                            </dg:DataGrid.Columns>
+                            <dg:DataGrid.RowsBackgroundColorPalette>
+                                <dg:PaletteCollection>
+                                    <Color>#F2F2F2</Color>
+                                    <Color>#FFFFFF</Color>
+                                </dg:PaletteCollection>
+                            </dg:DataGrid.RowsBackgroundColorPalette>
+                            <dg:DataGrid.Resources>
+                                <ResourceDictionary>
+                                    <conv:StreakToColorConverter x:Key="StreakToColorConverter"/>
+                                </ResourceDictionary>
+                            </dg:DataGrid.Resources>
+                        </dg:DataGrid>
+                    </Grid> -->
+
+                </Grid>
+            </Grid>
+
+
+
+
+            <BoxView HeightRequest="5" Grid.Row="33"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <StackLayout BackgroundColor="SkyBlue"  Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Attachments"/>
+                        <Label HorizontalOptions="End" x:Name="lbl_from" Text="0"/>
+                        <Label HorizontalOptions="End"  Text="of"/>
+                        <Label HorizontalOptions="End"  x:Name="lbl_to" Text="0"/>
+                        <Label HorizontalOptions="End"  Text="of total 10"/>
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Row="1">
+                        <Image  x:Name="Image1"/>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".3*"/>
+                        <ColumnDefinition Width=".4*"/>
+                        <ColumnDefinition Width=".3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" x:Name="Prev" Text="Prev" FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Clicked="OnClick_Prev"/>
+                    <Button Grid.Column="1" x:Name="DeletePhoto"  FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Text="DeletePhoto" Clicked="OnClick_deletepicture"/>
+                    <Button Grid.Column="2" x:Name="Next"  FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Text="Next" Clicked="OnClick_Nxt"/>
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".5*"/>
+                        <ColumnDefinition Width=".5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" x:Name="takePhoto" FontSize="Micro"  ContentLayout="Left,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="camera.png" Text="Take Photo" Clicked="OnClick_takepicture"/>
+                    <Button Grid.Column="1" x:Name="pickPhoto" FontSize="Micro"  ContentLayout="Left,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="gallery.png" Text="Pick Photo" Clicked="OnClick_pickPicture"/>
+
+                </Grid>
+                <Grid Grid.Row="4" IsVisible="False">
+                    <StackLayout>
+                        <Label BackgroundColor="Gray" x:Name="img1"/>
+                        <Label x:Name="img2"/>
+                        <Label BackgroundColor="Gray" x:Name="img3"/>
+                        <Label x:Name="img4"/>
+                        <Label BackgroundColor="Gray" x:Name="img5"/>
+                        <Label x:Name="img6"/>
+                        <Label BackgroundColor="Gray" x:Name="img7"/>
+                        <Label x:Name="img8"/>
+                        <Label BackgroundColor="Gray" x:Name="img9"/>
+                        <Label x:Name="img10"/>
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Row="5" IsVisible="False">
+                    <StackLayout Orientation="Vertical"><Label x:Name="ActImg"/>
+                       
+                    </StackLayout>
+                </Grid>
+            </Grid>
+   
+   
+            <Grid>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".35*"/>
+                        <ColumnDefinition Width=".35*"/>
+                        <ColumnDefinition Width=".35*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Text="Open Drafts" FontSize="Micro"  ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="fillableform1_pictures_icon.png" Clicked="OnClick_OpenDraft" />
+                    <Button Grid.Column="1" Text="Save as Draft" FontSize="Micro" ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" HorizontalOptions="FillAndExpand" Image="fillableform1_save_icon.png" Clicked="OnClick_SaveDraft"/>
+                    <Button Grid.Column="2" Text="Save as PDF" FontSize="Micro" ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" HorizontalOptions="FillAndExpand" Image="fillableform1_pdf_icon.png" Clicked="OnClick_SavePDF"/>
+                </Grid>
+
+            </Grid>
+    </StackLayout>
+    </ScrollView>
+
+</ContentPage>

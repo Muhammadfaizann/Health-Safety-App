@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HealthSafetyApp.ViewModels" 
+             xmlns:controls="clr-namespace:HealthSafetyApp.Controls"
+             xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             x:Class="HealthSafetyApp.Views.SignupPageSecond">
+    <StackLayout Padding="40" VerticalOptions="Center"
+                     HorizontalOptions="FillAndExpand"
+                     x:DataType="vm:SignUpViewModel">
+
+        <controls:RoundedEntry PlaceHolder="Organization" Text="{Binding Organizatiion}"/>
+        <controls:RoundedEntry PlaceHolder="Position" Text="{Binding Position}"/>
+        <controls:RoundedEntry PlaceHolder="Industry" Text="{Binding Industry}"/>
+        <controls:RoundedEntry PlaceHolder="Qualification" Text="{Binding Qualification}"/>
+        <Frame BackgroundColor="White" Padding="0"
+               CornerRadius="{ OnPlatform Android=50, iOS=20}">
+            <DatePicker Date="{Binding DOB}"/>
+        </Frame>
+        <ActivityIndicator IsRunning="{Binding IsBusy}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Color="{StaticResource HealthSafetyGreen}"/>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,50,0,0">
+            <CheckBox VerticalOptions="Center"/>
+            <Label Text="I accept terms and condtion" VerticalOptions="Center"/>
+        </StackLayout>
+
+        <Button Text="SIGN UP" Command="{Binding SignUpCommand}"
+                    BackgroundColor="{StaticResource HealthSafetyGreen}" Margin="60,60,60,0"
+                    CornerRadius="{ OnPlatform Android=30, iOS=20}"
+                    TextColor="White"/>
+        <forms:SvgCachedImage
+            Aspect="AspectFit"
+            Source="Icon.svg"
+            DownsampleToViewSize="True"
+            HeightRequest="15"
+            WidthRequest="100"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"></forms:SvgCachedImage>
+    </StackLayout>
+</ContentPage>

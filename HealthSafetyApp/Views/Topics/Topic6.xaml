@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:Core"
+                
+             x:Class=" HealthSafetyApp.Views.Topics.Topic6">
+  <ScrollView x:Name="myscrollview" Orientation="Vertical" VerticalOptions="FillAndExpand">
+    <Grid RowSpacing="1" Padding="5">
+      <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <!--<RowDefinition Height="auto"/>-->
+        <RowDefinition Height="100"/>
+      </Grid.RowDefinitions>
+
+      <!--<Label Grid.Row="0"  FontSize="22" HorizontalTextAlignment="Center" FontAttributes="Bold"  Text="Form" BackgroundColor="#ffffff" TextColor="#0086b7"/>-->
+      <Grid Grid.Row="0" >
+        <StackLayout  >
+          <Label Text="Assessor name:" FontSize="Large"   TextColor="#0086b7" />
+          <Entry x:Name="txt_name"  PlaceholderColor="#939393"/>
+          <Label Text="Risk assessment topic name:" FontSize="Large"   TextColor="#0086b7"/>
+          <Entry x:Name="txt_projname"  PlaceholderColor="#939393"/>
+          <!--<Label Text="Site Name" FontSize="Large" TextColor="#0086b7"/>
+          <Entry x:Name="txt_sitename" Placeholder="Site Name" PlaceholderColor="#939393"/>-->
+          <Label Text="Date:" FontSize="Large"  TextColor="#0086b7"/>
+          <Grid >
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width=".9*"/>
+              <ColumnDefinition Width=".1*"/>
+            </Grid.ColumnDefinitions>
+            <DatePicker Grid.Column="0" TextColor="Black" x:Name="datepicker" />
+            <Image Grid.Column="1"  Source="tool_calendar_icon.png" ></Image>
+          </Grid>
+
+                    <Label Text="Safe systems / Method statment:" FontSize="Large" TextColor="#0086b7" />
+                    <Frame HasShadow="False" BorderColor="LightGray" Padding="0">
+                    <local:ExpandableEditor x:Name="headlines" VerticalOptions="FillAndExpand"/>
+                    </Frame>
+                </StackLayout>
+      </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <StackLayout BackgroundColor="SkyBlue"  Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Attachments"/>
+                        <Label HorizontalOptions="End" x:Name="lbl_from" Text="0"/>
+                        <Label HorizontalOptions="End"  Text="of"/>
+                        <Label HorizontalOptions="End"  x:Name="lbl_to" Text="0"/>
+                        <Label HorizontalOptions="End"  Text="of total 10"/>
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Image  x:Name="Image1"/>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".3*"/>
+                        <ColumnDefinition Width=".4*"/>
+                        <ColumnDefinition Width=".3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" x:Name="Prev" Text="Prev" FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Clicked="OnClick_Prev"/>
+                    <Button Grid.Column="1" x:Name="DeletePhoto"  FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Text="DeletePhoto" Clicked="OnClick_deletepicture"/>
+                    <Button Grid.Column="2" x:Name="Next"  FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Text="Next" Clicked="OnClick_Nxt"/>
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".5*"/>
+                        <ColumnDefinition Width=".5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" x:Name="takePhoto" FontSize="Micro"  ContentLayout="Left,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="camera.png" Text="Take Photo" Clicked="OnClick_takepicture"/>
+                    <Button Grid.Column="1" x:Name="pickPhoto" FontSize="Micro"  ContentLayout="Left,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="gallery.png" Text="Pick Photo" Clicked="OnClick_pickPicture"/>
+
+
+                </Grid>
+                <Grid Grid.Row="4" IsVisible="False">
+                    <StackLayout>
+                        <Label x:Name="img1"/>
+                        <Label x:Name="img2"/>
+                        <Label x:Name="img3"/>
+                        <Label x:Name="img4"/>
+                        <Label x:Name="img5"/>
+                        <Label x:Name="img6"/>
+                        <Label x:Name="img7"/>
+                        <Label x:Name="img8"/>
+                        <Label x:Name="img9"/>
+                        <Label x:Name="img10"/>
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Row="5" IsVisible="False">
+                    <Label x:Name="ActImg"/>
+                </Grid>
+            </Grid>
+
+
+
+            <Grid Grid.Row="2" Margin="0,20,0,0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width=".35*"/>
+          <ColumnDefinition Width=".35*"/>
+          <ColumnDefinition Width=".35*"/>
+        </Grid.ColumnDefinitions>
+        <!--<Picker x:Name="filespick" />-->
+        <!--SelectedIndexChanged="OnSelectedIndexChanged_pick_b_low"-->
+                <Button Grid.Column="0" Text="Open Drafts" FontSize="Micro"  ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="fillableform1_pictures_icon.png" Clicked="OnClick_OpenDraft" />
+                <Button Grid.Column="1" Text="Save as Draft" FontSize="Micro" ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" HorizontalOptions="FillAndExpand" Image="fillableform1_save_icon.png" Clicked="OnClick_SaveDraft"/>
+                <Button Grid.Column="2" Text="Save as PDF" FontSize="Micro" ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" HorizontalOptions="FillAndExpand" Image="fillableform1_pdf_icon.png" Clicked="OnClick_SavePDF"/>
+            </Grid>
+
+    </Grid>
+
+  </ScrollView>
+</ContentPage>

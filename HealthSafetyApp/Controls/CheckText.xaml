@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HealthSafetyApp.Controls.CheckText"
+             ColumnSpacing="0"
+             ColumnDefinitions="auto,auto"
+             x:Name="this">
+    <CheckBox Grid.Column="0" Margin="0,0,-10,0" x:Name="chkbox" VerticalOptions="Center" 
+              IsChecked="{Binding Source={x:Reference this},Path=Checked}"/>
+    <Label Grid.Column="1" x:Name="lbl"  VerticalOptions="Center" />
+</Grid>

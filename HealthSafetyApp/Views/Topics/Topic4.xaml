@@ -1,0 +1,584 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:chkbx="clr-namespace:HealthSafetyApp.Controls"
+            
+             x:Class="HealthSafetyApp.Views.Topics.Topic4"
+             Title="Risk Assessment:Manual Handling">
+    <ScrollView x:Name="myscrollview" Orientation="Vertical" VerticalOptions="StartAndExpand">
+        <Grid RowSpacing="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="70*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Text="Name of assessor" FontSize="Medium"  TextColor="#0086b7" />
+                <Entry Grid.Row="0" Grid.Column="1" x:Name="txt_name" Placeholder="" PlaceholderColor="#939393"/>
+
+                <Label Grid.Row="1" Grid.Column="0" Text="Department" FontSize="Medium"  TextColor="#0086b7"/>
+                <Entry Grid.Row="1" Grid.Column="1" x:Name="txt_projname" Placeholder="" PlaceholderColor="#939393"/>
+
+                <Label Grid.Row="2" Grid.Column="0" Text="Location" FontSize="Medium"  TextColor="#0086b7"/>
+                <Entry Grid.Row="2" Grid.Column="1" x:Name="txt_sitename" Placeholder="" PlaceholderColor="#939393"/>
+
+                <Label Grid.Row="3" Grid.Column="0" Text="Date" FontSize="Medium" TextColor="#0086b7"/>
+                <DatePicker Grid.Row="3" Grid.Column="1" TextColor="Black" x:Name="datepicker" />
+
+                <Label Grid.Row="4" Grid.Column="0" Text="Description" FontSize="Medium"  TextColor="#0086b7"/>
+                <Entry Grid.Row="4" Grid.Column="1" x:Name="txt_Description" Placeholder="" PlaceholderColor="#939393"/>
+
+            </Grid>
+
+            <Grid Grid.Row="1" >
+                <Grid.RowDefinitions>
+
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="35*"/>
+                    <ColumnDefinition Width="35*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Grid.Row="0" Grid.ColumnSpan="3" BackgroundColor="Gray">
+                    <Label TextColor="White" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="1. Task" FontSize="Large" HorizontalOptions="Center"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Grid.Column="0" BackgroundColor="AliceBlue" >
+                    <Label Grid.Row="1" Grid.Column="0" Text="Risk factor" FontSize="Small"  HorizontalOptions="Start" />
+                </StackLayout>
+                <StackLayout Grid.Row="1" Grid.Column="1" BackgroundColor="AliceBlue" >
+                    <Label Grid.Row="1" Grid.Column="1"  Text="Guidelines to degree of risk" FontSize="Small"  HorizontalOptions="Center"/>
+                </StackLayout>
+                <StackLayout Grid.Row="1" Grid.Column="2" BackgroundColor="AliceBlue" >
+                    <Label Grid.Row="1" Grid.Column="2"  Text="Comment / Assumptions" FontSize="Small" HorizontalOptions="Center"/>
+                </StackLayout>
+
+                <StackLayout BackgroundColor="LightGray" Grid.Row="2" Grid.Column="0" >
+                    <Label Grid.Row="2" Grid.Column="0" Text="Frequency" FontSize="Small" HorizontalOptions="Start"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" Grid.Column="1" BackgroundColor="LightGray">
+                    <!--<Picker  HorizontalOptions="FillAndExpand">
+                        <Picker.Items>
+                            <x:String>>8 per minute</x:String>
+                            <x:String>> 2 per minute</x:String>
+                            <x:String>2 per minute</x:String>
+                        </Picker.Items>
+                    </Picker>-->
+
+                    <chkbx:CheckText x:Name="CB11" DefaultText=" &gt; 8 per minute" TextColor="Red" Color="Red" FontSize="10"  HorizontalOptions="Start"  CheckedChanged="CB11_CheckedChanged_1"  Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB12" DefaultText="2-8 per minute" TextColor="Orange" Color="Orange" FontSize="10"  HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB13" DefaultText=" &lt; 2 per minute" TextColor="Green" Color="Green" FontSize="10"  Checked="True" IsEnabled="False"  HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" Grid.Column="2" BackgroundColor="LightGray" >
+                    <Entry x:Name="TB1" Grid.Row="2" Grid.Column="2" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="3" Grid.Column="0" >
+                    <Label Grid.Row="3" Grid.Column="0" Text="Stooping" FontSize="Small" HorizontalOptions="Start" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="3" Grid.Column="1">
+                    <chkbx:CheckText x:Name="CB21" Grid.Row="3" Grid.Column="1" DefaultText="> 30 degrees" TextColor="Red" Color="Red" FontSize="10" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB22" Grid.Row="3" Grid.Column="1" DefaultText="0-30 degrees" TextColor="Orange" Color="Orange" FontSize="10"   HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB23" Grid.Row="3" Grid.Column="1" DefaultText="No stooping" TextColor="Green" Color="Green" Checked="True" IsEnabled="False" FontSize="10"   HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="3" Grid.Column="2" BackgroundColor="WhiteSmoke" >
+                    <Entry x:Name="TB2" Grid.Row="3" Grid.Column="2" />
+                </StackLayout>
+
+
+                <StackLayout BackgroundColor="LightGray" Grid.Row="4" Grid.Column="0" >
+                    <Label Grid.Row="4" Grid.Column="0" Text="Twisting" FontSize="Small" HorizontalOptions="Start" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="LightGray" Grid.Row="4" Grid.Column="1" >
+                    <chkbx:CheckText x:Name="CB31" Grid.Row="4"  DefaultText="45-90 degrees" TextColor="Red" Color="Red" FontSize="10" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB32" Grid.Row="4" DefaultText="0-90 degrees" TextColor="Orange" Color="Orange" FontSize="10"   HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB33" Grid.Row="4" DefaultText="Very little or no twisting" Color="Green" TextColor="Green" Checked="True" IsEnabled="False" FontSize="10"   HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                </StackLayout>
+                <StackLayout BackgroundColor="LightGray" Grid.Row="4" Grid.Column="2" >
+                    <Entry x:Name="TB3" Grid.Row="4" Grid.Column="2" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="5" Grid.Column="0" >
+                    <Label Grid.Row="5" Grid.Column="0" Text="Reaching" FontSize="Small" HorizontalOptions="Start"/>
+                </StackLayout>
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="5" Grid.Column="1" >
+                    <chkbx:CheckText x:Name="CB41" Grid.Row="5"  DefaultText="Arms length" TextColor="Red" Color="Red" FontSize="10" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB42" Grid.Row="5"  DefaultText="Between arm length and body" Color="Orange" TextColor="Orange" FontSize="10"   HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB43" Grid.Row="5"  DefaultText="Close to body" TextColor="Green" Color="Green" FontSize="10" Checked="True" IsEnabled="False"  HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                </StackLayout>
+
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="5" Grid.Column="2" >
+                    <Entry x:Name="TB4" Grid.Row="5" Grid.Column="2" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="LightGray" Grid.Row="6" Grid.Column="0" >
+                    <Label Grid.Row="6"  Grid.Column="0" Text="Weight" FontSize="Small" HorizontalOptions="Start" />
+                    <Label Grid.Row="6" Grid.Column="0" Text="(Consider above factors and identify area subject to load from body map)" FontSize="Micro" HorizontalOptions = "Start"/>
+                </StackLayout>
+                <StackLayout BackgroundColor="LightGray" Grid.Row="6" Grid.Column="1" >
+                    <chkbx:CheckText x:Name="CB51" Grid.Row="6" DefaultText= "> 25kg" TextColor="Red" Color="Red" FontSize="10" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB52" Grid.Row="6" DefaultText= "12 - 25kg" TextColor="Orange" Color="Orange" FontSize="10"   HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB53" Grid.Row="6"  DefaultText= "&lt; 12kg" TextColor="Green" Color="Green" FontSize="10" Checked="True" IsEnabled="False"   HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                </StackLayout>
+                <StackLayout BackgroundColor="LightGray" Grid.Row="6" Grid.Column="2" >
+                    <Entry x:Name="TB5" Grid.Row="6" Grid.Column="2" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="7" Grid.Column="0" >
+                    <Label Grid.Row="7" Grid.Column="0" Text="Pushing/Pulling Force" FontSize="Small" HorizontalOptions="Start" />
+                </StackLayout>
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="7" Grid.Column="1" >
+                    <chkbx:CheckText x:Name="CB61" Grid.Row="7" DefaultText=">25kg" TextColor="Red" Color="Red" FontSize="10" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB62" Grid.Row="7"  DefaultText="10-25kg" TextColor="Orange" Color="Orange" FontSize="10"   HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB63" Grid.Row="7"  DefaultText="&lt; 10kg" TextColor="Green" Color="Green" FontSize="10" Checked="True" IsEnabled="False"  HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                </StackLayout>
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="7" Grid.Column="2" >
+                    <Entry x:Name="TB6" Grid.Row="7" Grid.Column="2" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="LightGray" Grid.Row="8" Grid.Column="0" >
+                    <Label Grid.Row="8" Grid.Column="0" Text="Distance carried" FontSize="Small" HorizontalOptions="Start" />
+                </StackLayout>
+                <StackLayout BackgroundColor="LightGray" Grid.Row="8" Grid.Column="1" >
+                    <chkbx:CheckText x:Name="CB71" Grid.Row="8"  DefaultText="> 10m forwards/ > 1m backwards" TextColor="Red" Color="Red" FontSize="10" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB72" Grid.Row="8" DefaultText="1-10m forward/&lt;  1m backwards" TextColor="Orange" Color="Orange" FontSize="10"  HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB73" Grid.Row="8"  DefaultText="&lt;  1m forwards/nil backwards" TextColor="Green" Color="Green" FontSize="10"  Checked="True" IsEnabled="False"  HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                </StackLayout>
+                <StackLayout BackgroundColor="LightGray" Grid.Row="8" Grid.Column="2" >
+                    <Entry x:Name="TB7" Grid.Row="8" Grid.Column="2" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="9" Grid.Column="0" >
+                    <Label Grid.Row="9" Grid.Column="0" Text="Duration of each work element / assignment" FontSize="Small" HorizontalOptions="Start"/>
+                </StackLayout>
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="9" Grid.Column="1" >
+                    <chkbx:CheckText x:Name="CB81" Grid.Row="9" DefaultText="> 10 minutes/&lt;  30 minutes" TextColor="Red" Color="Red" FontSize="10" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB82" Grid.Row="9" DefaultText="1-10 minutes" TextColor="Orange" Color="Orange" FontSize="10"  HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB83" Grid.Row="9"  DefaultText="30 secs-1 minute" TextColor="Green" Color="Green" FontSize="10" Checked="True" IsEnabled="False"  HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                </StackLayout>
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="9" Grid.Column="2" >
+                    <Entry x:Name="TB8" Grid.Row="9" Grid.Column="2" />
+                </StackLayout>
+
+            </Grid>
+            <!--2 Load-->
+            <Grid Grid.Row="2" >
+                <Grid.RowDefinitions>
+
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="35*"/>
+                    <ColumnDefinition Width="35*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Grid.Row="0" Grid.ColumnSpan="3" BackgroundColor="Gray">
+                    <Label TextColor="White" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="2. Load" FontSize="Large" HorizontalOptions="Center"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Grid.Column="0" BackgroundColor="AliceBlue" >
+                    <Label Grid.Row="1" Grid.Column="0" Text="Risk factor" FontSize="Small"  HorizontalOptions="Start" />
+                </StackLayout>
+                <StackLayout Grid.Row="1" Grid.Column="1" BackgroundColor="AliceBlue" >
+                    <Label Grid.Row="1" Grid.Column="1"  Text="Guidelines to degree of risk" FontSize="Small"  HorizontalOptions="Center"/>
+                </StackLayout>
+                <StackLayout Grid.Row="1" Grid.Column="2" BackgroundColor="AliceBlue" >
+                    <Label Grid.Row="1" Grid.Column="2"  Text="Comment / Assumptions" FontSize="Small" HorizontalOptions="Center"/>
+                </StackLayout>
+
+                <StackLayout BackgroundColor="LightGray" Grid.Row="2" Grid.Column="0" >
+                    <Label Grid.Row="2" Grid.Column="0" Text="Part handling" FontSize="Small" HorizontalOptions="Start" />
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" Grid.Column="1" BackgroundColor="LightGray">
+
+                    <chkbx:CheckText x:Name="CB91" DefaultText="No grasp points" TextColor="Red" Color="Red" FontSize="10" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB92" DefaultText="Grasp points okay but awkward" TextColor="Orange" Color="Orange" FontSize="10"   HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText  x:Name="CB93" DefaultText="Good grasp points" TextColor="Green" FontSize="10" Color="Green" Checked="True" IsEnabled="False"  HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" Grid.Column="2" BackgroundColor="LightGray" >
+                    <Entry x:Name="TB9" Grid.Row="2" Grid.Column="2" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="3" Grid.Column="0" >
+                    <Label Grid.Row="3" Grid.Column="0" Text="Conditions (COSHH)" FontSize="Small" HorizontalOptions="Start" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="3" Grid.Column="1">
+                    <chkbx:CheckText x:Name="CB101" Grid.Row="3" Grid.Column="1" DefaultText="Unmarked potential harmful" TextColor="Red" Color="Red" FontSize="10" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB102" Grid.Row="3" Grid.Column="1" DefaultText="Marked potential harmful" TextColor="Orange" Color="Orange" FontSize="10"   HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB103" Grid.Row="3" Grid.Column="1" DefaultText="Marked harmless" TextColor="Green" Color="Green" FontSize="10" Checked="True" IsEnabled="False"   HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="3" Grid.Column="2" BackgroundColor="WhiteSmoke" >
+                    <Entry x:Name="TB10" Grid.Row="3" Grid.Column="2" />
+                </StackLayout>
+
+            </Grid>
+            <!--3 Environment-->
+            <Grid Grid.Row="3" >
+                <Grid.RowDefinitions>
+
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="35*"/>
+                    <ColumnDefinition Width="35*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Grid.Row="0" Grid.ColumnSpan="3" BackgroundColor="Gray">
+                    <Label TextColor="White" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="3. Environment" FontSize="Large" HorizontalOptions="Center"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Grid.Column="0" BackgroundColor="AliceBlue" >
+                    <Label Grid.Row="1" Grid.Column="0" Text="Risk factor" FontSize="Small"  HorizontalOptions="Start" />
+                </StackLayout>
+                <StackLayout Grid.Row="1" Grid.Column="1" BackgroundColor="AliceBlue" >
+                    <Label Grid.Row="1" Grid.Column="1"  Text="Guidelines to degree of risk" FontSize="Small"  HorizontalOptions="Center"/>
+                </StackLayout>
+                <StackLayout Grid.Row="1" Grid.Column="2" BackgroundColor="AliceBlue" >
+                    <Label Grid.Row="1" Grid.Column="2"  Text="Comment / Assumptions" FontSize="Small" HorizontalOptions="Center"/>
+                </StackLayout>
+
+                <StackLayout BackgroundColor="LightGray" Grid.Row="2" Grid.Column="0" >
+                    <Label Grid.Row="2" Grid.Column="0" Text="Space " FontSize="Small" HorizontalOptions="Start" />
+                    <Label Grid.Row="2" Grid.Column="0" Text="Access sufficient for size of part" FontSize="Micro" HorizontalOptions="Start" />
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" Grid.Column="1" BackgroundColor="LightGray">
+
+                    <chkbx:CheckText x:Name="CB111" DefaultText="Congested" TextColor="Red" Color="Red" FontSize="10" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB112" DefaultText="Restricted" TextColor="Orange" Color="Orange" FontSize="10"   HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB113" DefaultText="Clear" TextColor="Green" Color="Green" FontSize="10" Checked="True" IsEnabled="False"   HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" Grid.Column="2" BackgroundColor="LightGray" >
+                    <Entry x:Name="TB11" Grid.Row="2" Grid.Column="2" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="3" Grid.Column="0" >
+                    <Label Grid.Row="3" Grid.Column="0" Text="Floor condition" FontSize="Small" HorizontalOptions="Start" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="3" Grid.Column="1">
+                    <chkbx:CheckText x:Name="CB121" Grid.Row="3" Grid.Column="1" DefaultText="Slippery" TextColor="Red" Color="Red" FontSize="10" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB122" Grid.Row="3" Grid.Column="1" DefaultText="Reasonable" TextColor="Orange" Color="Orange" FontSize="10"   HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB123" Grid.Row="3" Grid.Column="1" DefaultText="Good" TextColor="Green" Color="Green" FontSize="10"  Checked="True" IsEnabled="False"  HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="3" Grid.Column="2" BackgroundColor="WhiteSmoke" >
+                    <Entry x:Name="TB12" Grid.Row="3" Grid.Column="2" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="LightGray" Grid.Row="4" Grid.Column="0" >
+                    <Label Grid.Row="4" Grid.Column="0" Text="Changes in floor level" FontSize="Small" HorizontalOptions="Start" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="LightGray" Grid.Row="4" Grid.Column="1" >
+                    <chkbx:CheckText x:Name="CB131" Grid.Row="4"  DefaultText="Steps" TextColor="Red" Color="Red" FontSize="10" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB132" Grid.Row="4" DefaultText="Slopes" TextColor="Orange" Color="Orange" FontSize="10"   HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB133" Grid.Row="4" DefaultText="None" TextColor="Green" Color="Green" FontSize="10" Checked="True" IsEnabled="False" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                </StackLayout>
+                <StackLayout BackgroundColor="LightGray" Grid.Row="4" Grid.Column="2" >
+                    <Entry x:Name="TB13" Grid.Row="4" Grid.Column="2" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="5" Grid.Column="0" >
+                    <Label Grid.Row="5" Grid.Column="0" Text="Lighting" FontSize="Small" HorizontalOptions="Start" />
+                </StackLayout>
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="5" Grid.Column="1" >
+                    <chkbx:CheckText x:Name="CB141" Grid.Row="5"  DefaultText="Poor, deep shadow or glare" TextColor="Red" Color="Red" FontSize="10" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB142" Grid.Row="5"  DefaultText="Reasonable, some shadow or glare" TextColor="Orange" Color="Orange"   FontSize="10"   HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB143" Grid.Row="5"  DefaultText="Good or natural light, no shadow or glare" TextColor="Green" Color="Green" FontSize="10" Checked="True" IsEnabled="False"  HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                </StackLayout>
+
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="5" Grid.Column="2" >
+                    <Entry x:Name="TB14" Grid.Row="5" Grid.Column="2" />
+                </StackLayout>
+
+            </Grid>
+
+            <!--4 Individual-->
+            <Grid Grid.Row="4" >
+                <Grid.RowDefinitions>
+
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="35*"/>
+                    <ColumnDefinition Width="35*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Grid.Row="0" Grid.ColumnSpan="3" BackgroundColor="Gray">
+                    <Label TextColor="White" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="4. Individual" FontSize="Large" HorizontalOptions="Center"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Grid.Column="0" BackgroundColor="AliceBlue" >
+                    <Label Grid.Row="1" Grid.Column="0" Text="Risk factor" FontSize="Small"  HorizontalOptions="Start" />
+                </StackLayout>
+                <StackLayout Grid.Row="1" Grid.Column="1" BackgroundColor="AliceBlue" >
+                    <Label Grid.Row="1" Grid.Column="1"  Text="Guidelines to degree of risk" FontSize="Small"  HorizontalOptions="Center"/>
+                </StackLayout>
+                <StackLayout Grid.Row="1" Grid.Column="2" BackgroundColor="AliceBlue" >
+                    <Label Grid.Row="1" Grid.Column="2"  Text="Comment / Assumptions" FontSize="Small" HorizontalOptions="Center"/>
+                </StackLayout>
+
+                <StackLayout BackgroundColor="LightGray" Grid.Row="2" Grid.Column="0" IsVisible="False" >
+                    <Label Grid.Row="2" Grid.Column="0" Text="Age" FontSize="Small" HorizontalOptions="Start" />
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" Grid.Column="1" BackgroundColor="LightGray" IsVisible="False">
+                    <!--<Picker  HorizontalOptions="FillAndExpand">
+                        <Picker.Items>
+                            <x:String>>8 per minute</x:String>
+                            <x:String>> 2 per minute</x:String>
+                            <x:String>2 per minute</x:String>
+                        </Picker.Items>
+                    </Picker>-->
+
+                    <chkbx:CheckText x:Name="CB151" DefaultText="Assume fit and able bodied" TextColor="Green" Color="Green" FontSize="10" Checked="True" IsEnabled="False" HorizontalOptions="Start" CheckedChanged="CC_Checked_15" Visual="Material"/>
+
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" Grid.Column="2" BackgroundColor="LightGray" IsVisible="False">
+                    <Entry x:Name="TB15" Grid.Row="2" Grid.Column="2" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="3" Grid.Column="0" >
+                    <Label Grid.Row="3" Grid.Column="0" Text="Physical status" FontSize="Small" HorizontalOptions="Start"/>
+                </StackLayout>
+
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="3" Grid.Column="1">
+                    <chkbx:CheckText x:Name="CB161" Grid.Row="3" Grid.Column="1" DefaultText="Unfit and with medical condition" TextColor="Red" Color="Red" FontSize="10" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB162" Grid.Row="3" Grid.Column="1" DefaultText="Unfit but no medical condition" TextColor="Orange" Color="Orange" FontSize="10"   HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB163" Grid.Row="3" Grid.Column="1" DefaultText="Fit and no medical condition" TextColor="Green" Color="Green" FontSize="10" Checked="True" IsEnabled="False"   HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="3" Grid.Column="2" BackgroundColor="WhiteSmoke" >
+                    <Entry x:Name="TB16" Grid.Row="3" Grid.Column="2" />
+                </StackLayout>
+
+
+                <StackLayout BackgroundColor="LightGray" Grid.Row="4" Grid.Column="0" >
+                    <Label Grid.Row="4" Grid.Column="0" Text="Personal protective equipment (PPE)" FontSize="Small" HorizontalOptions="Start"/>
+                </StackLayout>
+
+                <StackLayout BackgroundColor="LightGray" Grid.Row="4" Grid.Column="1" >
+                    <chkbx:CheckText x:Name="CB171" Grid.Row="4"  DefaultText="PPE required and not provided" Color="Red" TextColor="Red" FontSize="10" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB172" Grid.Row="4" DefaultText="N/A" TextColor="Orange" Color="Orange" FontSize="10"   HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB173" Grid.Row="4" DefaultText="Appropriate PPE available" Color="Green" TextColor="Green" FontSize="10" Checked="True" IsEnabled="False" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                </StackLayout>
+                <StackLayout BackgroundColor="LightGray" Grid.Row="4" Grid.Column="2" >
+                    <Entry x:Name="TB17" Grid.Row="4" Grid.Column="2" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="5" Grid.Column="0" >
+                    <Label Grid.Row="5" Grid.Column="0" Text="Training" FontSize="Small" HorizontalOptions="Start" />
+                </StackLayout>
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="5" Grid.Column="1" >
+                    <chkbx:CheckText x:Name="CB181" Grid.Row="5"  DefaultText="No training given" TextColor="Red" Color="Red" FontSize="10" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB182" Grid.Row="5"  DefaultText="General training given" TextColor="Orange" Color="Orange" FontSize="10" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB183" Grid.Row="5"  DefaultText="Specific training given" TextColor="Green" Color="Green" FontSize="10" Checked="True" IsEnabled="False" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                </StackLayout>
+
+                <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="5" Grid.Column="2" >
+                    <Entry x:Name="TB18" Grid.Row="5" Grid.Column="2" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="LightGray" Grid.Row="6" Grid.Column="0" >
+                    <Label Grid.Row="6" Grid.Column="0" Text="Teamwork" FontSize="Small" HorizontalOptions="Start"/>
+                </StackLayout>
+                <StackLayout BackgroundColor="LightGray" Grid.Row="6" Grid.Column="1" >
+                    <chkbx:CheckText x:Name="CB191" Grid.Row="6" DefaultText= "Manning less than process or not available" TextColor="Red" Color="Red" FontSize="10" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB192" Grid.Row="6" DefaultText= "N/A" TextColor="Orange" FontSize="10" Color="Orange"  HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                    <chkbx:CheckText x:Name="CB193" Grid.Row="6"  DefaultText= "Manning available in line with the process" TextColor="Green" Color="Green" FontSize="10" Checked="True" IsEnabled="False" HorizontalOptions="Start" CheckedChanged="CC_Checked" Visual="Material"/>
+                </StackLayout>
+                <StackLayout BackgroundColor="LightGray" Grid.Row="6" Grid.Column="2" >
+                    <Entry x:Name="TB19"  Grid.Row="6" Grid.Column="2" />
+                </StackLayout>
+
+            </Grid>
+
+            <Grid Grid.Row="5" Margin="0,20,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".40*"/>
+                    <ColumnDefinition Width=".20*"/>
+                    <ColumnDefinition Width=".20*"/>
+                    <ColumnDefinition Width=".20*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Grid.Row="0" Grid.Column="0" BackgroundColor="Gray">
+                    <Label Text="Totals (counts)" TextColor="White" HorizontalOptions="StartAndExpand"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="0" Grid.Column="1" BackgroundColor="Red">
+                    <Label Text="0" TextColor="White" x:Name="RedCount" HorizontalOptions="Center" />
+                </StackLayout>
+                <StackLayout Grid.Row="0" Grid.Column="2" BackgroundColor="Orange">
+                    <Label Text="0" TextColor="White" x:Name="OrangeCount" HorizontalOptions="Center" />
+                </StackLayout>
+                <StackLayout Grid.Row="0" Grid.Column="3" BackgroundColor="Green">
+                    <Label Text="18" TextColor="White" x:Name="GreenCount"  HorizontalOptions="Center" />
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4">
+                    <Label Text="! If you have 1 or more red counts and/or more than 5 amber counts, Dynamic risk assessment will be required." TextColor="Red" FontSize="Medium"  FontAttributes="Italic"/>
+                </StackLayout>
+
+                <StackLayout BackgroundColor="AliceBlue" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4">
+                    <Label Text="Remarks" FontSize="Medium" HorizontalOptions="Center"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4">
+
+                    <Entry x:Name="TB20" />
+
+                </StackLayout>
+
+
+            </Grid>
+            <Grid Grid.Row="6">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <StackLayout BackgroundColor="SkyBlue"  Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Attachments"/>
+                        <Label HorizontalOptions="End" x:Name="lbl_from" Text="0"/>
+                        <Label HorizontalOptions="End"  Text="of"/>
+                        <Label HorizontalOptions="End"  x:Name="lbl_to" Text="0"/>
+                        <Label HorizontalOptions="End"  Text="of total 10"/>
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Image  x:Name="Image1"/>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".3*"/>
+                        <ColumnDefinition Width=".4*"/>
+                        <ColumnDefinition Width=".3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" x:Name="Prev" Text="Prev" FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Clicked="OnClick_Prev"/>
+                    <Button Grid.Column="1" x:Name="DeletePhoto"  FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Text="DeletePhoto" Clicked="OnClick_deletepicture"/>
+                    <Button Grid.Column="2" x:Name="Next"  FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Text="Next" Clicked="OnClick_Nxt"/>
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".5*"/>
+                        <ColumnDefinition Width=".5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" x:Name="takePhoto" FontSize="Micro"  ContentLayout="Left,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="camera.png" Text="Take Photo" Clicked="OnClick_takepicture"/>
+                    <Button Grid.Column="1" x:Name="pickPhoto" FontSize="Micro"  ContentLayout="Left,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="gallery.png" Text="Pick Photo" Clicked="OnClick_pickPicture"/>
+
+
+                </Grid>
+                <Grid Grid.Row="4" IsVisible="False">
+                    <StackLayout>
+                        <Label x:Name="img1"/>
+                        <Label x:Name="img2"/>
+                        <Label x:Name="img3"/>
+                        <Label x:Name="img4"/>
+                        <Label x:Name="img5"/>
+                        <Label x:Name="img6"/>
+                        <Label x:Name="img7"/>
+                        <Label x:Name="img8"/>
+                        <Label x:Name="img9"/>
+                        <Label x:Name="img10"/>
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Row="5" IsVisible="False">
+                    <Label x:Name="ActImg"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="7" Margin="0,20,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".35*"/>
+                    <ColumnDefinition Width=".35*"/>
+                    <ColumnDefinition Width=".35*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Text="Open Drafts" FontSize="Micro"  ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="fillableform1_pictures_icon.png" Clicked="OnClick_OpenDraft" />
+                <Button Grid.Column="1" Text="Save as Draft" FontSize="Micro" ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" HorizontalOptions="FillAndExpand" Image="fillableform1_save_icon.png" Clicked="OnClick_SaveDraft"/>
+                <Button Grid.Column="2" Text="Save as PDF" FontSize="Micro" ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" HorizontalOptions="FillAndExpand" Image="fillableform1_pdf_icon.png" Clicked="OnClick_SavePDF"/>
+            </Grid>
+        </Grid>
+
+    </ScrollView>
+</ContentPage>

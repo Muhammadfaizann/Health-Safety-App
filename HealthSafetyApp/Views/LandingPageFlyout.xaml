@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:HealthSafetyApp.Controls"
+             x:Class="HealthSafetyApp.Views.LandingPageFlyout"
+             Title="Health and Safety App"
+             BackgroundColor="{StaticResource HsBackground}">
+   <ScrollView>
+            <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="20" Spacing="10">
+                <Image  Source="TM.png" VerticalOptions="Center" HorizontalOptions="Start"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" >
+                    <BoxView HeightRequest="0.5" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black" />
+                    <Label Text="Contact Us">
+                    </Label>
+                    <BoxView HeightRequest="0.5" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black" />
+                </StackLayout>
+                
+                <!-- Media section-->
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="1">
+                    <!--<Button BorderRadius="25" HeightRequest="50" WidthRequest="50" BackgroundColor="#3b5998" Clicked="facebook_clicked" Image="facebook.png" >
+                    </Button>
+                    
+                    <Button BorderRadius="25" HeightRequest="43" WidthRequest="235" BorderWidth="0" BorderColor="Transparent" BackgroundColor="Transparent" Clicked="twitter_clicked" Image="twitter1.png">
+                    </Button>
+                    <Button BorderRadius="25" HeightRequest="43" WidthRequest="235" BorderWidth="0" BorderColor="Transparent" BackgroundColor="Transparent" Clicked="linkedin_clicked" Image="linkedin1.png">
+                    </Button>
+                    <Button BorderRadius="25"  HeightRequest="43"  BorderWidth="235" BorderColor="Transparent" BackgroundColor="Transparent" Clicked="youtube_clicked" Image="youtube1.png">
+                    </Button>-->
+                   
+                     <Button Padding="10" FontSize="Small" BackgroundColor="#64a8d9" BorderColor="#f0f0f0" TextColor="#f0f0f0" BorderWidth="1" BorderRadius="20" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Clicked="contactus_clicked" Text="Contact Us" Image="contactus1.png"></Button>
+           
+                    <!-- <Button BorderRadius="25" HeightRequest="50" WidthRequest="50" BackgroundColor="Gray" Clicked="phone_clicked" Image="Phone.png">
+                    </Button>-->
+                     <!--   <controls:CustomButton  ClassId="0" x:Name="BTN10" 
+                                        CustomBorderColor="#f0f0f0"
+                                         CustomBackgroundColor="#64a8d9"
+                                         Text="Contact Us" TextColor="#f0f0f0"
+                                         Clicked="contactus_clicked"
+                                         CustomBorderRadius="20"
+                                         CustomBorderWidth="8"
+                                         VerticalOptions="Center"
+                                         Image="contactus1.png" />-->
+                    </StackLayout>
+
+                    
+                    <!-- Contact us section-->
+              <!--  <Label Text="Name" x:Name="NameLabel" >
+                </Label>
+                <Entry Placeholder="John Smith">
+                </Entry>
+                <Label Text="Email">
+                </Label>
+                <Entry Placeholder="email@domain.com" Keyboard="Email">
+                </Entry>
+                <Label Text="Phone">
+                </Label>
+                <Entry Placeholder="(123) 456-7890" Keyboard="Telephone">
+                </Entry>
+                <Label Text="Message">
+                </Label>
+                <Editor HeightRequest="90">
+                </Editor>
+                <Button HorizontalOptions="FillAndExpand" Text="Send">
+                </Button>-->
+                
+        
+        
+                
+            </StackLayout>
+                <Image Source="line.png" AbsoluteLayout.LayoutBounds=".5,1,.8,.5" AbsoluteLayout.LayoutFlags="All"  ></Image>
+            </AbsoluteLayout>
+        </ScrollView>
+        
+</ContentPage>
