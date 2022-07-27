@@ -1,38 +1,36 @@
 ﻿using System;
+using Airbnb.Lottie;
+using CoreGraphics;
 using UIKit;
 
 namespace HealthSafetyApp.iOS
 {
     public class SplashViewController : UIViewController
     {
-        public SplashViewController() : base() { }
+        public SplashViewController() : base("SplashViewController", null)
+        {
+        }
 
-
-        /*public override void ViewDidLoad()
+        public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            var animationView = LOTAnimationView.AnimationNamed("banana_car");
+            var boundSize = UIScreen.MainScreen.Bounds.Size;
+            animationView.Frame = new CGRect(x: 0, y: 0, width: boundSize.Width, height: boundSize.Height);
+            animationView.ContentMode = UIViewContentMode.ScaleAspectFit;
 
-            var viewAnimation = LOTAnimationView.AnimationNamed("3583-yoga-girl-3");
-            viewAnimation.ContentMode = UIViewContentMode.Center;
-
-            View.AddSubview(viewAnimation);
-
-            //View.BackgroundColor = UIColor.SystemTealColor;
-
-            //center the animation 
-            viewAnimation.Center = View.Center;
-
-            viewAnimation.PlayWithCompletion((finished) =>
+            this.View.AddSubview(animationView);
+            animationView.PlayWithCompletion((animationFinished) =>
             {
-                UIApplication.SharedApplication.Delegate.FinishedLaunching
-                (UIApplication.SharedApplication, new Foundation.NSDictionary());
+                UIApplication.SharedApplication.Delegate.FinishedLaunching(UIApplication.SharedApplication,
+                                                                           new Foundation.NSDictionary());
             });
-
-        }*/
+        }
 
         public override void DidReceiveMemoryWarning()
         {
             base.DidReceiveMemoryWarning();
         }
     }
+}
 }
