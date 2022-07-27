@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 using Acr.UserDialogs;
 using System.Globalization;
-
+using Plugin.Media;
 
 namespace HealthSafetyApp.Views.Topics
 {
@@ -3932,33 +3932,125 @@ namespace HealthSafetyApp.Views.Topics
         private async void OnClick_takepicture(object sender, EventArgs e)
         {
             filname = "1";
-            if (img_count >= 10)
+            if (img_count >= 1)
             {
-                UserDialogs.Instance.Alert("You can't attach more than 10 images.Please delete one to attach one more", "Image count Exceeding limit");
+
+                bool s = await DisplayAlert("lite version limitation", "You can add only one image in lite version. Please buy full version to use this option", "Buy Full Version", "Cancel");
+                if (s == true)
+                {
+                    Device.OpenUri(new Uri("https://play.google.com/store/apps/details?id=uk.co.thehealthandsafetyapp.HandSApp"));
+                }
+                return;
+
+            }
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                await DisplayAlert("No Camera", ":( No camera avaialble.", "OK");
                 return;
             }
-            
 
-           
-        
-        
+            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+            {
+                PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium,
+                Directory = "HealthAndSafetyImages",
+                Name = "img" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg"
+            });
+
+            if (file == null) { return; }
+
+            //await DisplayAlert("File Location", file.Path, "OK");
+            img_count++;
+
+
+
+            Label lbl = this.FindByName<Label>("img" + img_count);
+            lbl.Text = file.Path;
+
+
+
+
+            ActImg.Text = img_count.ToString();
+            lbl_to.Text = img_count.ToString();
+            lbl_from.Text = img_count.ToString();
+
+            Image1.Source = ImageSource.FromStream(() =>
+            {
+                var stream = file.GetStream();
+                file.Dispose();
+                return stream;
+            });
+
+
+
+
+
+
+
+
         }
-    private async void OnClick_pickPicture(object sender, EventArgs e)
+        private async void OnClick_pickPicture(object sender, EventArgs e)
     {
             filname = "1";
+
+            filname = "1";
             ;
-            if (img_count >= 10)
+            if (img_count >= 1)
             {
-                UserDialogs.Instance.Alert("You can't attach more than 10 images.Please delete one to attach one more", "Image count Exceeding limit");
+                bool s = await DisplayAlert("lite version limitation", "You can add only one image in lite version. Please buy full version to use this option", "Buy Full Version", "Cancel");
+                if (s == true)
+                {
+                    Device.OpenUri(new Uri("https://play.google.com/store/apps/details?id=uk.co.thehealthandsafetyapp.HandSApp"));
+                }
                 return;
+
             }
 
+            if (!CrossMedia.Current.IsPickPhotoSupported)
+            {
+                await DisplayAlert("Photos Not Supported", ":( Permission not granted to photos.", "OK");
+                return;
+            }
+            var file = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
+            {
+                PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium
+            });
 
 
-            
+            if (file == null) { return; }
+
+
+            //await DisplayAlert("File Location", file.Path, "OK");
+            img_count = img_count + 1;
+
+            Label lbl = this.FindByName<Label>("img" + img_count);
+            lbl.Text = file.Path;
+
+
+            ActImg.Text = img_count.ToString();
+            lbl_to.Text = img_count.ToString();
+            lbl_from.Text = img_count.ToString();
+
+            Image1.Source = ImageSource.FromStream(() =>
+            {
+                var stream = file.GetStream();
+                file.Dispose();
+                return stream;
+            });
+
+
 
             //await DisplayAlert("File Path", Image1.Source.ToString(), "OK");
         }
+
+
+
+
+
+
+        //await DisplayAlert("File Path", Image1.Source.ToString(), "OK");
+    }
 
 
 }
@@ -3998,5 +4090,4 @@ namespace HealthSafetyApp.Views.Topics
 //    }
 //}
 
-
-}
+ 
