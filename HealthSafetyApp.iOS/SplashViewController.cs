@@ -33,4 +33,4 @@ namespace HealthSafetyApp.iOS
         }
     }
 }
-}
+

@@ -23,7 +23,7 @@ namespace HealthSafetyApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            if (Window == null)
+            /*if (Window == null)
             {
                 Window = new UIWindow(frame: UIScreen.MainScreen.Bounds);
                 var initialViewController = new SplashViewController();
@@ -31,8 +31,8 @@ namespace HealthSafetyApp.iOS
                 Window.MakeKeyAndVisible();
 
                 return true;
-            }
-            else
+            }*/
+            //else
             {
                 CachedImageRenderer.Init();
                 global::Xamarin.Forms.Forms.Init();

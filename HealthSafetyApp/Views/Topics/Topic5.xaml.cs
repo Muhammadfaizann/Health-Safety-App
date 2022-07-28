@@ -6,6 +6,7 @@ using System.IO;
 using Newtonsoft.Json;
 using Acr.UserDialogs;
 using System.Globalization;
+using Plugin.Media;
 
 namespace HealthSafetyApp.Views.Topics
 {
@@ -744,6 +745,53 @@ namespace HealthSafetyApp.Views.Topics
                 UserDialogs.Instance.Alert("You can't attach more than 10 images.Please delete one to attach one more", "Image count Exceeding limit");
                 return;
             }
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                await DisplayAlert("No Camera", "No camera avaialble.", "OK");
+                return;
+            }
+            try
+            {
+
+                var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+                {
+                    PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium,
+                    Directory = "HealthAndSafetyImages",
+                    Name = "img" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg"
+                });
+
+
+                if (file == null)
+                {
+                    return;
+                }
+                else
+                {
+                    img_count++;
+                    Label lbl = this.FindByName<Label>("img" + img_count);
+                    lbl.Text = file.Path;
+
+                    ActImg.Text = img_count.ToString();
+                    lbl_to.Text = img_count.ToString();
+                    lbl_from.Text = img_count.ToString();
+
+                    Image1.Source = ImageSource.FromStream(() =>
+                    {
+                        var stream = file.GetStream();
+                        file.Dispose();
+                        return stream;
+                    });
+                }
+
+            }
+            catch (Exception error)
+            {
+                await DisplayAlert("Alert!", error.ToString(), "OK");
+                throw error;
+            }
+
 
         }
         private async void OnClick_pickPicture(object sender, EventArgs e)
@@ -755,11 +803,30 @@ namespace HealthSafetyApp.Views.Topics
                 return;
             }
 
-          
+            if (!CrossMedia.Current.IsPickPhotoSupported)
+            {
+                await DisplayAlert("Photos Not Supported", ":( Permission not granted to photos.", "OK");
+                return;
+            }
+            var file = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
+            {
+                PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium
+            });
+            if (file == null)
+                return;
 
-           
-
-            //await DisplayAlert("File Path", Image1.Source.ToString(), "OK");
+            img_count++;
+            Label lbl = this.FindByName<Label>("img" + img_count);
+            lbl.Text = file.Path;
+            ActImg.Text = img_count.ToString();
+            lbl_to.Text = img_count.ToString();
+            lbl_from.Text = img_count.ToString();
+            Image1.Source = ImageSource.FromStream(() =>
+            {
+                var stream = file.GetStream();
+                file.Dispose();
+                return stream;
+            });
         }
 
 
