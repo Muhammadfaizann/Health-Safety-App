@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using HealthSafetyApp.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;

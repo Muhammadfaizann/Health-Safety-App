@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using Acr.UserDialogs;
 using System.Globalization;
 using Plugin.Media;
+using PCLStorage;
 
 namespace HealthSafetyApp.Views.Topics
 {
@@ -355,7 +356,7 @@ namespace HealthSafetyApp.Views.Topics
             //pick_b_new2.SelectedIndex = 0;
             if (filname != "1")
             {
-                await PCLReadJson();
+                // await PCLReadJson();
             }
 
             //grdfill_text.IsVisible = false;
@@ -3104,213 +3105,219 @@ namespace HealthSafetyApp.Views.Topics
 #pragma warning restore CS0612 // Type or member is obsolete
 #pragma warning restore CS0618 // Type or member is obsolete
             {
-
-                DraftFields s = new DraftFields
+                try
                 {
-                    Name1 = txt_name.Text,
-                    ProjectName = txt_projname.Text,
-                    SiteName = txt_sitename.Text,
-                    Date = dat,
 
-                    pick1 = pick_1.Items[pick_1.SelectedIndex],
-                    pick2 = pick_2.Items[pick_2.SelectedIndex],
-                    pick3 = pick_3.Items[pick_3.SelectedIndex],
-                    pick4 = pick_4.Items[pick_4.SelectedIndex],
+                    IFile file;
+                    DraftFields s = new DraftFields
+                    {
+                        Name1 = txt_name.Text,
+                        ProjectName = txt_projname.Text,
+                        SiteName = txt_sitename.Text,
+                        Date = dat,
 
-                    pick2_1 = pick2_1.Items[pick2_1.SelectedIndex],
-                    pick2_2 = pick2_2.Items[pick2_2.SelectedIndex],
-                    pick2_3 = pick2_3.Items[pick2_3.SelectedIndex],
-                    pick2_4 = pick2_4.Items[pick2_4.SelectedIndex],
-                    pick2_5 = pick2_5.Items[pick2_5.SelectedIndex],
-                    pick2_6 = pick2_6.Items[pick2_6.SelectedIndex],
-                    pick2_7 = pick2_7.Items[pick2_7.SelectedIndex],
-                    pick2_8 = pick2_8.Items[pick2_8.SelectedIndex],
+                        pick1 = pick_1.Items[pick_1.SelectedIndex],
+                        pick2 = pick_2.Items[pick_2.SelectedIndex],
+                        pick3 = pick_3.Items[pick_3.SelectedIndex],
+                        pick4 = pick_4.Items[pick_4.SelectedIndex],
 
-                    pick2_9 = pick2_9.Items[pick2_9.SelectedIndex],
-                    pick2_10 = pick2_10.Items[pick2_10.SelectedIndex],
-                    pick2_11 = pick2_11.Items[pick2_11.SelectedIndex],
-                    pick2_12 = pick2_12.Items[pick2_12.SelectedIndex],
-                    pick2_13 = pick2_13.Items[pick2_13.SelectedIndex],
-                    pick2_14 = pick2_14.Items[pick2_14.SelectedIndex],
-                    pick2_15 = pick2_15.Items[pick2_15.SelectedIndex],
-                    pick2_16 = pick2_16.Items[pick2_16.SelectedIndex],
+                        pick2_1 = pick2_1.Items[pick2_1.SelectedIndex],
+                        pick2_2 = pick2_2.Items[pick2_2.SelectedIndex],
+                        pick2_3 = pick2_3.Items[pick2_3.SelectedIndex],
+                        pick2_4 = pick2_4.Items[pick2_4.SelectedIndex],
+                        pick2_5 = pick2_5.Items[pick2_5.SelectedIndex],
+                        pick2_6 = pick2_6.Items[pick2_6.SelectedIndex],
+                        pick2_7 = pick2_7.Items[pick2_7.SelectedIndex],
+                        pick2_8 = pick2_8.Items[pick2_8.SelectedIndex],
 
-
-                    pick2_17 = pick2_17.Items[pick2_17.SelectedIndex],
-                    pick2_18 = pick2_18.Items[pick2_18.SelectedIndex],
-                    pick2_19 = pick2_19.Items[pick2_19.SelectedIndex],
-                    pick2_20 = pick2_20.Items[pick2_20.SelectedIndex],
-                    pick2_21 = pick2_21.Items[pick2_21.SelectedIndex],
-                    pick2_22 = pick2_22.Items[pick2_22.SelectedIndex],
-                    pick2_23 = pick2_23.Items[pick2_23.SelectedIndex],
-                    pick2_24 = pick2_24.Items[pick2_24.SelectedIndex],
-
-                    step2_other = step2_other.Text,
-                    pick3_1 = pick3_1.Items[pick3_1.SelectedIndex],
-
-                    fillable_txt1 = txt_fill1.Text,
-                    fillable_txt2 = txt_fill2.Text,
-                    fillable_txt3 = txt_Check_text11.Text,
-                    fillable_txt4 = txt_Check_text12.Text,
-                    fillable_txt5 = txt_Check_text21.Text,
-                    fillable_txt6 = txt_Check_text22.Text,
-                    fillable_txt7 = txt_Check_text31.Text,
-                    fillable_txt8 = txt_Check_text32.Text,
-                    fillable_txt9 = txt_Check_text41.Text,
-                    fillable_txt10 = txt_Check_text42.Text,
-                    fillable_txt11 = txt_Check_text51.Text,
-                    fillable_txt12 = txt_Check_text52.Text,
-                    fillable_txt13 = txt_Check_text61.Text,
-                    fillable_txt14 = txt_Check_text62.Text,
-                    fillable_txt15 = txt_Check_text71.Text,
-                    fillable_txt16 = txt_Check_text72.Text,
-                    fillable_txt17 = txt_Check_text81.Text,
-                    fillable_txt18 = txt_Check_text82.Text,
-                    fillable_txt19 = txt_Check_text91.Text,
-                    fillable_txt20 = txt_Check_text92.Text,
-                    fillable_txt21 = txt_Check_text101.Text,
-                    fillable_txt22 = txt_Check_text102.Text,
-                    a_up = a_up.ToString(),
-                    b_up = b_up.ToString(),
-                    c_up = c_up.ToString(),
-                    a_low = a_low.ToString(),
-                    b_low = b_low.ToString(),
-                    c_low = c_low.ToString(),
-                    a_new = a_new.ToString(),
-                    b_new = b_new.ToString(),
-                    c_new = c_new.ToString(),
-                    a_new1 = a_new1.ToString(),
-                    b_new1 = b_new1.ToString(),
-                    c_new1 = c_new1.ToString(),
-                    a_new2 = a_new2.ToString(),
-                    b_new2 = b_new2.ToString(),
-                    c_new2 = c_new2.ToString(),
-                    a_up1 = a_up1.ToString(),
-                    b_up1 = b_up1.ToString(),
-                    c_up1 = c_up1.ToString(),
-                    a_low1 = a_low1.ToString(),
-                    b_low1 = b_low1.ToString(),
-                    c_low1 = c_low1.ToString(),
-
-                    a_up2 = a_up2.ToString(),
-                    b_up2 = b_up2.ToString(),
-                    c_up2 = c_up2.ToString(),
-                    a_low2 = a_low2.ToString(),
-                    b_low2 = b_low2.ToString(),
-                    c_low2 = c_low2.ToString(),
-
-                    a_up3 = a_up3.ToString(),
-                    b_up3 = b_up3.ToString(),
-                    c_up3 = c_up3.ToString(),
-                    a_low3 = a_low3.ToString(),
-                    b_low3 = b_low3.ToString(),
-                    c_low3 = c_low3.ToString(),
-
-                    a_up4 = a_up4.ToString(),
-                    b_up4 = b_up4.ToString(),
-                    c_up4 = c_up4.ToString(),
-                    a_low4 = a_low4.ToString(),
-                    b_low4 = b_low4.ToString(),
-                    c_low4 = c_low4.ToString(),
-
-                    a_up5 = a_up5.ToString(),
-                    b_up5 = b_up5.ToString(),
-                    c_up5 = c_up5.ToString(),
-                    a_low5 = a_low5.ToString(),
-                    b_low5 = b_low5.ToString(),
-                    c_low5 = c_low5.ToString(),
-
-                    a_up6 = a_up6.ToString(),
-                    b_up6 = b_up6.ToString(),
-                    c_up6 = c_up6.ToString(),
-                    a_low6 = a_low6.ToString(),
-                    b_low6 = b_low6.ToString(),
-                    c_low6 = c_low6.ToString(),
-
-                    a_up7 = a_up7.ToString(),
-                    b_up7 = b_up7.ToString(),
-                    c_up7 = c_up7.ToString(),
-                    a_low7 = a_low7.ToString(),
-                    b_low7 = b_low7.ToString(),
-                    c_low7 = c_low7.ToString(),
-
-                    a_up8 = a_up8.ToString(),
-                    b_up8 = b_up8.ToString(),
-                    c_up8 = c_up8.ToString(),
-                    a_low8 = a_low8.ToString(),
-                    b_low8 = b_low8.ToString(),
-                    c_low8 = c_low8.ToString(),
-
-                    a_up9 = a_up9.ToString(),
-                    b_up9 = b_up9.ToString(),
-                    c_up9 = c_up9.ToString(),
-                    a_low9 = a_low9.ToString(),
-                    b_low9 = b_low9.ToString(),
-                    c_low9 = c_low9.ToString(),
-
-                    a_up10 = a_up10.ToString(),
-                    b_up10 = b_up10.ToString(),
-                    c_up10 = c_up10.ToString(),
-                    a_low10 = a_low10.ToString(),
-                    b_low10 = b_low10.ToString(),
-                    c_low10 = c_low10.ToString(),
-                    add_btn1 = txt_fill1.IsVisible,
-                    add_btn2 = fill_text_11.IsVisible,
-                    add_btn3 = fill_text_21.IsVisible,
-                    add_btn4 = fill_text_31.IsVisible,
-                    add_btn5 = fill_text_41.IsVisible,
-                    add_btn6 = fill_text_51.IsVisible,
-                    add_btn7 = fill_text_61.IsVisible,
-                    add_btn8 = fill_text_71.IsVisible,
-                    add_btn9 = fill_text_81.IsVisible,
-                    add_btn10 = fill_text_91.IsVisible,
-                    add_btn11 = fill_text_101.IsVisible,
-                    img1 = img1.Text,
-                    img2 = img2.Text,
-                    img3 = img3.Text,
-                    img4 = img4.Text,
-                    img5 = img5.Text,
-                    img6 = img6.Text,
-                    img7 = img7.Text,
-                    img8 = img8.Text,
-                    img9 = img9.Text,
-                    img10 = img10.Text,
+                        pick2_9 = pick2_9.Items[pick2_9.SelectedIndex],
+                        pick2_10 = pick2_10.Items[pick2_10.SelectedIndex],
+                        pick2_11 = pick2_11.Items[pick2_11.SelectedIndex],
+                        pick2_12 = pick2_12.Items[pick2_12.SelectedIndex],
+                        pick2_13 = pick2_13.Items[pick2_13.SelectedIndex],
+                        pick2_14 = pick2_14.Items[pick2_14.SelectedIndex],
+                        pick2_15 = pick2_15.Items[pick2_15.SelectedIndex],
+                        pick2_16 = pick2_16.Items[pick2_16.SelectedIndex],
 
 
-                };
+                        pick2_17 = pick2_17.Items[pick2_17.SelectedIndex],
+                        pick2_18 = pick2_18.Items[pick2_18.SelectedIndex],
+                        pick2_19 = pick2_19.Items[pick2_19.SelectedIndex],
+                        pick2_20 = pick2_20.Items[pick2_20.SelectedIndex],
+                        pick2_21 = pick2_21.Items[pick2_21.SelectedIndex],
+                        pick2_22 = pick2_22.Items[pick2_22.SelectedIndex],
+                        pick2_23 = pick2_23.Items[pick2_23.SelectedIndex],
+                        pick2_24 = pick2_24.Items[pick2_24.SelectedIndex],
 
-                string jsonContents = JsonConvert.SerializeObject(s);
+                        step2_other = step2_other.Text,
+                        pick3_1 = pick3_1.Items[pick3_1.SelectedIndex],
 
+                        fillable_txt1 = txt_fill1.Text,
+                        fillable_txt2 = txt_fill2.Text,
+                        fillable_txt3 = txt_Check_text11.Text,
+                        fillable_txt4 = txt_Check_text12.Text,
+                        fillable_txt5 = txt_Check_text21.Text,
+                        fillable_txt6 = txt_Check_text22.Text,
+                        fillable_txt7 = txt_Check_text31.Text,
+                        fillable_txt8 = txt_Check_text32.Text,
+                        fillable_txt9 = txt_Check_text41.Text,
+                        fillable_txt10 = txt_Check_text42.Text,
+                        fillable_txt11 = txt_Check_text51.Text,
+                        fillable_txt12 = txt_Check_text52.Text,
+                        fillable_txt13 = txt_Check_text61.Text,
+                        fillable_txt14 = txt_Check_text62.Text,
+                        fillable_txt15 = txt_Check_text71.Text,
+                        fillable_txt16 = txt_Check_text72.Text,
+                        fillable_txt17 = txt_Check_text81.Text,
+                        fillable_txt18 = txt_Check_text82.Text,
+                        fillable_txt19 = txt_Check_text91.Text,
+                        fillable_txt20 = txt_Check_text92.Text,
+                        fillable_txt21 = txt_Check_text101.Text,
+                        fillable_txt22 = txt_Check_text102.Text,
+                        a_up = a_up.ToString(),
+                        b_up = b_up.ToString(),
+                        c_up = c_up.ToString(),
+                        a_low = a_low.ToString(),
+                        b_low = b_low.ToString(),
+                        c_low = c_low.ToString(),
+                        a_new = a_new.ToString(),
+                        b_new = b_new.ToString(),
+                        c_new = c_new.ToString(),
+                        a_new1 = a_new1.ToString(),
+                        b_new1 = b_new1.ToString(),
+                        c_new1 = c_new1.ToString(),
+                        a_new2 = a_new2.ToString(),
+                        b_new2 = b_new2.ToString(),
+                        c_new2 = c_new2.ToString(),
+                        a_up1 = a_up1.ToString(),
+                        b_up1 = b_up1.ToString(),
+                        c_up1 = c_up1.ToString(),
+                        a_low1 = a_low1.ToString(),
+                        b_low1 = b_low1.ToString(),
+                        c_low1 = c_low1.ToString(),
+
+                        a_up2 = a_up2.ToString(),
+                        b_up2 = b_up2.ToString(),
+                        c_up2 = c_up2.ToString(),
+                        a_low2 = a_low2.ToString(),
+                        b_low2 = b_low2.ToString(),
+                        c_low2 = c_low2.ToString(),
+
+                        a_up3 = a_up3.ToString(),
+                        b_up3 = b_up3.ToString(),
+                        c_up3 = c_up3.ToString(),
+                        a_low3 = a_low3.ToString(),
+                        b_low3 = b_low3.ToString(),
+                        c_low3 = c_low3.ToString(),
+
+                        a_up4 = a_up4.ToString(),
+                        b_up4 = b_up4.ToString(),
+                        c_up4 = c_up4.ToString(),
+                        a_low4 = a_low4.ToString(),
+                        b_low4 = b_low4.ToString(),
+                        c_low4 = c_low4.ToString(),
+
+                        a_up5 = a_up5.ToString(),
+                        b_up5 = b_up5.ToString(),
+                        c_up5 = c_up5.ToString(),
+                        a_low5 = a_low5.ToString(),
+                        b_low5 = b_low5.ToString(),
+                        c_low5 = c_low5.ToString(),
+
+                        a_up6 = a_up6.ToString(),
+                        b_up6 = b_up6.ToString(),
+                        c_up6 = c_up6.ToString(),
+                        a_low6 = a_low6.ToString(),
+                        b_low6 = b_low6.ToString(),
+                        c_low6 = c_low6.ToString(),
+
+                        a_up7 = a_up7.ToString(),
+                        b_up7 = b_up7.ToString(),
+                        c_up7 = c_up7.ToString(),
+                        a_low7 = a_low7.ToString(),
+                        b_low7 = b_low7.ToString(),
+                        c_low7 = c_low7.ToString(),
+
+                        a_up8 = a_up8.ToString(),
+                        b_up8 = b_up8.ToString(),
+                        c_up8 = c_up8.ToString(),
+                        a_low8 = a_low8.ToString(),
+                        b_low8 = b_low8.ToString(),
+                        c_low8 = c_low8.ToString(),
+
+                        a_up9 = a_up9.ToString(),
+                        b_up9 = b_up9.ToString(),
+                        c_up9 = c_up9.ToString(),
+                        a_low9 = a_low9.ToString(),
+                        b_low9 = b_low9.ToString(),
+                        c_low9 = c_low9.ToString(),
+
+                        a_up10 = a_up10.ToString(),
+                        b_up10 = b_up10.ToString(),
+                        c_up10 = c_up10.ToString(),
+                        a_low10 = a_low10.ToString(),
+                        b_low10 = b_low10.ToString(),
+                        c_low10 = c_low10.ToString(),
+                        add_btn1 = txt_fill1.IsVisible,
+                        add_btn2 = fill_text_11.IsVisible,
+                        add_btn3 = fill_text_21.IsVisible,
+                        add_btn4 = fill_text_31.IsVisible,
+                        add_btn5 = fill_text_41.IsVisible,
+                        add_btn6 = fill_text_51.IsVisible,
+                        add_btn7 = fill_text_61.IsVisible,
+                        add_btn8 = fill_text_71.IsVisible,
+                        add_btn9 = fill_text_81.IsVisible,
+                        add_btn10 = fill_text_91.IsVisible,
+                        add_btn11 = fill_text_101.IsVisible,
+                        img1 = img1.Text,
+                        img2 = img2.Text,
+                        img3 = img3.Text,
+                        img4 = img4.Text,
+                        img5 = img5.Text,
+                        img6 = img6.Text,
+                        img7 = img7.Text,
+                        img8 = img8.Text,
+                        img9 = img9.Text,
+                        img10 = img10.Text,
+
+
+                    };
+
+                    string jsonContents = JsonConvert.SerializeObject(s);
+                    IFolder rootFolder = FileSystem.Current.LocalStorage;
+                    //IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(path);
+                    IFolder folder = await rootFolder.CreateFolderAsync("HandSAppDrafts", CreationCollisionOption.OpenIfExists);
+                    if (filname != "1")
+                    { file = await folder.CreateFileAsync(filname, CreationCollisionOption.ReplaceExisting); }
+                    else
+                    {
+                        string fnam = await InputBox(this.Navigation);
+                        if (fnam is null) { return; }
+                        else
+                        {
+                            if (fnam == "") { fnam = "Draft_DRA.json"; } else { fnam = fnam + "_DRA.json"; }
+                        }
+                        file = await folder.CreateFileAsync(fnam, CreationCollisionOption.GenerateUniqueName);
+                    }
+                    using (var fs = await file.OpenAsync(PCLStorage.FileAccess.ReadAndWrite))
+                    {
+                        using (StreamWriter textWriter = new StreamWriter(fs))
+                        {
+                            textWriter.Write(jsonContents);
+
+                        }
+
+                    }
+                    await DisplayAlert("File Path", file.Path.ToString(), "OK");
+                    //UserDialogs.Instance.sh("Draft saved at:" + file.Path.ToString(), 2000);
+                }
+                catch(Exception ex)
+                {
+
+                }
             }
 
-            //txt_name.Text = txt_projname.Text = txt_sitename.Text = txt_fill1.Text = txt_fill2.Text = txt_Check_text11.Text = txt_Check_text12.Text = txt_Check_text21.Text = txt_Check_text22.Text = txt_Check_text31.Text = "";
-
-
-            //pick_1.SelectedIndex = pick_2.SelectedIndex = pick_3.SelectedIndex = pick_4.SelectedIndex = 0;
-
-
-            //pick2_1.SelectedIndex = pick2_2.SelectedIndex = pick2_3.SelectedIndex = pick2_4.SelectedIndex = pick2_5.SelectedIndex = pick2_6.SelectedIndex = pick2_7.SelectedIndex = pick2_8.SelectedIndex = 0;
-            //pick2_11.SelectedIndex = pick2_9.SelectedIndex = pick2_10.SelectedIndex = pick2_12.SelectedIndex = pick2_13.SelectedIndex = pick2_14.SelectedIndex = pick2_15.SelectedIndex = pick2_16.SelectedIndex = 0;
-            //pick2_17.SelectedIndex = pick2_18.SelectedIndex = pick2_19.SelectedIndex = pick2_20.SelectedIndex = pick2_21.SelectedIndex = pick2_22.SelectedIndex = pick2_23.SelectedIndex = pick2_24.SelectedIndex = 0;
-
-            //step2_other.Text = "";
-            //pick3_1.SelectedIndex = 0;
-
-
-
-            //pick_a_up.SelectedIndex = 0;
-            //pick_b_up.SelectedIndex = 0;
-            //pick_a_low.SelectedIndex = 0;
-            //pick_b_low.SelectedIndex = 0;
-            //pick_a_up1.SelectedIndex = 0;
-            //pick_b_up1.SelectedIndex = 0;
-            //pick_a_up2.SelectedIndex = 0;
-            //pick_b_up2.SelectedIndex = 0;
-            //pick_a_up3.SelectedIndex = 0;
-            //pick_b_up3.SelectedIndex = 0;
-
         }
-
         public Task<string> InputBox(INavigation navigation)
         {
             // wait in this proc, until user did his input 
@@ -3375,6 +3382,36 @@ namespace HealthSafetyApp.Views.Topics
             // then proc returns the result
             return tcs.Task;
         }
+
+        //txt_name.Text = txt_projname.Text = txt_sitename.Text = txt_fill1.Text = txt_fill2.Text = txt_Check_text11.Text = txt_Check_text12.Text = txt_Check_text21.Text = txt_Check_text22.Text = txt_Check_text31.Text = "";
+
+
+        //pick_1.SelectedIndex = pick_2.SelectedIndex = pick_3.SelectedIndex = pick_4.SelectedIndex = 0;
+
+
+        //pick2_1.SelectedIndex = pick2_2.SelectedIndex = pick2_3.SelectedIndex = pick2_4.SelectedIndex = pick2_5.SelectedIndex = pick2_6.SelectedIndex = pick2_7.SelectedIndex = pick2_8.SelectedIndex = 0;
+        //pick2_11.SelectedIndex = pick2_9.SelectedIndex = pick2_10.SelectedIndex = pick2_12.SelectedIndex = pick2_13.SelectedIndex = pick2_14.SelectedIndex = pick2_15.SelectedIndex = pick2_16.SelectedIndex = 0;
+        //pick2_17.SelectedIndex = pick2_18.SelectedIndex = pick2_19.SelectedIndex = pick2_20.SelectedIndex = pick2_21.SelectedIndex = pick2_22.SelectedIndex = pick2_23.SelectedIndex = pick2_24.SelectedIndex = 0;
+
+        //step2_other.Text = "";
+        //pick3_1.SelectedIndex = 0;
+
+
+
+        //pick_a_up.SelectedIndex = 0;
+        //pick_b_up.SelectedIndex = 0;
+        //pick_a_low.SelectedIndex = 0;
+        //pick_b_low.SelectedIndex = 0;
+        //pick_a_up1.SelectedIndex = 0;
+        //pick_b_up1.SelectedIndex = 0;
+        //pick_a_up2.SelectedIndex = 0;
+        //pick_b_up2.SelectedIndex = 0;
+        //pick_a_up3.SelectedIndex = 0;
+        //pick_b_up3.SelectedIndex = 0;
+
+
+
+
         #endregion
 
 
@@ -4030,18 +4067,19 @@ namespace HealthSafetyApp.Views.Topics
                     return stream;
                 });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
         }
-
-
-
-
     }
-
 }
+
+
+
+   
+
+
 
 //public class CustomImageHTMLTagProcessor : IHTMLTagProcessor
 //{

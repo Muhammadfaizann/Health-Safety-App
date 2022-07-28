@@ -214,6 +214,12 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="PCLStorage">
+      <Version>1.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="PCLStorage.Abstractions">
+      <Version>1.0.3</Version>
+    </PackageReference>
     <PackageReference Include="SaturdayMP.XPlugins.iOS.BEMCheckBox">
       <Version>1.4.3</Version>
     </PackageReference>

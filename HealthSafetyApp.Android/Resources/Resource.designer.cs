@@ -14,7 +14,7 @@ namespace HealthSafetyApp.Droid
 {
 	
 	
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "12.2.4.160")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "1.0.0.0")]
 	public partial class Resource
 	{
 		
@@ -4859,6 +4859,8 @@ namespace HealthSafetyApp.Droid
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahText = global::HealthSafetyApp.Droid.Resource.Styleable.ProgressWheel_ahText;
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextColor = global::HealthSafetyApp.Droid.Resource.Styleable.ProgressWheel_ahTextColor;
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextSize = global::HealthSafetyApp.Droid.Resource.Styleable.ProgressWheel_ahTextSize;
+			global::PCLStorage.Resource.String.ApplicationName = global::HealthSafetyApp.Droid.Resource.String.ApplicationName;
+			global::PCLStorage.Resource.String.Hello = global::HealthSafetyApp.Droid.Resource.String.Hello;
 			global::Plugin.Media.Resource.Attribute.alpha = global::HealthSafetyApp.Droid.Resource.Attribute.alpha;
 			global::Plugin.Media.Resource.Attribute.coordinatorLayoutStyle = global::HealthSafetyApp.Droid.Resource.Attribute.coordinatorLayoutStyle;
 			global::Plugin.Media.Resource.Attribute.font = global::HealthSafetyApp.Droid.Resource.Attribute.font;
