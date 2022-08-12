@@ -26,17 +26,7 @@ namespace HealthSafetyApp.Views
             new Nav() {Id = 10, Name = "TOOLBOX TALKS"},
             };
         }
-        private void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
-        {
-
-        }
-        private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
-        {
-
-        }
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-        }
+        
         public async void OnTap_Nav_List(object sender, EventArgs args)
         {
             string filename = "1";
@@ -67,12 +57,20 @@ namespace HealthSafetyApp.Views
         private async void OnTap_openpdffolderAsync(object sender, EventArgs e)
         {
 
-           
+          
         }
+
+
+
+
+
+
+
         private async void OnTap_opendraftrsfolderAsync(object sender, EventArgs e)
         {
            
         }
+
 
         void TapGestureRecognizer_Tapped_3(System.Object sender, System.EventArgs e)
         {

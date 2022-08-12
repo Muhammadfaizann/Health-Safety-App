@@ -1,0 +1,87 @@
+﻿[
+  {
+    "SNo": 5,
+    "Name": 0,
+    "Win": 5,
+    "Loose": 10,
+    "Percentage": 20,
+    "Conf": "43-9",
+    "Div": 25,
+    "Home": 15,
+    "Road": "34-7",
+    "Last10": "8-2",
+    "Streak": 25,
+    "Logo": "Fatality ,Disabling injury ,etc"
+  },
+  {
+     "SNo": 4,
+    "Name": 0,
+    "Win": 4,
+    "Loose": 8,
+    "Percentage": 16,
+    "Conf": "43-9",
+    "Div": "14-2",
+    "Home": 12,
+    "Road": "27-14",
+    "Last10": "6-4",
+    "Streak": 20,
+    "Logo": "Major injury or illness"
+  },
+  {
+     "SNo": 3,
+    "Name": 0,
+    "Win": 3,
+    "Loose": 6,
+    "Percentage": 12,
+    "Conf": "37-15",
+    "Div": "13-3",
+    "Home": 9,
+    "Road": "23-18",
+    "Last10": "5-5",
+    "Streak": 15,
+    "Logo": "7 day Injury or illness"
+  },
+  {
+     "SNo": 2,
+    "Name": 0,
+    "Win": 2,
+    "Loose": 4,
+    "Percentage": 8,
+    "Conf": "31-21",
+    "Div": "9-7",
+    "Home": 6,
+    "Road": "24-17",
+    "Last10": "8-2",
+    "Streak": 10,
+    "Logo": "Minor injury or illness"
+  },
+  {
+     "SNo": 1,
+    "Name": 0,
+    "Win": 1,
+    "Loose": 2,
+    "Percentage": 4,
+    "Conf": "29-23",
+    "Div": "11-5",
+    "Home": 3,
+    "Road": "16-25",
+    "Last10": "7-3",
+    "Streak": 5,
+    "Logo": "First aid injury or illness"
+  },
+  {
+     "SNo": 0,
+    "Name": 0,
+    "Win": 0,
+    "Loose": 0,
+    "Percentage": 0,
+    "Conf": "27-25",
+    "Div": "7-9",
+    "Home": 0,
+    "Road": "19-22",
+    "Last10": "7-3",
+    "Streak": 0,
+    "Logo": "No injury or illness"
+  }
+  
+]

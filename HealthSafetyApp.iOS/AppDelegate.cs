@@ -23,23 +23,13 @@ namespace HealthSafetyApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            /*if (Window == null)
-            {
-                Window = new UIWindow(frame: UIScreen.MainScreen.Bounds);
-                var initialViewController = new SplashViewController();
-                Window.RootViewController = initialViewController;
-                Window.MakeKeyAndVisible();
-
-                return true;
-            }*/
-            //else
-            {
+           
                 CachedImageRenderer.Init();
                 global::Xamarin.Forms.Forms.Init();
                 global::Xamarin.Forms.FormsMaterial.Init();
                 LoadApplication(new App());
                 return base.FinishedLaunching(app, options);
-            }
+            
            
         }
     }

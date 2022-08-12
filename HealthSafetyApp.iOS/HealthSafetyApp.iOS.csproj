@@ -248,6 +248,7 @@
       <Name>HealthSafetyApp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BundleResource Include="Resources\AcuteToxicity.png" />
     <BundleResource Include="Resources\BackgroundShape.png" />
@@ -259,6 +260,11 @@
     <BundleResource Include="Resources\contactus11.png" />
     <BundleResource Include="Resources\Corrosive.png" />
     <BundleResource Include="Resources\DangerousToTheEnvironment.png" />
+    <BundleResource Include="Resources\Default-568h%402x.png" />
+    <BundleResource Include="Resources\Default-Portrait.png" />
+    <BundleResource Include="Resources\Default-Portrait%402x.png" />
+    <BundleResource Include="Resources\Default.png" />
+    <BundleResource Include="Resources\Default%402x.png" />
     <BundleResource Include="Resources\dustmask.png" />
     <BundleResource Include="Resources\Explosive.png" />
     <BundleResource Include="Resources\ExtremelyFlammable.png" />
@@ -368,5 +374,4 @@
     <BundleResource Include="Resources\youtube.png" />
     <BundleResource Include="Resources\youtube1.png" />
   </ItemGroup>
-  <ItemGroup />
 </Project>

@@ -22,7 +22,7 @@
                 </Image.GestureRecognizers>
             </Image>
             
-            <Label Grid.Column="1" Text="Health and Safety topics" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+            <Label Grid.Column="1" Text="Health and Safety topics" VerticalOptions="Center" FontAttributes="Bold" FontSize="Header" HorizontalOptions="Start"></Label>
         </Grid>
     <ScrollView BackgroundColor="LightGray" >
         <StackLayout HorizontalOptions="FillAndExpand" Padding="5,15" Spacing="5" >
