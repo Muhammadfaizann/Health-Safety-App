@@ -21,6 +21,7 @@
     <PackageReference Include="Xamarin.Forms.Visual.Material" Version="5.0.0.2478" />
     <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
     <PackageReference Include="PCLStorage" Version="1.0.2" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPdfViewer" Version="20.2.0.43" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="FirebaseDatabase.net" />
@@ -34,6 +35,15 @@
     <None Remove="Plugin.Permissions" />
     <None Remove="iTextSharp" />
     <None Remove="PCLStorage" />
+    <None Remove="Syncfusion.Xamarin.SfPdfViewer" />
+    <None Remove="PDFfiles\AbrasiveWheels.pdf" />
+    <None Remove="PDFfiles\ELECTRICALTOOLS.pdf" />
+    <None Remove="PDFfiles\ElectricityToolbox.pdf" />
+    <None Remove="PDFfiles\FireToolbox.pdf" />
+    <None Remove="PDFfiles\HANDTOOLSAFETY.pdf" />
+    <None Remove="PDFfiles\HAZARDOUSSUBSTANCES.pdf" />
+    <None Remove="PDFfiles\HOUSEKEEPINGSLIPSTRIPSFALLS.pdf" />
+    <None Remove="PDFfiles\Ladders.pdf" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\checked.png" />
@@ -41,15 +51,20 @@
     <EmbeddedResource Include="Fonts\FontAwesomeBrand.otf" />
     <EmbeddedResource Include="Fonts\FontAwesomeRegular.otf" />
     <EmbeddedResource Include="Fonts\FontAwesomeSolid.otf" />
+    <EmbeddedResource Include="PDFfiles\AbrasiveWheels.pdf" />
+    <EmbeddedResource Include="PDFfiles\ELECTRICALTOOLS.pdf" />
+    <EmbeddedResource Include="PDFfiles\ElectricityToolbox.pdf" />
+    <EmbeddedResource Include="PDFfiles\FireToolbox.pdf" />
+    <EmbeddedResource Include="PDFfiles\HANDTOOLSAFETY.pdf" />
+    <EmbeddedResource Include="PDFfiles\HAZARDOUSSUBSTANCES.pdf" />
+    <EmbeddedResource Include="PDFfiles\HOUSEKEEPINGSLIPSTRIPSFALLS.pdf" />
+    <EmbeddedResource Include="PDFfiles\Ladders.pdf" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Controls\BorderlessEntry.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\CheckText.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\TestPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

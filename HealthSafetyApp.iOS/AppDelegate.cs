@@ -23,14 +23,12 @@ namespace HealthSafetyApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-           
                 CachedImageRenderer.Init();
                 global::Xamarin.Forms.Forms.Init();
+                Syncfusion.SfPdfViewer.XForms.iOS.SfPdfDocumentViewRenderer.Init();
                 global::Xamarin.Forms.FormsMaterial.Init();
                 LoadApplication(new App());
                 return base.FinishedLaunching(app, options);
-            
-           
         }
     }
 }

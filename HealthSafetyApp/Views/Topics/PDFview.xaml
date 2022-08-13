@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:syncfusion="clr-namespace:Syncfusion.SfPdfViewer.XForms;assembly=Syncfusion.SfPdfViewer.XForms" 
+    xmlns:fontAwesone="clr-namespace:HealthSafetyApp.FontAwesomeIcons"
+    x:Class="HealthSafetyApp.Views.Topics.PDFview">
+    
+   <StackLayout Orientation="Vertical">
+        <Grid ColumnDefinitions="50,*" HeightRequest="40" Margin="10,40,10,0">
+            <Image Grid.Column="0" HorizontalOptions="Center" >
+                        <Image.Source>
+                            <FontImageSource
+                                FontFamily="fontAwesomeSolid"
+                                Glyph="{x:Static fontAwesone:FontAwesomeIcons.ArrowLeft}"
+                                Size="Large"
+                                Color="Black" />
+                        </Image.Source>
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                </Image.GestureRecognizers>
+            </Image>
+            
+        </Grid>
+        <syncfusion:SfPdfViewer x:Name="pdfViewerControl"/>
+    </StackLayout> 
+</ContentPage>

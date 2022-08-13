@@ -14,7 +14,7 @@ namespace HealthSafetyApp
             var user = Preferences.Get("UserName", "");
             if (string.IsNullOrEmpty(user))
             {
-                MainPage = new LandingPage();
+                MainPage = new LoginPage();
             }
             else
             {

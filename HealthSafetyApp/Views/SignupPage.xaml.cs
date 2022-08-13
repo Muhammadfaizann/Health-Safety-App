@@ -13,10 +13,14 @@ namespace HealthSafetyApp.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SignupPage : ContentPage
 	{
-		public SignupPage ()
+		public SignupPage()
 		{
-			InitializeComponent ();
+			InitializeComponent();
 			this.BindingContext = new SignUpViewModel(Navigation);
+		}
+		private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+		{
+			Navigation.PopModalAsync();
 		}
 	}
 }

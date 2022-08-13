@@ -18,5 +18,9 @@ namespace HealthSafetyApp.Views
             InitializeComponent();
             this.BindingContext = viewModel;
         }
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PopModalAsync();
+        }
     }
 }

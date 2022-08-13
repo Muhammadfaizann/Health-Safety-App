@@ -20,14 +20,14 @@
                                    Text="{Binding UserName}"/>
             <controls:RoundedEntry Grid.Row="1" Margin="0,20,0,0" PlaceHolder="Password" IsPassword="True"
                                    Text="{Binding Password}"/>
-            <Label Text="Forgot your password?" TextColor="{StaticResource HealthSafetyCharcoal}"
-               HorizontalOptions="End"/>
+            
             <ActivityIndicator IsRunning="{Binding IsBusy}"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"
                            Color="{StaticResource HealthSafetyGreen}"/>
         </Grid>
-
+        <Label Text="Forgot your password?" TextColor="{StaticResource HealthSafetyCharcoal}"
+               HorizontalOptions="End"/>
         <StackLayout Margin="0,40,0,0">
             <Button BackgroundColor="{StaticResource HealthSafetyGreen}" Text="SIGN IN" CornerRadius="{ OnPlatform Android=30, iOS=20}"
                     HorizontalOptions="CenterAndExpand" WidthRequest="120" TextColor="White"

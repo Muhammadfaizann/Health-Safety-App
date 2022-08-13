@@ -4,12 +4,26 @@
              xmlns:vm="clr-namespace:HealthSafetyApp.ViewModels"
              xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:controls="clr-namespace:HealthSafetyApp.Controls"
+             xmlns:fontAwesone="clr-namespace:HealthSafetyApp.FontAwesomeIcons"
              x:Class="HealthSafetyApp.Views.SignupPage">
-   
-        <StackLayout Padding="40" VerticalOptions="Center"
+  <Grid RowDefinitions="auto,*">
+       <Grid Grid.Row="0" ColumnDefinitions="50,*" HeightRequest="40" Margin="10,40,10,0">
+            <Image Grid.Column="0" HorizontalOptions="Center" >
+                        <Image.Source>
+                            <FontImageSource
+                                FontFamily="fontAwesomeSolid"
+                                Glyph="{x:Static fontAwesone:FontAwesomeIcons.ArrowLeft}"
+                                Size="Large"
+                                Color="Black" />
+                        </Image.Source>
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                </Image.GestureRecognizers>
+            </Image>
+        </Grid>
+        <StackLayout Grid.Row="1" Padding="40" VerticalOptions="Center"
                      HorizontalOptions="FillAndExpand"
                      x:DataType="vm:SignUpViewModel">
-
         <controls:RoundedEntry PlaceHolder="Name" Text="{Binding Name}"/>
         <controls:RoundedEntry PlaceHolder="Email" Text="{Binding Email}"/>
         <controls:RoundedEntry PlaceHolder="Password" Text="{Binding Password}" IsPassword="True"/>
@@ -33,5 +47,5 @@
             HorizontalOptions="Center"
             VerticalOptions="Center"></forms:SvgCachedImage>
     </StackLayout>
-   
+   </Grid>
 </ContentPage>
