@@ -24,10 +24,12 @@
     <StackLayout Grid.Row="1" Padding="40" VerticalOptions="Center"
                      HorizontalOptions="FillAndExpand"
                      x:DataType="vm:SignUpViewModel">
-        <controls:RoundedEntry PlaceHolder="Organization" Text="{Binding Organizatiion}"/>
-        <controls:RoundedEntry PlaceHolder="Position" Text="{Binding Position}"/>
+        <controls:RoundedEntry PlaceHolder="Work postcode" Text="{Binding Postcode}"/>
+        <controls:RoundedEntry PlaceHolder="Country" Text="{Binding Country}"/>
+        <controls:RoundedEntry PlaceHolder="Company Name" Text="{Binding Organizatiion}"/>
+        <controls:RoundedEntry PlaceHolder="Job Title" Text="{Binding Position}"/>
         <controls:RoundedEntry PlaceHolder="Industry" Text="{Binding Industry}"/>
-        <controls:RoundedEntry PlaceHolder="Qualification" Text="{Binding Qualification}"/>
+        
         <Frame BackgroundColor="White" Padding="0"
                CornerRadius="{ OnPlatform Android=50, iOS=20}">
             <DatePicker Date="{Binding DOB}"/>

@@ -22,11 +22,10 @@
     <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
     <PackageReference Include="PCLStorage" Version="1.0.2" />
     <PackageReference Include="Syncfusion.Xamarin.SfPdfViewer" Version="20.2.0.43" />
+    <PackageReference Include="itext7" Version="7.2.3" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="FirebaseDatabase.net" />
-    <None Remove="Images\checked.png" />
-    <None Remove="Images\unchecked.png" />
     <None Remove="Xamarin.FFImageLoading.Svg.Forms" />
     <None Remove="Acr.UserDialogs" />
     <None Remove="Fonts\FontAwesomeBrand.otf" />
@@ -44,10 +43,10 @@
     <None Remove="PDFfiles\HAZARDOUSSUBSTANCES.pdf" />
     <None Remove="PDFfiles\HOUSEKEEPINGSLIPSTRIPSFALLS.pdf" />
     <None Remove="PDFfiles\Ladders.pdf" />
+    <None Remove="itext7" />
+    <None Remove="teams.json" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Images\checked.png" />
-    <EmbeddedResource Include="Images\unchecked.png" />
     <EmbeddedResource Include="Fonts\FontAwesomeBrand.otf" />
     <EmbeddedResource Include="Fonts\FontAwesomeRegular.otf" />
     <EmbeddedResource Include="Fonts\FontAwesomeSolid.otf" />
@@ -59,6 +58,7 @@
     <EmbeddedResource Include="PDFfiles\HAZARDOUSSUBSTANCES.pdf" />
     <EmbeddedResource Include="PDFfiles\HOUSEKEEPINGSLIPSTRIPSFALLS.pdf" />
     <EmbeddedResource Include="PDFfiles\Ladders.pdf" />
+    <EmbeddedResource Include="teams.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Controls\BorderlessEntry.xaml">

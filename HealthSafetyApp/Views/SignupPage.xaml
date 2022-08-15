@@ -24,8 +24,8 @@
         <StackLayout Grid.Row="1" Padding="40" VerticalOptions="Center"
                      HorizontalOptions="FillAndExpand"
                      x:DataType="vm:SignUpViewModel">
-        <controls:RoundedEntry PlaceHolder="Name" Text="{Binding Name}"/>
-        <controls:RoundedEntry PlaceHolder="Email" Text="{Binding Email}"/>
+        <controls:RoundedEntry PlaceHolder="Full Name" Text="{Binding Name}"/>
+        <controls:RoundedEntry PlaceHolder="Work Email" Text="{Binding Email}"/>
         <controls:RoundedEntry PlaceHolder="Password" Text="{Binding Password}" IsPassword="True"/>
         <controls:RoundedEntry PlaceHolder="Confirm Password" Text="{Binding ConfirmPassword}" IsPassword="True"/>
         <controls:RoundedEntry PlaceHolder="Telephone Number" Text="{Binding Telephone}"/>

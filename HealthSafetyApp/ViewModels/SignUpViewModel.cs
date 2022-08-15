@@ -38,7 +38,7 @@ namespace HealthSafetyApp.ViewModels
             try
             {
                 IsBusy = true;
-                string[] inputs = { _name, _organization, _industry, _position, _qualification, _password, _confirmPassword, _telephone, _email };
+                string[] inputs = { _name, _organization, _industry, _position, _country, _password, _confirmPassword, _telephone, _email };
                foreach (var input in inputs)
                {
                    if (string.IsNullOrEmpty(input))
@@ -68,7 +68,7 @@ namespace HealthSafetyApp.ViewModels
                 user.Name = _name;
                 user.Organization = _organization;
                 user.Position = _position;
-                user.Qualification = _qualification;
+                user.Country = _country;
                 user.Industry = _industry;
                 user.DOB = _dob.ToString("dd/mm/yyyy");
                 user.Email = _email;
@@ -119,7 +119,16 @@ namespace HealthSafetyApp.ViewModels
                 OnPropertyChanged("IsBusy");
             }
         }
-
+        string _postcode;
+        public string Postcode
+        {
+            get => _postcode;
+            set
+            {
+                _postcode = value;
+                OnPropertyChanged("Postcode");
+            }
+        }
         string _name;
         public string Name
         {
@@ -163,14 +172,14 @@ namespace HealthSafetyApp.ViewModels
             }
         }
 
-        string _qualification;
-        public string Qualification
+        string _country;
+        public string Country
         {
-            get => _qualification;
+            get => _country;
             set
             {
-                _qualification = value;
-                OnPropertyChanged("Qualification");
+                _country = value;
+                OnPropertyChanged("Country");
             }
         }
 

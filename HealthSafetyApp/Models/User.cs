@@ -11,7 +11,8 @@ namespace HealthSafetyApp.Models
         public string Organization { get; set; }
         public string Position { get; set; }
         public string Industry { get; set; }
-        public string Qualification { get; set; }
+        public string Postcode { get; set; }
+        public string Country { get; set; }
         public string DOB { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }

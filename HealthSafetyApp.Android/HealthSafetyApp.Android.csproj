@@ -93,9 +93,11 @@
     <PackageReference Include="Syncfusion.Xamarin.SfPdfViewer">
       <Version>20.2.0.43</Version>
     </PackageReference>
+    <PackageReference Include="itext7">
+      <Version>7.2.3</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AndroidExternalStorageWriter.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Renderers\BorderlessEntryRenderer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />

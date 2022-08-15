@@ -14,7 +14,7 @@ namespace HealthSafetyApp.Helpers
     {
         public static List<Team> GetTeams()
         {
-            var assembly = typeof(DummyDataProvider).GetTypeInfo().Assembly;
+            var assembly = typeof(App).GetTypeInfo().Assembly;
 
             var resourceName = "HealthSafetyApp.teams.json";
 
