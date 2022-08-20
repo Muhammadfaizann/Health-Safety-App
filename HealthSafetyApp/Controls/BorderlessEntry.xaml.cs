@@ -16,8 +16,9 @@ namespace HealthSafetyApp.Controls
         {
             InitializeComponent(); 
         }
+        
 
-       
     }
+
 
 }

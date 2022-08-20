@@ -12,14 +12,27 @@ namespace HealthSafetyApp.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RoundedEntry : Frame
     {
+
+        
         public static readonly BindableProperty TextProperty =
  BindableProperty.Create("Text", typeof(string), typeof(RoundedEntry), null,
            defaultBindingMode: BindingMode.TwoWay);
-
+        
         public RoundedEntry()
         {
             InitializeComponent();
-            
+            txt.Focused += Txt_Focused;
+        }
+
+        private void Txt_Focused(object sender, FocusEventArgs e)
+        {
+            var entry =  (Entry)sender;
+            if(entry.Placeholder=="DOB")
+                MessagingCenter.Send<object, string>(BindingContext, "DOB", "Jhon");
+            else if(entry.Placeholder== "Country")
+                MessagingCenter.Send<object, string>(BindingContext, "Country", "Jhon");
+            else if(entry.Placeholder == "Industry Type")
+                MessagingCenter.Send<object, string>(BindingContext, "Industry Type", "Jhon");
         }
 
         public double FontSize

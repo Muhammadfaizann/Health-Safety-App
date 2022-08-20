@@ -38,7 +38,7 @@ namespace HealthSafetyApp.ViewModels
             try
             {
                 IsBusy = true;
-                string[] inputs = { _FirstName, _organization, _industry, _position, _country, _password, _confirmPassword, _telephone, _email };
+                string[] inputs = { _FirstName,_LastName, _organization, _industry, _position, _country, _password, _confirmPassword, _telephone, _email };
                foreach (var input in inputs)
                {
                    if (string.IsNullOrEmpty(input))
@@ -70,6 +70,7 @@ namespace HealthSafetyApp.ViewModels
                 }
                 User user = new User();
                 user.FirstName = _FirstName;
+                user.LastName = _LastName;
                 user.Organization = _organization;
                 user.Position = _position;
                 user.Country = _country;

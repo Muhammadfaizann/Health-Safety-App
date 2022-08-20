@@ -37,25 +37,22 @@
                 <controls:RoundedEntry Grid.Column="0" PlaceHolder="First Name" Text="{Binding FirstName}"/>
                 <controls:RoundedEntry Grid.Column="1" PlaceHolder="Last Name" Text="{Binding LastName}"/>
             </Grid>
-           <controls:RoundedEntry Grid.Row="1" PlaceHolder="DOB" Unfocused="RoundedEntry_Focused">
-               <controls:RoundedEntry.GestureRecognizers>
-                   <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1">
-
-                   </TapGestureRecognizer>
-               </controls:RoundedEntry.GestureRecognizers>
+           <controls:RoundedEntry x:Name="dob" Grid.Row="1" PlaceHolder="DOB" >
+              
            </controls:RoundedEntry>
                               
-       <DatePicker x:Name="dateOfBirth" IsVisible="false" Date="{Binding DOB}"/>
-        
+       <DatePicker x:Name="dobPicker" IsVisible="false" Date="{Binding DOB}"/>
+       <Picker x:Name="countryPicker" IsVisible="false"></Picker>
+       <Picker x:Name="industryPicker" IsVisible="false"></Picker>
         <controls:RoundedEntry Grid.Row="2" PlaceHolder="Job Title" Text="{Binding Position}"/>
         <controls:RoundedEntry Grid.Row="6" PlaceHolder="Work Email" Text="{Binding Email}"/>
         <controls:RoundedEntry Grid.Row="4" PlaceHolder="Password" Text="{Binding Password}" IsPassword="True"/>
         <controls:RoundedEntry Grid.Row="5" PlaceHolder="Confirm Password" Text="{Binding ConfirmPassword}" IsPassword="True"/>
         <controls:RoundedEntry Grid.Row="3" PlaceHolder="Telephone No" Text="{Binding Telephone}"/>
         <controls:RoundedEntry Grid.Row="7" PlaceHolder="Work postcode" Text="{Binding Postcode}"/>
-        <controls:RoundedEntry Grid.Row="8" PlaceHolder="Country" Text="{Binding Country}"/>
+        <controls:RoundedEntry x:Name="country" Grid.Row="8" PlaceHolder="Country" Text="{Binding Country}"/>
         <controls:RoundedEntry Grid.Row="9" PlaceHolder="Company Name" Text="{Binding Organizatiion}"/>
-        <controls:RoundedEntry Grid.Row="10" PlaceHolder="Industry Type" Text="{Binding Industry}"/>
+        <controls:RoundedEntry x:Name="industy" Grid.Row="10" PlaceHolder="Industry Type" Text="{Binding Industry}"/>
             
      <ActivityIndicator Grid.Row="5" IsRunning="{Binding IsBusy}"
                            HorizontalOptions="Center"

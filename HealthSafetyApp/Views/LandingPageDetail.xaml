@@ -18,7 +18,7 @@
                                 Color="Black" />
                         </Image.Source>
                 <Image.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_3"></TapGestureRecognizer>
+                    <TapGestureRecognizer Tapped="MenuBarTapped"></TapGestureRecognizer>
                 </Image.GestureRecognizers>
             </Image>
             

@@ -14,7 +14,7 @@
     "Logo": "Fatality ,Disabling injury ,etc"
   },
   {
-     "SNo": 4,
+    "SNo": 4,
     "Name": 0,
     "Win": 4,
     "Loose": 8,
@@ -28,7 +28,7 @@
     "Logo": "Major injury or illness"
   },
   {
-     "SNo": 3,
+    "SNo": 3,
     "Name": 0,
     "Win": 3,
     "Loose": 6,
@@ -42,7 +42,7 @@
     "Logo": "7 day Injury or illness"
   },
   {
-     "SNo": 2,
+    "SNo": 2,
     "Name": 0,
     "Win": 2,
     "Loose": 4,
@@ -56,7 +56,7 @@
     "Logo": "Minor injury or illness"
   },
   {
-     "SNo": 1,
+    "SNo": 1,
     "Name": 0,
     "Win": 1,
     "Loose": 2,
@@ -70,7 +70,7 @@
     "Logo": "First aid injury or illness"
   },
   {
-     "SNo": 0,
+    "SNo": 0,
     "Name": 0,
     "Win": 0,
     "Loose": 0,
@@ -83,5 +83,5 @@
     "Streak": 0,
     "Logo": "No injury or illness"
   }
-  
+
 ]

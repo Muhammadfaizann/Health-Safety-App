@@ -54,25 +54,17 @@ namespace HealthSafetyApp.Views
 
             UserDialogs.Instance.HideLoading();
         }
-        private async void OnTap_openpdffolderAsync(object sender, EventArgs e)
+        private void OnTap_openpdffolderAsync(object sender, EventArgs e)
         {
-
-          
+            throw new NotImplementedException();
+        }
+        private  void OnTap_opendraftrsfolderAsync(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
 
-
-
-
-
-
-        private async void OnTap_opendraftrsfolderAsync(object sender, EventArgs e)
-        {
-           
-        }
-
-
-        void TapGestureRecognizer_Tapped_3(System.Object sender, System.EventArgs e)
+        void MenuBarTapped(System.Object sender, System.EventArgs e)
         {
             var flyout = (FlyoutPage)Application.Current.MainPage;
             flyout.IsPresented = true;
