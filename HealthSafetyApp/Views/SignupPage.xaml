@@ -6,7 +6,8 @@
              xmlns:controls="clr-namespace:HealthSafetyApp.Controls"
              xmlns:fontAwesone="clr-namespace:HealthSafetyApp.FontAwesomeIcons"
              x:Class="HealthSafetyApp.Views.SignupPage">
-  <Grid RowDefinitions="auto,*">
+    
+  <Grid RowDefinitions="auto,auto,auto">
        <Grid Grid.Row="0" ColumnDefinitions="50,*" HeightRequest="40" Margin="10,40,10,0">
             <Image Grid.Column="0" HorizontalOptions="Center" >
                         <Image.Source>
@@ -21,31 +22,71 @@
                 </Image.GestureRecognizers>
             </Image>
         </Grid>
-        <StackLayout Grid.Row="1" Padding="40" VerticalOptions="Center"
-                     HorizontalOptions="FillAndExpand"
-                     x:DataType="vm:SignUpViewModel">
-        <controls:RoundedEntry PlaceHolder="Full Name" Text="{Binding Name}"/>
-        <controls:RoundedEntry PlaceHolder="Work Email" Text="{Binding Email}"/>
-        <controls:RoundedEntry PlaceHolder="Password" Text="{Binding Password}" IsPassword="True"/>
-        <controls:RoundedEntry PlaceHolder="Confirm Password" Text="{Binding ConfirmPassword}" IsPassword="True"/>
-        <controls:RoundedEntry PlaceHolder="Telephone Number" Text="{Binding Telephone}"/>
-        <ActivityIndicator IsRunning="{Binding IsBusy}"
+       
+        <Image Grid.Row="1" Source="TM.png" VerticalOptions="Start" HorizontalOptions="Center"/>
+      
+        <Grid
+            Grid.Row="2"
+            Padding="40,0"
+            RowDefinitions="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto"
+            VerticalOptions="Center"
+            HorizontalOptions="FillAndExpand"
+            x:DataType="vm:SignUpViewModel">
+            
+            <Grid Grid.Row="0" ColumnDefinitions="*,*">
+                <controls:RoundedEntry Grid.Column="0" PlaceHolder="First Name" Text="{Binding FirstName}"/>
+                <controls:RoundedEntry Grid.Column="1" PlaceHolder="Last Name" Text="{Binding LastName}"/>
+            </Grid>
+           <controls:RoundedEntry Grid.Row="1" PlaceHolder="DOB" Unfocused="RoundedEntry_Focused">
+               <controls:RoundedEntry.GestureRecognizers>
+                   <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1">
+
+                   </TapGestureRecognizer>
+               </controls:RoundedEntry.GestureRecognizers>
+           </controls:RoundedEntry>
+                              
+       <DatePicker x:Name="dateOfBirth" IsVisible="false" Date="{Binding DOB}"/>
+        
+        <controls:RoundedEntry Grid.Row="2" PlaceHolder="Job Title" Text="{Binding Position}"/>
+        <controls:RoundedEntry Grid.Row="6" PlaceHolder="Work Email" Text="{Binding Email}"/>
+        <controls:RoundedEntry Grid.Row="4" PlaceHolder="Password" Text="{Binding Password}" IsPassword="True"/>
+        <controls:RoundedEntry Grid.Row="5" PlaceHolder="Confirm Password" Text="{Binding ConfirmPassword}" IsPassword="True"/>
+        <controls:RoundedEntry Grid.Row="3" PlaceHolder="Telephone No" Text="{Binding Telephone}"/>
+        <controls:RoundedEntry Grid.Row="7" PlaceHolder="Work postcode" Text="{Binding Postcode}"/>
+        <controls:RoundedEntry Grid.Row="8" PlaceHolder="Country" Text="{Binding Country}"/>
+        <controls:RoundedEntry Grid.Row="9" PlaceHolder="Company Name" Text="{Binding Organizatiion}"/>
+        <controls:RoundedEntry Grid.Row="10" PlaceHolder="Industry Type" Text="{Binding Industry}"/>
+            
+     <ActivityIndicator Grid.Row="5" IsRunning="{Binding IsBusy}"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"
                            Color="{StaticResource HealthSafetyGreen}"/>
-        <Button Text="Next" Command="{Binding SecondSignupPageCommand}"
-                    BackgroundColor="{StaticResource HealthSafetyGreen}" Margin="0,60,0,0"
+        <Grid Grid.Row="11" ColumnDefinitions="auto,auto" ColumnSpacing="0" HorizontalOptions="FillAndExpand" >
+            <CheckBox x:Name="checkbox" Grid.Column="0" VerticalOptions="Start" IsEnabled="False" IsChecked="{Binding IsTermsConditionChecked}"/>
+            <Label Margin="-5,0,0,0" Grid.Column="1" VerticalOptions="Center"  HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="I agree to the" TextColor="{StaticResource HealthSafetyCharcoal}"/>
+                        <Span Text=" "/>
+                        <Span Text="terms and conditions." TextColor="Red">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OpenTermsConditionsPopup"/>
+                            </Span.GestureRecognizers>
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </Grid>
+       
+
+        <Button Grid.Row="12" Text="Sign up" Command="{Binding SignUpCommand}"
+                    BackgroundColor="{StaticResource HealthSafetyGreen}" 
                     CornerRadius="{ OnPlatform Android=30, iOS=20}"
-                     FontAttributes="Bold"
+                    FontAttributes="Bold"
                     TextColor="White"/>
-          <forms:SvgCachedImage
-            Aspect="AspectFit"
-            Source="Icon.svg"
-            DownsampleToViewSize="True"
-            HeightRequest="15"
-            WidthRequest="100"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"></forms:SvgCachedImage>
-    </StackLayout>
-   </Grid>
+                
+          
+    </Grid>
+    </Grid>
+        
 </ContentPage>

@@ -19,12 +19,7 @@ namespace HealthSafetyApp.Views
             this.BindingContext = new LoginViewModel(Navigation);
 		}
 
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        void ForgotPasswordTapped(System.Object sender, System.EventArgs e)
         {
 
         }

@@ -19,6 +19,7 @@ namespace HealthSafetyApp.Controls
         public RoundedEntry()
         {
             InitializeComponent();
+            
         }
 
         public double FontSize

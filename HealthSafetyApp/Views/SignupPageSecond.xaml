@@ -6,7 +6,7 @@
              xmlns:fontAwesone="clr-namespace:HealthSafetyApp.FontAwesomeIcons"
              xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              x:Class="HealthSafetyApp.Views.SignupPageSecond">
-    <Grid RowDefinitions="auto,*">
+    <Grid RowDefinitions="auto,auto,*">
        <Grid Grid.Row="0" ColumnDefinitions="50,*" HeightRequest="40" Margin="10,40,10,0">
             <Image Grid.Column="0" HorizontalOptions="Center" >
                         <Image.Source>
@@ -21,7 +21,18 @@
                 </Image.GestureRecognizers>
             </Image>
         </Grid>
-    <StackLayout Grid.Row="1" Padding="40" VerticalOptions="Center"
+        <StackLayout Grid.Row="1" Padding="0,20">
+        <Label Text="The health &#38; Safety App" HorizontalOptions="Center" FontSize="Large" FontFamily="PoppinsBold" FontAttributes="Bold"></Label>
+        <forms:SvgCachedImage
+            Aspect="AspectFit"
+            Source="Icon.svg"
+            DownsampleToViewSize="True"
+            HeightRequest="50"
+            WidthRequest="50"
+            HorizontalOptions="Center"
+            VerticalOptions="Start"></forms:SvgCachedImage>
+        </StackLayout>
+    <StackLayout Grid.Row="2" Padding="40" VerticalOptions="Center"
                      HorizontalOptions="FillAndExpand"
                      x:DataType="vm:SignUpViewModel">
         <controls:RoundedEntry PlaceHolder="Work postcode" Text="{Binding Postcode}"/>
@@ -29,7 +40,6 @@
         <controls:RoundedEntry PlaceHolder="Company Name" Text="{Binding Organizatiion}"/>
         <controls:RoundedEntry PlaceHolder="Job Title" Text="{Binding Position}"/>
         <controls:RoundedEntry PlaceHolder="Industry" Text="{Binding Industry}"/>
-        
         <Frame BackgroundColor="White" Padding="0"
                CornerRadius="{ OnPlatform Android=50, iOS=20}">
             <DatePicker Date="{Binding DOB}"/>
@@ -39,21 +49,13 @@
                            VerticalOptions="Center"
                            Color="{StaticResource HealthSafetyGreen}"/>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,50,0,0">
-            <CheckBox VerticalOptions="Center"/>
-            <Label Text="I accept terms and condtion" VerticalOptions="Center"/>
+            <CheckBox IsEnabled="False"/>
+            <Label Text="Email address is mandatory for confirmation of your registration for this resource. HAS APP may from time to time send updates about HAS APP and other relevant products and services. By providing your contact information you consent to being contacted for direct marketing purposes by HAS APP." VerticalOptions="Center"/>
         </StackLayout>
         <Button Text="SIGN UP" Command="{Binding SignUpCommand}"
                     BackgroundColor="{StaticResource HealthSafetyGreen}" Margin="60,60,60,0"
                     CornerRadius="{ OnPlatform Android=30, iOS=20}"
                     TextColor="White"/>
-        <forms:SvgCachedImage
-            Aspect="AspectFit"
-            Source="Icon.svg"
-            DownsampleToViewSize="True"
-            HeightRequest="15"
-            WidthRequest="100"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"></forms:SvgCachedImage>
     </StackLayout>
 </Grid>
 </ContentPage>

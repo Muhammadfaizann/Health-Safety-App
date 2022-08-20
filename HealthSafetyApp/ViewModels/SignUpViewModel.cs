@@ -38,7 +38,7 @@ namespace HealthSafetyApp.ViewModels
             try
             {
                 IsBusy = true;
-                string[] inputs = { _name, _organization, _industry, _position, _country, _password, _confirmPassword, _telephone, _email };
+                string[] inputs = { _FirstName, _organization, _industry, _position, _country, _password, _confirmPassword, _telephone, _email };
                foreach (var input in inputs)
                {
                    if (string.IsNullOrEmpty(input))
@@ -53,7 +53,6 @@ namespace HealthSafetyApp.ViewModels
                     await App.Current.MainPage.DisplayAlert("Attention", "Please Enter a Valid Email", "Ok");
                     return;
                 }
-
                 if (_password.Length < 8)
                 {
                     await App.Current.MainPage.DisplayAlert("Attention", "Enter Mininum 8 Characters", "Ok");
@@ -64,8 +63,13 @@ namespace HealthSafetyApp.ViewModels
                    await App.Current.MainPage.DisplayAlert("Attention", "Password and Confirm Password not matched", "Ok");
                     return;
                 }
+                if(!_IsTermsConditionChecked)
+                {
+                    await App.Current.MainPage.DisplayAlert("Attention", "Kindly open and agree to our terms and conditions.", "Ok");
+                    return;
+                }
                 User user = new User();
-                user.Name = _name;
+                user.FirstName = _FirstName;
                 user.Organization = _organization;
                 user.Position = _position;
                 user.Country = _country;
@@ -108,7 +112,16 @@ namespace HealthSafetyApp.ViewModels
                 OnPropertyChanged("Result");
             }
         }
-
+        bool _IsTermsConditionChecked;
+        public bool IsTermsConditionChecked
+        {
+            get => _IsTermsConditionChecked;
+            set
+            {
+                _IsTermsConditionChecked = value;
+                OnPropertyChanged("IsTermsConditionChecked");
+            }
+        }
         bool _isBusy;
         public bool IsBusy
         {
@@ -129,14 +142,24 @@ namespace HealthSafetyApp.ViewModels
                 OnPropertyChanged("Postcode");
             }
         }
-        string _name;
-        public string Name
+        string _FirstName;
+        public string FirstName
         {
-            get => _name;
+            get => _FirstName;
             set
             {
-                _name = value;
-                OnPropertyChanged("Name");
+                _FirstName = value;
+                OnPropertyChanged("FirstName");
+            }
+        }
+        string _LastName;
+        public string LastName
+        {
+            get => _LastName;
+            set
+            {
+                _LastName = value;
+                OnPropertyChanged("LastName");
             }
         }
         string _organization;

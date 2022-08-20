@@ -22,14 +22,12 @@
     <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
     <PackageReference Include="PCLStorage" Version="1.0.2" />
     <PackageReference Include="Syncfusion.Xamarin.SfPdfViewer" Version="20.2.0.43" />
-    <PackageReference Include="itext7" Version="7.2.3" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.4" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="FirebaseDatabase.net" />
     <None Remove="Xamarin.FFImageLoading.Svg.Forms" />
     <None Remove="Acr.UserDialogs" />
-    <None Remove="Fonts\FontAwesomeBrand.otf" />
-    <None Remove="Fonts\FontAwesomeRegular.otf" />
     <None Remove="Fonts\FontAwesomeSolid.otf" />
     <None Remove="Plugin.Permissions" />
     <None Remove="iTextSharp" />
@@ -45,10 +43,9 @@
     <None Remove="PDFfiles\Ladders.pdf" />
     <None Remove="itext7" />
     <None Remove="teams.json" />
+    <None Remove="Xamarin.CommunityToolkit" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Fonts\FontAwesomeBrand.otf" />
-    <EmbeddedResource Include="Fonts\FontAwesomeRegular.otf" />
     <EmbeddedResource Include="Fonts\FontAwesomeSolid.otf" />
     <EmbeddedResource Include="PDFfiles\AbrasiveWheels.pdf" />
     <EmbeddedResource Include="PDFfiles\ELECTRICALTOOLS.pdf" />

@@ -4,16 +4,16 @@
              xmlns:vm="clr-namespace:HealthSafetyApp.ViewModels"
              xmlns:controls="clr-namespace:HealthSafetyApp.Controls"
              xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-             BackgroundImage="background.png"
              x:Class="HealthSafetyApp.Views.LoginPage"
              >
-    <StackLayout Padding="40,80,40,40" VerticalOptions="Center" 
+    <StackLayout Padding="40,0,40,40" VerticalOptions="Center"  
                      HorizontalOptions="FillAndExpand" x:DataType="vm:LoginViewModel">
+        <Image  Source="TM.png" VerticalOptions="Start" HorizontalOptions="Center"/>
         <Label Text="Hello" FontSize="40" HorizontalOptions="Start"
                FontFamily="PoppinsBold" TextColor="{StaticResource HealthSafetyGreen}"
                FontAttributes="Bold"/>
         <Label Text="Sign in to your account." TextColor="{StaticResource HealthSafetyCharcoal}"
-               FontFamily="PoppinsRegular"/>
+               />
         <Grid RowDefinitions="auto,auto">
             <controls:RoundedEntry Grid.Row="0" Margin="0,40,0,0" VerticalOptions="Center" 
                                    PlaceHolder="Email"
@@ -27,11 +27,17 @@
                            Color="{StaticResource HealthSafetyGreen}"/>
         </Grid>
         <Label Text="Forgot your password?" TextColor="{StaticResource HealthSafetyCharcoal}"
-               HorizontalOptions="End"/>
+               HorizontalOptions="End">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="ForgotPasswordTapped" ></TapGestureRecognizer>
+            </Label.GestureRecognizers>
+            </Label>
         <StackLayout Margin="0,40,0,0">
-            <Button BackgroundColor="{StaticResource HealthSafetyGreen}" Text="SIGN IN" CornerRadius="{ OnPlatform Android=30, iOS=20}"
-                    HorizontalOptions="CenterAndExpand" WidthRequest="120" TextColor="White"
-                    HeightRequest="40" Command="{Binding LogInCommand}"/>
+        <Button Text="SIGN IN" Command="{Binding LogInCommand}"
+                    BackgroundColor="{StaticResource HealthSafetyGreen}" 
+                    CornerRadius="{ OnPlatform Android=30, iOS=20}"
+                     FontAttributes="Bold"
+                    TextColor="White"/>
             <Label HorizontalOptions="Center" Margin="0,20,0,0">
                 <Label.FormattedText>
                     <FormattedString>
@@ -46,14 +52,7 @@
                 </Label.FormattedText>
             </Label>
         </StackLayout> 
-        <forms:SvgCachedImage
-            Aspect="AspectFit"
-            Source="Icon.svg"
-            DownsampleToViewSize="True"
-            HeightRequest="15"
-            WidthRequest="100"
-            HorizontalOptions="Center"
-            VerticalOptions="End"></forms:SvgCachedImage>
+
         
     </StackLayout>
 </ContentPage>

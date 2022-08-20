@@ -13,8 +13,7 @@ using Plugin.Media;
 using PCLStorage;
 using HealthSafetyApp.Helpers;
 
-using iText.Kernel.Pdf;
-using iText.Layout;
+
 
 namespace HealthSafetyApp.Views.Topics
 {
@@ -342,28 +341,11 @@ namespace HealthSafetyApp.Views.Topics
             //}
         }
 
-        protected async override void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            if (pick_a_up.SelectedItem is null) { pick_a_up.SelectedIndex = 0; }
-            if (pick_b_up.SelectedItem is null) { pick_b_up.SelectedIndex = 0; }
-            if (pick_a_low.SelectedItem is null) { pick_a_low.SelectedIndex = 0; }
-            if (pick_b_low.SelectedItem is null) { pick_b_low.SelectedIndex = 0; }
-            //pick_a_new.SelectedIndex = 0;
-            //pick_b_new.SelectedIndex = 0;
-            //pick_a_new1.SelectedIndex = 0;
-            //pick_b_new1.SelectedIndex = 0;
-            //pick_a_new2.SelectedIndex = 0;
-            //pick_b_new2.SelectedIndex = 0;
-            if (filname != "1")
-            {
-                // await PCLReadJson();
-            }
-
-            //grdfill_text.IsVisible = false;
-            //grdfill_textnew1.IsVisible = false;
-            //grdfill_textnew2.IsVisible = false;
+           
         }
 
         //Click New Line Method
@@ -1856,13 +1838,13 @@ namespace HealthSafetyApp.Views.Topics
 
 
         
-        private async void OnClick_SavePDF(object sender, EventArgs e)
+        private  void OnClick_SavePDF(object sender, EventArgs e)
         {
-            try
+            /*try
             {
                 await PCLReportGenaratePdf("/storage/emulated/0/");
             }
-            catch (FormatException) { }
+            catch (FormatException) { }*/
 
         }
 
@@ -2679,42 +2661,12 @@ namespace HealthSafetyApp.Views.Topics
                     else
                     { if (fnam == "") { fnam = "Dynamic Risk Assessment.pdf"; } else { fnam = fnam + ".pdf"; } }
                     IFile file = await folder.CreateFileAsync(fnam, CreationCollisionOption.ReplaceExisting);
-                    using (PdfWriter pdfwriter = new PdfWriter(file.Path))
-                    {
-                        using (PdfDocument pdfdocument = new PdfDocument(pdfwriter))
-                        {
-                            using (Document document =new Document(pdfdocument))
-                            {
+                   
+                    UserDialogs.Instance.Alert("PDF saved at:" + file.Path.ToString());
+                        
 
-                            Label lbl;
-                            double wDif, hDif;
-                            float prcnt = 0;
-                            wDif = hDif = 0;
-                            for (int i = 1; i <= 10; i++)
-                            {
-                                lbl = this.FindByName<Label>("img" + i);
-                                if (lbl.Text != null)
-                                {
-                                    if (wDif < 1 || hDif < 1)
-                                    {
-                                        if (wDif > hDif)
-                                        {
-                                            prcnt = float.Parse(hDif.ToString());
-                                        }
-                                        else
-                                        {
-                                            prcnt = float.Parse(wDif.ToString());
-                                        }
-                                    }
-                                }
-                            }
-                            document.Close();
-
-                            UserDialogs.Instance.Alert("PDF saved at:" + file.Path.ToString());
-                        }
-
-                        }
-                     }
+                        
+                     
                 
                 
             }

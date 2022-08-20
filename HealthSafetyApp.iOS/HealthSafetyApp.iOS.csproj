@@ -47,14 +47,15 @@
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARM64</MtouchArch>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <MtouchInterpreter>-all</MtouchInterpreter>
+    <MtouchExtraArgs>--linkskip=AssemblyOne --linkskip=AssemblyTwo
+</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\iPhone\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -62,8 +63,7 @@
     <CodesignKey>iPhone Distribution: HAS APP LTD (K62Q774Z57)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <CodesignProvision>Health &amp; Safety</CodesignProvision>
-    <MtouchLink>None</MtouchLink>
-    <MtouchUseLlvm>true</MtouchUseLlvm>
+    <MtouchLink>Full</MtouchLink>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -75,7 +75,6 @@
     <Compile Include="Renderers\MyButtonRenderer.cs" />
     <Compile Include="Renderers\CheckBoxView.cs" />
     <Compile Include="Renderers\CustomCheckBoxRenderer.cs" />
-    <Compile Include="SplashViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -214,9 +213,6 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SaturdayMP.XPlugins.iOS.BEMCheckBox">
-      <Version>1.4.3</Version>
-    </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
       <Version>5.0.1</Version>
     </PackageReference>
@@ -228,14 +224,14 @@
     <PackageReference Include="XLabs.Forms">
       <Version>2.0.5782</Version>
     </PackageReference>
-    <PackageReference Include="Com.Airbnb.iOS.Lottie">
-      <Version>2.5.13</Version>
-    </PackageReference>
     <PackageReference Include="Plugin.Permissions">
       <Version>6.0.1</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfPdfViewer">
       <Version>20.2.0.43</Version>
+    </PackageReference>
+    <PackageReference Include="SaturdayMP.XPlugins.iOS.BEMCheckBox">
+      <Version>1.4.3</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
@@ -379,8 +375,10 @@
     <BundleResource Include="Resources\Footwear.png" />
     <BundleResource Include="Resources\contactus11.png" />
     <BundleResource Include="Resources\DangerousToTheEnvironment.png" />
+    <BundleResource Include="Resources\Icon.svg" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <InterfaceDefinition Include="SplashScreen.storyboard" />
   </ItemGroup>
 </Project>

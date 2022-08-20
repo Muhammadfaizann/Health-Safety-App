@@ -14,7 +14,10 @@ namespace HealthSafetyApp.Controls
     {
         public BorderlessEntry()
         {
-            InitializeComponent();
+            InitializeComponent(); 
         }
+
+       
     }
+
 }

@@ -7,7 +7,9 @@ namespace HealthSafetyApp.Models
    public class User
     {
       
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
         public string Organization { get; set; }
         public string Position { get; set; }
         public string Industry { get; set; }
