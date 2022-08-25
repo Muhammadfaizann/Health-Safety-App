@@ -1,4 +1,5 @@
 ﻿ using System;
+using System.Threading.Tasks;
 using HealthSafetyApp.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -11,6 +12,13 @@ namespace HealthSafetyApp
         public App()
         {
             InitializeComponent();
+            _ = InitializeApp();
+        }
+
+        private async Task InitializeApp()
+        {
+            MainPage = new SplashScreen();
+            await Task.Delay(112*40);
             var user = Preferences.Get("UserName", "");
             if (string.IsNullOrEmpty(user))
             {

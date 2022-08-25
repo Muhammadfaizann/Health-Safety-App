@@ -30,7 +30,11 @@ namespace HealthSafetyApp.Views
 ,"Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu","Uganda","Ukraine","United Arab Emirates (UAE)"
 ,"United Kingdom (UK)","United States of America (USA)","Uruguay","Uzbekistan","Vanuatu","Vatican City (Holy See)","Venezuela","Vietnam","Yemen"
 ,"Zambia","Zimbabwe" };
-		List<string> industries = new List<string> { "Software Development", "Mobile Development", "Web development" };
+		List<string> industries = new List<string> { "Accounting","Administration & Office Support","Advertising, Arts & Media","Banking & Financial Services","Call Centre & Customer Service"
+,"Community Services & Development","Construction","Consulting & Strategy","Design & Architechture","Education & Training","Engineering",
+"Farming, Animals & Conservation","Government & Defence","Healthcare & Medical","Hospitality & Tourism","Human Resources & Recruitment"
+,"Information & Communication Technology","Insurance & Superannuation","Legal","Manufacturing, Transport & Logistics","Marketing & Communications",
+"Mining, Resources & Energy","Real Estate & Property","Retail & Consumer Products","Sales","Science & Technology","Sport & Recreation","Trades & Services" };
 		public SignupPage()
 		{
 			InitializeComponent();

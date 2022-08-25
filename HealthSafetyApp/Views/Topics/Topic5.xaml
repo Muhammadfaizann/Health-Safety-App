@@ -16,10 +16,6 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
-
-
-            
-                
                 <Grid Grid.Row="0" BackgroundColor="DarkGray">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10*"/>
