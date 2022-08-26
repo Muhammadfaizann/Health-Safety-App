@@ -23,5 +23,9 @@ namespace HealthSafetyApp.Views
         {
 
         }
+
+        void StandardEntry_Focused(System.Object sender, Xamarin.Forms.FocusEventArgs e)
+        {
+        }
     }
 }

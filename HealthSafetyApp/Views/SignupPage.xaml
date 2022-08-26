@@ -34,25 +34,25 @@
             x:DataType="vm:SignUpViewModel">
             
             <Grid Grid.Row="0" ColumnDefinitions="*,*">
-                <controls:RoundedEntry Grid.Column="0" PlaceHolder="First Name" Text="{Binding FirstName}"/>
-                <controls:RoundedEntry Grid.Column="1" PlaceHolder="Last Name" Text="{Binding LastName}"/>
+                <controls:StandardEntry Grid.Column="0" Placeholder="First Name" Text="{Binding FirstName}"/>
+                <controls:StandardEntry Grid.Column="1" Placeholder="Last Name" Text="{Binding LastName}"/>
             </Grid>
-           <controls:RoundedEntry x:Name="dob" Grid.Row="1" PlaceHolder="DOB" >
+           <controls:StandardEntry x:Name="dob" Grid.Row="1" Placeholder="DOB" Focused="dob_Focused" >
               
-           </controls:RoundedEntry>
+           </controls:StandardEntry>
                               
        <DatePicker x:Name="dobPicker" IsVisible="false" Date="{Binding DOB}"/>
        <Picker x:Name="countryPicker" IsVisible="false"></Picker>
        <Picker x:Name="industryPicker" IsVisible="false"></Picker>
-        <controls:RoundedEntry Grid.Row="2" PlaceHolder="Job Title" Text="{Binding Position}"/>
-        <controls:RoundedEntry Grid.Row="6" PlaceHolder="Work Email" Text="{Binding Email}"/>
-        <controls:RoundedEntry Grid.Row="4" PlaceHolder="Password" Text="{Binding Password}" IsPassword="True"/>
-        <controls:RoundedEntry Grid.Row="5" PlaceHolder="Confirm Password" Text="{Binding ConfirmPassword}" IsPassword="True"/>
-        <controls:RoundedEntry Grid.Row="3" PlaceHolder="Telephone No" Text="{Binding Telephone}"/>
-        <controls:RoundedEntry Grid.Row="7" PlaceHolder="Work postcode" Text="{Binding Postcode}"/>
-        <controls:RoundedEntry x:Name="country" Grid.Row="8" PlaceHolder="Country" Text="{Binding Country}"/>
-        <controls:RoundedEntry Grid.Row="9" PlaceHolder="Company Name" Text="{Binding Organizatiion}"/>
-        <controls:RoundedEntry x:Name="industy" Grid.Row="10" PlaceHolder="Industry Type" Text="{Binding Industry}"/>
+        <controls:StandardEntry Grid.Row="2" Placeholder="Job Title" Text="{Binding Position}"/>
+        <controls:StandardEntry Grid.Row="6" Placeholder="Work Email" Text="{Binding Email}"/>
+        <controls:StandardEntry Grid.Row="4" Placeholder="Password" Text="{Binding Password}" IsPassword="True"/>
+        <controls:StandardEntry Grid.Row="5" Placeholder="Confirm Password" Text="{Binding ConfirmPassword}" IsPassword="True"/>
+        <controls:StandardEntry Grid.Row="3" Placeholder="Telephone No" Text="{Binding Telephone}"/>
+        <controls:StandardEntry Grid.Row="7" Placeholder="Work postcode" Text="{Binding Postcode}"/>
+        <controls:StandardEntry x:Name="country" Grid.Row="8" Placeholder="Country" Text="{Binding Country}" Focused="country_Focused"/>
+        <controls:StandardEntry Grid.Row="9" Placeholder="Company Name" Text="{Binding Organizatiion}"/>
+        <controls:StandardEntry x:Name="industy" Grid.Row="10" Placeholder="Industry Type" Text="{Binding Industry}" Focused="industy_Focused"/>
             
      <ActivityIndicator Grid.Row="5" IsRunning="{Binding IsBusy}"
                            HorizontalOptions="Center"

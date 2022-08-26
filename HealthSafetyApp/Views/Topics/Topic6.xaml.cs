@@ -25,7 +25,7 @@ namespace HealthSafetyApp.Views.Topics
             base.OnAppearing();          
         }
 
-
+        
         private void OnClick_Prev(object sender, EventArgs e)
         {
             if (img_count == 0)
@@ -263,6 +263,7 @@ namespace HealthSafetyApp.Views.Topics
 
             
         }
+        
 
 
 

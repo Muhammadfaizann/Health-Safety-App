@@ -1,11 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Core"
-             x:Class=" HealthSafetyApp.Views.Topics.Topic5"
-             Title="ACCIDENT RECORD FORM">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Core"
+    x:Class="HealthSafetyApp.Views.Topics.AccidentForm"
+    Title="ACCIDENT RECORD FORM">
     <ContentPage.Content>
-   <ScrollView x:Name="myscrollview" Orientation="Vertical" VerticalOptions="StartAndExpand">
+         <ScrollView x:Name="myscrollview" Orientation="Vertical" VerticalOptions="StartAndExpand">
         <Grid RowSpacing="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -187,8 +188,8 @@
                         <ColumnDefinition Width=".3*"/>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" x:Name="Prev" Text="Prev" FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Clicked="Prev_Clicked" />
-                    <Button Grid.Column="1" x:Name="DeletePhoto"  FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Text="DeletePhoto" Clicked="OnClick_deletepicture" />
-                    <Button Grid.Column="2" x:Name="Next"  FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Text="Next" Clicked="OnClick_Nxt" />
+                    <Button Grid.Column="1" x:Name="DeletePhoto"  FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Text="DeletePhoto" Clicked="DeletePhoto_Clicked" />
+                    <Button Grid.Column="2" x:Name="Next"  FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Text="Next" Clicked="Next_Clicked" />
                 </Grid>
 
                 <Grid Grid.Row="3">
@@ -197,8 +198,8 @@
                         <ColumnDefinition Width=".5*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0" x:Name="takePhoto" FontSize="Micro"  ContentLayout="Left,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="camera.png" Text="Take Photo" Clicked="OnClick_takepicture"/>
-                    <Button Grid.Column="1" x:Name="pickPhoto" FontSize="Micro"  ContentLayout="Left,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="gallery.png" Text="Pick Photo" Clicked="OnClick_pickPicture" />
+                    <Button Grid.Column="0" x:Name="takePhoto" FontSize="Micro"  ContentLayout="Left,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="camera.png" Text="Take Photo" Clicked="takePhoto_Clicked"/>
+                    <Button Grid.Column="1" x:Name="pickPhoto" FontSize="Micro"  ContentLayout="Left,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="gallery.png" Text="Pick Photo" Clicked="pickPhoto_Clicked" />
 
 
                 </Grid>
@@ -234,5 +235,5 @@
         </Grid>
 
     </ScrollView>
-        </ContentPage.Content>
+    </ContentPage.Content>
 </ContentPage>

@@ -1,39 +1,27 @@
 ﻿using System;
-using System.Threading.Tasks;
-using Xamarin.Forms;
 using Acr.UserDialogs;
 using Plugin.Media;
 
+using Xamarin.Forms;
+
 namespace HealthSafetyApp.Views.Topics
 {
-    public partial class Topic5 : ContentPage
+    public partial class SafeSystemForm : ContentPage
     {
         private string fileText;
-        
+
         int img_count;
         private string filname;
-        public Topic5(string filenam)
+        public SafeSystemForm(string filenam)
         {
             InitializeComponent();
             filname = filenam;
-            this.Title = "Accident record form";
+            this.Title = "Safe systems of work tool";
             {
                 this.BackgroundColor = Xamarin.Forms.Color.White;
             }
         }
-
-       
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            
-        }
-
-
-        
-
-        private void OnClick_Prev(object sender, EventArgs e)
+        void Prev_Clicked(System.Object sender, System.EventArgs e)
         {
             if (img_count == 0)
             {
@@ -70,45 +58,10 @@ namespace HealthSafetyApp.Views.Topics
 
             }
         }
-        private void OnClick_Nxt(object sender, EventArgs e)
+
+        void DeletePhoto_Clicked(System.Object sender, System.EventArgs e)
         {
-            if (img_count == 0)
-            {
-                lbl_from.Text = "0";
-                lbl_to.Text = "0";
-                return;
-            }
 
-            int s = 0;
-
-            if (ActImg.Text != null)
-            {
-                Int32.TryParse(ActImg.Text, out s);
-                if (s != 10 && s != img_count)
-                {
-                    s++;
-                }
-                else
-                {
-                    s = 1;
-                }
-                Label lbl = this.FindByName<Label>("img" + s);
-                if (lbl.Text != null)
-                {
-                    Image1.Source = lbl.Text;
-                    ActImg.Text = s.ToString();
-                }
-                lbl_from.Text = s.ToString();
-                lbl_to.Text = img_count.ToString();
-
-
-
-
-            }
-        }
-
-        private void OnClick_deletepicture(object sender, EventArgs e)
-        {
             int s = 0;
 
             if (ActImg.Text != null)
@@ -172,9 +125,47 @@ namespace HealthSafetyApp.Views.Topics
             }
         }
 
-
-        private async void OnClick_takepicture(object sender, EventArgs e)
+        void Next_Clicked(System.Object sender, System.EventArgs e)
         {
+
+            if (img_count == 0)
+            {
+                lbl_from.Text = "0";
+                lbl_to.Text = "0";
+                return;
+            }
+
+            int s = 0;
+
+            if (ActImg.Text != null)
+            {
+                Int32.TryParse(ActImg.Text, out s);
+                if (s != 10 && s != img_count)
+                {
+                    s++;
+                }
+                else
+                {
+                    s = 1;
+                }
+                Label lbl = this.FindByName<Label>("img" + s);
+                if (lbl.Text != null)
+                {
+                    Image1.Source = lbl.Text;
+                    ActImg.Text = s.ToString();
+                }
+                lbl_from.Text = s.ToString();
+                lbl_to.Text = img_count.ToString();
+
+
+
+
+            }
+        }
+
+        async void takePhoto_Clicked(System.Object sender, System.EventArgs e)
+        {
+
             filname = "1";
             if (img_count >= 10)
             {
@@ -228,9 +219,9 @@ namespace HealthSafetyApp.Views.Topics
                 throw error;
             }
 
-
         }
-        private async void OnClick_pickPicture(object sender, EventArgs e)
+
+        async void pickPhoto_Clicked(System.Object sender, System.EventArgs e)
         {
             filname = "1";
             if (img_count >= 10)
@@ -264,8 +255,5 @@ namespace HealthSafetyApp.Views.Topics
                 return stream;
             });
         }
-
-        
-
     }
 }

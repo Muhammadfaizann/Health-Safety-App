@@ -58,9 +58,6 @@
     <EmbeddedResource Include="teams.json" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Controls\BorderlessEntry.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Controls\CheckText.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

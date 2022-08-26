@@ -43,9 +43,9 @@ namespace HealthSafetyApp.Views
             if (gid == "3")
                 await Navigation.PushAsync(new Topic4(filename));
             if (gid == "4")
-                await Navigation.PushAsync(new Topic5(filename));
+                await Navigation.PushAsync(new AccidentForm(filename));
             if (gid == "5")
-                await Navigation.PushAsync(new Topic6(filename));
+                await Navigation.PushAsync(new SafeSystemForm(filename));
             if (gid == "6")
                 await Navigation.PushAsync(new Topic11_homepage());
             if (gid == "7")

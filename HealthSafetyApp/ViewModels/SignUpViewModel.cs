@@ -15,20 +15,12 @@ namespace HealthSafetyApp.ViewModels
         UserService service = new UserService();
         public INavigation Navigation { get; set; }
         public ICommand SignUpCommand { get; set; }
-        public ICommand SecondSignupPageCommand { get; set; }
         public SignUpViewModel(INavigation navigation)
         {
             Navigation = navigation;
             SignUpCommand = new Command( () => { SignUp(); });
 
-            SecondSignupPageCommand = new Command(async () =>
-              {  if (IsBusy)
-                      return;
-
-                  IsBusy = true;
-                  await Navigation.PushModalAsync(new SignupPageSecond(this));
-                  IsBusy = false;
-              });
+            
         }
 
         private async void SignUp()

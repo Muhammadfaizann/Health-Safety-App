@@ -48,24 +48,7 @@ namespace HealthSafetyApp.Views
 
             dobPicker.DateSelected += DobPicker_DateSelected;
 
-			MessagingCenter.Subscribe<object, string>(this, "DOB", (sender, arg) =>
-			{
-				Device.BeginInvokeOnMainThread(() => {
-					var check = dobPicker.Focus();
-				});
-			}, BindingContext);
-			MessagingCenter.Subscribe<object, string>(this, "Country", (sender, arg) =>
-			{
-				Device.BeginInvokeOnMainThread(() => {
-					var check = countryPicker.Focus();
-				});
-			}, BindingContext);
-			MessagingCenter.Subscribe<object, string>(this, "Industry Type", (sender, arg) =>
-			{
-				Device.BeginInvokeOnMainThread(() => {
-					var check = industryPicker.Focus();
-				});
-			}, BindingContext);
+			
 		}
 
         private void IndustryPicker_SelectedIndexChanged(object sender, EventArgs e)
@@ -90,6 +73,29 @@ namespace HealthSafetyApp.Views
         {
 			await App.Current.MainPage.DisplayAlert("Terms and Conditions", TermsAndCondtions, "Ok");
 			checkbox.IsEnabled = true;
+		}
+
+        void dob_Focused(System.Object sender, Xamarin.Forms.FocusEventArgs e)
+        {
+			Device.BeginInvokeOnMainThread(() => {
+				var check = dobPicker.Focus();
+			});
+		}
+
+        void industy_Focused(System.Object sender, Xamarin.Forms.FocusEventArgs e)
+        {
+			Device.BeginInvokeOnMainThread(() => {
+				var check = industryPicker.Focus();
+			});
+			
+		}
+
+        void country_Focused(System.Object sender, Xamarin.Forms.FocusEventArgs e)
+        {
+			Device.BeginInvokeOnMainThread(() => {
+				var check = countryPicker.Focus();
+			});
+			
 		}
     }
 }
