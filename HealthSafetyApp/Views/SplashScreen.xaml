@@ -2,8 +2,8 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="HealthSafetyApp.Views.SplashScreen">
+    x:Class="HealthSafetyApp.Views.SplashScreen" BackgroundColor="White">
     <ContentPage.Content>
-        <Image x:Name="placeholder" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Aspect="AspectFit" ></Image>
+        <Image x:Name="placeholder" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFit" ></Image>
     </ContentPage.Content>
 </ContentPage>

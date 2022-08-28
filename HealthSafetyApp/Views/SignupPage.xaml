@@ -5,10 +5,11 @@
              xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:controls="clr-namespace:HealthSafetyApp.Controls"
              xmlns:fontAwesone="clr-namespace:HealthSafetyApp.FontAwesomeIcons"
+             NavigationPage.HasNavigationBar="False"
              x:Class="HealthSafetyApp.Views.SignupPage">
     
   <Grid RowDefinitions="auto,auto,auto">
-       <Grid Grid.Row="0" ColumnDefinitions="50,*" HeightRequest="40" Margin="10,40,10,0">
+       <Grid Grid.Row="0" ColumnDefinitions="50,*" HeightRequest="40" Margin="10,10,10,0">
             <Image Grid.Column="0" HorizontalOptions="Center" >
                         <Image.Source>
                             <FontImageSource
@@ -60,7 +61,7 @@
                            Color="{StaticResource HealthSafetyGreen}"/>
         <Grid Grid.Row="11" ColumnDefinitions="auto,auto" ColumnSpacing="0" HorizontalOptions="FillAndExpand" >
             <CheckBox x:Name="checkbox" Grid.Column="0" VerticalOptions="Start" IsEnabled="False" IsChecked="{Binding IsTermsConditionChecked}"/>
-            <Label Margin="-5,0,0,0" Grid.Column="1" VerticalOptions="Center"  HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start">
+            <Label Margin="0,0,0,0" Grid.Column="1" VerticalOptions="Center"  HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="I agree to the" TextColor="{StaticResource HealthSafetyCharcoal}"/>
