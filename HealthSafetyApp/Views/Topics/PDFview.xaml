@@ -7,7 +7,7 @@
     x:Class="HealthSafetyApp.Views.Topics.PDFview">
     
    <StackLayout Orientation="Vertical">
-        <Grid ColumnDefinitions="50,*" HeightRequest="40" Margin="10,40,10,0">
+        <Grid ColumnDefinitions="50,*" HeightRequest="40" Margin="10,10,10,0">
             <Image Grid.Column="0" HorizontalOptions="Center" >
                         <Image.Source>
                             <FontImageSource

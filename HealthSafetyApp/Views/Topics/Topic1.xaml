@@ -6,7 +6,7 @@
              x:Class="HealthSafetyApp.Views.Topics.Topic1">
                
         <ScrollView x:Name="myscrollview" Orientation="Vertical" VerticalOptions="FillAndExpand">
-        <StackLayout>
+        <StackLayout Padding="{OnPlatform Android=5}">
 
 
 
@@ -594,17 +594,14 @@
                 </Picker>
             </StackLayout>
 
-            <!--step 3-->
+           
             <StackLayout Orientation="Horizontal" IsVisible="False" >
-            
-                <!--<chkbx:CustomCheckbox x:Name="chkbx1" Checked="chkbx1_CheckedChanged" Color="Green"/>-->
                 <CheckBox x:Name="chkbx1" CheckedChanged="chkbx1_CheckedChanged" Color="Green" Visual="Material"/>
                 <Entry x:Name="txt_Check1_text" Placeholder="" PlaceholderColor="#939393"  HorizontalOptions="FillAndExpand"/>
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" IsVisible="False">
 
-                <!--<chkbx:CustomCheckbox x:Name="chkbx2" Checked="chkbx2_CheckedChanged" Color="Green"/>-->
                 <CheckBox x:Name="chkbx2" CheckedChanged="chkbx2_CheckedChanged" Color="Green"/>
                 <Entry x:Name="txt_Check2_text" Placeholder="" PlaceholderColor="#939393"  HorizontalOptions="FillAndExpand"/>
                 
@@ -655,7 +652,6 @@
                         <ColumnDefinition Width=".1*"/>
                     </Grid.ColumnDefinitions>
                     <Entry Grid.Column="0" x:Name="txt_fill1" VerticalOptions="Center" HorizontalOptions="StartAndExpand"  Placeholder="Enter hazard Identified" PlaceholderColor="#939393" />
-                    <!--<Picker Grid.Column="1" x:Name="pick_a_up" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="OnSelectedIndexChanged_pick_a_up">-->
                     <Picker Grid.Column="1" x:Name="pick_a_up" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" TextColor="Black" SelectedIndexChanged="Chg_Pick">    
                         <Picker.Items>
                             <x:String>0</x:String> 

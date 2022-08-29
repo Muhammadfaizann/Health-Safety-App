@@ -7,7 +7,7 @@
     Title="ACCIDENT RECORD FORM">
     <ContentPage.Content>
          <ScrollView x:Name="myscrollview" Orientation="Vertical" VerticalOptions="StartAndExpand">
-        <Grid RowSpacing="1" >
+        <Grid RowSpacing="1" Padding="{OnPlatform Android=5}" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>

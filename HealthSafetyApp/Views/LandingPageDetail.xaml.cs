@@ -66,8 +66,15 @@ namespace HealthSafetyApp.Views
 
         void MenuBarTapped(System.Object sender, System.EventArgs e)
         {
-            var flyout = (FlyoutPage)Application.Current.MainPage;
-            flyout.IsPresented = true;
+            try
+            {
+                var flyout = (FlyoutPage)Application.Current.MainPage;
+                flyout.IsPresented = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
     class Nav
