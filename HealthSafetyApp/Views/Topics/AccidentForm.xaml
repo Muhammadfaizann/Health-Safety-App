@@ -6,32 +6,8 @@
     x:Class="HealthSafetyApp.Views.Topics.AccidentForm"
     Title="ACCIDENT RECORD FORM">
     <ContentPage.Content>
-         <ScrollView x:Name="myscrollview" Orientation="Vertical" VerticalOptions="StartAndExpand">
-        <Grid RowSpacing="1" Padding="{OnPlatform Android=5}" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="100"/>
-            </Grid.RowDefinitions>
-                <Grid Grid.Row="0" BackgroundColor="DarkGray">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10*"/>
-                        <ColumnDefinition Width="90*"/>
-                    </Grid.ColumnDefinitions>
-
-                <StackLayout BackgroundColor="#0086b7" Grid.Column="0" >
-                    <Label Text="1." FontSize="Medium" TextColor="White"  HorizontalOptions="Center"/>
-                </StackLayout>
-                    
-                <Label Grid.Column="1" Text="About the person involved with accident / incident " FontSize="Default"   TextColor="White"/>
-                </Grid>
-
-            <Grid Grid.Row="1" Padding="5">
+        <ScrollView x:Name="myscrollview" Orientation="Vertical" VerticalOptions="StartAndExpand">
+            <Grid RowSpacing="1" Padding="{OnPlatform Android=5}" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -39,201 +15,226 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="100"/>
                 </Grid.RowDefinitions>
-                
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30*"/>
-                    <ColumnDefinition Width="70*"/>
-                </Grid.ColumnDefinitions>
-
-                <Label Grid.Row="0" Grid.Column="0" Text="Name:" FontSize="Medium"  TextColor="#0086b7" />
-                <Entry Grid.Row="0" Grid.Column="1" x:Name="txt_name" Placeholder="" PlaceholderColor="#939393"/>
-
-                <Label Grid.Row="1" Grid.Column="0" Text="Address:" FontSize="Medium"  TextColor="#0086b7"/>
-                <Entry Grid.Row="1" Grid.Column="1" x:Name="txt_Address" Placeholder="" PlaceholderColor="#939393"/>
-
-                <Label Grid.Row="2" Grid.Column="0" Text="City/Town:" FontSize="Medium"  TextColor="#0086b7"/>
-                <Entry Grid.Row="2" Grid.Column="1" x:Name="txt_city" Placeholder="" PlaceholderColor="#939393"/>
-
-                <Label Grid.Row="3" Grid.Column="0" Text="Postcode:" FontSize="Medium" TextColor="#0086b7"/>
-                <Entry Grid.Row="3" Grid.Column="1" x:Name="txt_postcode" Placeholder="" PlaceholderColor="#939393"/>
-
-                <Label Grid.Row="4" Grid.Column="0" Text="Telephone:" FontSize="Medium"  TextColor="#0086b7"/>
-                <Entry Grid.Row="4" Grid.Column="1" x:Name="txt_telephone" Placeholder="" Keyboard="Telephone" PlaceholderColor="#939393"/>
-                
-                <Label Grid.Row="5" Grid.Column="0" Text="Occupation:" FontSize="Medium"  TextColor="#0086b7"/>
-                <Entry Grid.Row="5" Grid.Column="1" x:Name="txt_occupation" Placeholder="" PlaceholderColor="#939393"/>
-
-            </Grid>
-            
-            <Grid Grid.Row="2" BackgroundColor="DarkGray" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="90*"/>
-                </Grid.ColumnDefinitions>
-                <StackLayout BackgroundColor="#0086b7" Grid.Column="0" >
-                    <Label Text="2." FontSize="Medium" TextColor="White" HorizontalOptions="Center" />
-                </StackLayout>
-                <Label Grid.Column="1" Text="Details of person reporting this accident / incident" FontSize="Default" TextColor="White"/>
-            </Grid>
-
-            <Grid Grid.Row="3" Padding="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30*"/>
-                    <ColumnDefinition Width="70*"/>
-                </Grid.ColumnDefinitions>
-
-                <Label Grid.Row="0" Grid.Column="0" Text="Name:" FontSize="Medium"  TextColor="#0086b7" />
-                <Entry Grid.Row="0" Grid.Column="1" x:Name="txt_name2" Placeholder="" PlaceholderColor="#939393"/>
-
-                <Label Grid.Row="1" Grid.Column="0" Text="Address:" FontSize="Medium"  TextColor="#0086b7"/>
-                <Entry Grid.Row="1" Grid.Column="1" x:Name="txt_Address2" Placeholder="" PlaceholderColor="#939393"/>
-
-                <Label Grid.Row="2" Grid.Column="0" Text="City/Town:" FontSize="Medium"  TextColor="#0086b7"/>
-                <Entry Grid.Row="2" Grid.Column="1" x:Name="txt_city2" Placeholder="" PlaceholderColor="#939393"/>
-
-                <Label Grid.Row="3" Grid.Column="0" Text="Postcode" FontSize="Medium" TextColor="#0086b7"/>
-                <Entry Grid.Row="3" Grid.Column="1" x:Name="txt_postcode2" Placeholder="" PlaceholderColor="#939393"/>
-
-                <Label Grid.Row="4" Grid.Column="0" Text="Telephone:" FontSize="Medium"  TextColor="#0086b7"/>
-                <Entry Grid.Row="4" Grid.Column="1" x:Name="txt_telephone2" Placeholder="" Keyboard="Telephone" PlaceholderColor="#939393"/>
-
-                <Label Grid.Row="5" Grid.Column="0" Text="Occupation:" FontSize="Medium"  TextColor="#0086b7"/>
-                <Entry Grid.Row="5" Grid.Column="1" x:Name="txt_occupation2" Placeholder="" PlaceholderColor="#939393"/>
-
-            </Grid>
-            
-            <Grid Grid.Row="4" BackgroundColor="DarkGray">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="90*"/>
-                </Grid.ColumnDefinitions>
-                <StackLayout BackgroundColor="#0086b7" Grid.Column="0" >
-                    <Label Grid.Column="0" Text="3." FontSize="Medium" TextColor="White" HorizontalOptions="Center" />
-                </StackLayout>
-                <Label Grid.Column="1" Text="Details of accident / incident and injury" FontSize="Medium" TextColor="White"/>
-            </Grid>
-
-            
-            <Grid Grid.Row="5" Padding="5">
-                
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40*"/>
-                    <ColumnDefinition Width="60*"/>
-                </Grid.ColumnDefinitions>
-
-                <Label Grid.Row="0" Grid.Column="0" Text="Date(DD/MM/YYYY):" FontSize="Medium"  TextColor="#0086b7" />
-                <DatePicker Grid.Row="0" Grid.Column="1" TextColor="Black" x:Name="datepicker" />
-
-                <Label Grid.Row="1" Grid.Column="0" Text="Time(HH/MM):" FontSize="Medium"  TextColor="#0086b7"/>
-                <TimePicker Grid.Row="1" Grid.Column="1" x:Name="timepicker" TextColor="Black"/>
-                <StackLayout Grid.Row="2" Grid.ColumnSpan="2" >
-                    <Label Text="Where did the accident/injury take place?" FontSize="Medium"  TextColor="#0086b7" />
-                    <Frame HasShadow="False" BorderColor="LightGray" Padding="0">
-                    <local:ExpandableEditor x:Name="entry_Where" />
-                    </Frame>
-                    <Label Text="How the accident happened, Give the cause if you can?" FontSize="Medium"  TextColor="#0086b7" />
-                    <Frame HasShadow="False" BorderColor="LightGray" Padding="0">
-                    <local:ExpandableEditor x:Name="entry_How" />
-                        </Frame>
-                    <Label Text="Details of accident/injury?" FontSize="Medium"  TextColor="#0086b7" />
-                    <Frame HasShadow="False" BorderColor="LightGray" Padding="0">
-                    <local:ExpandableEditor x:Name="entry_Details"/>
-                        </Frame>
-                </StackLayout>
                
-            </Grid>
+                <Grid Grid.Row="0" BackgroundColor="DarkGray">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="90*"/>
+                        </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="6">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
+                        <StackLayout BackgroundColor="#0086b7" Grid.Column="0" >
+                            <Label Text="1." FontSize="Medium" TextColor="White"  HorizontalOptions="Center"/>
+                        </StackLayout>
+                        <Label Grid.Column="1" Text="About the person involved with accident / incident " FontSize="Default"   TextColor="White"/>
+                    </Grid>
+                    <Grid Grid.Row="1" Padding="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30*"/>
+                            <ColumnDefinition Width="70*"/>
+                        </Grid.ColumnDefinitions>
 
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <StackLayout BackgroundColor="SkyBlue"  Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand" Text="Attachments"/>
-                        <Label HorizontalOptions="End" x:Name="lbl_from" Text="0"/>
-                        <Label HorizontalOptions="End"  Text="of"/>
-                        <Label HorizontalOptions="End"  x:Name="lbl_to" Text="0"/>
-                        <Label HorizontalOptions="End"  Text="of total 10"/>
-                    </StackLayout>
-                </Grid>
-                <Grid Grid.Row="1">
-                    <Image  x:Name="Image1"/>
-                </Grid>
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".3*"/>
-                        <ColumnDefinition Width=".4*"/>
-                        <ColumnDefinition Width=".3*"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" x:Name="Prev" Text="Prev" FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Clicked="Prev_Clicked" />
-                    <Button Grid.Column="1" x:Name="DeletePhoto"  FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Text="DeletePhoto" Clicked="DeletePhoto_Clicked" />
-                    <Button Grid.Column="2" x:Name="Next"  FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Text="Next" Clicked="Next_Clicked" />
-                </Grid>
+                        <Label Grid.Row="0" Grid.Column="0" Text="Name:" FontSize="Medium"  TextColor="#0086b7" />
+                        <Entry Grid.Row="0" Grid.Column="1" x:Name="txt_name" Placeholder="" PlaceholderColor="#939393"/>
 
-                <Grid Grid.Row="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".5*"/>
-                        <ColumnDefinition Width=".5*"/>
-                    </Grid.ColumnDefinitions>
+                        <Label Grid.Row="1" Grid.Column="0" Text="Address:" FontSize="Medium"  TextColor="#0086b7"/>
+                        <Entry Grid.Row="1" Grid.Column="1" x:Name="txt_Address" Placeholder="" PlaceholderColor="#939393"/>
 
-                    <Button Grid.Column="0" x:Name="takePhoto" FontSize="Micro"  ContentLayout="Left,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="camera.png" Text="Take Photo" Clicked="takePhoto_Clicked"/>
-                    <Button Grid.Column="1" x:Name="pickPhoto" FontSize="Micro"  ContentLayout="Left,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="gallery.png" Text="Pick Photo" Clicked="pickPhoto_Clicked" />
+                        <Label Grid.Row="2" Grid.Column="0" Text="City/Town:" FontSize="Medium"  TextColor="#0086b7"/>
+                        <Entry Grid.Row="2" Grid.Column="1" x:Name="txt_city" Placeholder="" PlaceholderColor="#939393"/>
+
+                        <Label Grid.Row="3" Grid.Column="0" Text="Postcode:" FontSize="Medium" TextColor="#0086b7"/>
+                        <Entry Grid.Row="3" Grid.Column="1" x:Name="txt_postcode" Placeholder="" PlaceholderColor="#939393"/>
+
+                        <Label Grid.Row="4" Grid.Column="0" Text="Telephone:" FontSize="Medium"  TextColor="#0086b7"/>
+                        <Entry Grid.Row="4" Grid.Column="1" x:Name="txt_telephone" Placeholder="" Keyboard="Telephone" PlaceholderColor="#939393"/>
+                
+                        <Label Grid.Row="5" Grid.Column="0" Text="Occupation:" FontSize="Medium"  TextColor="#0086b7"/>
+                        <Entry Grid.Row="5" Grid.Column="1" x:Name="txt_occupation" Placeholder="" PlaceholderColor="#939393"/>
+
+                    </Grid>
+            
+                    <Grid Grid.Row="2" BackgroundColor="DarkGray" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="90*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout BackgroundColor="#0086b7" Grid.Column="0" >
+                            <Label Text="2." FontSize="Medium" TextColor="White" HorizontalOptions="Center" />
+                        </StackLayout>
+                        <Label Grid.Column="1" Text="Details of person reporting this accident / incident" FontSize="Default" TextColor="White"/>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Padding="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30*"/>
+                            <ColumnDefinition Width="70*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Text="Name:" FontSize="Medium"  TextColor="#0086b7" />
+                        <Entry Grid.Row="0" Grid.Column="1" x:Name="txt_name2" Placeholder="" PlaceholderColor="#939393"/>
+
+                        <Label Grid.Row="1" Grid.Column="0" Text="Address:" FontSize="Medium"  TextColor="#0086b7"/>
+                        <Entry Grid.Row="1" Grid.Column="1" x:Name="txt_Address2" Placeholder="" PlaceholderColor="#939393"/>
+
+                        <Label Grid.Row="2" Grid.Column="0" Text="City/Town:" FontSize="Medium"  TextColor="#0086b7"/>
+                        <Entry Grid.Row="2" Grid.Column="1" x:Name="txt_city2" Placeholder="" PlaceholderColor="#939393"/>
+
+                        <Label Grid.Row="3" Grid.Column="0" Text="Postcode" FontSize="Medium" TextColor="#0086b7"/>
+                        <Entry Grid.Row="3" Grid.Column="1" x:Name="txt_postcode2" Placeholder="" PlaceholderColor="#939393"/>
+
+                        <Label Grid.Row="4" Grid.Column="0" Text="Telephone:" FontSize="Medium"  TextColor="#0086b7"/>
+                        <Entry Grid.Row="4" Grid.Column="1" x:Name="txt_telephone2" Placeholder="" Keyboard="Telephone" PlaceholderColor="#939393"/>
+
+                        <Label Grid.Row="5" Grid.Column="0" Text="Occupation:" FontSize="Medium"  TextColor="#0086b7"/>
+                        <Entry Grid.Row="5" Grid.Column="1" x:Name="txt_occupation2" Placeholder="" PlaceholderColor="#939393"/>
+
+                    </Grid>
+            
+                    <Grid Grid.Row="4" BackgroundColor="DarkGray">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="90*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout BackgroundColor="#0086b7" Grid.Column="0" >
+                            <Label Grid.Column="0" Text="3." FontSize="Medium" TextColor="White" HorizontalOptions="Center" />
+                        </StackLayout>
+                        <Label Grid.Column="1" Text="Details of accident / incident and injury" FontSize="Medium" TextColor="White"/>
+                    </Grid>
+
+            
+                    <Grid Grid.Row="5" Padding="5">
+                
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40*"/>
+                            <ColumnDefinition Width="60*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Text="Date(DD/MM/YYYY):" FontSize="Medium"  TextColor="#0086b7" />
+                        <DatePicker Grid.Row="0" Grid.Column="1" TextColor="Black" x:Name="datepicker" />
+
+                        <Label Grid.Row="1" Grid.Column="0" Text="Time(HH/MM):" FontSize="Medium"  TextColor="#0086b7"/>
+                        <TimePicker Grid.Row="1" Grid.Column="1" x:Name="timepicker" TextColor="Black"/>
+                        <StackLayout Grid.Row="2" Grid.ColumnSpan="2" >
+                            <Label Text="Where did the accident/injury take place?" FontSize="Medium"  TextColor="#0086b7" />
+                            <Frame HasShadow="False" BorderColor="LightGray" Padding="0">
+                            <local:ExpandableEditor x:Name="entry_Where" />
+                            </Frame>
+                            <Label Text="How the accident happened, Give the cause if you can?" FontSize="Medium"  TextColor="#0086b7" />
+                            <Frame HasShadow="False" BorderColor="LightGray" Padding="0">
+                            <local:ExpandableEditor x:Name="entry_How" />
+                                </Frame>
+                            <Label Text="Details of accident/injury?" FontSize="Medium"  TextColor="#0086b7" />
+                            <Frame HasShadow="False" BorderColor="LightGray" Padding="0">
+                            <local:ExpandableEditor x:Name="entry_Details"/>
+                                </Frame>
+                        </StackLayout>
+               
+                    </Grid>
+
+                    <Grid Grid.Row="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <StackLayout BackgroundColor="SkyBlue"  Orientation="Horizontal">
+                                <Label HorizontalOptions="StartAndExpand" Text="Attachments"/>
+                                <Label HorizontalOptions="End" x:Name="lbl_from" Text="0"/>
+                                <Label HorizontalOptions="End"  Text="of"/>
+                                <Label HorizontalOptions="End"  x:Name="lbl_to" Text="0"/>
+                                <Label HorizontalOptions="End"  Text="of total 10"/>
+                            </StackLayout>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Image  x:Name="Image1"/>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".3*"/>
+                                <ColumnDefinition Width=".4*"/>
+                                <ColumnDefinition Width=".3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" x:Name="Prev" Text="Prev" FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Clicked="Prev_Clicked" />
+                            <Button Grid.Column="1" x:Name="DeletePhoto"  FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Text="DeletePhoto" Clicked="DeletePhoto_Clicked" />
+                            <Button Grid.Column="2" x:Name="Next"  FontSize="Micro" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" Text="Next" Clicked="Next_Clicked" />
+                        </Grid>
+
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".5*"/>
+                                <ColumnDefinition Width=".5*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0" x:Name="takePhoto" FontSize="Micro"  ContentLayout="Left,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="camera.png" Text="Take Photo" Clicked="takePhoto_Clicked"/>
+                            <Button Grid.Column="1" x:Name="pickPhoto" FontSize="Micro"  ContentLayout="Left,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="gallery.png" Text="Pick Photo" Clicked="pickPhoto_Clicked" />
 
 
-                </Grid>
-                <Grid Grid.Row="4" IsVisible="False">
-                    <StackLayout>
-                        <Label x:Name="img1"/>
-                        <Label x:Name="img2"/>
-                        <Label x:Name="img3"/>
-                        <Label x:Name="img4"/>
-                        <Label x:Name="img5"/>
-                        <Label x:Name="img6"/>
-                        <Label x:Name="img7"/>
-                        <Label x:Name="img8"/>
-                        <Label x:Name="img9"/>
-                        <Label x:Name="img10"/>
-                    </StackLayout>
-                </Grid>
-                <Grid Grid.Row="5" IsVisible="False">
-                    <Label x:Name="ActImg"/>
-                </Grid>
-            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="4" IsVisible="False">
+                            <StackLayout>
+                                <Label x:Name="img1"/>
+                                <Label x:Name="img2"/>
+                                <Label x:Name="img3"/>
+                                <Label x:Name="img4"/>
+                                <Label x:Name="img5"/>
+                                <Label x:Name="img6"/>
+                                <Label x:Name="img7"/>
+                                <Label x:Name="img8"/>
+                                <Label x:Name="img9"/>
+                                <Label x:Name="img10"/>
+                            </StackLayout>
+                        </Grid>
+                        <Grid Grid.Row="5" IsVisible="False">
+                            <Label x:Name="ActImg"/>
+                        </Grid>
+                    </Grid>
 
-            <Grid Grid.Row="7" Margin="0,20,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".35*"/>
-                    <ColumnDefinition Width=".35*"/>
-                    <ColumnDefinition Width=".35*"/>
-                </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Text="Open Drafts" FontSize="Micro"  ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="fillableform1_pictures_icon.png"  />
-                <Button Grid.Column="1" Text="Save as Draft" FontSize="Micro" ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" HorizontalOptions="FillAndExpand" Image="fillableform1_save_icon.png" />
-                <Button Grid.Column="2" Text="Save as PDF" FontSize="Micro" ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" HorizontalOptions="FillAndExpand" Image="fillableform1_pdf_icon.png" />
-            </Grid>
-        </Grid>
+                    <Grid Grid.Row="7" Margin="0,20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".35*"/>
+                            <ColumnDefinition Width=".35*"/>
+                            <ColumnDefinition Width=".35*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Text="Open Drafts" FontSize="Micro"  ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="fillableform1_pictures_icon.png"  />
+                        <Button Grid.Column="1" Text="Save as Draft" FontSize="Micro" ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" HorizontalOptions="FillAndExpand" Image="fillableform1_save_icon.png" />
+                        <Button Grid.Column="2" Text="Save as PDF" FontSize="Micro" ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" HorizontalOptions="FillAndExpand" Image="fillableform1_pdf_icon.png" />
+                    </Grid>
 
-    </ScrollView>
+     
+            </Grid> 
+
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

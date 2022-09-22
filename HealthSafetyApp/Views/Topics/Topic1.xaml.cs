@@ -12,8 +12,12 @@ using System.Globalization;
 using Plugin.Media;
 
 using HealthSafetyApp.Helpers;
-
-
+using Microsoft.AppCenter.Crashes;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Parsing;
+using Syncfusion.Pdf.Graphics;
+using Syncfusion.Pdf.Grid;
+using Syncfusion.Drawing;
 
 namespace HealthSafetyApp.Views.Topics
 {
@@ -61,7 +65,7 @@ namespace HealthSafetyApp.Views.Topics
 
         // Picker pck;
         private string filname;
-
+        
         private void OnClicked_DelLine2(object sender, EventArgs e)
         {
 
@@ -168,7 +172,7 @@ namespace HealthSafetyApp.Views.Topics
 
             }
         }
-
+        
         private void OnClick_Prev(object sender, EventArgs e)
         {
             if (img_count == 0)
@@ -313,24 +317,24 @@ namespace HealthSafetyApp.Views.Topics
 
             }
         }
-
-
+        
+        
 
         public Topic1(string filenam)
         {
-            InitializeComponent();
-            filname = filenam;
-            this.Title = "Dynamic risk assessment tool";
-#pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
-            if (Device.OS == TargetPlatform.Windows)
-#pragma warning restore CS0612 // Type or member is obsolete
-#pragma warning restore CS0618 // Type or member is obsolete
+            
+            try
             {
-                this.BackgroundColor = Xamarin.Forms.Color.White;
-            }
+                InitializeComponent();
+                filname = filenam;
+                this.Title = "Dynamic risk assessment tool";
 
-            img_count = 0;
+                img_count = 0;
+            }
+            catch (Exception exception)
+            {
+                Crashes.TrackError(exception);
+            }
         }
 
         private void Datechanged(object sender, DateChangedEventArgs e)
@@ -343,11 +347,16 @@ namespace HealthSafetyApp.Views.Topics
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
-
-           
+            try
+            {
+                base.OnAppearing();
+            }
+            catch (Exception exception)
+            {
+                Crashes.TrackError(exception);
+            }
         }
-
+       
         //Click New Line Method
         private void OnClicked_NewLine(object sender, EventArgs e)
         {
@@ -1840,12 +1849,39 @@ namespace HealthSafetyApp.Views.Topics
         
         private  void OnClick_SavePDF(object sender, EventArgs e)
         {
-            /*try
-            {
-                await PCLReportGenaratePdf("/storage/emulated/0/");
-            }
-            catch (FormatException) { }*/
+            try
+            { 
+                // Create a new PDF document
+                PdfDocument document = new PdfDocument();
 
+                //Add a page to the document
+                PdfPage page = document.Pages.Add();
+
+                //Create PDF graphics for the page
+                PdfGraphics graphics = page.Graphics;
+
+                //Set the standard font
+                PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
+
+                //Draw the text
+                graphics.DrawString("Hello World!!!", font, PdfBrushes.Black, new PointF(0, 0));
+
+                //Save the document to the stream
+                MemoryStream stream = new MemoryStream();
+                document.Save(stream);
+
+                //Close the document
+                document.Close(true);
+
+                //Save the stream as a file in the device and invoke it for viewing
+                string filePath = DependencyService.Get<ISave>().Save(stream);
+                string message = "The PDF has been saved to " + filePath;
+                UserDialogs.Instance.Alert(message);
+            }
+            catch (Exception exception)
+            {
+                Crashes.TrackError(exception);
+            }
         }
 
         public async Task PCLReportGenaratePdf(string path)
@@ -2785,355 +2821,7 @@ namespace HealthSafetyApp.Views.Topics
         {
 
         }
-        public async Task PCLReadJson()
-        {
-#pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
-            if (Device.OS == TargetPlatform.Windows)
-#pragma warning restore CS0612 // Type or member is obsolete
-#pragma warning restore CS0618 // Type or member is obsolete
-            {
-
-            }
-#pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
-            if (Device.OS == TargetPlatform.Android)
-#pragma warning restore CS0612 // Type or member is obsolete
-#pragma warning restore CS0618 // Type or member is obsolete
-            {
-
-            }
-
-            DraftFields account = JsonConvert.DeserializeObject<DraftFields>(FileText);
-            txt_name.Text = account.Name1;
-            txt_projname.Text = account.ProjectName;
-            txt_sitename.Text = account.SiteName;
-
-
-            pick_1.SelectedItem = account.pick1;
-            pick_2.SelectedItem = account.pick2;
-
-
-            pick_3.SelectedItem = account.pick3;
-            pick_4.SelectedItem = account.pick4;
-
-            pick2_1.SelectedItem = account.pick2_1;
-            pick2_2.SelectedItem = account.pick2_2;
-            pick2_3.SelectedItem = account.pick2_3;
-            pick2_4.SelectedItem = account.pick2_4;
-            pick2_5.SelectedItem = account.pick2_5;
-            pick2_6.SelectedItem = account.pick2_6;
-            pick2_7.SelectedItem = account.pick2_7;
-            pick2_8.SelectedItem = account.pick2_8;
-
-            pick2_9.SelectedItem = account.pick2_9;
-            pick2_10.SelectedItem = account.pick2_10;
-            pick2_11.SelectedItem = account.pick2_11;
-            pick2_12.SelectedItem = account.pick2_12;
-            pick2_13.SelectedItem = account.pick2_13;
-            pick2_14.SelectedItem = account.pick2_14;
-            pick2_15.SelectedItem = account.pick2_15;
-            pick2_16.SelectedItem = account.pick2_16;
-
-            pick2_17.SelectedItem = account.pick2_17;
-            pick2_18.SelectedItem = account.pick2_18;
-            pick2_19.SelectedItem = account.pick2_19;
-            pick2_20.SelectedItem = account.pick2_20;
-            pick2_21.SelectedItem = account.pick2_21;
-            pick2_22.SelectedItem = account.pick2_22;
-            pick2_23.SelectedItem = account.pick2_23;
-            pick2_24.SelectedItem = account.pick2_24;
-
-
-
-            step2_other.Text = account.step2_other;
-            pick3_1.SelectedItem = account.pick3_1;
-
-            txt_fill1.Text = account.fillable_txt1;
-            txt_fill2.Text = account.fillable_txt2;
-
-
-            txt_Check_text11.Text = account.fillable_txt3;
-            txt_Check_text12.Text = account.fillable_txt4;
-            txt_Check_text21.Text = account.fillable_txt5;
-            txt_Check_text22.Text = account.fillable_txt6;
-            txt_Check_text31.Text = account.fillable_txt7;
-            txt_Check_text32.Text = account.fillable_txt8;
-            txt_Check_text41.Text = account.fillable_txt9;
-            txt_Check_text42.Text = account.fillable_txt10;
-
-            txt_Check_text51.Text = account.fillable_txt11;
-            txt_Check_text52.Text = account.fillable_txt12;
-            txt_Check_text61.Text = account.fillable_txt13;
-            txt_Check_text62.Text = account.fillable_txt14;
-            txt_Check_text71.Text = account.fillable_txt15;
-            txt_Check_text72.Text = account.fillable_txt16;
-            txt_Check_text81.Text = account.fillable_txt17;
-            txt_Check_text82.Text = account.fillable_txt18;
-            txt_Check_text91.Text = account.fillable_txt19;
-            txt_Check_text92.Text = account.fillable_txt20;
-            txt_Check_text101.Text = account.fillable_txt21;
-            txt_Check_text102.Text = account.fillable_txt22;
-
-            pick_a_up.SelectedItem = account.a_up;
-            pick_b_up.SelectedItem = account.b_up;
-            //txt_resultup   = account.c_up.ToString();
-
-            pick_a_low.SelectedItem = account.a_low;
-            pick_b_low.SelectedItem = account.b_low;
-            //txt_resultlow  = account.c_low.ToString();
-
-            //pick_a_ne = account.a_new;
-            //b_new = account.b_new;
-            //c_new = account.c_new;
-            //a_new1 = account.a_new1;
-            //b_new1 = account.b_new1;
-            //c_new1 = account.c_new1;
-            //a_new2 = account.a_new2;
-            //b_new2 = account.b_new2;
-            //c_new2 = account.c_new2;
-            pick_a_up1.SelectedItem = account.a_up1;
-            pick_b_up1.SelectedItem = account.b_up1;
-            //txt_resultup1 = account.c_up1;
-            pick_a_low1.SelectedItem = account.a_low1;
-            pick_b_low1.SelectedItem = account.b_low1;
-            //txt_resultlow1  = account.c_low1;
-
-            pick_a_up2.SelectedItem = account.a_up2;
-            pick_b_up2.SelectedItem = account.b_up2;
-            //txt_resultup2  = account.c_up2;
-            pick_a_low2.SelectedItem = account.a_low2;
-            pick_b_low2.SelectedItem = account.b_low2;
-            //txt_resultlow2 = account.c_low2;
-
-            pick_a_up3.SelectedItem = account.a_up3;
-            pick_b_up3.SelectedItem = account.b_up3;
-            // txt_resultup3 = account.c_up3;
-            pick_a_low3.SelectedItem = account.a_low3;
-            pick_b_low3.SelectedItem = account.b_low3;
-            //txt_resultlow3 = account.c_low3;
-
-            pick_a_up4.SelectedItem = account.a_up4;
-            pick_b_up4.SelectedItem = account.b_up4;
-            //c_up4 = account.c_up4;
-            pick_a_low4.SelectedItem = account.a_low4;
-            pick_b_low4.SelectedItem = account.b_low4;
-            //c_low4 = account.c_low4;
-
-            pick_a_up5.SelectedItem = account.a_up5;
-            pick_b_up5.SelectedItem = account.b_up5;
-            //c_up5 = account.c_up5;
-            pick_a_low5.SelectedItem = account.a_low5;
-            pick_b_low5.SelectedItem = account.b_low5;
-            //c_low5 = account.c_low5;
-
-            pick_a_up6.SelectedItem = account.a_up6;
-            pick_b_up6.SelectedItem = account.b_up6;
-            //c_up6 = account.c_up6;
-            pick_a_low6.SelectedItem = account.a_low6;
-            pick_b_low6.SelectedItem = account.b_low6;
-            //c_low6 = account.c_low6;
-
-            pick_a_up7.SelectedItem = account.a_up7;
-            pick_b_up7.SelectedItem = account.b_up7;
-            //c_up7 = account.c_up7;
-            pick_a_low7.SelectedItem = account.a_low7;
-            pick_b_low7.SelectedItem = account.b_low7;
-            //c_low7 = account.c_low7;
-
-            pick_a_up8.SelectedItem = account.a_up8;
-            pick_b_up8.SelectedItem = account.b_up8;
-            //c_up8 = account.c_up8;
-            pick_a_low8.SelectedItem = account.a_low8;
-            pick_b_low8.SelectedItem = account.b_low8;
-            //c_low8 = account.c_low8;
-
-            pick_a_up9.SelectedItem = account.a_up9;
-            pick_b_up9.SelectedItem = account.b_up9;
-            //c_up9 = account.c_up9;
-            pick_a_low9.SelectedItem = account.a_low9;
-            pick_b_low9.SelectedItem = account.b_low9;
-            //c_low9 = account.c_low9;
-
-            pick_a_up10.SelectedItem = account.a_up10;
-            pick_b_up10.SelectedItem = account.b_up10;
-            //c_up10 = account.c_up10;
-            pick_a_low10.SelectedItem = account.a_low10;
-            pick_b_low10.SelectedItem = account.b_low10;
-            //c_low10 = account.c_low10;
-            img1.Text = account.img1;
-            img2.Text = account.img2;
-            img3.Text = account.img3;
-            img4.Text = account.img4;
-            img5.Text = account.img5;
-            img6.Text = account.img6;
-            img7.Text = account.img7;
-            img8.Text = account.img8;
-            img9.Text = account.img9;
-            img10.Text = account.img10;
-
-            img_count = 0;
-            for (int i = 1; i <= 10; i++)
-            {
-                Label lbl = this.FindByName<Label>("img" + i);
-                if (!(lbl.Text is null))
-                {
-                    img_count++;
-                }
-            }
-
-            if (img1 != null)
-            {
-
-                ActImg.Text = "1";
-                Image1.Source = img1.Text;
-                lbl_from.Text = "1";
-                lbl_to.Text = img_count.ToString();
-            }
-            if (account.add_btn1 == true) { Add_btn1.IsVisible = true; } else { Add_btn1.IsVisible = false; }
-
-            if (account.add_btn2 == true)
-            {
-                fill_text_11.IsVisible = true;
-                fill_text_12.IsVisible = true;
-                Add_btn1.IsVisible = false;
-                Add_btn2.IsVisible = true;
-            }
-            else
-            {
-                fill_text_11.IsVisible = false;
-                fill_text_12.IsVisible = false;
-                Add_btn1.IsVisible = true;
-                Add_btn2.IsVisible = false;
-            }
-
-            if (account.add_btn3 == true)
-            {
-                fill_text_21.IsVisible = true;
-                fill_text_22.IsVisible = true;
-                Add_btn3.IsVisible = true;
-                Add_btn2.IsVisible = false;
-            }
-            else
-            {
-                fill_text_21.IsVisible = false;
-                fill_text_22.IsVisible = false;
-                Add_btn3.IsVisible = false;
-
-            }
-
-            if (account.add_btn4 == true)
-            {
-                fill_text_31.IsVisible = true;
-                fill_text_32.IsVisible = true;
-                Add_btn4.IsVisible = true;
-                Add_btn3.IsVisible = false;
-            }
-            else
-            {
-                fill_text_31.IsVisible = false;
-                fill_text_32.IsVisible = false;
-                Add_btn4.IsVisible = false;
-            }
-
-            if (account.add_btn5 == true)
-            {
-                fill_text_41.IsVisible = true;
-                fill_text_42.IsVisible = true;
-                Add_btn5.IsVisible = true;
-                Add_btn4.IsVisible = false;
-            }
-            else
-            {
-                fill_text_41.IsVisible = false;
-                fill_text_42.IsVisible = false;
-                Add_btn5.IsVisible = false;
-            }
-            if (account.add_btn6 == true)
-            {
-                fill_text_51.IsVisible = true;
-                fill_text_52.IsVisible = true;
-                Add_btn6.IsVisible = true;
-                Add_btn5.IsVisible = false;
-            }
-            else
-            {
-                fill_text_51.IsVisible = false;
-                fill_text_52.IsVisible = false;
-                Add_btn6.IsVisible = false;
-            }
-            if (account.add_btn7 == true)
-            {
-                fill_text_61.IsVisible = true;
-                fill_text_62.IsVisible = true;
-                Add_btn7.IsVisible = true;
-                Add_btn6.IsVisible = false;
-            }
-            else
-            {
-                fill_text_61.IsVisible = false;
-                fill_text_62.IsVisible = false;
-                Add_btn7.IsVisible = false;
-            }
-
-            if (account.add_btn8 == true)
-            {
-                fill_text_71.IsVisible = true;
-                fill_text_72.IsVisible = true;
-                Add_btn8.IsVisible = true;
-                Add_btn7.IsVisible = false;
-            }
-            else
-            {
-                fill_text_71.IsVisible = false;
-                fill_text_72.IsVisible = false;
-                Add_btn8.IsVisible = false;
-            }
-
-            if (account.add_btn9 == true)
-            {
-                fill_text_81.IsVisible = true;
-                fill_text_82.IsVisible = true;
-                Add_btn9.IsVisible = true;
-                Add_btn8.IsVisible = false;
-            }
-            else
-            {
-                fill_text_81.IsVisible = false;
-                fill_text_82.IsVisible = false;
-                Add_btn9.IsVisible = false;
-            }
-
-            if (account.add_btn10 == true)
-            {
-                fill_text_91.IsVisible = true;
-                fill_text_92.IsVisible = true;
-                Add_btn10.IsVisible = true;
-                Add_btn9.IsVisible = false;
-            }
-            else
-            {
-                fill_text_91.IsVisible = false;
-                fill_text_92.IsVisible = false;
-                Add_btn10.IsVisible = false;
-            }
-
-            if (account.add_btn11 == true)
-            {
-                fill_text_101.IsVisible = true;
-                fill_text_102.IsVisible = true;
-                Add_btn11.IsVisible = true;
-                Add_btn10.IsVisible = true;
-            }
-            else
-            {
-                fill_text_101.IsVisible = false;
-                fill_text_102.IsVisible = false;
-                Add_btn11.IsVisible = false;
-                Add_btn10.IsVisible = false;
-            }
-
-        }
+       
         #endregion
 
 
@@ -3338,7 +3026,7 @@ namespace HealthSafetyApp.Views.Topics
 
         }
 
-
+        
         private async void OnClick_takepicture(object sender, EventArgs e)
         {
             filname = "1";

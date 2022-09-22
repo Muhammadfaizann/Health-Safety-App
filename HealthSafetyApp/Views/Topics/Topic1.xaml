@@ -6,23 +6,17 @@
              x:Class="HealthSafetyApp.Views.Topics.Topic1">
                
         <ScrollView x:Name="myscrollview" Orientation="Vertical" VerticalOptions="FillAndExpand">
-        <StackLayout Padding="{OnPlatform Android=5}">
-
-
-
+            <StackLayout Padding="{OnPlatform Android=5}">
             <StackLayout BackgroundColor="DarkGray">
                 <Label Text="Maintenace dynamic/Point of work risk assessment" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"   FontSize="Medium"  BackgroundColor="DarkGray"   TextColor="White" />
             </StackLayout>
-
             <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" BackgroundColor="WhiteSmoke">
                 <Label Text="For use on:" FontSize="Medium"  TextColor="#0086b7" />
                 <Label Text="Un-planned maintenance tasks including breakdowns.To supplement a generic risk assessment on planned tasks"  TextColor="Gray"   />
             </StackLayout>
-
             <Label Text="Name:" TextColor="#0086b7" />
             <Entry x:Name="txt_name"  Placeholder="" PlaceholderColor="#939393" />
-
-            <Grid >
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width=".1*"/>
                     <ColumnDefinition Width=".8*"/>
@@ -32,17 +26,11 @@
                 <DatePicker Grid.Column="1" TextColor="Black" x:Name="datepicker"  />
                 <Image Grid.Column="2"  Source="tool_calendar_icon.png"  ></Image>
             </Grid>
-
             <Label Text="Location name:" TextColor="#0086b7"/>
             <Entry x:Name="txt_projname" Placeholder="" PlaceholderColor="#939393"/>
-
-
             <Label Text="Task description:" TextColor="#0086b7"/>
             <Entry x:Name="txt_sitename" Placeholder="" PlaceholderColor="#939393"/>
-
-
             <!--step 1-->
-
             <Grid RowSpacing="0" ColumnSpacing="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -1909,160 +1897,10 @@
                             <Label Text="" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                         </StackLayout>
                     </Grid>
-                  
-                    <!--<dg:DataGrid x:Name="pdfdatagridtest"
-                RowHeight="50" HeaderHeight="50" BorderColor="#CCCCCC" HeaderBackground="DarkGray">
-                            <dg:DataGrid.HeaderFontSize>
-                                <OnIdiom  x:TypeArguments="x:Double">
-                                    <OnIdiom.Tablet>15</OnIdiom.Tablet>
-                                    <OnIdiom.Phone>12</OnIdiom.Phone>
-                                </OnIdiom>
-                            </dg:DataGrid.HeaderFontSize>
-                            <dg:DataGrid.Columns>
-                                <dg:DataGridColumn Title="" PropertyName="Logo" Width=".38*" ></dg:DataGridColumn>-->
-                               <!-- <dg:DataGridColumn Title="Likelihood" PropertyName="Logo" Width="1*" ></dg:DataGridColumn>
-                            </dg:DataGrid.Columns>
-                        </dg:DataGrid>
-                    </Grid>
-                    <Grid Grid.Row="32">
-                        <dg:DataGrid x:Name="pdfdatagridtest1"
-                RowHeight="50" HeaderHeight="50" BorderColor="#CCCCCC" HeaderBackground="#E0E6F8">
-                            <dg:DataGrid.HeaderFontSize>
-                                <OnIdiom  x:TypeArguments="x:Double">
-                                    <OnIdiom.Tablet>13</OnIdiom.Tablet>
-                                    <OnIdiom.Phone>10</OnIdiom.Phone>
-                                </OnIdiom>
-                            </dg:DataGrid.HeaderFontSize>
-                            <dg:DataGrid.Columns>
-                                <dg:DataGridColumn Title="" PropertyName="Logo" Width="100" ></dg:DataGridColumn>
-                                <dg:DataGridColumn Title="" PropertyName="Logo" Width="1*" ></dg:DataGridColumn>
-                                <dg:DataGridColumn Title="Zero to very low" PropertyName="Logo" Width="1*" ></dg:DataGridColumn>
-                                <dg:DataGridColumn Title="Very Unlikely" PropertyName="Logo" Width="1*" ></dg:DataGridColumn>
-                                <dg:DataGridColumn Title="Unlikely" PropertyName="Logo" Width="1*" ></dg:DataGridColumn>
-                                <dg:DataGridColumn Title="Likely" PropertyName="Logo" Width="1*" ></dg:DataGridColumn>
-                                <dg:DataGridColumn Title="Very Likely" PropertyName="Logo" Width="1*" ></dg:DataGridColumn>
-                                <dg:DataGridColumn Title="Almost Certain" PropertyName="Logo" Width="1*" ></dg:DataGridColumn>
-                            </dg:DataGrid.Columns>
-                        </dg:DataGrid>
-                    </Grid>
-                    <Grid Grid.Row="33">
-                        <dg:DataGrid x:Name="pdfdatagrid" ItemsSource="{Binding Teams}" SelectionEnabled="True" SelectedItem="{Binding SelectedTeam}" RowHeight="50" HeaderHeight="50" BorderColor="#CCCCCC" HeaderBackground="#E0E6F8"
-                  PullToRefreshCommand="{Binding RefreshCommand}"  IsRefreshing="{Binding IsRefreshing}">
-                            <dg:DataGrid.HeaderFontSize>
-                                <OnIdiom  x:TypeArguments="x:Double">
-                                    <OnIdiom.Tablet>13</OnIdiom.Tablet>
-                                    <OnIdiom.Phone>10</OnIdiom.Phone>
-                                </OnIdiom>
-                            </dg:DataGrid.HeaderFontSize>
-
-                            <dg:DataGrid.Columns>
-
-                                <dg:DataGridColumn Title="SEVERITY" PropertyName="Logo" Width="100" >
-                                    <dg:DataGridColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Label Text="{Binding Logo}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
-                                        </DataTemplate>
-                                    </dg:DataGridColumn.CellTemplate>
-                                </dg:DataGridColumn>
-                                <dg:DataGridColumn Title="" PropertyName="Name" Width="1*">
-                                    <dg:DataGridColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ContentView HorizontalOptions="Fill" VerticalOptions="Fill">
-                                                <Label Text="{Binding SNo}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
-                                            </ContentView>
-                                        </DataTemplate>
-                                    </dg:DataGridColumn.CellTemplate>
-                                </dg:DataGridColumn>
-
-                                <dg:DataGridColumn Title="0" PropertyName="Name" Width="1*">
-                                    <dg:DataGridColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ContentView HorizontalOptions="Fill" VerticalOptions="Fill"
-                                 BackgroundColor="{Binding Name,Converter={StaticResource StreakToColorConverter}}">
-
-                                                <Label Text="{Binding Name}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
-                                            </ContentView>
-                                        </DataTemplate>
-                                    </dg:DataGridColumn.CellTemplate>
-                                </dg:DataGridColumn>
-
-                                <dg:DataGridColumn Title="1" PropertyName="Win" Width="1*">
-                                    <dg:DataGridColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ContentView HorizontalOptions="Fill" VerticalOptions="Fill"
-                                 BackgroundColor="{Binding Win,Converter={StaticResource StreakToColorConverter}}">
-                                                <Label Text="{Binding Win}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
-                                            </ContentView>
-                                        </DataTemplate>
-                                    </dg:DataGridColumn.CellTemplate>
-                                </dg:DataGridColumn>
-
-                                <dg:DataGridColumn Title="2" PropertyName="Loose"  Width="1*">
-                                    <dg:DataGridColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ContentView HorizontalOptions="Fill" VerticalOptions="Fill"
-                                 BackgroundColor="{Binding Loose,Converter={StaticResource StreakToColorConverter}}">
-                                                <Label Text="{Binding Loose}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
-                                            </ContentView>
-                                        </DataTemplate>
-                                    </dg:DataGridColumn.CellTemplate>
-                                </dg:DataGridColumn>
-
-                                <dg:DataGridColumn Title="3" PropertyName="Home">
-                                    <dg:DataGridColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ContentView HorizontalOptions="Fill" VerticalOptions="Fill"
-                                 BackgroundColor="{Binding Home,Converter={StaticResource StreakToColorConverter}}">
-                                                <Label Text="{Binding Home}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
-                                            </ContentView>
-                                        </DataTemplate>
-                                    </dg:DataGridColumn.CellTemplate>
-                                </dg:DataGridColumn>
-
-                                <dg:DataGridColumn Title="4" PropertyName="Percentage"  Width="1*">
-                                    <dg:DataGridColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ContentView HorizontalOptions="Fill" VerticalOptions="Fill"
-                                 BackgroundColor="{Binding Percentage,Converter={StaticResource StreakToColorConverter}}">
-                                                <Label Text="{Binding Percentage}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
-                                            </ContentView>
-                                        </DataTemplate>
-                                    </dg:DataGridColumn.CellTemplate>
-                                </dg:DataGridColumn>
-
-                                <dg:DataGridColumn Title="5" PropertyName="Streak" Width="1*">
-                                    <dg:DataGridColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ContentView HorizontalOptions="Fill" VerticalOptions="Fill"
-                                 BackgroundColor="{Binding Streak,Converter={StaticResource StreakToColorConverter}}">
-                                                <Label Text="{Binding Streak}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
-                                            </ContentView>
-                                        </DataTemplate>
-                                    </dg:DataGridColumn.CellTemplate>
-                                </dg:DataGridColumn>
-                            </dg:DataGrid.Columns>
-                            <dg:DataGrid.RowsBackgroundColorPalette>
-                                <dg:PaletteCollection>
-                                    <Color>#F2F2F2</Color>
-                                    <Color>#FFFFFF</Color>
-                                </dg:PaletteCollection>
-                            </dg:DataGrid.RowsBackgroundColorPalette>
-                            <dg:DataGrid.Resources>
-                                <ResourceDictionary>
-                                    <conv:StreakToColorConverter x:Key="StreakToColorConverter"/>
-                                </ResourceDictionary>
-                            </dg:DataGrid.Resources>
-                        </dg:DataGrid>
-                    </Grid> -->
-
                 </Grid>
             </Grid>
-
-
-
-
-            <BoxView HeightRequest="5" Grid.Row="33"/>
-            <Grid>
+<BoxView HeightRequest="5" Grid.Row="33"/>
+<Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -2125,8 +1963,6 @@
                     </StackLayout>
                 </Grid>
             </Grid>
-   
-   
             <Grid>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
@@ -2141,7 +1977,16 @@
                 </Grid>
 
             </Grid>
+
+
+
+
+            
+            
+   
+   
+           
     </StackLayout>
-    </ScrollView>
+        </ScrollView>
 
 </ContentPage>

@@ -21,6 +21,8 @@
     <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
     <PackageReference Include="Syncfusion.Xamarin.SfPdfViewer" Version="20.2.0.43" />
     <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.4" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="4.5.3" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="4.5.3" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="FirebaseDatabase.net" />
@@ -42,6 +44,8 @@
     <None Remove="itext7" />
     <None Remove="teams.json" />
     <None Remove="Xamarin.CommunityToolkit" />
+    <None Remove="Microsoft.AppCenter.Analytics" />
+    <None Remove="Microsoft.AppCenter.Crashes" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Fonts\FontAwesomeSolid.otf" />

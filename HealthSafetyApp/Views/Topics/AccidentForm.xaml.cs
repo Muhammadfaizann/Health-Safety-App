@@ -21,7 +21,7 @@ namespace HealthSafetyApp.Views.Topics
                 this.BackgroundColor = Xamarin.Forms.Color.White;
             }
         }
-
+        
         void Prev_Clicked(System.Object sender, System.EventArgs e)
         {
             if (img_count == 0)

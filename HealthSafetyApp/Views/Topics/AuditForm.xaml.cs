@@ -7,53 +7,47 @@ using Newtonsoft.Json;
 using Acr.UserDialogs;
 using System.Globalization;
 using Plugin.Media;
+using Microsoft.AppCenter.Crashes;
 
 namespace HealthSafetyApp.Views.Topics
 {
     public partial class AuditForm : ContentPage
     {
         private string fileText;
-        //int a_up, b_up, c_up, a_low, b_low, c_low, a_new, b_new, c_new, a_new1, b_new1, c_new1, a_new2, b_new2, c_new2 = 0;
-        //string c_up_color;
-        //string c_low_color;
-        //string c_new_color;
-        //string c_new1_color;
-        //int count = 0;
-       
-       // Picker pck;
         int img_count;
         private string filname;
         public AuditForm(string filenam)
         {
-            InitializeComponent();
-            filname = filenam;
-            this.Title = "Audit form";
-#pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
-            if (Device.OS == TargetPlatform.Windows)
-#pragma warning restore CS0612 // Type or member is obsolete
-#pragma warning restore CS0618 // Type or member is obsolete
+            try
             {
-                this.BackgroundColor = Xamarin.Forms.Color.White;
+                InitializeComponent();
+                filname = filenam;
+                this.Title = "Audit form";
             }
-            //chkbx2.IsChecked = false;
-        }
-        protected async override void OnAppearing()
-        {
-            base.OnAppearing();
-            if (filname != "1")
+            catch (Exception exception)
             {
-                await PCLReadJson();
+                Crashes.TrackError(exception);
+            }
+            
+        }
+        protected override void OnAppearing()
+        {
+            
+            try
+            {
+                base.OnAppearing();
+            }
+            catch (Exception exception)
+            {
+                Crashes.TrackError(exception);
             }
         }
         private void CC_Checked(object sender, EventArgs e)
         {
             Controls.CheckText a = (Controls.CheckText)sender;
-
             Controls.CheckText CbRed;
             Controls.CheckText CbOrg;
             Controls.CheckText CbGrn;
-
             CbRed = (Controls.CheckText)CB11;
             CbOrg = (Controls.CheckText)CB12;
             CbGrn = (Controls.CheckText)CB13;
@@ -2397,7 +2391,6 @@ namespace HealthSafetyApp.Views.Topics
 
             }
         }
-
         private void OnClick_deletepicture(object sender, EventArgs e)
         {
             int s = 0;

@@ -1097,7 +1097,6 @@
 
                     <chkbx:CheckText x:Name="CB381" DefaultText=" Poor" Visual="Material" Color="Red" TextColor="Red" FontSize="10" HorizontalOptions="Start" CheckedChanged="CC_Checked"/>
                     <chkbx:CheckText x:Name="CB382" DefaultText=" Moderate" Visual="Material" Color="Orange" TextColor="Orange" FontSize="10"   HorizontalOptions="Start" CheckedChanged="CC_Checked"/>
-
                     <chkbx:CheckText x:Name="CB383" DefaultText=" Good" Visual="Material" Color="Green" TextColor="Green" FontSize="10"  Checked="True" HorizontalOptions="Start" CheckedChanged="CC_Checked"/>
 
                 </StackLayout>
@@ -1113,7 +1112,6 @@
                 <StackLayout BackgroundColor="WhiteSmoke" Grid.Row="3" Grid.Column="1">
                     <chkbx:CheckText x:Name="CB391"  Grid.Column="1" Visual="Material" DefaultText=" Poor" Color="Red" TextColor="Red" FontSize="10" HorizontalOptions="Start" CheckedChanged="CC_Checked"/>
                     <chkbx:CheckText x:Name="CB392"  Grid.Column="1" Visual="Material" DefaultText=" Moderate" Color="Orange" TextColor="Orange" FontSize="10"   HorizontalOptions="Start" CheckedChanged="CC_Checked"/>
-
                     <chkbx:CheckText x:Name="CB393"  Grid.Column="1" Visual="Material" DefaultText=" Good" Color="Green" TextColor="Green" FontSize="10" Checked="True" HorizontalOptions="Start" CheckedChanged="CC_Checked"/>
 
                 </StackLayout>
