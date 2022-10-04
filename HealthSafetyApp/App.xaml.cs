@@ -21,7 +21,7 @@ namespace HealthSafetyApp
         private async Task InitializeApp()
         {
             MainPage = new SplashScreen();
-            await Task.Delay(112*40);
+            await Task.Delay(112*38);
             var user = Preferences.Get("UserName", "");
             if (string.IsNullOrEmpty(user))
             {

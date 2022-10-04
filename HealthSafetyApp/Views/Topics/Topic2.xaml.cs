@@ -693,22 +693,22 @@ namespace HealthSafetyApp.Views.Topics
 
 
                 sb3.Append(@"
-</tr>
-</tbody>
-</table>
-<br/>
-<table style='width: 100%;' border='1'>
-<tbody>
-<tr>
-<td colspan='3' rowspan='1'> Signature(s) </td>
-<td colspan='7' rowspan='2'>  </td>
-<td colspan='2' rowspan='1'> Date: </td>
-<td colspan='3' rowspan='2'> </td>
-<td colspan='2' rowspan='1'> Review Date: </td>
-<td colspan='3' rowspan='2'> </td>
-</tr>
-</tbody>
-</table></main>");
+            </tr>
+            </tbody>
+            </table>
+            <br/>
+            <table style='width: 100%;' border='1'>
+            <tbody>
+            <tr>
+            <td colspan='3' rowspan='1'> Signature(s) </td>
+            <td colspan='7' rowspan='2'>  </td>
+            <td colspan='2' rowspan='1'> Date: </td>
+            <td colspan='3' rowspan='2'> </td>
+            <td colspan='2' rowspan='1'> Review Date: </td>
+            <td colspan='3' rowspan='2'> </td>
+            </tr>
+            </tbody>
+            </table></main>");
 
                 StringReader sr = new StringReader(sb.ToString());
                 StringReader sr1 = new StringReader(sb1.ToString());

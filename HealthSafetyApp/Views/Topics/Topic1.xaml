@@ -156,7 +156,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Text="Slip, Trip and Falls" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
-                    <Picker Grid.Column="1" x:Name="pick2_1" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                    <Picker Grid.Column="1" x:Name="pick2_1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" SelectedIndexChanged="pick2_1_SelectedIndexChanged"   TextColor="Black" >
                         <Picker.Items>
                             <x:String>No</x:String>
                             <x:String>Yes</x:String>
@@ -240,7 +240,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Text="Moving vehicles" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
-                    <Picker Grid.Column="1" x:Name="pick2_6" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                    <Picker Grid.Column="1" x:Name="pick2_6" VerticalOptions="Center" HorizontalOptions="FillAndExpand"  TextColor="Black" >
                         <Picker.Items>
                             <x:String>No</x:String>
                             <x:String>Yes</x:String>
@@ -259,7 +259,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Text="Overturning / Collapse" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
-                    <Picker Grid.Column="1" x:Name="pick2_7" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                    <Picker Grid.Column="1" x:Name="pick2_7" VerticalOptions="Center" HorizontalOptions="FillAndExpand"  TextColor="Black" >
                         <Picker.Items>
                             <x:String>No</x:String>
                             <x:String>Yes</x:String>
@@ -292,7 +292,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Text="Pressurised equipment" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
-                    <Picker Grid.Column="1" x:Name="pick2_9" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                    <Picker Grid.Column="1" x:Name="pick2_9" VerticalOptions="Center" HorizontalOptions="FillAndExpand"  TextColor="Black" >
                         <Picker.Items>
                             <x:String>No</x:String>
                             <x:String>Yes</x:String>
@@ -309,7 +309,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Text="Sharp objects" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
-                    <Picker Grid.Column="1" x:Name="pick2_10" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                    <Picker Grid.Column="1" x:Name="pick2_10" VerticalOptions="Center" HorizontalOptions="FillAndExpand"  TextColor="Black" >
                         <Picker.Items>
                             <x:String>No</x:String>
                             <x:String>Yes</x:String>
@@ -326,7 +326,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Text="Manual handling / Ergonomics" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
-                    <Picker Grid.Column="1" x:Name="pick2_11" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                    <Picker Grid.Column="1" x:Name="pick2_11" VerticalOptions="Center" HorizontalOptions="FillAndExpand"  TextColor="Black" >
                         <Picker.Items>
                             <x:String>No</x:String>
                             <x:String>Yes</x:String>
@@ -343,7 +343,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Text="Confined / Restricted space" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
-                    <Picker Grid.Column="1" x:Name="pick2_12" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                    <Picker Grid.Column="1" x:Name="pick2_12" VerticalOptions="Center" HorizontalOptions="FillAndExpand"  TextColor="Black" >
                         <Picker.Items>
                             <x:String>No</x:String>
                             <x:String>Yes</x:String>
@@ -360,7 +360,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Text="Poor lighting" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
-                    <Picker Grid.Column="1" x:Name="pick2_13" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                    <Picker Grid.Column="1" x:Name="pick2_13" VerticalOptions="Center" HorizontalOptions="FillAndExpand"  TextColor="Black" >
                         <Picker.Items>
                             <x:String>No</x:String>
                             <x:String>Yes</x:String>
@@ -377,7 +377,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Text="Fire / Explosion risk" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
-                    <Picker Grid.Column="1" x:Name="pick2_14" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                    <Picker Grid.Column="1" x:Name="pick2_14" VerticalOptions="Center" HorizontalOptions="FillAndExpand"  TextColor="Black" >
                         <Picker.Items>
                             <x:String>No</x:String>
                             <x:String>Yes</x:String>
@@ -411,7 +411,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Text="Hazardous materials / Waste" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
-                    <Picker Grid.Column="1" x:Name="pick2_16" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                    <Picker Grid.Column="1" x:Name="pick2_16" VerticalOptions="Center" HorizontalOptions="FillAndExpand"  TextColor="Black" >
                         <Picker.Items>
                             <x:String>No</x:String>
                             <x:String>Yes</x:String>
@@ -445,7 +445,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Text="Vibration" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
-                    <Picker Grid.Column="1" x:Name="pick2_18" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                    <Picker Grid.Column="1" x:Name="pick2_18" VerticalOptions="Center" HorizontalOptions="FillAndExpand"  TextColor="Black" >
                         <Picker.Items>
                             <x:String>No</x:String>
                             <x:String>Yes</x:String>
@@ -462,7 +462,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Text="High / Low humidity" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
-                    <Picker Grid.Column="1" x:Name="pick2_19" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                    <Picker Grid.Column="1" x:Name="pick2_19" VerticalOptions="Center" HorizontalOptions="FillAndExpand" TextColor="Black" >
                         <Picker.Items>
                             <x:String>No</x:String>
                             <x:String>Yes</x:String>
@@ -479,7 +479,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Text="Hot / Cold temperatures" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
-                    <Picker Grid.Column="1" x:Name="pick2_20" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                    <Picker Grid.Column="1" x:Name="pick2_20" VerticalOptions="Center" HorizontalOptions="FillAndExpand" TextColor="Black" >
                         <Picker.Items>
                             <x:String>No</x:String>
                             <x:String>Yes</x:String>
@@ -496,7 +496,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Text="Lone working" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
-                    <Picker Grid.Column="1" x:Name="pick2_21" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                    <Picker Grid.Column="1" x:Name="pick2_21" VerticalOptions="Center" HorizontalOptions="FillAndExpand" TextColor="Black" >
                         <Picker.Items>
                             <x:String>No</x:String>
                             <x:String>Yes</x:String>
@@ -513,7 +513,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Text="Specialist equipment required" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
-                    <Picker Grid.Column="1" x:Name="pick2_22" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                    <Picker Grid.Column="1" x:Name="pick2_22" VerticalOptions="Center" HorizontalOptions="FillAndExpand"  TextColor="Black" >
                         <Picker.Items>
                             <x:String>No</x:String>
                             <x:String>Yes</x:String>
@@ -530,7 +530,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Text="Moving vehicles" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
-                    <Picker Grid.Column="1" x:Name="pick2_23" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                    <Picker Grid.Column="1" x:Name="pick2_23" VerticalOptions="Center" HorizontalOptions="FillAndExpand"  TextColor="Black" >
                         <Picker.Items>
                             <x:String>No</x:String>
                             <x:String>Yes</x:String>
@@ -547,7 +547,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Text="Risk to you from others" HorizontalTextAlignment="Start" VerticalOptions="Center" FontSize="Medium"  />
-                    <Picker Grid.Column="1" x:Name="pick2_24" VerticalOptions="Center" HorizontalOptions="FillAndExpand"   TextColor="Black" >
+                    <Picker Grid.Column="1" x:Name="pick2_24" VerticalOptions="Center" HorizontalOptions="FillAndExpand"  TextColor="Black" >
                         <Picker.Items>
                             <x:String>No</x:String>
                             <x:String>Yes</x:String>

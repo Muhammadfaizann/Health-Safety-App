@@ -1850,33 +1850,8 @@ namespace HealthSafetyApp.Views.Topics
         private  void OnClick_SavePDF(object sender, EventArgs e)
         {
             try
-            { 
-                // Create a new PDF document
-                PdfDocument document = new PdfDocument();
-
-                //Add a page to the document
-                PdfPage page = document.Pages.Add();
-
-                //Create PDF graphics for the page
-                PdfGraphics graphics = page.Graphics;
-
-                //Set the standard font
-                PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
-
-                //Draw the text
-                graphics.DrawString("Hello World!!!", font, PdfBrushes.Black, new PointF(0, 0));
-
-                //Save the document to the stream
-                MemoryStream stream = new MemoryStream();
-                document.Save(stream);
-
-                //Close the document
-                document.Close(true);
-
-                //Save the stream as a file in the device and invoke it for viewing
-                string filePath = DependencyService.Get<ISave>().Save(stream);
-                string message = "The PDF has been saved to " + filePath;
-                UserDialogs.Instance.Alert(message);
+            {
+               
             }
             catch (Exception exception)
             {
@@ -2673,17 +2648,17 @@ namespace HealthSafetyApp.Views.Topics
                 sb2.Append("</table >");
 
                 sb2.Append(@"<br><table style='width: 100%;' border='1'>
-<tbody>
-<tr>
-<td colspan='3' rowspan='1'> Signature(s) </td>
-<td colspan='7' rowspan='2'>  </td>
-<td colspan='2' rowspan='1'> Date: </td>
-<td colspan='3' rowspan='2'> </td>
-<td colspan='2' rowspan='1'> Review Date: </td>
-<td colspan='3' rowspan='2'> </td>
-</tr>
-</tbody>
-</table>");
+                    <tbody>
+                    <tr>
+                    <td colspan='3' rowspan='1'> Signature(s) </td>
+                    <td colspan='7' rowspan='2'>  </td>
+                    <td colspan='2' rowspan='1'> Date: </td>
+                    <td colspan='3' rowspan='2'> </td>
+                    <td colspan='2' rowspan='1'> Review Date: </td>
+                    <td colspan='3' rowspan='2'> </td>
+                    </tr>
+                    </tbody>
+                    </table>");
                 sb2.Append("</main>");
 
 
@@ -3125,6 +3100,246 @@ namespace HealthSafetyApp.Views.Topics
 
             }
         }
+
+        void pick2_1_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_fill1.Text = "Slip, Trip and Falls";
+                OnClicked_NewLine(null, null);
+            }
+        }
+        /*
+        void pick2_2_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_Check_text11.Text = "Work at height";
+                OnClicked_NewLine2(null, null);
+            }
+        }
+
+        void pick2_3_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_Check_text21.Text = "Risk of fall from height";
+                OnClicked_NewLine3(null, null);
+            }
+        }
+
+        void pick2_4_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_Check_text21.Text = "Lifting operations / cranes";
+                OnClicked_NewLine4(null, null);
+            }
+        }
+
+        void pick2_5_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_Check_text31.Text = "Falling / Ejected Objects";
+                OnClicked_NewLine5(null, null);
+            }
+        }
+
+        void pick2_6_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_Check_text41.Text = "Moving vehicles";
+                OnClicked_NewLine6(null, null);
+            }
+        }
+
+        void pick2_7_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_Check_text51.Text = "Overturning / Collapse";
+                OnClicked_NewLine7(null, null);
+            }
+        }
+
+        void pick2_8_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_Check_text61.Text = "Electricity (HV/LV)";
+                OnClicked_NewLine8(null, null);
+            }
+        }
+
+        void pick2_9_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_Check_text71.Text = "Pressurised equipment";
+                OnClicked_NewLine9(null, null);
+            }
+        }
+
+        void pick2_10_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_Check_text81.Text = "Sharp objects";
+                OnClicked_NewLine10(null, null);
+            }
+        }
+
+        void pick2_11_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_Check_text91.Text = "Manual handling / Ergonomics";
+                OnClicked_NewLine(null, null);
+            }
+        }
+
+        void pick2_12_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_Check_text101.Text = "Confined / Restricted space";
+                OnClicked_NewLine(null, null);
+            }
+        }
+
+        void pick2_13_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_Check_text11.Text = "Poor lighting";
+                OnClicked_NewLine(null, null);
+            }
+        }
+
+        void pick2_14_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_Check_text12.Text = "Fire / Explosion risk";
+                OnClicked_NewLine(null, null);
+            }
+        }
+
+        void pick2_15_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_fill1.Text = "Dust, Fumes, Gases , Vapours";
+                OnClicked_NewLine(null, null);
+            }
+        }
+
+        void pick2_16_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_fill1.Text = "Hazardous materials / Waste";
+                OnClicked_NewLine(null, null);
+            }
+        }
+
+        void pick2_17_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_fill1.Text = "Noise";
+                OnClicked_NewLine(null, null);
+            }
+        }
+
+        void pick2_18_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_fill1.Text = "Vibration";
+                OnClicked_NewLine(null, null);
+            }
+        }
+
+        void pick2_19_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_fill1.Text = "High / Low humidity";
+                OnClicked_NewLine(null, null);
+            }
+        }
+
+        void pick2_20_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_fill1.Text = "Hot / Cold temperatures";
+                OnClicked_NewLine(null, null);
+            }
+        }
+
+        void pick2_21_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_fill1.Text = "Lone working";
+                OnClicked_NewLine(null, null);
+            }
+        }
+
+        void pick2_22_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_fill1.Text = "Specialist equipment required";
+                OnClicked_NewLine(null, null);
+            }
+        }
+
+        void pick2_23_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_fill1.Text = "Moving vehicles";
+                OnClicked_NewLine(null, null);
+            }
+        }
+
+        void pick2_24_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            var picker = (Picker)sender;
+            if (picker.SelectedIndex == 1)
+            {
+                txt_fill1.Text = "Risk to you from others";
+                OnClicked_NewLine(null, null);
+            }
+        }*/
     }
 
 
