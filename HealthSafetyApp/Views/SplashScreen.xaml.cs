@@ -17,7 +17,7 @@ namespace HealthSafetyApp.Views
         {
             for (int i = 1; i<= 39; i++)
             {
-                placeholder.Source = "frame_"+i+".png";
+                placeholder.Source = "Frame_"+i+".png";
                 await Task.Delay(112);
             }
         }

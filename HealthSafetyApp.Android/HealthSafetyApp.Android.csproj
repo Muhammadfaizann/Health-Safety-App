@@ -476,159 +476,163 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_1.png">
+    <AndroidResource Include="Resources\drawable\Frame_1.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_2.png">
+    <AndroidResource Include="Resources\drawable\Frame_2.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_3.png">
+    <AndroidResource Include="Resources\drawable\Frame_3.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_4.png">
+    <AndroidResource Include="Resources\drawable\Frame_4.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_5.png">
+    <AndroidResource Include="Resources\drawable\Frame_5.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_6.png">
+    <AndroidResource Include="Resources\drawable\Frame_6.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_7.png">
+    <AndroidResource Include="Resources\drawable\Frame_7.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_8.png">
+    <AndroidResource Include="Resources\drawable\Frame_8.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_9.png">
+    <AndroidResource Include="Resources\drawable\Frame_9.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_10.png">
+    <AndroidResource Include="Resources\drawable\Frame_10.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_11.png">
+    <AndroidResource Include="Resources\drawable\Frame_11.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_12.png">
+    <AndroidResource Include="Resources\drawable\Frame_12.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_13.png">
+    <AndroidResource Include="Resources\drawable\Frame_13.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_14.png">
+    <AndroidResource Include="Resources\drawable\Frame_14.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_15.png">
+    <AndroidResource Include="Resources\drawable\Frame_15.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_16.png">
+    <AndroidResource Include="Resources\drawable\Frame_16.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_17.png">
+    <AndroidResource Include="Resources\drawable\Frame_17.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_18.png">
+    <AndroidResource Include="Resources\drawable\Frame_18.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_19.png">
+    <AndroidResource Include="Resources\drawable\Frame_19.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_20.png">
+    <AndroidResource Include="Resources\drawable\Frame_20.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_21.png">
+    <AndroidResource Include="Resources\drawable\Frame_21.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_22.png">
+    <AndroidResource Include="Resources\drawable\Frame_22.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_23.png">
+    <AndroidResource Include="Resources\drawable\Frame_23.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_24.png">
+    <AndroidResource Include="Resources\drawable\Frame_24.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_25.png">
+    <AndroidResource Include="Resources\drawable\Frame_25.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_26.png">
+    <AndroidResource Include="Resources\drawable\Frame_26.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_27.png">
+    <AndroidResource Include="Resources\drawable\Frame_27.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_28.png">
+    <AndroidResource Include="Resources\drawable\Frame_28.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_29.png">
+    <AndroidResource Include="Resources\drawable\Frame_29.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_30.png">
+    <AndroidResource Include="Resources\drawable\Frame_30.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_31.png">
+    <AndroidResource Include="Resources\drawable\Frame_31.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_32.png">
+    <AndroidResource Include="Resources\drawable\Frame_32.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_33.png">
+    <AndroidResource Include="Resources\drawable\Frame_33.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_34.png">
+    <AndroidResource Include="Resources\drawable\Frame_34.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_35.png">
+    <AndroidResource Include="Resources\drawable\Frame_35.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_36.png">
+    <AndroidResource Include="Resources\drawable\Frame_36.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_37.png">
+    <AndroidResource Include="Resources\drawable\Frame_37.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_38.png">
+    <AndroidResource Include="Resources\drawable\Frame_38.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\frame_39.png">
+    <AndroidResource Include="Resources\drawable\Frame_39.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\Frame_40.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
