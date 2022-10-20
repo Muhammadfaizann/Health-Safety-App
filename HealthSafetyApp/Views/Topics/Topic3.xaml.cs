@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Acr.UserDialogs;
 using System.Globalization;
 using Plugin.Media;
+using PCLStorage;
 
 namespace HealthSafetyApp.Views.Topics
 {
@@ -636,49 +637,28 @@ namespace HealthSafetyApp.Views.Topics
 
             #region SaveDraft
             private async void OnClick_SaveDraft(object sender, EventArgs e)
-        {
-            try
             {
-                await PCLGenarateJson("/storage/emulated/0/");
+                try
+                {
+                    if (Device.RuntimePlatform == Device.iOS)
+                    {
+                        await PCLGenarateJson(PCLStorage.FileSystem.Current.LocalStorage.Path);
+                    }
+                    else if (Device.RuntimePlatform == Device.Android)
+                    {
+                        await PCLGenarateJson("/storage/emulated/0/");
+                    }
+
+                }
+                catch (FormatException) { }
             }
-            catch (FormatException) { }
-        }
         public async Task PCLGenarateJson(string path)
         {
             string dat = "";
             var dt = datepicker.Date;
-                       dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
-#pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
-            if (Device.OS == TargetPlatform.Windows)
-#pragma warning restore CS0612 // Type or member is obsolete
-#pragma warning restore CS0618 // Type or member is obsolete
-            {
-                string filepath = "";
-                DraftFields s = new DraftFields
-                {
-                    Name1 = txt_name.Text,
-                    ProjectName = txt_projname.Text,
-                    SiteName = txt_sitename.Text,
-                    date = dat,
-                    CheckBox1data = txt_Check1_text.Text,
-                    //CheckBox2data = txt_Check2_text.Text,
+            dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
 
-
-                };
-                string jsonContents = JsonConvert.SerializeObject(s);
-             
-                
-                txt_name.Text = txt_projname.Text = txt_sitename.Text = txt_Check1_text.Text = txt_Check2_text.Text = "";
-                chkbx1.IsChecked = chkbx2.IsChecked = false;
-            }
-#pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
-            if (Device.OS == TargetPlatform.Android)
-#pragma warning restore CS0612 // Type or member is obsolete
-#pragma warning restore CS0618 // Type or member is obsolete
-            {
-                
+                IFile file;
                 DraftFields s = new DraftFields
                 {
                     Name1 = txt_name.Text,
@@ -694,7 +674,7 @@ namespace HealthSafetyApp.Views.Topics
                     cmb_noise = Cmb_Noise.Items[Cmb_Noise.SelectedIndex],
                     cmb_temp = Cmb_temp.Items[Cmb_temp.SelectedIndex],
                     cmb_air = Cmb_Air.Items[Cmb_Air.SelectedIndex],
-                    y11 = Y11.IsChecked? "1": "0",
+                    y11 = Y11.IsChecked ? "1" : "0",
                     N11 = N11.IsChecked ? "1" : "0",
                     y21 = Y21.IsChecked ? "1" : "0",
                     N21 = N21.IsChecked ? "1" : "0",
@@ -762,11 +742,35 @@ namespace HealthSafetyApp.Views.Topics
 
                 string jsonContents = JsonConvert.SerializeObject(s);
 
-            }
+                IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(path);
+                IFolder folder = await rootFolder.CreateFolderAsync("HandSAppDrafts", CreationCollisionOption.OpenIfExists);
+                if (filname != "1")
+                { file = await folder.CreateFileAsync(filname, CreationCollisionOption.ReplaceExisting); }
+                else
+                {
+                    string fnam = await InputBox(this.Navigation);
+                    if (fnam is null) { return; }
+                    else
+                    { if (fnam == "") { fnam = "Draft_WSA.json"; } else { fnam = fnam + "_WSA.json"; } }
 
 
+                    file = await folder.CreateFileAsync(fnam, CreationCollisionOption.GenerateUniqueName);
+                }
+                using (var fs = await file.OpenAsync(PCLStorage.FileAccess.ReadAndWrite))
+                {
+                    using (StreamWriter textWriter = new StreamWriter(fs))
+                    {
+                        textWriter.Write(jsonContents);
+
+                    }
+
+                }
+                await DisplayAlert("File Path", file.Path.ToString(), "OK");
+                //UserDialogs.Instance.ShowSuccess("Draft saved at:" + file.Path.ToString(), 2000);
 
         }
+
+
 
         public Task<string> InputBox(INavigation navigation)
         {
@@ -838,14 +842,29 @@ namespace HealthSafetyApp.Views.Topics
 
         #region OpenDraft
         private async void OnClick_OpenDraft(object sender, EventArgs e)
-        {           
-           
+        {
+            await Navigation.PushAsync(new DraftsList("_WSA", 1));
         }
-
 
         public async Task PCLReadJson()
         {
 
+                IFile file = null;
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    file = await FileSystem.Current.LocalStorage.GetFileAsync(PCLStorage.FileSystem.Current.LocalStorage.Path + "/HandSAppDrafts/" + filname);
+                }
+                else if (Device.RuntimePlatform == Device.Android)
+                {
+                    file = await FileSystem.Current.LocalStorage.GetFileAsync("/storage/emulated/0/HandSAppDrafts/" + filname);
+                }
+                using (var stream = await file.OpenAsync(PCLStorage.FileAccess.Read))
+
+                using (var reader = new StreamReader(stream))
+                {
+                    FileText = await reader.ReadToEndAsync();
+                }
+            
 
             DraftFields account = JsonConvert.DeserializeObject<DraftFields>(FileText);
             txt_name.Text = account.Name1;
@@ -860,7 +879,7 @@ namespace HealthSafetyApp.Views.Topics
             if (account.CheckBox2data != null)
             { chkbx2.IsChecked = true; }
 
-                    
+
             Cmb_Space.SelectedItem = account.cmb_space;
             Cmb_light.SelectedItem = account.cmb_light;
             Cmb_ControlLight.SelectedItem = account.cmb_ControlLight;
@@ -870,7 +889,7 @@ namespace HealthSafetyApp.Views.Topics
             Cmb_Air.SelectedItem = account.cmb_air;
 
 
-            if (account.y11 == "1") { Y11.IsChecked  = true; } else { Y11.IsChecked = false; }
+            if (account.y11 == "1") { Y11.IsChecked = true; } else { Y11.IsChecked = false; }
             if (account.N11 == "1") { N11.IsChecked = true; } else { N11.IsChecked = false; }
             if (account.y21 == "1") { Y21.IsChecked = true; } else { Y21.IsChecked = false; }
             if (account.N21 == "1") { N21.IsChecked = true; } else { N21.IsChecked = false; }

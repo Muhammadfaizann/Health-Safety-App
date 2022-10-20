@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Globalization;
+using System.IO;
+using System.Threading.Tasks;
 using Acr.UserDialogs;
+using Newtonsoft.Json;
+using PCLStorage;
 using Plugin.Media;
 
 using Xamarin.Forms;
@@ -257,7 +262,282 @@ namespace HealthSafetyApp.Views.Topics
             });
         }
 
+        public async Task PCLReadJson()
+        {
 
+                IFile file = null;
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    file = await FileSystem.Current.LocalStorage.GetFileAsync(PCLStorage.FileSystem.Current.LocalStorage.Path + "/HandSAppDrafts/" + filname);
+                }
+                else if (Device.RuntimePlatform == Device.Android)
+                {
+                    file = await FileSystem.Current.LocalStorage.GetFileAsync("/storage/emulated/0/HandSAppDrafts/" + filname);
+                }
+                using (var stream = await file.OpenAsync(PCLStorage.FileAccess.Read))
+                using (var reader = new StreamReader(stream))
+                {
+                    FileText = await reader.ReadToEndAsync();
+                }
+            
+
+            DraftFields account = JsonConvert.DeserializeObject<DraftFields>(FileText);
+            txt_name.Text = account.Name1;
+
+            datepicker.Date = Convert.ToDateTime(account.date);
+            timepicker.Time = TimeSpan.Parse(account.time);
+
+            txt_Address.Text = account.Add;
+            txt_city.Text = account.City;
+
+            txt_postcode.Text = account.PostCode;
+            txt_telephone.Text = account.tele;
+            txt_occupation.Text = account.ocu;
+            txt_name2.Text = account.name2;
+            txt_Address2.Text = account.Add2;
+            txt_city2.Text = account.City2;
+            txt_postcode2.Text = account.PostCode2;
+            txt_telephone2.Text = account.tele2;
+            txt_occupation2.Text = account.ocu2;
+            entry_Where.Text = account.Where;
+            entry_How.Text = account.How;
+            entry_Details.Text = account.detail;
+            img1.Text = account.img1;
+            img2.Text = account.img2;
+            img3.Text = account.img3;
+            img4.Text = account.img4;
+            img5.Text = account.img5;
+            img6.Text = account.img6;
+            img7.Text = account.img7;
+            img8.Text = account.img8;
+            img9.Text = account.img9;
+            img10.Text = account.img10;
+
+            img_count = 0;
+            for (int i = 1; i <= 10; i++)
+            {
+                Label lbl = this.FindByName<Label>("img" + i);
+                if (!(lbl.Text is null))
+                {
+                    img_count++;
+                }
+            }
+
+            if (img1 != null)
+            {
+                ActImg.Text = "1";
+                Image1.Source = img1.Text;
+            }
+
+        }
+
+        public string FileText
+        {
+            get { return fileText; }
+            set
+            {
+                if (FileText == value) return;
+                fileText = value;
+                OnPropertyChanged();
+            }
+        }
+        #region SaveDraft
+        private async void OnClick_SaveDraft(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    await PCLGenarateJson(PCLStorage.FileSystem.Current.LocalStorage.Path);
+                }
+                else if (Device.RuntimePlatform == Device.Android)
+                {
+                    await PCLGenarateJson("/storage/emulated/0/");
+                }
+
+            }
+            catch (FormatException) { }
+        }
+        public async Task PCLGenarateJson(string path)
+        {
+            string dat = "";
+            var dt = datepicker.Date;
+            dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
+
+                IFile file;
+                DraftFields s = new DraftFields
+                {
+                    Name1 = txt_name.Text,
+                    Add = txt_Address.Text,
+                    City = txt_city.Text,
+                    date = dat,
+                    time = timepicker.Time.ToString(),
+                    PostCode = txt_postcode.Text,
+                    tele = txt_telephone.Text,
+                    ocu = txt_occupation.Text,
+                    name2 = txt_name2.Text,
+                    Add2 = txt_Address2.Text,
+                    City2 = txt_city2.Text,
+                    PostCode2 = txt_postcode2.Text,
+                    tele2 = txt_telephone2.Text,
+                    ocu2 = txt_occupation2.Text,
+                    Where = entry_Where.Text,
+                    How = entry_How.Text,
+                    detail = entry_Details.Text,
+                    img1 = img1.Text,
+                    img2 = img2.Text,
+                    img3 = img3.Text,
+                    img4 = img4.Text,
+                    img5 = img5.Text,
+                    img6 = img6.Text,
+                    img7 = img7.Text,
+                    img8 = img8.Text,
+                    img9 = img9.Text,
+                    img10 = img10.Text,
+
+                };
+
+                string jsonContents = JsonConvert.SerializeObject(s);
+
+                IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(path);
+                IFolder folder = await rootFolder.CreateFolderAsync("HandSAppDrafts", CreationCollisionOption.OpenIfExists);
+                if (filname != "1")
+                { file = await folder.CreateFileAsync(filname, CreationCollisionOption.ReplaceExisting); }
+                else
+                {
+                    string fnam = await InputBox(this.Navigation);
+                    if (fnam is null) { return; }
+                    else
+                    {
+
+                        if (fnam == "") { fnam = "Draft_ARF.json"; } else { fnam = fnam + "_ARF.json"; }
+                    }
+
+                    file = await folder.CreateFileAsync(fnam, CreationCollisionOption.GenerateUniqueName);
+                }
+                using (var fs = await file.OpenAsync(PCLStorage.FileAccess.ReadAndWrite))
+                {
+                    using (StreamWriter textWriter = new StreamWriter(fs))
+                    {
+                        textWriter.Write(jsonContents);
+
+                    }
+
+                }
+                await DisplayAlert("File Path", file.Path.ToString(), "OK");
+                //UserDialogs.Instance.ShowSuccess("Draft saved at:" + file.Path.ToString(), 2000);
+
+
+
+
+        }
+        #endregion
+        public Task<string> InputBox(INavigation navigation)
+        {
+            // wait in this proc, until user did his input 
+            var tcs = new TaskCompletionSource<string>();
+
+            var lblTitle = new Label { Text = "Health & Safety App", HorizontalOptions = LayoutOptions.Center, FontAttributes = FontAttributes.Bold };
+            var lblMessage = new Label { Text = "Enter file name:" };
+            var txtInput = new Entry { Text = "" };
+
+            var btnOk = new Xamarin.Forms.Button
+            {
+                Text = "Ok",
+                WidthRequest = 100,
+                BackgroundColor = Xamarin.Forms.Color.FromRgb(0.8, 0.8, 0.8),
+            };
+            btnOk.Clicked += async (s, e) =>
+            {
+                // close page
+                var result = txtInput.Text;
+                await navigation.PopModalAsync();
+                // pass result
+                tcs.SetResult(result);
+            };
+
+            var btnCancel = new Xamarin.Forms.Button
+            {
+                Text = "Cancel",
+                WidthRequest = 100,
+                BackgroundColor = Xamarin.Forms.Color.FromRgb(0.8, 0.8, 0.8)
+            };
+            btnCancel.Clicked += async (s, e) =>
+            {
+                // close page
+                await navigation.PopModalAsync();
+                // pass empty result
+                tcs.SetResult(null);
+            };
+
+            var slButtons = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                Children = { btnOk, btnCancel },
+            };
+
+            var layout = new StackLayout
+            {
+                Padding = new Thickness(0, 40, 0, 0),
+                VerticalOptions = LayoutOptions.StartAndExpand,
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                Orientation = StackOrientation.Vertical,
+                Children = { lblTitle, lblMessage, txtInput, slButtons },
+            };
+
+            // create and show page
+            var page = new ContentPage();
+            page.Content = layout;
+            navigation.PushModalAsync(page);
+            // open keyboard
+            txtInput.Focus();
+
+            // code is waiting her, until result is passed with tcs.SetResult() in btn-Clicked
+            // then proc returns the result
+            return tcs.Task;
+        }
+
+        private async void OnClick_OpenDraft(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new DraftsList("_ARF", 1));
+        }
+    }
+    public class DraftFields
+    {
+        public string Name1 { get; set; }
+        public string ProjectName { get; set; }
+        public string SiteName { get; set; }
+        public string date { get; set; }
+        public string time { get; set; }
+        public string CheckBox1data { get; set; }
+        public string CheckBox2data { get; set; }
+        public string Add { get; set; }
+        public string City { get; set; }
+        public string PostCode { get; set; }
+        public string tele { get; set; }
+        public string ocu { get; set; }
+        public string name2 { get; set; }
+        public string Add2 { get; set; }
+        public string City2 { get; set; }
+        public string PostCode2 { get; set; }
+        public string tele2 { get; set; }
+        public string ocu2 { get; set; }
+        public string Where { get; set; }
+        public string How { get; set; }
+        public string detail { get; set; }
+        public string img1 { get; set; }
+        public string img2 { get; set; }
+        public string img3 { get; set; }
+        public string img4 { get; set; }
+        public string img5 { get; set; }
+        public string img6 { get; set; }
+        public string img7 { get; set; }
+        public string img8 { get; set; }
+        public string img9 { get; set; }
+        public string img10 { get; set; }
     }
 
+    
+
 }
+

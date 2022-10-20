@@ -255,5 +255,10 @@ namespace HealthSafetyApp.Views.Topics
                 return stream;
             });
         }
+
+        private async void OnClick_OpenDraft(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new DraftsList("_SSW", 1));
+        }
     }
 }

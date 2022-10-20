@@ -54,13 +54,29 @@ namespace HealthSafetyApp.Views
 
             UserDialogs.Instance.HideLoading();
         }
-        private void OnTap_openpdffolderAsync(object sender, EventArgs e)
+        private async void OnTap_openpdffolderAsync(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DraftsList frm = new DraftsList("PDFS", 2);
+                await Navigation.PushAsync(frm);
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
-        private  void OnTap_opendraftrsfolderAsync(object sender, EventArgs e)
+        private async void OnTap_opendraftrsfolderAsync(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DraftsList frm = new DraftsList("DRAFTS", 3);
+                await Navigation.PushAsync(frm);
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
 

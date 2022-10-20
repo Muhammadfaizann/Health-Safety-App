@@ -10,13 +10,16 @@ using Newtonsoft.Json;
 using Acr.UserDialogs;
 using System.Globalization;
 using Plugin.Media;
+using Microsoft.AppCenter.Crashes;
+using PCLStorage;
+using static System.Net.WebRequestMethods;
 
 namespace HealthSafetyApp.Views.Topics
 {
     public partial class Topic2 : ContentPage
     {
         private string fileText;
-      
+
         private string filname;
 
         int count = 0;
@@ -54,15 +57,25 @@ namespace HealthSafetyApp.Views.Topics
         {
             try
             {
-                await PCLReportGenaratePdf("/storage/emulated/0/");
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    await PCLReportGenaratePdf(PCLStorage.FileSystem.Current.LocalStorage.Path);
+                }
+                else if (Device.RuntimePlatform == Device.Android)
+                {
+                    await PCLReportGenaratePdf("/storage/emulated/0/");
+                }
             }
-            catch (FormatException) { }
+            catch (Exception exception)
+            {
+                Crashes.TrackError(exception);
+            }
         }
         public async Task PCLReportGenaratePdf(string path)
         {
             string dat = "";
             var dt = datepicker.Date;
-                       dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
+            dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
 #pragma warning disable CS0618 // Type or member is obsolete
 #pragma warning disable CS0612 // Type or member is obsolete
             if (Device.OS == TargetPlatform.Windows)
@@ -98,7 +111,7 @@ namespace HealthSafetyApp.Views.Topics
                 sb.Append("<main>");
                 sb.Append("</main>");
                 var filepath = "";
-              
+
             }
 #pragma warning disable CS0618 // Type or member is obsolete
 #pragma warning disable CS0612 // Type or member is obsolete
@@ -715,7 +728,7 @@ namespace HealthSafetyApp.Views.Topics
                 StringReader sr2 = new StringReader(sb2.ToString());
                 StringReader sr21 = new StringReader(sb21.ToString());
                 StringReader sr3 = new StringReader(sb3.ToString());
-                
+
             }
             txt_name.Text = txt_projname.Text = txt_sitename.Text = "";
         }
@@ -727,7 +740,15 @@ namespace HealthSafetyApp.Views.Topics
         {
             try
             {
-                await PCLGenarateJson("/storage/emulated/0/");
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    await PCLGenarateJson(PCLStorage.FileSystem.Current.LocalStorage.Path);
+                }
+                else if (Device.RuntimePlatform == Device.Android)
+                {
+                    await PCLGenarateJson("/storage/emulated/0/");
+                }
+
             }
             catch (FormatException) { }
         }
@@ -736,226 +757,127 @@ namespace HealthSafetyApp.Views.Topics
         {
             string dat = "";
             var dt = datepicker.Date;
-                       dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
-#pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
-            if (Device.OS == TargetPlatform.Windows)
-#pragma warning restore CS0612 // Type or member is obsolete
-#pragma warning restore CS0618 // Type or member is obsolete
+            dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
+            IFile file;
+            DraftFields s = new DraftFields
             {
-                string filepath = "";
-                DraftFields s = new DraftFields
-                {
-                    Name1 = txt_name.Text,
-                    ProjectName = txt_projname.Text,
-                    date = dat,
-                    CheckBox1data = txt_Check1_text.Text,
-                    CheckBox2data = txt_Check2_text.Date.ToString(),
-                    GM = txt_GroundMaintenance.Text,
-                    Op1Yes = option1_yes.Checked ? "1" : "0",
-                  //  Op1No = option1_No.Checked ? "1" : "0",
-                    AT = Activity_txt.Text,
-                    HLT = HowLong_txt.Text,
-                    HOT = Howoften_txt.Text,
-                    HMT = HowMuch_txt.Text,
-                    SiteName = txt_sitename.Text,
-                    CB11 = chkbx1.Text,
-                    CB12 = chkbx2.Text,
-                    CB13 = Others_CB.Text,
-                    CB14 = Valnerable_CB.Text,
-                    txt_sub = txt_substance.Text,
-                    txt_sub_app = txt_substance_app.Text,
-                    txt_saf_DS = txt_safety_DS.Text,
-                    txt_Emergency_no = txt_Emergency_contact.Text,
+                Name1 = txt_name.Text,
+                ProjectName = txt_projname.Text,
+                date = dat,
+                CheckBox1data = txt_Check1_text.Text,
+                CheckBox2data = txt_Check2_text.Date.ToString(),
+                GM = txt_GroundMaintenance.Text,
+                Op1Yes = option1_yes.Checked ? "1" : "0",
+                Op1No = option1_No.Checked ? "1" : "0",
+                AT = Activity_txt.Text,
+                HLT = HowLong_txt.Text,
+                HOT = Howoften_txt.Text,
+                HMT = HowMuch_txt.Text,
+                SiteName = txt_sitename.Text,
+                CB11 = chkbx1.Checked ? "1" : "0",
+                CB12 = chkbx2.Checked ? "1" : "0",
+                CB13 = Others_CB.Checked ? "1" : "0",
+                CB14 = Valnerable_CB.Checked ? "1" : "0",
+                txt_sub = txt_substance.Text,
+                txt_sub_app = txt_substance_app.Text,
+                txt_saf_DS = txt_safety_DS.Text,
+                txt_Emergency_no = txt_Emergency_contact.Text,
 
-                    cb211 = cb211.Checked ? "1" : "0",
-                    cb212 = cb212.Checked ? "1" : "0",
-                    cb213 = cb213.Checked ? "1" : "0",
-                    cb221 = cb221.Checked ? "1" : "0",
-                    cb222 = cb222.Checked ? "1" : "0",
-                    cb223 = cb223.Checked ? "1" : "0",
-                    cb231 = cb231.Checked ? "1" : "0",
-                    cb232 = cb232.Checked ? "1" : "0",
-                    cb233 = cb233.Checked ? "1" : "0",
-                    cb241 = cb241.Checked ? "1" : "0",
-                    cb242 = cb242.Checked ? "1" : "0",
-                    cb243 = cb243.Checked ? "1" : "0",
-                    cb251 = cb251.Checked ? "1" : "0",
-                    cb252 = cb252.Checked ? "1" : "0",
-                    opt3yes = option3_yes.Checked ? "1" : "0",
-                    opt3no = option3_No.Checked ? "1" : "0",
-                    optGas = opt_Gas.Checked ? "1" : "0",
-                    optVap = opt_Vapour.Checked ? "1" : "0",
-                    optmist = opt_Mist.Checked ? "1" : "0",
-                    optfume = opt_Fume.Checked ? "1" : "0",
-                    optDust = opt_Dust.Checked ? "1" : "0",
-                    optLiq = opt_Liquid.Checked ? "1" : "0",
-                    optSolid = opt_Solid.Checked ? "1" : "0",
-                    optOther = opt_other.Text,
-                    optinh = opt_Inhalation.Checked ? "1" : "0",
-                    optskin = opt_Skin.Checked ? "1" : "0",
-                    opteye = opt_eyes.Checked ? "1" : "0",
-                    opting = opt_ingestion.Checked ? "1" : "0",
-                    optother2 = opt2_other.Text,
-                    optExpolimitlong = opt_expolmt_long.Checked ? "1" : "0",
-                    optExpolimitshort = opt_expolmt_short.Checked ? "1" : "0",
-                    risklist = txt_list1.Text,
-                    controlmeasures = txt_list2.Text,
-                    warninglist = txt_list3.Text,
-                    opt4yes = option4_yes.Checked ? "1" : "0",
-                    opt4no = option4_No.Checked ? "1" : "0",
-                    cb311 = chk311.Checked ? "1" : "0",
-                    cb312 = chk312.Checked ? "1" : "0",
-                    cb313 = chk313.Checked ? "1" : "0",
-                    cb321 = chk321.Checked ? "1" : "0",
-                    cb322 = chk322.Checked ? "1" : "0",
-                    cb323 = chk323.Checked ? "1" : "0",
-                    cb331 = chk331.Checked ? "1" : "0",
-                    cb332 = chk332.Checked ? "1" : "0",
-                    firstaid = txt_list4.Text,
-                    optFEdry = opt_fireext_dry.Checked ? "1" : "0",
-                    optFEco = opt_fireext_co2.Checked ? "1" : "0",
-                    optFEWater = opt_fireext_water.Checked ? "1" : "0",
-                    optFEfoam = opt_fireext_foam.Checked ? "1" : "0",
-                    optFEfireblanket = opt_fireext_fireblanket.Checked ? "1" : "0",
-                    harmfulVapGas = txt_list5.Text,
-                    txtStorage = txt_storage_text.Text,
-                    optDisHaz = opt_dispose_hazardous.Checked ? "1" : "0",
-                    optDisGen = opt_dispose_general.Checked ? "1" : "0",
-                    optDisBio = opt_dispose_biological.Checked ? "1" : "0",
-                    optDisRet = opt_dispose_returntosupplier.Checked ? "1" : "0",
-                    optDisOther = opt_dispose_other.Checked ? "1" : "0",
-                    optExpoYes = opt_exposure_yes.Checked ? "1" : "0",
-                    optExpoNo = opt_exposure_No.Checked ? "1" : "0",
-                    img1 = img1.Text,
-                    img2 = img2.Text,
-                    img3 = img3.Text,
-                    img4 = img4.Text,
-                    img5 = img5.Text,
-                    img6 = img6.Text,
-                    img7 = img7.Text,
-                    img8 = img8.Text,
-                    img9 = img9.Text,
-                    img10 = img10.Text,
-                };
+                cb211 = cb211.Checked ? "1" : "0",
+                cb212 = cb212.Checked ? "1" : "0",
+                cb213 = cb213.Checked ? "1" : "0",
+                cb221 = cb221.Checked ? "1" : "0",
+                cb222 = cb222.Checked ? "1" : "0",
+                cb223 = cb223.Checked ? "1" : "0",
+                cb231 = cb231.Checked ? "1" : "0",
+                cb232 = cb232.Checked ? "1" : "0",
+                cb233 = cb233.Checked ? "1" : "0",
+                cb241 = cb241.Checked ? "1" : "0",
+                cb242 = cb242.Checked ? "1" : "0",
+                cb243 = cb243.Checked ? "1" : "0",
+                cb251 = cb251.Checked ? "1" : "0",
+                cb252 = cb252.Checked ? "1" : "0",
+                opt3yes = option3_yes.Checked ? "1" : "0",
+                opt3no = option3_No.Checked ? "1" : "0",
+                optGas = opt_Gas.Checked ? "1" : "0",
+                optVap = opt_Vapour.Checked ? "1" : "0",
+                optmist = opt_Mist.Checked ? "1" : "0",
+                optfume = opt_Fume.Checked ? "1" : "0",
+                optDust = opt_Dust.Checked ? "1" : "0",
+                optLiq = opt_Liquid.Checked ? "1" : "0",
+                optSolid = opt_Solid.Checked ? "1" : "0",
+                optOther = opt_other.Text,
+                optinh = opt_Inhalation.Checked ? "1" : "0",
+                optskin = opt_Skin.Checked ? "1" : "0",
+                opteye = opt_eyes.Checked ? "1" : "0",
+                opting = opt_ingestion.Checked ? "1" : "0",
+                optother2 = opt2_other.Text,
+                optExpolimitlong = opt_expolmt_long.Checked ? "1" : "0",
+                optExpolimitshort = opt_expolmt_short.Checked ? "1" : "0",
+                risklist = txt_list1.Text,
+                controlmeasures = txt_list2.Text,
+                warninglist = txt_list3.Text,
+                opt4yes = option4_yes.Checked ? "1" : "0",
+                opt4no = option4_No.Checked ? "1" : "0",
+                cb311 = chk311.Checked ? "1" : "0",
+                cb312 = chk312.Checked ? "1" : "0",
+                cb313 = chk313.Checked ? "1" : "0",
+                cb321 = chk321.Checked ? "1" : "0",
+                cb322 = chk322.Checked ? "1" : "0",
+                cb323 = chk323.Checked ? "1" : "0",
+                cb331 = chk331.Checked ? "1" : "0",
+                cb332 = chk332.Checked ? "1" : "0",
+                firstaid = txt_list4.Text,
+                optFEdry = opt_fireext_dry.Checked ? "1" : "0",
+                optFEco = opt_fireext_co2.Checked ? "1" : "0",
+                optFEWater = opt_fireext_water.Checked ? "1" : "0",
+                optFEfoam = opt_fireext_foam.Checked ? "1" : "0",
+                optFEfireblanket = opt_fireext_fireblanket.Checked ? "1" : "0",
+                harmfulVapGas = txt_list5.Text,
+                txtStorage = txt_storage_text.Text,
+                optDisHaz = opt_dispose_hazardous.Checked ? "1" : "0",
+                optDisGen = opt_dispose_general.Checked ? "1" : "0",
+                optDisBio = opt_dispose_biological.Checked ? "1" : "0",
+                optDisRet = opt_dispose_returntosupplier.Checked ? "1" : "0",
+                optDisOther = opt_dispose_other.Checked ? "1" : "0",
+                optExpoYes = opt_exposure_yes.Checked ? "1" : "0",
+                optExpoNo = opt_exposure_No.Checked ? "1" : "0",
+                img1 = img1.Text,
+                img2 = img2.Text,
+                img3 = img3.Text,
+                img4 = img4.Text,
+                img5 = img5.Text,
+                img6 = img6.Text,
+                img7 = img7.Text,
+                img8 = img8.Text,
+                img9 = img9.Text,
+                img10 = img10.Text,
+            };
+            string jsonContents = JsonConvert.SerializeObject(s);
 
-
-
-                string jsonContents = JsonConvert.SerializeObject(s);
-
-                txt_name.Text = txt_projname.Text = txt_sitename.Text = txt_Check1_text.Text  = "";
-                chkbx1.Checked = chkbx2.Checked = false;
-            }
-#pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
-            if (Device.OS == TargetPlatform.Android)
-#pragma warning restore CS0612 // Type or member is obsolete
-#pragma warning restore CS0618 // Type or member is obsolete
+            IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(path);
+            IFolder folder = await rootFolder.CreateFolderAsync("HandSAppDrafts", CreationCollisionOption.OpenIfExists);
+            if (filname != "1")
+            { file = await folder.CreateFileAsync(filname, CreationCollisionOption.ReplaceExisting); }
+            else
             {
-                
-                DraftFields s = new DraftFields
+                string fnam = await InputBox(this.Navigation);
+                if (fnam is null) { return; }
+                else
                 {
-                    Name1 = txt_name.Text,
-                    ProjectName = txt_projname.Text,
-                    date = dat,
-                    CheckBox1data = txt_Check1_text.Text,
-                    CheckBox2data = txt_Check2_text.Date.ToString(),
-                    GM = txt_GroundMaintenance.Text,
-                    Op1Yes = option1_yes.Checked ? "1" : "0",
-                     Op1No = option1_No.Checked ? "1" : "0",
-                    AT = Activity_txt.Text,
-                    HLT = HowLong_txt.Text,
-                    HOT = Howoften_txt.Text,
-                    HMT = HowMuch_txt.Text,
-                    SiteName = txt_sitename.Text,
-                    CB11 = chkbx1.Checked ? "1" : "0",
-                    CB12 = chkbx2.Checked ? "1" : "0",
-                    CB13 = Others_CB.Checked ? "1" : "0",
-                    CB14 = Valnerable_CB.Checked ? "1" : "0",
-                    txt_sub = txt_substance.Text,
-                    txt_sub_app = txt_substance_app.Text,
-                    txt_saf_DS = txt_safety_DS.Text,
-                    txt_Emergency_no = txt_Emergency_contact.Text,
-
-                    cb211 = cb211.Checked ? "1" : "0",
-                    cb212 = cb212.Checked ? "1" : "0",
-                    cb213 = cb213.Checked ? "1" : "0",
-                    cb221 = cb221.Checked ? "1" : "0",
-                    cb222 = cb222.Checked ? "1" : "0",
-                    cb223 = cb223.Checked ? "1" : "0",
-                    cb231 = cb231.Checked ? "1" : "0",
-                    cb232 = cb232.Checked ? "1" : "0",
-                    cb233 = cb233.Checked ? "1" : "0",
-                    cb241 = cb241.Checked ? "1" : "0",
-                    cb242 = cb242.Checked ? "1" : "0",
-                    cb243 = cb243.Checked ? "1" : "0",
-                    cb251 = cb251.Checked ? "1" : "0",
-                    cb252 = cb252.Checked ? "1" : "0",
-                    opt3yes = option3_yes.Checked ? "1" : "0",
-                    opt3no = option3_No.Checked ? "1" : "0",
-                    optGas = opt_Gas.Checked ? "1" : "0",
-                    optVap = opt_Vapour.Checked ? "1" : "0",
-                    optmist = opt_Mist.Checked ? "1" : "0",
-                    optfume = opt_Fume.Checked ? "1" : "0",
-                    optDust = opt_Dust.Checked ? "1" : "0",
-                    optLiq = opt_Liquid.Checked ? "1" : "0",
-                    optSolid = opt_Solid.Checked ? "1" : "0",
-                    optOther = opt_other.Text,
-                    optinh = opt_Inhalation.Checked ? "1" : "0",
-                    optskin = opt_Skin.Checked ? "1" : "0",
-                    opteye = opt_eyes.Checked ? "1" : "0",
-                    opting = opt_ingestion.Checked ? "1" : "0",
-                    optother2 = opt2_other.Text,
-                    optExpolimitlong = opt_expolmt_long.Checked ? "1" : "0",
-                    optExpolimitshort = opt_expolmt_short.Checked ? "1" : "0",
-                    risklist = txt_list1.Text,
-                    controlmeasures = txt_list2.Text,
-                    warninglist = txt_list3.Text,
-                    opt4yes = option4_yes.Checked ? "1" : "0",
-                    opt4no = option4_No.Checked ? "1" : "0",
-                    cb311 = chk311.Checked ? "1" : "0",
-                    cb312 = chk312.Checked ? "1" : "0",
-                    cb313 = chk313.Checked ? "1" : "0",
-                    cb321 = chk321.Checked ? "1" : "0",
-                    cb322 = chk322.Checked ? "1" : "0",
-                    cb323 = chk323.Checked ? "1" : "0",
-                    cb331 = chk331.Checked ? "1" : "0",
-                    cb332 = chk332.Checked ? "1" : "0",
-                    firstaid = txt_list4.Text,
-                    optFEdry = opt_fireext_dry.Checked ? "1" : "0",
-                    optFEco = opt_fireext_co2.Checked ? "1" : "0",
-                    optFEWater = opt_fireext_water.Checked ? "1" : "0",
-                    optFEfoam = opt_fireext_foam.Checked ? "1" : "0",
-                    optFEfireblanket = opt_fireext_fireblanket.Checked ? "1" : "0",
-                    harmfulVapGas = txt_list5.Text,
-                    txtStorage = txt_storage_text.Text,
-                    optDisHaz = opt_dispose_hazardous.Checked ? "1" : "0",
-                    optDisGen = opt_dispose_general.Checked ? "1" : "0",
-                    optDisBio = opt_dispose_biological.Checked ? "1" : "0",
-                    optDisRet = opt_dispose_returntosupplier.Checked ? "1" : "0",
-                    optDisOther = opt_dispose_other.Checked ? "1" : "0",
-                    optExpoYes = opt_exposure_yes.Checked ? "1" : "0",
-                    optExpoNo = opt_exposure_No.Checked ? "1" : "0",
-                    img1 = img1.Text,
-                    img2 = img2.Text,
-                    img3 = img3.Text,
-                    img4 = img4.Text,
-                    img5 = img5.Text,
-                    img6 = img6.Text,
-                    img7 = img7.Text,
-                    img8 = img8.Text,
-                    img9 = img9.Text,
-                    img10 = img10.Text,
-
-
-
-                };
-                string jsonContents = JsonConvert.SerializeObject(s);
-
+                    if (fnam == "") { fnam = "Draft_CA.json"; } else { fnam = fnam + "_CA.json"; }
+                }
+                file = await folder.CreateFileAsync(fnam, CreationCollisionOption.GenerateUniqueName);
             }
-
-
-
+            using (var fs = await file.OpenAsync(PCLStorage.FileAccess.ReadAndWrite))
+            {
+                using (StreamWriter textWriter = new StreamWriter(fs))
+                {
+                    textWriter.Write(jsonContents);
+                }
+            }
+            await DisplayAlert("File Path", file.Path.ToString(), "OK");
+            //UserDialogs.Instance.ShowSuccess("Draft saved at:" + file.Path.ToString(), 2000);
         }
 
         public Task<string> InputBox(INavigation navigation)
@@ -1029,12 +951,168 @@ namespace HealthSafetyApp.Views.Topics
         #region OpenDraft
         private async void OnClick_OpenDraft(object sender, EventArgs e)
         {
-           
+            await Navigation.PushAsync(new DraftsList("_CA", 1));
         }
 
 
         public async Task PCLReadJson()
         {
+
+            IFile file = null;
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                file = await FileSystem.Current.LocalStorage.GetFileAsync(PCLStorage.FileSystem.Current.LocalStorage.Path + "/HandSAppDrafts/" + filname);
+            }
+            else if (Device.RuntimePlatform == Device.Android)
+            {
+                file = await FileSystem.Current.LocalStorage.GetFileAsync("/storage/emulated/0/HandSAppDrafts/" + filname);
+            }
+            using (var stream = await file.OpenAsync(PCLStorage.FileAccess.Read))
+            using (var reader = new StreamReader(stream))
+            {
+                FileText = await reader.ReadToEndAsync();
+            }
+
+            DraftFields account = JsonConvert.DeserializeObject<DraftFields>(FileText);
+            txt_name.Text = account.Name1;
+            txt_projname.Text = account.ProjectName;
+            txt_sitename.Text = account.SiteName;
+            datepicker.Date = Convert.ToDateTime(account.date);
+            txt_Check1_text.Text = account.CheckBox1data;
+            txt_Check2_text.Date = Convert.ToDateTime(account.CheckBox2data);
+            if (account.CheckBox1data != null)
+            { chkbx1.Checked = true; }
+            txt_Check2_text.Date = Convert.ToDateTime(account.CheckBox2data);
+            if (account.CheckBox2data != null)
+            { chkbx2.Checked = true; }
+
+
+
+            txt_GroundMaintenance.Text = account.GM;
+            if (account.Op1Yes == "1") { option1_yes.Checked = true; } else { option1_yes.Checked = false; }
+            if (account.Op1No == "1") { option1_No.Checked = true; } else { option1_No.Checked = false; }
+            if (account.AT == "1") { option1_No.Checked = true; } else { option1_No.Checked = false; }
+
+            Activity_txt.Text = account.AT;
+            HowLong_txt.Text = account.HLT;
+            Howoften_txt.Text = account.HOT;
+            HowMuch_txt.Text = account.HMT;
+            txt_sitename.Text = account.SiteName;
+            if (account.CB11 == "1") { chkbx1.Checked = true; } else { chkbx1.Checked = false; }
+            if (account.CB12 == "1") { chkbx2.Checked = true; } else { chkbx2.Checked = false; }
+            if (account.CB13 == "1") { Others_CB.Checked = true; } else { Others_CB.Checked = false; }
+            if (account.CB14 == "1") { Valnerable_CB.Checked = true; } else { Valnerable_CB.Checked = false; }
+            txt_substance.Text = account.txt_sub;
+            txt_substance_app.Text = account.txt_sub_app;
+            txt_safety_DS.Text = account.txt_saf_DS;
+            txt_Emergency_contact.Text = account.txt_Emergency_no;
+
+            if (account.cb211 == "1") { cb211.Checked = true; } else { cb211.Checked = false; }
+            if (account.cb212 == "1") { cb212.Checked = true; } else { cb212.Checked = false; }
+            if (account.cb213 == "1") { cb213.Checked = true; } else { cb213.Checked = false; }
+
+            if (account.cb221 == "1") { cb221.Checked = true; } else { cb221.Checked = false; }
+            if (account.cb222 == "1") { cb222.Checked = true; } else { cb222.Checked = false; }
+            if (account.cb223 == "1") { cb223.Checked = true; } else { cb223.Checked = false; }
+
+            if (account.cb231 == "1") { cb231.Checked = true; } else { cb231.Checked = false; }
+            if (account.cb232 == "1") { cb232.Checked = true; } else { cb232.Checked = false; }
+            if (account.cb233 == "1") { cb233.Checked = true; } else { cb233.Checked = false; }
+
+            if (account.cb241 == "1") { cb241.Checked = true; } else { cb241.Checked = false; }
+            if (account.cb242 == "1") { cb242.Checked = true; } else { cb242.Checked = false; }
+            if (account.cb243 == "1") { cb243.Checked = true; } else { cb243.Checked = false; }
+
+            if (account.cb251 == "1") { cb251.Checked = true; } else { cb251.Checked = false; }
+            if (account.cb252 == "1") { cb252.Checked = true; } else { cb252.Checked = false; }
+
+            if (account.opt3yes == "1") { option3_yes.Checked = true; } else { option3_yes.Checked = false; }
+            if (account.opt3no == "1") { option3_No.Checked = true; } else { option3_No.Checked = false; }
+
+            if (account.optGas == "1") { opt_Gas.Checked = true; } else { opt_Gas.Checked = false; }
+            if (account.optVap == "1") { opt_Vapour.Checked = true; } else { opt_Vapour.Checked = false; }
+            if (account.optmist == "1") { opt_Mist.Checked = true; } else { opt_Mist.Checked = false; }
+            if (account.optfume == "1") { opt_Fume.Checked = true; } else { opt_Fume.Checked = false; }
+            if (account.optDust == "1") { opt_Dust.Checked = true; } else { opt_Dust.Checked = false; }
+            if (account.optLiq == "1") { opt_Liquid.Checked = true; } else { opt_Liquid.Checked = false; }
+            if (account.optSolid == "1") { opt_Solid.Checked = true; } else { opt_Solid.Checked = false; }
+            opt_other.Text = account.optOther;
+
+            if (account.optinh == "1") { opt_Inhalation.Checked = true; } else { opt_Inhalation.Checked = false; }
+            if (account.optskin == "1") { opt_Skin.Checked = true; } else { opt_Skin.Checked = false; }
+            if (account.opteye == "1") { opt_eyes.Checked = true; } else { opt_eyes.Checked = false; }
+            if (account.opting == "1") { opt_ingestion.Checked = true; } else { opt_ingestion.Checked = false; }
+            opt2_other.Text = account.optother2;
+
+            if (account.optExpolimitlong == "1") { opt_expolmt_long.Checked = true; } else { opt_expolmt_long.Checked = false; }
+            if (account.optExpolimitshort == "1") { opt_expolmt_short.Checked = true; } else { opt_expolmt_short.Checked = false; }
+
+            txt_list1.Text = account.risklist;
+            txt_list2.Text = account.controlmeasures;
+            txt_list3.Text = account.warninglist;
+
+            if (account.opt4yes == "1") { option4_yes.Checked = true; } else { option4_yes.Checked = false; }
+            if (account.opt4no == "1") { option4_No.Checked = true; } else { option4_No.Checked = false; }
+
+            if (account.cb311 == "1") { chk311.Checked = true; } else { chk311.Checked = false; }
+            if (account.cb312 == "1") { chk312.Checked = true; } else { chk312.Checked = false; }
+            if (account.cb313 == "1") { chk313.Checked = true; } else { chk313.Checked = false; }
+            if (account.cb321 == "1") { chk321.Checked = true; } else { chk321.Checked = false; }
+            if (account.cb322 == "1") { chk322.Checked = true; } else { chk322.Checked = false; }
+            if (account.cb323 == "1") { chk323.Checked = true; } else { chk323.Checked = false; }
+            if (account.cb331 == "1") { chk331.Checked = true; } else { chk331.Checked = false; }
+            if (account.cb332 == "1") { chk332.Checked = true; } else { chk332.Checked = false; }
+
+            txt_list4.Text = account.firstaid;
+
+            if (account.optFEdry == "1") { opt_fireext_dry.Checked = true; } else { opt_fireext_dry.Checked = false; }
+            if (account.optFEco == "1") { opt_fireext_co2.Checked = true; } else { opt_fireext_co2.Checked = false; }
+            if (account.optFEWater == "1") { opt_fireext_water.Checked = true; } else { opt_fireext_water.Checked = false; }
+            if (account.optFEfoam == "1") { opt_fireext_foam.Checked = true; } else { opt_fireext_foam.Checked = false; }
+            if (account.optFEfireblanket == "1") { opt_fireext_fireblanket.Checked = true; } else { opt_fireext_fireblanket.Checked = false; }
+
+            txt_list5.Text = account.harmfulVapGas;
+            txt_storage_text.Text = account.txtStorage;
+
+            if (account.optDisHaz == "1") { opt_dispose_hazardous.Checked = true; } else { opt_dispose_hazardous.Checked = false; }
+            if (account.optDisGen == "1") { opt_dispose_general.Checked = true; } else { opt_dispose_general.Checked = false; }
+
+            if (account.optDisBio == "1") { opt_dispose_biological.Checked = true; } else { opt_dispose_biological.Checked = false; }
+            if (account.optDisRet == "1") { opt_dispose_returntosupplier.Checked = true; } else { opt_dispose_returntosupplier.Checked = false; }
+
+            if (account.optDisOther == "1") { opt_dispose_other.Checked = true; } else { opt_dispose_other.Checked = false; }
+
+            if (account.optExpoYes == "1") { opt_exposure_yes.Checked = true; } else { opt_exposure_yes.Checked = false; }
+            if (account.optExpoNo == "1") { opt_exposure_No.Checked = true; } else { opt_exposure_No.Checked = false; }
+
+            img1.Text = account.img1;
+            img2.Text = account.img2;
+            img3.Text = account.img3;
+            img4.Text = account.img4;
+            img5.Text = account.img5;
+            img6.Text = account.img6;
+            img7.Text = account.img7;
+            img8.Text = account.img8;
+            img9.Text = account.img9;
+            img10.Text = account.img10;
+            img_count = 0;
+            for (int i = 1; i <= 10; i++)
+            {
+                Label lbl = this.FindByName<Label>("img" + i);
+                if (!(lbl.Text is null))
+                {
+                    img_count++;
+                }
+            }
+
+            if (img1 != null)
+            {
+                ActImg.Text = "1";
+                Image1.Source = img1.Text;
+                lbl_from.Text = "1";
+                lbl_to.Text = img_count.ToString();
+
+            }
 
         }
         #endregion
@@ -1400,7 +1478,7 @@ namespace HealthSafetyApp.Views.Topics
             {
                 option1_No.Checked = false;
             }
-          else
+            else
             {
                 option1_No.Checked = true;
             }
@@ -1491,6 +1569,7 @@ namespace HealthSafetyApp.Views.Topics
         }
 
 
+
         //public class CustomImageHTMLTagProcessor : IHTMLTagProcessor
         //{
         //    /// <summary>
@@ -1527,7 +1606,6 @@ namespace HealthSafetyApp.Views.Topics
         //}
 
 
+
     }
 }
-
-

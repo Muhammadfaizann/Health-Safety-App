@@ -263,8 +263,11 @@ namespace HealthSafetyApp.Views.Topics
 
             
         }
-        
 
+        private async void OnClick_OpenDraft(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new DraftsList("_SSW", 1));
+        }
 
 
     }

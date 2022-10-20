@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Acr.UserDialogs;
 using System.Globalization;
 using Plugin.Media;
+using PCLStorage;
 
 namespace HealthSafetyApp.Views.Topics
 {
@@ -770,145 +771,150 @@ sb.Append(@" <tr bgcolor='lightgray'>
         {
             try
             {
-                await PCLGenarateJson("/storage/emulated/0/");
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    await PCLGenarateJson(PCLStorage.FileSystem.Current.LocalStorage.Path);
+                }
+                else if (Device.RuntimePlatform == Device.Android)
+                {
+                    await PCLGenarateJson("/storage/emulated/0/");
+                }
+
             }
             catch (FormatException) { }
         }
+
         public async Task PCLGenarateJson(string path)
         {
-            string dat="";
-            var dt=datepicker.Date;
-            dat=dt.Year + "/" + dt.Month + "/" + dt.Day;
-#pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
-            if (Device.OS == TargetPlatform.Windows)
-#pragma warning restore CS0612 // Type or member is obsolete
-#pragma warning restore CS0618 // Type or member is obsolete
-            {
-                string filepath="";
-                DraftFields s=new DraftFields
+            string dat = "";
+            var dt = datepicker.Date;
+            dat = dt.Year + "/" + dt.Month + "/" + dt.Day;
+            
+                IFile file;
+                DraftFields s = new DraftFields
                 {
-                    Name1=txt_name.Text,
-                    ProjectName=txt_projname.Text,
-                    SiteName=txt_sitename.Text,
-                    date=dat,
-                   
-
-                };
-               
-            }
-#pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
-            if (Device.OS == TargetPlatform.Android)
-#pragma warning restore CS0612 // Type or member is obsolete
-#pragma warning restore CS0618 // Type or member is obsolete
-            {
-                
-                DraftFields s=new DraftFields
-                {
-                    Name1=txt_name.Text,
-                    ProjectName=txt_projname.Text,
-                    SiteName=txt_sitename.Text,
-                    date=dat,
-                    Desc=txt_Description.Text,
-                    CB11=CB11.Checked ? "1" : "0",
-                    CB12=CB12.Checked ? "1" : "0",
-                    CB13=CB13.Checked ? "1" : "0",
-                    CB21=CB21.Checked ? "1" : "0",
-                    CB22=CB22.Checked ? "1" : "0",
-                    CB23=CB23.Checked ? "1" : "0",
-                    CB31=CB31.Checked ? "1" : "0",
-                    CB32=CB32.Checked ? "1" : "0",
-                    CB33=CB33.Checked ? "1" : "0",
-                    CB41=CB41.Checked ? "1" : "0",
-                    CB42=CB42.Checked ? "1" : "0",
-                    CB43=CB43.Checked ? "1" : "0",
-                    CB51=CB51.Checked ? "1" : "0",
-                    CB52=CB52.Checked ? "1" : "0",
-                    CB53=CB53.Checked ? "1" : "0",
-                    CB61=CB61.Checked ? "1" : "0",
-                    CB62=CB62.Checked ? "1" : "0",
-                    CB63=CB63.Checked ? "1" : "0",
-                    CB71=CB71.Checked ? "1" : "0",
-                    CB72=CB72.Checked ? "1" : "0",
-                    CB73=CB73.Checked ? "1" : "0",
-                    CB81=CB81.Checked ? "1" : "0",
-                    CB82=CB82.Checked ? "1" : "0",
-                    CB83=CB83.Checked ? "1" : "0",
-                    CB91=CB91.Checked ? "1" : "0",
-                    CB92=CB92.Checked ? "1" : "0",
-                    CB93=CB93.Checked ? "1" : "0",
-                    CB101=CB101.Checked ? "1" : "0",
-                    CB102=CB102.Checked ? "1" : "0",
-                    CB103=CB103.Checked ? "1" : "0",
-                    CB111=CB111.Checked ? "1" : "0",
-                    CB112=CB112.Checked ? "1" : "0",
-                    CB113=CB113.Checked ? "1" : "0",
-                    CB121=CB121.Checked ? "1" : "0",
-                    CB122=CB122.Checked ? "1" : "0",
-                    CB123=CB123.Checked ? "1" : "0",
-                    CB131=CB131.Checked ? "1" : "0",
-                    CB132=CB132.Checked ? "1" : "0",
-                    CB133=CB133.Checked ? "1" : "0",
-                    CB141=CB141.Checked ? "1" : "0",
-                    CB142=CB142.Checked ? "1" : "0",
-                    CB143=CB143.Checked ? "1" : "0",
-                    CB151=CB151.Checked ? "1" : "0",
-                    CB161=CB161.Checked ? "1" : "0",
-                    CB162=CB162.Checked ? "1" : "0",
-                    CB163=CB163.Checked ? "1" : "0",
-                    CB171=CB171.Checked ? "1" : "0",
-                    CB172=CB172.Checked ? "1" : "0",
-                    CB173=CB173.Checked ? "1" : "0",
-                    CB181=CB181.Checked ? "1" : "0",
-                    CB182=CB182.Checked ? "1" : "0",
-                    CB183=CB183.Checked ? "1" : "0",
-                    CB191=CB191.Checked ? "1" : "0",
-                    CB192=CB192.Checked ? "1" : "0",
-                    CB193=CB193.Checked ? "1" : "0",
-                    TB1=TB1.Text,
-                    TB2=TB2.Text,
-                    TB3=TB3.Text,
-                    TB4=TB4.Text,
-                    TB5=TB5.Text,
-                    TB6=TB6.Text,
-                    TB7=TB7.Text,
-                    TB8=TB8.Text,
-                    TB9=TB9.Text,
-                    TB10=TB10.Text,
-                    TB11=TB11.Text,
-                    TB12=TB12.Text,
-                    TB13=TB13.Text,
-                    TB14=TB14.Text,
-                    TB15=TB15.Text,
-                    TB16=TB16.Text,
-                    TB17=TB17.Text,
-                    TB18=TB18.Text,
-                    TB19=TB19.Text,
-                    TB20=TB20.Text,
-                    img1=img1.Text,
-                    img2=img2.Text,
-                    img3=img3.Text,
-                    img4=img4.Text,
-                    img5=img5.Text,
-                    img6=img6.Text,
-                    img7=img7.Text,
-                    img8=img8.Text,
-                    img9=img9.Text,
-                    img10=img10.Text,
+                    Name1 = txt_name.Text,
+                    ProjectName = txt_projname.Text,
+                    SiteName = txt_sitename.Text,
+                    date = dat,
+                    Desc = txt_Description.Text,
+                    CB11 = CB11.Checked ? "1" : "0",
+                    CB12 = CB12.Checked ? "1" : "0",
+                    CB13 = CB13.Checked ? "1" : "0",
+                    CB21 = CB21.Checked ? "1" : "0",
+                    CB22 = CB22.Checked ? "1" : "0",
+                    CB23 = CB23.Checked ? "1" : "0",
+                    CB31 = CB31.Checked ? "1" : "0",
+                    CB32 = CB32.Checked ? "1" : "0",
+                    CB33 = CB33.Checked ? "1" : "0",
+                    CB41 = CB41.Checked ? "1" : "0",
+                    CB42 = CB42.Checked ? "1" : "0",
+                    CB43 = CB43.Checked ? "1" : "0",
+                    CB51 = CB51.Checked ? "1" : "0",
+                    CB52 = CB52.Checked ? "1" : "0",
+                    CB53 = CB53.Checked ? "1" : "0",
+                    CB61 = CB61.Checked ? "1" : "0",
+                    CB62 = CB62.Checked ? "1" : "0",
+                    CB63 = CB63.Checked ? "1" : "0",
+                    CB71 = CB71.Checked ? "1" : "0",
+                    CB72 = CB72.Checked ? "1" : "0",
+                    CB73 = CB73.Checked ? "1" : "0",
+                    CB81 = CB81.Checked ? "1" : "0",
+                    CB82 = CB82.Checked ? "1" : "0",
+                    CB83 = CB83.Checked ? "1" : "0",
+                    CB91 = CB91.Checked ? "1" : "0",
+                    CB92 = CB92.Checked ? "1" : "0",
+                    CB93 = CB93.Checked ? "1" : "0",
+                    CB101 = CB101.Checked ? "1" : "0",
+                    CB102 = CB102.Checked ? "1" : "0",
+                    CB103 = CB103.Checked ? "1" : "0",
+                    CB111 = CB111.Checked ? "1" : "0",
+                    CB112 = CB112.Checked ? "1" : "0",
+                    CB113 = CB113.Checked ? "1" : "0",
+                    CB121 = CB121.Checked ? "1" : "0",
+                    CB122 = CB122.Checked ? "1" : "0",
+                    CB123 = CB123.Checked ? "1" : "0",
+                    CB131 = CB131.Checked ? "1" : "0",
+                    CB132 = CB132.Checked ? "1" : "0",
+                    CB133 = CB133.Checked ? "1" : "0",
+                    CB141 = CB141.Checked ? "1" : "0",
+                    CB142 = CB142.Checked ? "1" : "0",
+                    CB143 = CB143.Checked ? "1" : "0",
+                    CB151 = CB151.Checked ? "1" : "0",
+                    CB161 = CB161.Checked ? "1" : "0",
+                    CB162 = CB162.Checked ? "1" : "0",
+                    CB163 = CB163.Checked ? "1" : "0",
+                    CB171 = CB171.Checked ? "1" : "0",
+                    CB172 = CB172.Checked ? "1" : "0",
+                    CB173 = CB173.Checked ? "1" : "0",
+                    CB181 = CB181.Checked ? "1" : "0",
+                    CB182 = CB182.Checked ? "1" : "0",
+                    CB183 = CB183.Checked ? "1" : "0",
+                    CB191 = CB191.Checked ? "1" : "0",
+                    CB192 = CB192.Checked ? "1" : "0",
+                    CB193 = CB193.Checked ? "1" : "0",
+                    TB1 = TB1.Text,
+                    TB2 = TB2.Text,
+                    TB3 = TB3.Text,
+                    TB4 = TB4.Text,
+                    TB5 = TB5.Text,
+                    TB6 = TB6.Text,
+                    TB7 = TB7.Text,
+                    TB8 = TB8.Text,
+                    TB9 = TB9.Text,
+                    TB10 = TB10.Text,
+                    TB11 = TB11.Text,
+                    TB12 = TB12.Text,
+                    TB13 = TB13.Text,
+                    TB14 = TB14.Text,
+                    TB15 = TB15.Text,
+                    TB16 = TB16.Text,
+                    TB17 = TB17.Text,
+                    TB18 = TB18.Text,
+                    TB19 = TB19.Text,
+                    TB20 = TB20.Text,
+                    img1 = img1.Text,
+                    img2 = img2.Text,
+                    img3 = img3.Text,
+                    img4 = img4.Text,
+                    img5 = img5.Text,
+                    img6 = img6.Text,
+                    img7 = img7.Text,
+                    img8 = img8.Text,
+                    img9 = img9.Text,
+                    img10 = img10.Text,
 
 
                 };
 
                 string jsonContents = JsonConvert.SerializeObject(s);
 
-              
-            }
+                IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(path);
+                IFolder folder = await rootFolder.CreateFolderAsync("HandSAppDrafts", CreationCollisionOption.OpenIfExists);
+                if (filname != "1")
+                { file = await folder.CreateFileAsync(filname, CreationCollisionOption.ReplaceExisting); }
+                else
+                {
+                    string fnam = await InputBox(this.Navigation);
+                    if (fnam is null) { return; }
+                    else
+                    {
+                        if (fnam == "") { fnam = "Draft_MHA.json"; } else { fnam = fnam + "_MHA.json"; }
+                    }
+                    file = await folder.CreateFileAsync(fnam, CreationCollisionOption.GenerateUniqueName);
+                }
+                using (var fs = await file.OpenAsync(PCLStorage.FileAccess.ReadAndWrite))
+                {
+                    using (StreamWriter textWriter = new StreamWriter(fs))
+                    {
+                        textWriter.Write(jsonContents);
 
+                    }
 
-
+                }
+                await DisplayAlert("File Path", file.Path.ToString(), "OK");
+                //UserDialogs.Instance.ShowSuccess("Draft saved at:" + file.Path.ToString(), 2000);
         }
-
         public Task<string> InputBox(INavigation navigation)
         {
             // wait in this proc, until user did his input 
@@ -980,122 +986,120 @@ sb.Append(@" <tr bgcolor='lightgray'>
         #region OpenDraft
         private async void OnClick_OpenDraft(object sender, EventArgs e)
         {
-           
+            await Navigation.PushAsync(new DraftsList("_MHA", 1));
         }
 
 
         public async Task PCLReadJson()
         {
 
-#pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
-            if (Device.OS == TargetPlatform.Windows)
-#pragma warning restore CS0612 // Type or member is obsolete
-#pragma warning restore CS0618 // Type or member is obsolete
-            {
-                string filepath="";
-                
-            }
-#pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
-            if (Device.OS == TargetPlatform.Android)
-#pragma warning restore CS0612 // Type or member is obsolete
-#pragma warning restore CS0618 // Type or member is obsolete
-            {
-                
-            }
+                IFile file = null;
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    file = await FileSystem.Current.LocalStorage.GetFileAsync(PCLStorage.FileSystem.Current.LocalStorage.Path + "/HandSAppDrafts/" + filname);
+                }
+                else if (Device.RuntimePlatform == Device.Android)
+                {
+                    file = await FileSystem.Current.LocalStorage.GetFileAsync("/storage/emulated/0/HandSAppDrafts/" + filname);
+                }
+                using (var stream = await file.OpenAsync(PCLStorage.FileAccess.Read))
+                using (var reader = new StreamReader(stream))
+                {
+                    FileText = await reader.ReadToEndAsync();
+                }
+            
 
-            DraftFields account=JsonConvert.DeserializeObject<DraftFields>(FileText);
-            txt_name.Text=account.Name1;
-            txt_projname.Text=account.ProjectName;
-            txt_sitename.Text=account.SiteName;
-            datepicker.Date=Convert.ToDateTime(account.date);
-            txt_Description.Text=account.Desc;
-            if (account.CB11 == "1") { CB11.Checked=true; } else { CB11.Checked=false; }
-            if (account.CB12 == "1") { CB12.Checked=true; } else { CB12.Checked=false; }
-            if (account.CB13 == "1") { CB13.Checked=true; } else { CB13.Checked=false; }
-            if (account.CB21 == "1") { CB21.Checked=true; } else { CB21.Checked=false; }
-            if (account.CB22 == "1") { CB22.Checked=true; } else { CB22.Checked=false; }
-            if (account.CB23 == "1") { CB23.Checked=true; } else { CB23.Checked=false; }
-            if (account.CB31 == "1") { CB31.Checked=true; } else { CB31.Checked=false; }
-            if (account.CB32 == "1") { CB32.Checked=true; } else { CB32.Checked=false; }
-            if (account.CB33 == "1") { CB33.Checked=true; } else { CB33.Checked=false; }
-            if (account.CB41 == "1") { CB41.Checked=true; } else { CB41.Checked=false; }
-            if (account.CB42 == "1") { CB42.Checked=true; } else { CB42.Checked=false; }
-            if (account.CB43 == "1") { CB43.Checked=true; } else { CB43.Checked=false; }
-            if (account.CB51 == "1") { CB51.Checked=true; } else { CB51.Checked=false; }
-            if (account.CB52 == "1") { CB52.Checked=true; } else { CB52.Checked=false; }
-            if (account.CB53 == "1") { CB53.Checked=true; } else { CB53.Checked=false; }
-            if (account.CB61 == "1") { CB61.Checked=true; } else { CB61.Checked=false; }
-            if (account.CB62 == "1") { CB62.Checked=true; } else { CB62.Checked=false; }
-            if (account.CB63 == "1") { CB63.Checked=true; } else { CB63.Checked=false; }
-            if (account.CB71 == "1") { CB71.Checked=true; } else { CB71.Checked=false; }
-            if (account.CB72 == "1") { CB72.Checked=true; } else { CB72.Checked=false; }
-            if (account.CB73 == "1") { CB73.Checked=true; } else { CB73.Checked=false; }
-            if (account.CB81 == "1") { CB81.Checked=true; } else { CB81.Checked=false; }
-            if (account.CB82 == "1") { CB82.Checked=true; } else { CB82.Checked=false; }
-            if (account.CB83 == "1") { CB83.Checked=true; } else { CB83.Checked=false; }
-            if (account.CB91 == "1") { CB91.Checked=true; } else { CB91.Checked=false; }
-            if (account.CB92 == "1") { CB92.Checked=true; } else { CB92.Checked=false; }
-            if (account.CB93 == "1") { CB93.Checked=true; } else { CB93.Checked=false; }
-            if (account.CB101 == "1") { CB101.Checked=true; } else { CB101.Checked=false; }
-            if (account.CB102 == "1") { CB102.Checked=true; } else { CB102.Checked=false; }
-            if (account.CB103 == "1") { CB103.Checked=true; } else { CB103.Checked=false; }
-            if (account.CB111 == "1") { CB111.Checked=true; } else { CB111.Checked=false; }
-            if (account.CB112 == "1") { CB112.Checked=true; } else { CB112.Checked=false; }
-            if (account.CB113 == "1") { CB113.Checked=true; } else { CB113.Checked=false; }
-            if (account.CB121 == "1") { CB121.Checked=true; } else { CB121.Checked=false; }
-            if (account.CB122 == "1") { CB122.Checked=true; } else { CB122.Checked=false; }
-            if (account.CB123 == "1") { CB123.Checked=true; } else { CB123.Checked=false; }
-            if (account.CB131 == "1") { CB131.Checked=true; } else { CB131.Checked=false; }
-            if (account.CB132 == "1") { CB132.Checked=true; } else { CB132.Checked=false; }
-            if (account.CB133 == "1") { CB133.Checked=true; } else { CB133.Checked=false; }
-            if (account.CB141 == "1") { CB141.Checked=true; } else { CB141.Checked=false; }
-            if (account.CB142 == "1") { CB142.Checked=true; } else { CB142.Checked=false; }
-            if (account.CB143 == "1") { CB143.Checked=true; } else { CB143.Checked=false; }
-            if (account.CB151 == "1") { CB151.Checked=true; } else { CB151.Checked=false; }
-            if (account.CB161 == "1") { CB161.Checked=true; } else { CB161.Checked=false; }
-            if (account.CB162 == "1") { CB162.Checked=true; } else { CB162.Checked=false; }
-            if (account.CB163 == "1") { CB163.Checked=true; } else { CB163.Checked=false; }
-            if (account.CB171 == "1") { CB171.Checked=true; } else { CB171.Checked=false; }
-            if (account.CB172 == "1") { CB172.Checked=true; } else { CB172.Checked=false; }
-            if (account.CB173 == "1") { CB173.Checked=true; } else { CB173.Checked=false; }
-            if (account.CB181 == "1") { CB181.Checked=true; } else { CB181.Checked=false; }
-            if (account.CB182 == "1") { CB182.Checked=true; } else { CB182.Checked=false; }
-            if (account.CB183 == "1") { CB183.Checked=true; } else { CB183.Checked=false; }
-            if (account.CB191 == "1") { CB191.Checked=true; } else { CB191.Checked=false; }
-            if (account.CB192 == "1") { CB192.Checked=true; } else { CB192.Checked=false; }
-            if (account.CB193 == "1") { CB193.Checked=true; } else { CB193.Checked=false; }
-            TB1.Text=account.TB1;
-            TB2.Text=account.TB2;
-            TB3.Text=account.TB3;
-            TB4.Text=account.TB4;
-            TB5.Text=account.TB5;
-            TB6.Text=account.TB6;
-            TB7.Text=account.TB7;
-            TB8.Text=account.TB8;
-            TB9.Text=account.TB9;
-            TB10.Text=account.TB10;
-            TB11.Text=account.TB11;
-            TB12.Text=account.TB12;
-            TB13.Text=account.TB13;
-            TB14.Text=account.TB14;
-            TB15.Text=account.TB15;
-            TB16.Text=account.TB16;
-            TB17.Text=account.TB17;
-            TB18.Text=account.TB18;
-            TB19.Text=account.TB19;
-            TB20.Text=account.TB20;
-            img1.Text=account.img1;
-            img2.Text=account.img2;
-            img3.Text=account.img3;
-            img4.Text=account.img4;
-            img5.Text=account.img5;
-            img6.Text=account.img6;
-            img7.Text=account.img7;
-            img8.Text=account.img8;
-            img9.Text=account.img9;
-            img10.Text=account.img10;
+            DraftFields account = JsonConvert.DeserializeObject<DraftFields>(FileText);
+            txt_name.Text = account.Name1;
+            txt_projname.Text = account.ProjectName;
+            txt_sitename.Text = account.SiteName;
+            datepicker.Date = Convert.ToDateTime(account.date);
+            txt_Description.Text = account.Desc;
+            if (account.CB11 == "1") { CB11.Checked = true; } else { CB11.Checked = false; }
+            if (account.CB12 == "1") { CB12.Checked = true; } else { CB12.Checked = false; }
+            if (account.CB13 == "1") { CB13.Checked = true; } else { CB13.Checked = false; }
+            if (account.CB21 == "1") { CB21.Checked = true; } else { CB21.Checked = false; }
+            if (account.CB22 == "1") { CB22.Checked = true; } else { CB22.Checked = false; }
+            if (account.CB23 == "1") { CB23.Checked = true; } else { CB23.Checked = false; }
+            if (account.CB31 == "1") { CB31.Checked = true; } else { CB31.Checked = false; }
+            if (account.CB32 == "1") { CB32.Checked = true; } else { CB32.Checked = false; }
+            if (account.CB33 == "1") { CB33.Checked = true; } else { CB33.Checked = false; }
+            if (account.CB41 == "1") { CB41.Checked = true; } else { CB41.Checked = false; }
+            if (account.CB42 == "1") { CB42.Checked = true; } else { CB42.Checked = false; }
+            if (account.CB43 == "1") { CB43.Checked = true; } else { CB43.Checked = false; }
+            if (account.CB51 == "1") { CB51.Checked = true; } else { CB51.Checked = false; }
+            if (account.CB52 == "1") { CB52.Checked = true; } else { CB52.Checked = false; }
+            if (account.CB53 == "1") { CB53.Checked = true; } else { CB53.Checked = false; }
+            if (account.CB61 == "1") { CB61.Checked = true; } else { CB61.Checked = false; }
+            if (account.CB62 == "1") { CB62.Checked = true; } else { CB62.Checked = false; }
+            if (account.CB63 == "1") { CB63.Checked = true; } else { CB63.Checked = false; }
+            if (account.CB71 == "1") { CB71.Checked = true; } else { CB71.Checked = false; }
+            if (account.CB72 == "1") { CB72.Checked = true; } else { CB72.Checked = false; }
+            if (account.CB73 == "1") { CB73.Checked = true; } else { CB73.Checked = false; }
+            if (account.CB81 == "1") { CB81.Checked = true; } else { CB81.Checked = false; }
+            if (account.CB82 == "1") { CB82.Checked = true; } else { CB82.Checked = false; }
+            if (account.CB83 == "1") { CB83.Checked = true; } else { CB83.Checked = false; }
+            if (account.CB91 == "1") { CB91.Checked = true; } else { CB91.Checked = false; }
+            if (account.CB92 == "1") { CB92.Checked = true; } else { CB92.Checked = false; }
+            if (account.CB93 == "1") { CB93.Checked = true; } else { CB93.Checked = false; }
+            if (account.CB101 == "1") { CB101.Checked = true; } else { CB101.Checked = false; }
+            if (account.CB102 == "1") { CB102.Checked = true; } else { CB102.Checked = false; }
+            if (account.CB103 == "1") { CB103.Checked = true; } else { CB103.Checked = false; }
+            if (account.CB111 == "1") { CB111.Checked = true; } else { CB111.Checked = false; }
+            if (account.CB112 == "1") { CB112.Checked = true; } else { CB112.Checked = false; }
+            if (account.CB113 == "1") { CB113.Checked = true; } else { CB113.Checked = false; }
+            if (account.CB121 == "1") { CB121.Checked = true; } else { CB121.Checked = false; }
+            if (account.CB122 == "1") { CB122.Checked = true; } else { CB122.Checked = false; }
+            if (account.CB123 == "1") { CB123.Checked = true; } else { CB123.Checked = false; }
+            if (account.CB131 == "1") { CB131.Checked = true; } else { CB131.Checked = false; }
+            if (account.CB132 == "1") { CB132.Checked = true; } else { CB132.Checked = false; }
+            if (account.CB133 == "1") { CB133.Checked = true; } else { CB133.Checked = false; }
+            if (account.CB141 == "1") { CB141.Checked = true; } else { CB141.Checked = false; }
+            if (account.CB142 == "1") { CB142.Checked = true; } else { CB142.Checked = false; }
+            if (account.CB143 == "1") { CB143.Checked = true; } else { CB143.Checked = false; }
+            if (account.CB151 == "1") { CB151.Checked = true; } else { CB151.Checked = false; }
+            if (account.CB161 == "1") { CB161.Checked = true; } else { CB161.Checked = false; }
+            if (account.CB162 == "1") { CB162.Checked = true; } else { CB162.Checked = false; }
+            if (account.CB163 == "1") { CB163.Checked = true; } else { CB163.Checked = false; }
+            if (account.CB171 == "1") { CB171.Checked = true; } else { CB171.Checked = false; }
+            if (account.CB172 == "1") { CB172.Checked = true; } else { CB172.Checked = false; }
+            if (account.CB173 == "1") { CB173.Checked = true; } else { CB173.Checked = false; }
+            if (account.CB181 == "1") { CB181.Checked = true; } else { CB181.Checked = false; }
+            if (account.CB182 == "1") { CB182.Checked = true; } else { CB182.Checked = false; }
+            if (account.CB183 == "1") { CB183.Checked = true; } else { CB183.Checked = false; }
+            if (account.CB191 == "1") { CB191.Checked = true; } else { CB191.Checked = false; }
+            if (account.CB192 == "1") { CB192.Checked = true; } else { CB192.Checked = false; }
+            if (account.CB193 == "1") { CB193.Checked = true; } else { CB193.Checked = false; }
+            TB1.Text = account.TB1;
+            TB2.Text = account.TB2;
+            TB3.Text = account.TB3;
+            TB4.Text = account.TB4;
+            TB5.Text = account.TB5;
+            TB6.Text = account.TB6;
+            TB7.Text = account.TB7;
+            TB8.Text = account.TB8;
+            TB9.Text = account.TB9;
+            TB10.Text = account.TB10;
+            TB11.Text = account.TB11;
+            TB12.Text = account.TB12;
+            TB13.Text = account.TB13;
+            TB14.Text = account.TB14;
+            TB15.Text = account.TB15;
+            TB16.Text = account.TB16;
+            TB17.Text = account.TB17;
+            TB18.Text = account.TB18;
+            TB19.Text = account.TB19;
+            TB20.Text = account.TB20;
+            img1.Text = account.img1;
+            img2.Text = account.img2;
+            img3.Text = account.img3;
+            img4.Text = account.img4;
+            img5.Text = account.img5;
+            img6.Text = account.img6;
+            img7.Text = account.img7;
+            img8.Text = account.img8;
+            img9.Text = account.img9;
+            img10.Text = account.img10;
 
             img_count = 0;
             for (int i = 1; i <= 10; i++)
@@ -1109,8 +1113,8 @@ sb.Append(@" <tr bgcolor='lightgray'>
 
             if (img1 != null)
             {
-                ActImg.Text="1";
-                Image1.Source=img1.Text;
+                ActImg.Text = "1";
+                Image1.Source = img1.Text;
             }
 
         }

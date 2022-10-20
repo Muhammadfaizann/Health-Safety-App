@@ -1838,11 +1838,6 @@ namespace HealthSafetyApp.Views.Topics
         #endregion
 
 
-        #region OpenDraft
-        private async void OnClick_OpenDraft(object sender, EventArgs e)
-        {
-            
-        }
 
 
         public async Task PCLReadJson()
@@ -2079,7 +2074,7 @@ namespace HealthSafetyApp.Views.Topics
             }
 
         }
-        #endregion
+        
 
 
         public class DraftFields
@@ -2555,6 +2550,9 @@ namespace HealthSafetyApp.Views.Topics
 
         }
 
-
+        private async void OnClick_OpenDraft(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new DraftsList("_ASI", 1));
+        }
     }
 }

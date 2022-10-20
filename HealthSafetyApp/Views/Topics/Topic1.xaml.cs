@@ -18,6 +18,12 @@ using Syncfusion.Pdf.Parsing;
 using Syncfusion.Pdf.Graphics;
 using Syncfusion.Pdf.Grid;
 using Syncfusion.Drawing;
+using Xamarin.Essentials;
+using PCLStorage;
+using SkiaSharp;
+using HealthSafetyApp.Models;
+using FileSystem = PCLStorage.FileSystem;
+using FileAccess = PCLStorage.FileAccess;
 
 namespace HealthSafetyApp.Views.Topics
 {
@@ -345,18 +351,399 @@ namespace HealthSafetyApp.Views.Topics
             //}
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             try
             {
-                base.OnAppearing();
+                
+                    base.OnAppearing();
+                    //Xamarin.Forms.DataGrid.DataGridComponent.Init();
+                    BindingContext = new ViewModels.MainViewModel();
+                    if (pick_a_up.SelectedItem is null) { pick_a_up.SelectedIndex = 0; }
+                    if (pick_b_up.SelectedItem is null) { pick_b_up.SelectedIndex = 0; }
+                    if (pick_a_low.SelectedItem is null) { pick_a_low.SelectedIndex = 0; }
+                    if (pick_b_low.SelectedItem is null) { pick_b_low.SelectedIndex = 0; }
+                    
+                    if (filname != "1")
+                    {
+                        await PCLReadJson();
+                    }
+
+                    //grdfill_text.IsVisible = false;
+                    //grdfill_textnew1.IsVisible = false;
+                    //grdfill_textnew2.IsVisible = false;
+                
             }
             catch (Exception exception)
             {
                 Crashes.TrackError(exception);
             }
         }
-       
+
+        private async Task PCLReadJson()
+        {
+            try
+            {
+
+                IFile file = null;
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    file = await FileSystem.Current.LocalStorage.GetFileAsync(PCLStorage.FileSystem.Current.LocalStorage.Path + "/HandSAppDrafts/" + filname);
+                }
+                else if (Device.RuntimePlatform == Device.Android)
+                {
+                    file = await FileSystem.Current.LocalStorage.GetFileAsync("/storage/emulated/0/HandSAppDrafts/" + filname);
+                }
+                using (var stream = await file.OpenAsync(FileAccess.Read))
+                using (var reader = new StreamReader(stream))
+                {
+                    FileText = await reader.ReadToEndAsync();
+                }
+
+
+                DraftFields account = JsonConvert.DeserializeObject<DraftFields>(FileText);
+                    txt_name.Text = account.Name1;
+                    txt_projname.Text = account.ProjectName;
+                    txt_sitename.Text = account.SiteName;
+                    txt_Check2_text.Text = account.CheckBox1data;
+                    if (account.CheckBox1data != null)
+                    { chkbx1.IsChecked = true; }
+                    txt_Check2_text.Text = account.CheckBox2data;
+                    if (account.CheckBox2data != null)
+                    { chkbx2.IsChecked = true; }
+                    datepicker.Date = Convert.ToDateTime(account.Date);
+
+                    pick_1.SelectedItem = account.pick1;
+                    pick_2.SelectedItem = account.pick2;
+
+
+                    pick_3.SelectedItem = account.pick3;
+                    pick_4.SelectedItem = account.pick4;
+
+                    pick2_1.SelectedItem = account.pick2_1;
+                    pick2_2.SelectedItem = account.pick2_2;
+                    pick2_3.SelectedItem = account.pick2_3;
+                    pick2_4.SelectedItem = account.pick2_4;
+                    pick2_5.SelectedItem = account.pick2_5;
+                    pick2_6.SelectedItem = account.pick2_6;
+                    pick2_7.SelectedItem = account.pick2_7;
+                    pick2_8.SelectedItem = account.pick2_8;
+
+                    pick2_9.SelectedItem = account.pick2_9;
+                    pick2_10.SelectedItem = account.pick2_10;
+                    pick2_11.SelectedItem = account.pick2_11;
+                    pick2_12.SelectedItem = account.pick2_12;
+                    pick2_13.SelectedItem = account.pick2_13;
+                    pick2_14.SelectedItem = account.pick2_14;
+                    pick2_15.SelectedItem = account.pick2_15;
+                    pick2_16.SelectedItem = account.pick2_16;
+
+                    pick2_17.SelectedItem = account.pick2_17;
+                    pick2_18.SelectedItem = account.pick2_18;
+                    pick2_19.SelectedItem = account.pick2_19;
+                    pick2_20.SelectedItem = account.pick2_20;
+                    pick2_21.SelectedItem = account.pick2_21;
+                    pick2_22.SelectedItem = account.pick2_22;
+                    pick2_23.SelectedItem = account.pick2_23;
+                    pick2_24.SelectedItem = account.pick2_24;
+
+
+
+                    step2_other.Text = account.step2_other;
+                    pick3_1.SelectedItem = account.pick3_1;
+
+                    txt_fill1.Text = account.fillable_txt1;
+                    txt_fill2.Text = account.fillable_txt2;
+
+
+                    txt_Check_text11.Text = account.fillable_txt3;
+                    txt_Check_text12.Text = account.fillable_txt4;
+                    txt_Check_text21.Text = account.fillable_txt5;
+                    txt_Check_text22.Text = account.fillable_txt6;
+                    txt_Check_text31.Text = account.fillable_txt7;
+                    txt_Check_text32.Text = account.fillable_txt8;
+                    txt_Check_text41.Text = account.fillable_txt9;
+                    txt_Check_text42.Text = account.fillable_txt10;
+
+                    txt_Check_text51.Text = account.fillable_txt11;
+                    txt_Check_text52.Text = account.fillable_txt12;
+                    txt_Check_text61.Text = account.fillable_txt13;
+                    txt_Check_text62.Text = account.fillable_txt14;
+                    txt_Check_text71.Text = account.fillable_txt15;
+                    txt_Check_text72.Text = account.fillable_txt16;
+                    txt_Check_text81.Text = account.fillable_txt17;
+                    txt_Check_text82.Text = account.fillable_txt18;
+                    txt_Check_text91.Text = account.fillable_txt19;
+                    txt_Check_text92.Text = account.fillable_txt20;
+                    txt_Check_text101.Text = account.fillable_txt21;
+                    txt_Check_text102.Text = account.fillable_txt22;
+
+                    pick_a_up.SelectedItem = account.a_up;
+                    pick_b_up.SelectedItem = account.b_up;
+                    //txt_resultup   = account.c_up.ToString();
+
+                    pick_a_low.SelectedItem = account.a_low;
+                    pick_b_low.SelectedItem = account.b_low;
+                    //txt_resultlow  = account.c_low.ToString();
+
+                    //pick_a_ne = account.a_new;
+                    //b_new = account.b_new;
+                    //c_new = account.c_new;
+                    //a_new1 = account.a_new1;
+                    //b_new1 = account.b_new1;
+                    //c_new1 = account.c_new1;
+                    //a_new2 = account.a_new2;
+                    //b_new2 = account.b_new2;
+                    //c_new2 = account.c_new2;
+                    pick_a_up1.SelectedItem = account.a_up1;
+                    pick_b_up1.SelectedItem = account.b_up1;
+                    //txt_resultup1 = account.c_up1;
+                    pick_a_low1.SelectedItem = account.a_low1;
+                    pick_b_low1.SelectedItem = account.b_low1;
+                    //txt_resultlow1  = account.c_low1;
+
+                    pick_a_up2.SelectedItem = account.a_up2;
+                    pick_b_up2.SelectedItem = account.b_up2;
+                    //txt_resultup2  = account.c_up2;
+                    pick_a_low2.SelectedItem = account.a_low2;
+                    pick_b_low2.SelectedItem = account.b_low2;
+                    //txt_resultlow2 = account.c_low2;
+
+                    pick_a_up3.SelectedItem = account.a_up3;
+                    pick_b_up3.SelectedItem = account.b_up3;
+                    // txt_resultup3 = account.c_up3;
+                    pick_a_low3.SelectedItem = account.a_low3;
+                    pick_b_low3.SelectedItem = account.b_low3;
+                    //txt_resultlow3 = account.c_low3;
+
+                    pick_a_up4.SelectedItem = account.a_up4;
+                    pick_b_up4.SelectedItem = account.b_up4;
+                    //c_up4 = account.c_up4;
+                    pick_a_low4.SelectedItem = account.a_low4;
+                    pick_b_low4.SelectedItem = account.b_low4;
+                    //c_low4 = account.c_low4;
+
+                    pick_a_up5.SelectedItem = account.a_up5;
+                    pick_b_up5.SelectedItem = account.b_up5;
+                    //c_up5 = account.c_up5;
+                    pick_a_low5.SelectedItem = account.a_low5;
+                    pick_b_low5.SelectedItem = account.b_low5;
+                    //c_low5 = account.c_low5;
+
+                    pick_a_up6.SelectedItem = account.a_up6;
+                    pick_b_up6.SelectedItem = account.b_up6;
+                    //c_up6 = account.c_up6;
+                    pick_a_low6.SelectedItem = account.a_low6;
+                    pick_b_low6.SelectedItem = account.b_low6;
+                    //c_low6 = account.c_low6;
+
+                    pick_a_up7.SelectedItem = account.a_up7;
+                    pick_b_up7.SelectedItem = account.b_up7;
+                    //c_up7 = account.c_up7;
+                    pick_a_low7.SelectedItem = account.a_low7;
+                    pick_b_low7.SelectedItem = account.b_low7;
+                    //c_low7 = account.c_low7;
+
+                    pick_a_up8.SelectedItem = account.a_up8;
+                    pick_b_up8.SelectedItem = account.b_up8;
+                    //c_up8 = account.c_up8;
+                    pick_a_low8.SelectedItem = account.a_low8;
+                    pick_b_low8.SelectedItem = account.b_low8;
+                    //c_low8 = account.c_low8;
+
+                    pick_a_up9.SelectedItem = account.a_up9;
+                    pick_b_up9.SelectedItem = account.b_up9;
+                    //c_up9 = account.c_up9;
+                    pick_a_low9.SelectedItem = account.a_low9;
+                    pick_b_low9.SelectedItem = account.b_low9;
+                    //c_low9 = account.c_low9;
+
+                    pick_a_up10.SelectedItem = account.a_up10;
+                    pick_b_up10.SelectedItem = account.b_up10;
+                    //c_up10 = account.c_up10;
+                    pick_a_low10.SelectedItem = account.a_low10;
+                    pick_b_low10.SelectedItem = account.b_low10;
+                    //c_low10 = account.c_low10;
+                    img1.Text = account.img1;
+                    img2.Text = account.img2;
+                    img3.Text = account.img3;
+                    img4.Text = account.img4;
+                    img5.Text = account.img5;
+                    img6.Text = account.img6;
+                    img7.Text = account.img7;
+                    img8.Text = account.img8;
+                    img9.Text = account.img9;
+                    img10.Text = account.img10;
+
+                    img_count = 0;
+                    for (int i = 1; i <= 10; i++)
+                    {
+                        Label lbl = this.FindByName<Label>("img" + i);
+                        if (!(lbl.Text is null))
+                        {
+                            img_count++;
+                        }
+                    }
+
+                    if (img1 != null)
+                    {
+
+                        ActImg.Text = "1";
+                        Image1.Source = img1.Text;
+                        lbl_from.Text = "1";
+                        lbl_to.Text = img_count.ToString();
+                    }
+                    if (account.add_btn1 == true) { Add_btn1.IsVisible = true; } else { Add_btn1.IsVisible = false; }
+
+                    if (account.add_btn2 == true)
+                    {
+                        fill_text_11.IsVisible = true;
+                        fill_text_12.IsVisible = true;
+                        Add_btn1.IsVisible = false;
+                        Add_btn2.IsVisible = true;
+                    }
+                    else
+                    {
+                        fill_text_11.IsVisible = false;
+                        fill_text_12.IsVisible = false;
+                        Add_btn1.IsVisible = true;
+                        Add_btn2.IsVisible = false;
+                    }
+
+                    if (account.add_btn3 == true)
+                    {
+                        fill_text_21.IsVisible = true;
+                        fill_text_22.IsVisible = true;
+                        Add_btn3.IsVisible = true;
+                        Add_btn2.IsVisible = false;
+                    }
+                    else
+                    {
+                        fill_text_21.IsVisible = false;
+                        fill_text_22.IsVisible = false;
+                        Add_btn3.IsVisible = false;
+
+                    }
+
+                    if (account.add_btn4 == true)
+                    {
+                        fill_text_31.IsVisible = true;
+                        fill_text_32.IsVisible = true;
+                        Add_btn4.IsVisible = true;
+                        Add_btn3.IsVisible = false;
+                    }
+                    else
+                    {
+                        fill_text_31.IsVisible = false;
+                        fill_text_32.IsVisible = false;
+                        Add_btn4.IsVisible = false;
+                    }
+
+                    if (account.add_btn5 == true)
+                    {
+                        fill_text_41.IsVisible = true;
+                        fill_text_42.IsVisible = true;
+                        Add_btn5.IsVisible = true;
+                        Add_btn4.IsVisible = false;
+                    }
+                    else
+                    {
+                        fill_text_41.IsVisible = false;
+                        fill_text_42.IsVisible = false;
+                        Add_btn5.IsVisible = false;
+                    }
+                    if (account.add_btn6 == true)
+                    {
+                        fill_text_51.IsVisible = true;
+                        fill_text_52.IsVisible = true;
+                        Add_btn6.IsVisible = true;
+                        Add_btn5.IsVisible = false;
+                    }
+                    else
+                    {
+                        fill_text_51.IsVisible = false;
+                        fill_text_52.IsVisible = false;
+                        Add_btn6.IsVisible = false;
+                    }
+                    if (account.add_btn7 == true)
+                    {
+                        fill_text_61.IsVisible = true;
+                        fill_text_62.IsVisible = true;
+                        Add_btn7.IsVisible = true;
+                        Add_btn6.IsVisible = false;
+                    }
+                    else
+                    {
+                        fill_text_61.IsVisible = false;
+                        fill_text_62.IsVisible = false;
+                        Add_btn7.IsVisible = false;
+                    }
+
+                    if (account.add_btn8 == true)
+                    {
+                        fill_text_71.IsVisible = true;
+                        fill_text_72.IsVisible = true;
+                        Add_btn8.IsVisible = true;
+                        Add_btn7.IsVisible = false;
+                    }
+                    else
+                    {
+                        fill_text_71.IsVisible = false;
+                        fill_text_72.IsVisible = false;
+                        Add_btn8.IsVisible = false;
+                    }
+
+                    if (account.add_btn9 == true)
+                    {
+                        fill_text_81.IsVisible = true;
+                        fill_text_82.IsVisible = true;
+                        Add_btn9.IsVisible = true;
+                        Add_btn8.IsVisible = false;
+                    }
+                    else
+                    {
+                        fill_text_81.IsVisible = false;
+                        fill_text_82.IsVisible = false;
+                        Add_btn9.IsVisible = false;
+                    }
+
+                    if (account.add_btn10 == true)
+                    {
+                        fill_text_91.IsVisible = true;
+                        fill_text_92.IsVisible = true;
+                        Add_btn10.IsVisible = true;
+                        Add_btn9.IsVisible = false;
+                    }
+                    else
+                    {
+                        fill_text_91.IsVisible = false;
+                        fill_text_92.IsVisible = false;
+                        Add_btn10.IsVisible = false;
+                    }
+
+                    if (account.add_btn11 == true)
+                    {
+                        fill_text_101.IsVisible = true;
+                        fill_text_102.IsVisible = true;
+                        Add_btn11.IsVisible = true;
+                        Add_btn10.IsVisible = true;
+                    }
+                    else
+                    {
+                        fill_text_101.IsVisible = false;
+                        fill_text_102.IsVisible = false;
+                        Add_btn11.IsVisible = false;
+                        Add_btn10.IsVisible = false;
+                    }
+
+                
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
         //Click New Line Method
         private void OnClicked_NewLine(object sender, EventArgs e)
         {
@@ -1847,11 +2234,18 @@ namespace HealthSafetyApp.Views.Topics
 
 
         
-        private  void OnClick_SavePDF(object sender, EventArgs e)
+        private async void OnClick_SavePDF(object sender, EventArgs e)
         {
             try
             {
-               
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                     await PCLReportGenaratePdf(PCLStorage.FileSystem.Current.LocalStorage.Path);
+                }
+                else if (Device.RuntimePlatform == Device.Android)
+                {
+                     await PCLReportGenaratePdf("/storage/emulated/0/");
+                }
             }
             catch (Exception exception)
             {
@@ -1862,16 +2256,13 @@ namespace HealthSafetyApp.Views.Topics
         public async Task PCLReportGenaratePdf(string path)
         {
             try
-            { 
+            {
                 string dat = "";
                 var dt = datepicker.Date;
                 dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
                 StringBuilder sb = new StringBuilder();
                 StringBuilder sb2 = new StringBuilder();
                 sb.Append("<header class='headerdiv'>");
-
-
-
                 sb.Append("</div>");
                 sb.Append("</header>");
                 sb.Append("<main>");
@@ -1884,11 +2275,11 @@ namespace HealthSafetyApp.Views.Topics
                             </td>
                             </tr> 
                         <tr>
-<td  bgcolor='silver' align='right'>
-<p style='color:#ffffff;font-size:5px;'><i>Created using Dynamic Risk Assessment tool © @The Health And Safety App </i></p>
-</td>
+                        <td  bgcolor='silver' align='right'>
+                        <p style='color:#ffffff;font-size:5px;'><i>Created using Dynamic Risk Assessment tool © @The Health And Safety App </i></p>
+                        </td>
 
-</tr>
+                        </tr>
                         </tbody></table>
 
                         <center>
@@ -2494,71 +2885,8 @@ namespace HealthSafetyApp.Views.Topics
 
                 }
                 sb.Append("</table>");
-                //sb.Append("<table width='100%' style='width:100%'>");
-                //sb.Append("<tr>");
-                //sb.Append("<td colspan='2' width='80%' style='width:80%'>");
-                //sb.Append("<table width='100%'>");
-                //sb.Append("<tr>");
-                //sb.Append("<td style='color:#0086b7;font-size:16px;'><b>Fillable Text box</b></td>");
-                //sb.Append("</tr>");
-                //sb.Append("<tr>");
-                //sb.Append("<td style='text-align:justify;font-size:14px;'><u>" + txt_Check_text11.Text + "</u></td>");
-                //sb.Append("</tr>");
-                //sb.Append("</table>");
-                //sb.Append("</td>");
-                ////sb.Append("<td></td>");
-                //sb.Append("<td width='20%' style='width:20%' valign='top'>");
-                //sb.Append("<table width='100%'>");
-                //sb.Append("<tr>");
-                //sb.Append("<td style='color:#0086b7;font-size:16px;'><b>A</b></td>");
-                //sb.Append("<td style='color:#0086b7;font-size:16px;'><b>B</b></td>");
-                //sb.Append("<td style='color:#0086b7;font-size:16px;'><b>C</b></td>");
-                //sb.Append("</tr>");
-                //sb.Append("<tr>");
-                //sb.Append("<td style='font-size:14px;'>" + a_new + "</td>");
-                //sb.Append("<td style='font-size:14px;'>" + b_new + "</td>");
-                //sb.Append("<td style='font-size:14px;color:" + c_new_color + ";'>" + c_new + "</td>");
-                //sb.Append("</tr>");
-                //sb.Append("</table>");
-                //sb.Append("</td>");
-                //sb.Append("</tr>");
-                //sb.Append("</table>");
-                //sb.Append("<br/><br/>");
-
-                //sb.Append("<table width='100%' style='width:100%'>");
-                //sb.Append("<tr>");
-                //sb.Append("<td colspan='2' width='80%' style='width:80%'>");
-                //sb.Append("<table width='100%'>");
-                //sb.Append("<tr>");
-                //sb.Append("<td style='color:#0086b7;font-size:16px;'><b>Fillable Text box</b></td>");
-                //sb.Append("</tr>");
-                //sb.Append("<tr>");
-                //sb.Append("<td style='text-align:justify;font-size:14px;'><u>" + txt_Check_text11.Text + "</u></td>");
-                //sb.Append("</tr>");
-                //sb.Append("</table>");
-                //sb.Append("</td>");
-                ////sb.Append("<td></td>");
-                //sb.Append("<td width='20%' style='width:20%' valign='top'>");
-                //sb.Append("<table width='100%'>");
-                //sb.Append("<tr>");
-                //sb.Append("<td style='color:#0086b7;font-size:16px;'><b>A</b></td>");
-                //sb.Append("<td style='color:#0086b7;font-size:16px;'><b>B</b></td>");
-                //sb.Append("<td style='color:#0086b7;font-size:16px;'><b>C</b></td>");
-                //sb.Append("</tr>");
-                //sb.Append("<tr>");
-                //sb.Append("<td style='font-size:14px;'>" + a_new1 + "</td>");
-                //sb.Append("<td style='font-size:14px;'>" + b_new1 + "</td>");
-                //sb.Append("<td style='font-size:14px;color:" + c_new1_color + ";'>" + c_new1 + "</td>");
-                //sb.Append("</tr>");
-                //sb.Append("</table>");
-                //sb.Append("</td>");
-                //sb.Append("</tr>");
-                //sb.Append("</table>");
-
-
                 sb.Append("<br/><br/>");
                 sb.Append("</main>");
-
                 sb2.Append("<main>");
                 sb2.Append("<table border='1' width='95%'  align='center' style='width=70%; border: solid gray 1px; border-collapse: collapse;' >");
                 sb2.Append("<thead >");
@@ -2662,16 +2990,53 @@ namespace HealthSafetyApp.Views.Topics
                 sb2.Append("</main>");
 
 
-
-                  
-                        
-
-                        
-                     
+                StringReader sr = new StringReader(sb.ToString());
+                StringReader sr2 = new StringReader(sb2.ToString());
                 
-                
+
+                IFolder rootFolder = await PCLStorage.FileSystem.Current.GetFolderFromPathAsync(path);
+                IFolder folder = await rootFolder.CreateFolderAsync("HandSAppPdf", CreationCollisionOption.OpenIfExists);
+
+                string fnam = await InputBox(this.Navigation);
+
+                if (fnam is null) { return; }
+                else
+                { if (fnam == "") { fnam = "Dynamic Risk Assessment.pdf"; } else { fnam = fnam + ".pdf"; } }
+
+                IFile file = await folder.CreateFileAsync(fnam, CreationCollisionOption.GenerateUniqueName);
+
+
+                using (var fs = await file.OpenAsync(PCLStorage.FileAccess.ReadAndWrite))
+                {
+
+                    // Create a new PDF document
+                    PdfDocument document = new PdfDocument();
+
+                    //Add a page to the document
+                    PdfPage page = document.Pages.Add();
+
+                    //Create PDF graphics for the page
+                    PdfGraphics graphics = page.Graphics;
+
+                    //Set the standard font
+                    PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
+
+                    //Draw the text
+                    graphics.DrawString(sb2.ToString(), font, PdfBrushes.Black, new PointF(0, 0));
+
+                    //Save the document to the stream
+                    MemoryStream stream = new MemoryStream();
+                    document.Save(stream);
+                    stream.WriteTo(fs);
+                    //Close the document
+                    document.Close(true);
+
+                    await DisplayAlert("File Path", file.Path.ToString(), "OK");
+                    
+
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -2685,105 +3050,298 @@ namespace HealthSafetyApp.Views.Topics
 
 
         #region SaveDraft
-        private void OnClick_SaveDraft(object sender, EventArgs e)
+        private async void OnClick_SaveDraft(object sender, EventArgs e)
         {
             try
             {
-                throw new NotImplementedException();
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    await PCLGenarateJson(PCLStorage.FileSystem.Current.LocalStorage.Path);
+                }
+                else if (Device.RuntimePlatform == Device.Android)
+                {
+                    await PCLGenarateJson("/storage/emulated/0/");
+                }
+                
             }
             catch (FormatException) { }
         }
-       
-        public Task<string> InputBox(INavigation navigation)
+        public async Task PCLGenarateJson(string path)
         {
-            // wait in this proc, until user did his input 
-            var tcs = new TaskCompletionSource<string>();
+            string dat = "";
+            var dt = datepicker.Date;
+            dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
+                            IFile file;
+                            DraftFields s = new DraftFields
+                            {
+                                Name1 = txt_name.Text,
+                                ProjectName = txt_projname.Text,
+                                SiteName = txt_sitename.Text,
+                                Date = dat,
 
-            var lblTitle = new Label { Text = "Health & Safety App", HorizontalOptions = LayoutOptions.Center, FontAttributes = FontAttributes.Bold };
-            var lblMessage = new Label { Text = "Enter file name:" };
-            var txtInput = new Entry { Text = "" };
+                                pick1 = pick_1.Items[pick_1.SelectedIndex],
+                                pick2 = pick_2.Items[pick_2.SelectedIndex],
+                                pick3 = pick_3.Items[pick_3.SelectedIndex],
+                                pick4 = pick_4.Items[pick_4.SelectedIndex],
 
-            var btnOk = new Xamarin.Forms.Button
-            {
-                Text = "Ok",
-                WidthRequest = 100,
-                BackgroundColor = Xamarin.Forms.Color.FromRgb(0.8, 0.8, 0.8),
-            };
-            btnOk.Clicked += async (s, e) =>
-            {
-                // close page
-                var result = txtInput.Text;
-                await navigation.PopModalAsync();
-                // pass result
-                tcs.SetResult(result);
-            };
+                                pick2_1 = pick2_1.Items[pick2_1.SelectedIndex],
+                                pick2_2 = pick2_2.Items[pick2_2.SelectedIndex],
+                                pick2_3 = pick2_3.Items[pick2_3.SelectedIndex],
+                                pick2_4 = pick2_4.Items[pick2_4.SelectedIndex],
+                                pick2_5 = pick2_5.Items[pick2_5.SelectedIndex],
+                                pick2_6 = pick2_6.Items[pick2_6.SelectedIndex],
+                                pick2_7 = pick2_7.Items[pick2_7.SelectedIndex],
+                                pick2_8 = pick2_8.Items[pick2_8.SelectedIndex],
 
-            var btnCancel = new Xamarin.Forms.Button
-            {
-                Text = "Cancel",
-                WidthRequest = 100,
-                BackgroundColor = Xamarin.Forms.Color.FromRgb(0.8, 0.8, 0.8)
-            };
-            btnCancel.Clicked += async (s, e) =>
-            {
-                // close page
-                await navigation.PopModalAsync();
-                // pass empty result
-                tcs.SetResult(null);
-            };
+                                pick2_9 = pick2_9.Items[pick2_9.SelectedIndex],
+                                pick2_10 = pick2_10.Items[pick2_10.SelectedIndex],
+                                pick2_11 = pick2_11.Items[pick2_11.SelectedIndex],
+                                pick2_12 = pick2_12.Items[pick2_12.SelectedIndex],
+                                pick2_13 = pick2_13.Items[pick2_13.SelectedIndex],
+                                pick2_14 = pick2_14.Items[pick2_14.SelectedIndex],
+                                pick2_15 = pick2_15.Items[pick2_15.SelectedIndex],
+                                pick2_16 = pick2_16.Items[pick2_16.SelectedIndex],
 
-            var slButtons = new StackLayout
-            {
-                Orientation = StackOrientation.Horizontal,
-                Children = { btnOk, btnCancel },
-            };
 
-            var layout = new StackLayout
-            {
-                Padding = new Thickness(0, 40, 0, 0),
-                VerticalOptions = LayoutOptions.StartAndExpand,
-                HorizontalOptions = LayoutOptions.CenterAndExpand,
-                Orientation = StackOrientation.Vertical,
-                Children = { lblTitle, lblMessage, txtInput, slButtons },
-            };
+                                pick2_17 = pick2_17.Items[pick2_17.SelectedIndex],
+                                pick2_18 = pick2_18.Items[pick2_18.SelectedIndex],
+                                pick2_19 = pick2_19.Items[pick2_19.SelectedIndex],
+                                pick2_20 = pick2_20.Items[pick2_20.SelectedIndex],
+                                pick2_21 = pick2_21.Items[pick2_21.SelectedIndex],
+                                pick2_22 = pick2_22.Items[pick2_22.SelectedIndex],
+                                pick2_23 = pick2_23.Items[pick2_23.SelectedIndex],
+                                pick2_24 = pick2_24.Items[pick2_24.SelectedIndex],
 
-            // create and show page
-            var page = new ContentPage();
-            page.Content = layout;
-            navigation.PushModalAsync(page);
-            // open keyboard
-            txtInput.Focus();
+                                step2_other = step2_other.Text,
+                                pick3_1 = pick3_1.Items[pick3_1.SelectedIndex],
 
-            // code is waiting her, until result is passed with tcs.SetResult() in btn-Clicked
-            // then proc returns the result
-            return tcs.Task;
+                                fillable_txt1 = txt_fill1.Text,
+                                fillable_txt2 = txt_fill2.Text,
+                                fillable_txt3 = txt_Check_text11.Text,
+                                fillable_txt4 = txt_Check_text12.Text,
+                                fillable_txt5 = txt_Check_text21.Text,
+                                fillable_txt6 = txt_Check_text22.Text,
+                                fillable_txt7 = txt_Check_text31.Text,
+                                fillable_txt8 = txt_Check_text32.Text,
+                                fillable_txt9 = txt_Check_text41.Text,
+                                fillable_txt10 = txt_Check_text42.Text,
+                                fillable_txt11 = txt_Check_text51.Text,
+                                fillable_txt12 = txt_Check_text52.Text,
+                                fillable_txt13 = txt_Check_text61.Text,
+                                fillable_txt14 = txt_Check_text62.Text,
+                                fillable_txt15 = txt_Check_text71.Text,
+                                fillable_txt16 = txt_Check_text72.Text,
+                                fillable_txt17 = txt_Check_text81.Text,
+                                fillable_txt18 = txt_Check_text82.Text,
+                                fillable_txt19 = txt_Check_text91.Text,
+                                fillable_txt20 = txt_Check_text92.Text,
+                                fillable_txt21 = txt_Check_text101.Text,
+                                fillable_txt22 = txt_Check_text102.Text,
+                                a_up = a_up.ToString(),
+                                b_up = b_up.ToString(),
+                                c_up = c_up.ToString(),
+                                a_low = a_low.ToString(),
+                                b_low = b_low.ToString(),
+                                c_low = c_low.ToString(),
+                                a_new = a_new.ToString(),
+                                b_new = b_new.ToString(),
+                                c_new = c_new.ToString(),
+                                a_new1 = a_new1.ToString(),
+                                b_new1 = b_new1.ToString(),
+                                c_new1 = c_new1.ToString(),
+                                a_new2 = a_new2.ToString(),
+                                b_new2 = b_new2.ToString(),
+                                c_new2 = c_new2.ToString(),
+                                a_up1 = a_up1.ToString(),
+                                b_up1 = b_up1.ToString(),
+                                c_up1 = c_up1.ToString(),
+                                a_low1 = a_low1.ToString(),
+                                b_low1 = b_low1.ToString(),
+                                c_low1 = c_low1.ToString(),
+
+                                a_up2 = a_up2.ToString(),
+                                b_up2 = b_up2.ToString(),
+                                c_up2 = c_up2.ToString(),
+                                a_low2 = a_low2.ToString(),
+                                b_low2 = b_low2.ToString(),
+                                c_low2 = c_low2.ToString(),
+
+                                a_up3 = a_up3.ToString(),
+                                b_up3 = b_up3.ToString(),
+                                c_up3 = c_up3.ToString(),
+                                a_low3 = a_low3.ToString(),
+                                b_low3 = b_low3.ToString(),
+                                c_low3 = c_low3.ToString(),
+
+                                a_up4 = a_up4.ToString(),
+                                b_up4 = b_up4.ToString(),
+                                c_up4 = c_up4.ToString(),
+                                a_low4 = a_low4.ToString(),
+                                b_low4 = b_low4.ToString(),
+                                c_low4 = c_low4.ToString(),
+
+                                a_up5 = a_up5.ToString(),
+                                b_up5 = b_up5.ToString(),
+                                c_up5 = c_up5.ToString(),
+                                a_low5 = a_low5.ToString(),
+                                b_low5 = b_low5.ToString(),
+                                c_low5 = c_low5.ToString(),
+
+                                a_up6 = a_up6.ToString(),
+                                b_up6 = b_up6.ToString(),
+                                c_up6 = c_up6.ToString(),
+                                a_low6 = a_low6.ToString(),
+                                b_low6 = b_low6.ToString(),
+                                c_low6 = c_low6.ToString(),
+
+                                a_up7 = a_up7.ToString(),
+                                b_up7 = b_up7.ToString(),
+                                c_up7 = c_up7.ToString(),
+                                a_low7 = a_low7.ToString(),
+                                b_low7 = b_low7.ToString(),
+                                c_low7 = c_low7.ToString(),
+
+                                a_up8 = a_up8.ToString(),
+                                b_up8 = b_up8.ToString(),
+                                c_up8 = c_up8.ToString(),
+                                a_low8 = a_low8.ToString(),
+                                b_low8 = b_low8.ToString(),
+                                c_low8 = c_low8.ToString(),
+
+                                a_up9 = a_up9.ToString(),
+                                b_up9 = b_up9.ToString(),
+                                c_up9 = c_up9.ToString(),
+                                a_low9 = a_low9.ToString(),
+                                b_low9 = b_low9.ToString(),
+                                c_low9 = c_low9.ToString(),
+
+                                a_up10 = a_up10.ToString(),
+                                b_up10 = b_up10.ToString(),
+                                c_up10 = c_up10.ToString(),
+                                a_low10 = a_low10.ToString(),
+                                b_low10 = b_low10.ToString(),
+                                c_low10 = c_low10.ToString(),
+                                add_btn1 = txt_fill1.IsVisible,
+                                add_btn2 = fill_text_11.IsVisible,
+                                add_btn3 = fill_text_21.IsVisible,
+                                add_btn4 = fill_text_31.IsVisible,
+                                add_btn5 = fill_text_41.IsVisible,
+                                add_btn6 = fill_text_51.IsVisible,
+                                add_btn7 = fill_text_61.IsVisible,
+                                add_btn8 = fill_text_71.IsVisible,
+                                add_btn9 = fill_text_81.IsVisible,
+                                add_btn10 = fill_text_91.IsVisible,
+                                add_btn11 = fill_text_101.IsVisible,
+                                img1 = img1.Text,
+                                img2 = img2.Text,
+                                img3 = img3.Text,
+                                img4 = img4.Text,
+                                img5 = img5.Text,
+                                img6 = img6.Text,
+                                img7 = img7.Text,
+                                img8 = img8.Text,
+                                img9 = img9.Text,
+                                img10 = img10.Text,
+
+                                CheckBox1data = txt_Check2_text.Text,
+                                CheckBox2data = txt_Check2_text.Text,
+                                Teams = DummyDataProvider.GetTeams()
+                            };
+
+                            string jsonContents = JsonConvert.SerializeObject(s);
+
+                            IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(path);
+                            IFolder folder = await rootFolder.CreateFolderAsync("HandSAppDrafts", CreationCollisionOption.OpenIfExists);
+                            if (filname != "1")
+                            { file = await folder.CreateFileAsync(filname, CreationCollisionOption.ReplaceExisting); }
+                            else
+                            {
+                                string fnam = await InputBox(this.Navigation);
+                                if (fnam is null) { return; }
+                                else
+                                {
+                                    if (fnam == "") { fnam = "Draft_DRA.json"; } else { fnam = fnam + "_DRA.json"; }
+                                }
+                                file = await folder.CreateFileAsync(fnam, CreationCollisionOption.GenerateUniqueName);
+                            }
+                            using (var fs = await file.OpenAsync(FileAccess.ReadAndWrite))
+                            {
+                                using (StreamWriter textWriter = new StreamWriter(fs))
+                                {
+                                    textWriter.Write(jsonContents);
+
+                                }
+
+                            }
+                            await DisplayAlert("File Path", file.Path.ToString(), "OK");
+                            //UserDialogs.Instance.ShowSuccess("Draft saved at:" + file.Path.ToString(), 2000);
+                        
         }
 
-        //txt_name.Text = txt_projname.Text = txt_sitename.Text = txt_fill1.Text = txt_fill2.Text = txt_Check_text11.Text = txt_Check_text12.Text = txt_Check_text21.Text = txt_Check_text22.Text = txt_Check_text31.Text = "";
+            public Task<string> InputBox(INavigation navigation)
+            {
+                // wait in this proc, until user did his input 
+                var tcs = new TaskCompletionSource<string>();
 
+                var lblTitle = new Label { Text = "Health & Safety App", HorizontalOptions = LayoutOptions.Center, FontAttributes = FontAttributes.Bold };
+                var lblMessage = new Label { Text = "Enter file name:" };
+                var txtInput = new Entry { Text = "" };
 
-        //pick_1.SelectedIndex = pick_2.SelectedIndex = pick_3.SelectedIndex = pick_4.SelectedIndex = 0;
+                var btnOk = new Xamarin.Forms.Button
+                {
+                    Text = "Ok",
+                    WidthRequest = 100,
+                    BackgroundColor = Xamarin.Forms.Color.FromRgb(0.8, 0.8, 0.8),
+                };
+                btnOk.Clicked += async (s, e) =>
+                {
+                    // close page
+                    var result = txtInput.Text;
+                    await navigation.PopModalAsync();
+                    // pass result
+                    tcs.SetResult(result);
+                };
 
+                var btnCancel = new Xamarin.Forms.Button
+                {
+                    Text = "Cancel",
+                    WidthRequest = 100,
+                    BackgroundColor = Xamarin.Forms.Color.FromRgb(0.8, 0.8, 0.8)
+                };
+                btnCancel.Clicked += async (s, e) =>
+                {
+                    // close page
+                    await navigation.PopModalAsync();
+                    // pass empty result
+                    tcs.SetResult(null);
+                };
 
-        //pick2_1.SelectedIndex = pick2_2.SelectedIndex = pick2_3.SelectedIndex = pick2_4.SelectedIndex = pick2_5.SelectedIndex = pick2_6.SelectedIndex = pick2_7.SelectedIndex = pick2_8.SelectedIndex = 0;
-        //pick2_11.SelectedIndex = pick2_9.SelectedIndex = pick2_10.SelectedIndex = pick2_12.SelectedIndex = pick2_13.SelectedIndex = pick2_14.SelectedIndex = pick2_15.SelectedIndex = pick2_16.SelectedIndex = 0;
-        //pick2_17.SelectedIndex = pick2_18.SelectedIndex = pick2_19.SelectedIndex = pick2_20.SelectedIndex = pick2_21.SelectedIndex = pick2_22.SelectedIndex = pick2_23.SelectedIndex = pick2_24.SelectedIndex = 0;
+                var slButtons = new StackLayout
+                {
+                    Orientation = StackOrientation.Horizontal,
+                    Children = { btnOk, btnCancel },
+                };
 
-        //step2_other.Text = "";
-        //pick3_1.SelectedIndex = 0;
+                var layout = new StackLayout
+                {
+                    Padding = new Thickness(0, 40, 0, 0),
+                    VerticalOptions = LayoutOptions.StartAndExpand,
+                    HorizontalOptions = LayoutOptions.CenterAndExpand,
+                    Orientation = StackOrientation.Vertical,
+                    Children = { lblTitle, lblMessage, txtInput, slButtons },
+                };
 
+            
+                var page = new ContentPage();
+                page.Content = layout;
+                navigation.PushModalAsync(page);
+          
+                txtInput.Focus();
 
+                return tcs.Task;
+            }
 
-        //pick_a_up.SelectedIndex = 0;
-        //pick_b_up.SelectedIndex = 0;
-        //pick_a_low.SelectedIndex = 0;
-        //pick_b_low.SelectedIndex = 0;
-        //pick_a_up1.SelectedIndex = 0;
-        //pick_b_up1.SelectedIndex = 0;
-        //pick_a_up2.SelectedIndex = 0;
-        //pick_b_up2.SelectedIndex = 0;
-        //pick_a_up3.SelectedIndex = 0;
-        //pick_b_up3.SelectedIndex = 0;
+        
 
 
 
@@ -2794,7 +3352,7 @@ namespace HealthSafetyApp.Views.Topics
         #region OpenDraft
         private async void OnClick_OpenDraft(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new DraftsList("_DRA", 1));
         }
        
         #endregion
@@ -2974,7 +3532,7 @@ namespace HealthSafetyApp.Views.Topics
             public int Streak { get; set; }
             public string CheckBox1data { get; set; }
             public string CheckBox2data { get; set; }
-
+            public List<Team> Teams { get; set; }
 
         }
 
@@ -3342,6 +3900,7 @@ namespace HealthSafetyApp.Views.Topics
         }*/
     }
 
+   
 
 
 }
