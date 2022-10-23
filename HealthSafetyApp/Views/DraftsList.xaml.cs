@@ -47,7 +47,7 @@ namespace HealthSafetyApp.Views
             IFolder rootFolder = null;
             if (Device.RuntimePlatform == Device.iOS)
             {
-                rootFolder = await FileSystem.Current.GetFolderFromPathAsync(PCLStorage.FileSystem.Current.LocalStorage.Path + "/HandSAppDrafts/");
+                rootFolder = await FileSystem.Current.GetFolderFromPathAsync(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/HandSAppDrafts/");
             }
             else if (Device.RuntimePlatform == Device.Android)
             {
@@ -170,7 +170,7 @@ namespace HealthSafetyApp.Views
             IFolder rootFolder = null;
             if (Device.RuntimePlatform == Device.iOS)
             {
-                rootFolder = await FileSystem.Current.GetFolderFromPathAsync(PCLStorage.FileSystem.Current.LocalStorage.Path + "/HandSAppDrafts/");
+                rootFolder = await FileSystem.Current.GetFolderFromPathAsync(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/HandSAppDrafts/");
             }
             else if (Device.RuntimePlatform == Device.Android)
             {
@@ -205,7 +205,7 @@ namespace HealthSafetyApp.Views
             IFolder rootFolder = null;
             if (Device.RuntimePlatform == Device.iOS)
             {
-                rootFolder = await FileSystem.Current.GetFolderFromPathAsync(PCLStorage.FileSystem.Current.LocalStorage.Path + "/HandSAppPdf/");
+                rootFolder = await FileSystem.Current.GetFolderFromPathAsync(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/HandSAppPdf/");
             }
             else if (Device.RuntimePlatform == Device.Android)
             {
@@ -256,9 +256,9 @@ namespace HealthSafetyApp.Views
             if (topic == "_MHA")
                 await Navigation.PushAsync(new Topic4(st.Name + ".json"));
             if (topic == "_ARF")
-                await Navigation.PushAsync(new Topic5(st.Name + ".json"));
+                await Navigation.PushAsync(new AccidentForm(st.Name + ".json"));
             if (topic == "_SSW")
-                await Navigation.PushAsync(new Topic6(st.Name + ".json"));
+                await Navigation.PushAsync(new SafeSystemForm(st.Name + ".json"));
             if (topic == "_ASI")
                 await Navigation.PushAsync(new AuditForm(st.Name + ".json"));
             /*if (topic == "topic7")

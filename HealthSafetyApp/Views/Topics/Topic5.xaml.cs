@@ -9,7 +9,6 @@ namespace HealthSafetyApp.Views.Topics
     public partial class Topic5 : ContentPage
     {
         private string fileText;
-        
         int img_count;
         private string filname;
         public Topic5(string filenam)
@@ -21,18 +20,10 @@ namespace HealthSafetyApp.Views.Topics
                 this.BackgroundColor = Xamarin.Forms.Color.White;
             }
         }
-
-       
-
         protected override void OnAppearing()
         {
-            base.OnAppearing();
-            
+            base.OnAppearing(); 
         }
-
-
-        
-
         private void OnClick_Prev(object sender, EventArgs e)
         {
             if (img_count == 0)
@@ -41,9 +32,7 @@ namespace HealthSafetyApp.Views.Topics
                 lbl_to.Text = "0";
                 return;
             }
-
             int s = 0;
-
             if (ActImg.Text != null)
             {
                 Int32.TryParse(ActImg.Text, out s);
@@ -52,22 +41,14 @@ namespace HealthSafetyApp.Views.Topics
                     s--;
                 }
                 else { s = img_count; }
-
                 Label lbl = this.FindByName<Label>("img" + s);
                 if (lbl.Text != null)
                 {
                     Image1.Source = lbl.Text;
                     ActImg.Text = s.ToString();
-
                 }
-
-
-
-
                 lbl_from.Text = s.ToString();
                 lbl_to.Text = img_count.ToString();
-
-
             }
         }
         private void OnClick_Nxt(object sender, EventArgs e)
@@ -78,7 +59,6 @@ namespace HealthSafetyApp.Views.Topics
                 lbl_to.Text = "0";
                 return;
             }
-
             int s = 0;
 
             if (ActImg.Text != null)
@@ -100,21 +80,14 @@ namespace HealthSafetyApp.Views.Topics
                 }
                 lbl_from.Text = s.ToString();
                 lbl_to.Text = img_count.ToString();
-
-
-
-
             }
         }
-
         private void OnClick_deletepicture(object sender, EventArgs e)
         {
             int s = 0;
-
             if (ActImg.Text != null)
             {
                 img_count--;
-
                 if (img_count <= 0)
                 {
                     lbl_from.Text = "0";
@@ -126,7 +99,6 @@ namespace HealthSafetyApp.Views.Topics
 
                     return;
                 }
-
                 Int32.TryParse(ActImg.Text, out s);
                 Label lbl, lbl1, lbl2;
                 if (s != 10 && s <= img_count)
@@ -152,9 +124,7 @@ namespace HealthSafetyApp.Views.Topics
                         Image1.Source = "";
                         ActImg.Text = "";
                     }
-
                 }
-
                 else
                 {
                     s = img_count;
@@ -167,12 +137,8 @@ namespace HealthSafetyApp.Views.Topics
 
                 lbl_from.Text = s.ToString();
                 lbl_to.Text = img_count.ToString();
-
-
             }
         }
-
-
         private async void OnClick_takepicture(object sender, EventArgs e)
         {
             filname = "1";
@@ -190,15 +156,12 @@ namespace HealthSafetyApp.Views.Topics
             }
             try
             {
-
                 var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
                 {
                     PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium,
                     Directory = "HealthAndSafetyImages",
                     Name = "img" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg"
                 });
-
-
                 if (file == null)
                 {
                     return;
@@ -220,15 +183,12 @@ namespace HealthSafetyApp.Views.Topics
                         return stream;
                     });
                 }
-
             }
             catch (Exception error)
             {
                 await DisplayAlert("Alert!", error.ToString(), "OK");
                 throw error;
             }
-
-
         }
         private async void OnClick_pickPicture(object sender, EventArgs e)
         {
@@ -264,11 +224,9 @@ namespace HealthSafetyApp.Views.Topics
                 return stream;
             });
         }
-
         private async void OnClick_OpenDraft(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new DraftsList("_ARF", 1));
         }
-
     }
 }

@@ -3,11 +3,15 @@ using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
+using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using PCLStorage;
 using Plugin.Media;
 
 using Xamarin.Forms;
+using static System.Net.WebRequestMethods;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
+using Entry = Xamarin.Forms.Entry;
 
 namespace HealthSafetyApp.Views.Topics
 {
@@ -26,7 +30,22 @@ namespace HealthSafetyApp.Views.Topics
                 this.BackgroundColor = Xamarin.Forms.Color.White;
             }
         }
-        
+        protected async override void OnAppearing()
+        {
+
+            try
+            {
+                base.OnAppearing();
+                if (filname != "1")
+                {
+                    await PCLReadJson();
+                }
+            }
+            catch (Exception exception)
+            {
+                Crashes.TrackError(exception);
+            }
+        }
         void Prev_Clicked(System.Object sender, System.EventArgs e)
         {
             if (img_count == 0)
@@ -262,24 +281,53 @@ namespace HealthSafetyApp.Views.Topics
             });
         }
 
-        public async Task PCLReadJson()
-        {
+       
 
-                IFile file = null;
+        public string FileText
+        {
+            get { return fileText; }
+            set
+            {
+                if (FileText == value) return;
+                fileText = value;
+                OnPropertyChanged();
+            }
+        }
+        #region SaveDraft
+        private async void OnClick_SaveDraft(object sender, EventArgs e)
+        {
+            try
+            {
                 if (Device.RuntimePlatform == Device.iOS)
                 {
-                    file = await FileSystem.Current.LocalStorage.GetFileAsync(PCLStorage.FileSystem.Current.LocalStorage.Path + "/HandSAppDrafts/" + filname);
+                    await PCLGenarateJson(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
                 }
                 else if (Device.RuntimePlatform == Device.Android)
                 {
-                    file = await FileSystem.Current.LocalStorage.GetFileAsync("/storage/emulated/0/HandSAppDrafts/" + filname);
+                    await PCLGenarateJson("/storage/emulated/0/");
                 }
-                using (var stream = await file.OpenAsync(PCLStorage.FileAccess.Read))
-                using (var reader = new StreamReader(stream))
-                {
-                    FileText = await reader.ReadToEndAsync();
-                }
-            
+
+            }
+            catch (FormatException) { }
+        }
+        public async Task PCLReadJson()
+        {
+
+            IFile file = null;
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                file = await FileSystem.Current.LocalStorage.GetFileAsync(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/HandSAppDrafts/" + filname);
+            }
+            else if (Device.RuntimePlatform == Device.Android)
+            {
+                file = await FileSystem.Current.LocalStorage.GetFileAsync("/storage/emulated/0/HandSAppDrafts/" + filname);
+            }
+            using (var stream = await file.OpenAsync(PCLStorage.FileAccess.Read))
+            using (var reader = new StreamReader(stream))
+            {
+                FileText = await reader.ReadToEndAsync();
+            }
+
 
             DraftFields account = JsonConvert.DeserializeObject<DraftFields>(FileText);
             txt_name.Text = account.Name1;
@@ -329,35 +377,7 @@ namespace HealthSafetyApp.Views.Topics
                 Image1.Source = img1.Text;
             }
 
-        }
-
-        public string FileText
-        {
-            get { return fileText; }
-            set
-            {
-                if (FileText == value) return;
-                fileText = value;
-                OnPropertyChanged();
             }
-        }
-        #region SaveDraft
-        private async void OnClick_SaveDraft(object sender, EventArgs e)
-        {
-            try
-            {
-                if (Device.RuntimePlatform == Device.iOS)
-                {
-                    await PCLGenarateJson(PCLStorage.FileSystem.Current.LocalStorage.Path);
-                }
-                else if (Device.RuntimePlatform == Device.Android)
-                {
-                    await PCLGenarateJson("/storage/emulated/0/");
-                }
-
-            }
-            catch (FormatException) { }
-        }
         public async Task PCLGenarateJson(string path)
         {
             string dat = "";
@@ -432,6 +452,7 @@ namespace HealthSafetyApp.Views.Topics
 
         }
         #endregion
+
         public Task<string> InputBox(INavigation navigation)
         {
             // wait in this proc, until user did his input 
@@ -496,7 +517,6 @@ namespace HealthSafetyApp.Views.Topics
             // then proc returns the result
             return tcs.Task;
         }
-
         private async void OnClick_OpenDraft(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new DraftsList("_ARF", 1));

@@ -8,6 +8,9 @@ using Acr.UserDialogs;
 using System.Globalization;
 using Plugin.Media;
 using Microsoft.AppCenter.Crashes;
+using PCLStorage;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
+using Entry = Xamarin.Forms.Entry;
 
 namespace HealthSafetyApp.Views.Topics
 {
@@ -30,12 +33,16 @@ namespace HealthSafetyApp.Views.Topics
             }
             
         }
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             
             try
             {
                 base.OnAppearing();
+                if (filname != "1")
+                {
+                    await PCLReadJson();
+                }
             }
             catch (Exception exception)
             {
@@ -1525,48 +1532,32 @@ namespace HealthSafetyApp.Views.Topics
         {
             try
             {
-                await PCLGenarateJson("/storage/emulated/0/");
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    await PCLGenarateJson(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+                }
+                else if (Device.RuntimePlatform == Device.Android)
+                {
+                    await PCLGenarateJson("/storage/emulated/0/");
+                }
             }
             catch (FormatException) { }
         }
+
         public async Task PCLGenarateJson(string path)
         {
             string dat = "";
             var dt = datepicker.Date;
             dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
-#pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
-            if (Device.OS == TargetPlatform.Windows)
-#pragma warning restore CS0612 // Type or member is obsolete
-#pragma warning restore CS0618 // Type or member is obsolete
-            {
-                string filepath = "";
+
+                IFile file;
                 DraftFields s = new DraftFields
                 {
                     Name1 = txt_name.Text,
                     ProjectName = txt_projname.Text,
                     SiteName = txt_sitename.Text,
                     date = dat,
-
-
-                };
-                txt_name.Text = txt_projname.Text = txt_sitename.Text = "";
-
-            }
-#pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
-            if (Device.OS == TargetPlatform.Android)
-#pragma warning restore CS0612 // Type or member is obsolete
-#pragma warning restore CS0618 // Type or member is obsolete
-            {
-                
-                DraftFields s = new DraftFields
-                {
-                    Name1 = txt_name.Text,
-                    ProjectName = txt_projname.Text,
-                    SiteName = txt_sitename.Text,
-                    date = dat,
-                    PerPres=txt_persons.Text,  
+                    PerPres = txt_persons.Text,
                     Desc = txt_Description.Text,
                     CB11 = CB11.Checked ? "1" : "0",
                     CB12 = CB12.Checked ? "1" : "0",
@@ -1743,9 +1734,9 @@ namespace HealthSafetyApp.Views.Topics
                     TB43 = TB43.Text,
                     TB44 = TB44.Text,
 
-                    RLRed=ResultLblPoor.Text,
-                    RLOrange=ResultLblModerate.Text,
-                    RLGreen=ResultLblGood.Text,   
+                    RLRed = ResultLblPoor.Text,
+                    RLOrange = ResultLblModerate.Text,
+                    RLGreen = ResultLblGood.Text,
 
                     img1 = img1.Text,
                     img2 = img2.Text,
@@ -1763,13 +1754,36 @@ namespace HealthSafetyApp.Views.Topics
 
                 string jsonContents = JsonConvert.SerializeObject(s);
 
-                
-            }
+                IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(path);
+                IFolder folder = await rootFolder.CreateFolderAsync("HandSAppDrafts", CreationCollisionOption.OpenIfExists);
+                if (filname != "1")
+                { file = await folder.CreateFileAsync(filname, CreationCollisionOption.ReplaceExisting); }
+                else
+                {
+                    string fnam = await InputBox(this.Navigation);
+                    if (fnam is null) { return; }
+                    else
+                    {
+                        if (fnam == "") { fnam = "Draft_ASI.json"; } else { fnam = fnam + "_ASI.json"; }
+                    }
+                    file = await folder.CreateFileAsync(fnam, CreationCollisionOption.GenerateUniqueName);
+                }
+                using (var fs = await file.OpenAsync(PCLStorage.FileAccess.ReadAndWrite))
+                {
+                    using (StreamWriter textWriter = new StreamWriter(fs))
+                    {
+                        textWriter.Write(jsonContents);
+
+                    }
+
+                }
+                await DisplayAlert("File Path", file.Path.ToString(), "OK");
+                //UserDialogs.Instance.ShowSuccess("Draft saved at:" + file.Path.ToString(), 2000);
+            
 
 
 
         }
-
         public Task<string> InputBox(INavigation navigation)
         {
             // wait in this proc, until user did his input 
@@ -1837,28 +1851,21 @@ namespace HealthSafetyApp.Views.Topics
 
         #endregion
 
-
-
-
         public async Task PCLReadJson()
         {
-
-#pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
-            if (Device.OS == TargetPlatform.Windows)
-#pragma warning restore CS0612 // Type or member is obsolete
-#pragma warning restore CS0618 // Type or member is obsolete
+            IFile file = null;
+            if (Device.RuntimePlatform == Device.iOS)
             {
-                string filepath = "";
-               
+                file = await FileSystem.Current.LocalStorage.GetFileAsync(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/HandSAppDrafts/" + filname);
             }
-#pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
-            if (Device.OS == TargetPlatform.Android)
-#pragma warning restore CS0612 // Type or member is obsolete
-#pragma warning restore CS0618 // Type or member is obsolete
+            else if (Device.RuntimePlatform == Device.Android)
             {
-                
+                file = await FileSystem.Current.LocalStorage.GetFileAsync("/storage/emulated/0/HandSAppDrafts/" + filname);
+            }
+            using (var stream = await file.OpenAsync(PCLStorage.FileAccess.Read))
+            using (var reader = new StreamReader(stream))
+            {
+                FileText = await reader.ReadToEndAsync();
             }
 
             DraftFields account = JsonConvert.DeserializeObject<DraftFields>(FileText);
@@ -1867,7 +1874,7 @@ namespace HealthSafetyApp.Views.Topics
             txt_sitename.Text = account.SiteName;
             datepicker.Date = Convert.ToDateTime(account.date);
             txt_Description.Text = account.Desc;
-            txt_persons.Text = account.PerPres;  
+            txt_persons.Text = account.PerPres;
             if (account.CB11 == "1") { CB11.Checked = true; } else { CB11.Checked = false; }
             if (account.CB12 == "1") { CB12.Checked = true; } else { CB12.Checked = false; }
             if (account.CB13 == "1") { CB13.Checked = true; } else { CB13.Checked = false; }
@@ -2041,7 +2048,7 @@ namespace HealthSafetyApp.Views.Topics
             TB42.Text = account.TB42;
             TB43.Text = account.TB43;
             TB44.Text = account.TB44;
-            
+
             img1.Text = account.img1;
             img2.Text = account.img2;
             img3.Text = account.img3;
@@ -2054,8 +2061,8 @@ namespace HealthSafetyApp.Views.Topics
             img10.Text = account.img10;
 
             ResultLblPoor.Text = account.RLRed;
-            ResultLblModerate.Text  = account.RLOrange;
-            ResultLblGood.Text   = account.RLGreen;
+            ResultLblModerate.Text = account.RLOrange;
+            ResultLblGood.Text = account.RLGreen;
 
             img_count = 0;
             for (int i = 1; i <= 10; i++)
@@ -2074,7 +2081,9 @@ namespace HealthSafetyApp.Views.Topics
             }
 
         }
-        
+
+
+
 
 
         public class DraftFields

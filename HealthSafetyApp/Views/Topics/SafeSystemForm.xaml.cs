@@ -1,5 +1,11 @@
 ﻿using System;
+using System.Globalization;
+using System.IO;
+using System.Threading.Tasks;
 using Acr.UserDialogs;
+using Microsoft.AppCenter.Crashes;
+using Newtonsoft.Json;
+using PCLStorage;
 using Plugin.Media;
 
 using Xamarin.Forms;
@@ -20,6 +26,77 @@ namespace HealthSafetyApp.Views.Topics
             {
                 this.BackgroundColor = Xamarin.Forms.Color.White;
             }
+        }
+        protected async override void OnAppearing()
+        {
+
+            try
+            {
+                base.OnAppearing();
+                if (filname != "1")
+                {
+                    await PCLReadJson();
+                }
+            }
+            catch (Exception exception)
+            {
+                Crashes.TrackError(exception);
+            }
+        }
+        public async Task PCLReadJson()
+        {
+
+
+            IFile file = null;
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                file = await FileSystem.Current.LocalStorage.GetFileAsync(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/HandSAppDrafts/" + filname);
+            }
+            else if (Device.RuntimePlatform == Device.Android)
+            {
+                file = await FileSystem.Current.LocalStorage.GetFileAsync("/storage/emulated/0/HandSAppDrafts/" + filname);
+            }
+
+                using (var stream = await file.OpenAsync(PCLStorage.FileAccess.Read))
+                using (var reader = new StreamReader(stream))
+                {
+                    FileText = await reader.ReadToEndAsync();
+                }
+            
+
+            DraftFields account = JsonConvert.DeserializeObject<DraftFields>(FileText);
+            txt_name.Text = account.Name1;
+            txt_projname.Text = account.ProjectName;
+
+            datepicker.Date = Convert.ToDateTime(account.date);
+            headlines.Text = account.detail;
+            img1.Text = account.img1;
+            img2.Text = account.img2;
+            img3.Text = account.img3;
+            img4.Text = account.img4;
+            img5.Text = account.img5;
+            img6.Text = account.img6;
+            img7.Text = account.img7;
+            img8.Text = account.img8;
+            img9.Text = account.img9;
+            img10.Text = account.img10;
+            img_count = 0;
+            for (int i = 1; i <= 10; i++)
+            {
+                Label lbl = this.FindByName<Label>("img" + i);
+                if (!(lbl.Text is null))
+                {
+                    img_count++;
+                }
+            }
+
+            if (img1 != null)
+            {
+                ActImg.Text = "1";
+                Image1.Source = img1.Text;
+            }
+
+
         }
         void Prev_Clicked(System.Object sender, System.EventArgs e)
         {
@@ -260,5 +337,159 @@ namespace HealthSafetyApp.Views.Topics
         {
             await Navigation.PushAsync(new DraftsList("_SSW", 1));
         }
+
+        #region SaveDraft
+        private async void OnClick_SaveDraft(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    await PCLGenarateJson(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+                }
+                else if (Device.RuntimePlatform == Device.Android)
+                {
+                    await PCLGenarateJson("/storage/emulated/0/");
+                }
+
+            }
+            catch (FormatException) { }
+        }
+        public async Task PCLGenarateJson(string path)
+        {
+
+            string dat = "";
+            var dt = datepicker.Date;
+            dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
+
+            IFile file;
+            DraftFields s = new DraftFields
+            {
+                Name1 = txt_name.Text,
+                ProjectName = txt_projname.Text,
+
+                date = dat,
+                detail = headlines.Text,
+                img1 = img1.Text,
+                img2 = img2.Text,
+                img3 = img3.Text,
+                img4 = img4.Text,
+                img5 = img5.Text,
+                img6 = img6.Text,
+                img7 = img7.Text,
+                img8 = img8.Text,
+                img9 = img9.Text,
+                img10 = img10.Text,
+            };
+
+            string jsonContents = JsonConvert.SerializeObject(s);
+
+            IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(path);
+            IFolder folder = await rootFolder.CreateFolderAsync("HandSAppDrafts", CreationCollisionOption.OpenIfExists);
+            if (filname != "1")
+            { file = await folder.CreateFileAsync(filname, CreationCollisionOption.ReplaceExisting); }
+            else
+            {
+                string fnam = await InputBox(this.Navigation);
+                if (fnam is null) { return; }
+                else
+                {
+                    if (fnam == "") { fnam = "Draft_SSW.json"; } else { fnam = fnam + "_SSW.json"; }
+                }
+                file = await folder.CreateFileAsync(fnam, CreationCollisionOption.GenerateUniqueName);
+            }
+            using (var fs = await file.OpenAsync(PCLStorage.FileAccess.ReadAndWrite))
+            {
+                using (StreamWriter textWriter = new StreamWriter(fs))
+                {
+                    textWriter.Write(jsonContents);
+
+                }
+
+            }
+            await DisplayAlert("File Path", file.Path.ToString(), "OK");
+            //UserDialogs.Instance.ShowSuccess("Draft saved at:" + file.Path.ToString(), 2000);
+        }
+
+        public Task<string> InputBox(INavigation navigation)
+        {
+            // wait in this proc, until user did his input 
+            var tcs = new TaskCompletionSource<string>();
+
+            var lblTitle = new Label { Text = "Health & Safety App", HorizontalOptions = LayoutOptions.Center, FontAttributes = FontAttributes.Bold };
+            var lblMessage = new Label { Text = "Enter file name:" };
+            var txtInput = new Entry { Text = "" };
+
+            var btnOk = new Xamarin.Forms.Button
+            {
+                Text = "Ok",
+                WidthRequest = 100,
+                BackgroundColor = Xamarin.Forms.Color.FromRgb(0.8, 0.8, 0.8),
+            };
+            btnOk.Clicked += async (s, e) =>
+            {
+                // close page
+                var result = txtInput.Text;
+                await navigation.PopModalAsync();
+                // pass result
+                tcs.SetResult(result);
+            };
+
+            var btnCancel = new Xamarin.Forms.Button
+            {
+                Text = "Cancel",
+                WidthRequest = 100,
+                BackgroundColor = Xamarin.Forms.Color.FromRgb(0.8, 0.8, 0.8)
+            };
+            btnCancel.Clicked += async (s, e) =>
+            {
+                // close page
+                await navigation.PopModalAsync();
+                // pass empty result
+                tcs.SetResult(null);
+            };
+
+            var slButtons = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                Children = { btnOk, btnCancel },
+            };
+
+            var layout = new StackLayout
+            {
+                Padding = new Thickness(0, 40, 0, 0),
+                VerticalOptions = LayoutOptions.StartAndExpand,
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                Orientation = StackOrientation.Vertical,
+                Children = { lblTitle, lblMessage, txtInput, slButtons },
+            };
+
+            // create and show page
+            var page = new ContentPage();
+            page.Content = layout;
+            navigation.PushModalAsync(page);
+            // open keyboard
+            txtInput.Focus();
+
+            // code is waiting her, until result is passed with tcs.SetResult() in btn-Clicked
+            // then proc returns the result
+            return tcs.Task;
+        }
+        public string FileText
+        {
+            get { return fileText; }
+            set
+            {
+                if (FileText == value) return;
+                fileText = value;
+                OnPropertyChanged();
+            }
+        }
+
     }
+
+    
+    #endregion
+
 }
+

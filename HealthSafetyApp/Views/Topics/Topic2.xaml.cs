@@ -59,7 +59,7 @@ namespace HealthSafetyApp.Views.Topics
             {
                 if (Device.RuntimePlatform == Device.iOS)
                 {
-                    await PCLReportGenaratePdf(PCLStorage.FileSystem.Current.LocalStorage.Path);
+                    await PCLReportGenaratePdf(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
                 }
                 else if (Device.RuntimePlatform == Device.Android)
                 {
@@ -742,7 +742,7 @@ namespace HealthSafetyApp.Views.Topics
             {
                 if (Device.RuntimePlatform == Device.iOS)
                 {
-                    await PCLGenarateJson(PCLStorage.FileSystem.Current.LocalStorage.Path);
+                    await PCLGenarateJson(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
                 }
                 else if (Device.RuntimePlatform == Device.Android)
                 {
@@ -961,7 +961,7 @@ namespace HealthSafetyApp.Views.Topics
             IFile file = null;
             if (Device.RuntimePlatform == Device.iOS)
             {
-                file = await FileSystem.Current.LocalStorage.GetFileAsync(PCLStorage.FileSystem.Current.LocalStorage.Path + "/HandSAppDrafts/" + filname);
+                file = await FileSystem.Current.LocalStorage.GetFileAsync(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/HandSAppDrafts/" + filname);
             }
             else if (Device.RuntimePlatform == Device.Android)
             {
