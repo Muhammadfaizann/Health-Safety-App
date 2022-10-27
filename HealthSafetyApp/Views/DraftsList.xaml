@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sfpdfviewer="clr-namespace:Syncfusion.SfPdfViewer.XForms;assembly=Syncfusion.SfPdfViewer.XForms"
              x:Class="HealthSafetyApp.Views.DraftsList">
     <StackLayout x:Name="Stack_search_draft"  Orientation="Vertical" HorizontalOptions="FillAndExpand">
         <Label x:Name="lbl_alert" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="No Drafts Available" TextColor="Black"/>
@@ -19,4 +20,5 @@
 
         </ListView>
     </StackLayout>
+     
 </ContentPage>

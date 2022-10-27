@@ -12,6 +12,7 @@ using Xamarin.Forms;
 using static System.Net.WebRequestMethods;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Entry = Xamarin.Forms.Entry;
+using System.Text;
 
 namespace HealthSafetyApp.Views.Topics
 {
@@ -292,6 +293,275 @@ namespace HealthSafetyApp.Views.Topics
                 fileText = value;
                 OnPropertyChanged();
             }
+        }
+        private async void OnClick_SavePDF(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    await PCLReportGenaratePdf(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+                }
+                else if (Device.RuntimePlatform == Device.Android)
+                {
+                    await PCLReportGenaratePdf("/storage/emulated/0/");
+                }
+            }
+            catch (Exception exception)
+            {
+                Crashes.TrackError(exception);
+            }
+        }
+        public async Task PCLReportGenaratePdf(string path)
+        {
+            string dat = "";
+            var dt = datepicker.Date;
+            dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
+            //            if (Device.OS == TargetPlatform.Windows)
+            //            {
+            //                StringBuilder sb = new StringBuilder();
+            //                sb.Append("<header class='headerdiv'>");
+            //                sb.Append("<b><h1 style='color:#000000;font-size:30px;'>Form</h1></b>");
+            //                sb.Append("<br/>");
+            //                sb.Append("<div>");
+            //                sb.Append("<b><p style='color:#0086b7;font-size:16px;'>Name</p></b>");
+            //                sb.Append("<u><p style='font-size:14px;'>" + txt_name.Text + "</p></u>");
+            //                sb.Append("<b><p style='color:#0086b7;font-size:16px;'>Project Name</p></b>");
+            //                sb.Append("<u><p style='font-size:14px;'>" + txt_projname.Text + "</p></u>");
+            //                sb.Append("<b><p style='color:#0086b7;font-size:16px;'>Site Name</p></b>");
+            //                sb.Append("<u><p style='font-size:14px;'>" + txt_sitename.Text + "</p></u>");
+            //                sb.Append("<b><p style='color:#0086b7;font-size:16px;'>Date</p></b>");
+            //                sb.Append("<u><p style='font-size:14px;'>" + dat + "</p></u>");
+            //                sb.Append("<br/>");
+            //                if (chkbx1.IsChecked == true)
+            //                { sb.Append("<p style='font-size:16px;'>(o) " + txt_Check1_text.Text + "</p>"); }
+            //                else
+            //                { sb.Append("<p style='font-size:16px;'>( )  " + txt_Check1_text.Text + "</p>"); }
+            //                if (chkbx2.IsChecked == true)
+            //                { sb.Append("<p style='font-size:16px;'>(o)  " + txt_Check2_text.Text + "</p>"); }
+            //                else
+            //                { sb.Append("<p style='font-size:16px;'>( ) " + txt_Check2_text.Text + "</p>"); }
+
+            //                sb.Append("</div>");
+            //                sb.Append("</header>");
+            //                sb.Append("<br/>");
+            //                sb.Append("<br/>");
+
+
+            //                sb.Append("<main>");
+
+            //                sb.Append("</main>");
+            //                var filepath = "";
+            //                var winwrite = DependencyService.Get<IWPExternalStorageWriter>();
+            //                filepath = await winwrite.CreateFile("hello.html");
+            //                IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(filepath);
+            //                IFolder folder = await rootFolder.CreateFolderAsync("HandSAppPdf", CreationCollisionOption.OpenIfExists);
+            //                IFile file = await folder.CreateFileAsync("Topic3_pdf.html", CreationCollisionOption.GenerateUniqueName);
+            //                await file.WriteAllTextAsync(sb.ToString());
+            //                await DisplayAlert("File Path", file.Path.ToString(), "OK");
+            //            }
+#pragma warning disable CS0618 // Type or member is obsolete
+#pragma warning disable CS0612 // Type or member is obsolete
+            if (Device.OS == TargetPlatform.Android)
+#pragma warning restore CS0612 // Type or member is obsolete
+#pragma warning restore CS0618 // Type or member is obsolete
+            {
+                StringBuilder sb = new StringBuilder();
+
+
+                sb.Append("<main>");
+                sb.Append(@"<table border='0' width='100%'><tbody>
+<tr>
+<td colspan='10' bgcolor='gray' align='center'>
+<font color='white'><h3><b>Accident/Incident Record Form </b></h3></font></center>
+</td></tr>
+<tr>
+<td colspan='10' bgcolor='silver' align='right'>
+<p style='color:#ffffff;font-size:5px;'><i>Created using Accident Record tool © @The Health And Safety App </i></p>
+</td>
+
+</tr>
+</tbody></table>
+<br>
+<table border='0' width='100%'><tbody>
+<tr>
+<td colspan='2' bgcolor='#3399ff' align='center'>
+<font color='white'><h3><b>1. </b></h3></font>
+</td>
+<td colspan='18' bgcolor='gray' align='left'>
+<font color='white'><h3><b>About the person involved with accident / incident </b></h3></font>
+</td></tr>
+</tbody></table>
+<br>
+<table border='0' width='100%' border='0' ><tbody>
+
+<tr bgcolor='whitesmoke'>
+<td colspan='4' rowspan='1'><font color='#3399ff'> Name: </font></td>
+<td colspan='16' rowspan='1' align='left' border='0'>" + txt_name.Text + @" </td>
+</tr>
+
+<tr bgcolor='lightgray'>
+<td colspan='4' rowspan='1'><font color='#3399ff'> Address: </font></td>
+<td colspan='16' rowspan='1' align='left' border='0'>" + txt_Address.Text + @" </td>
+</tr>
+
+<tr bgcolor='whitesmoke'>
+<td colspan='4' rowspan='1'><font color='#3399ff'> City/Town: </font></td>
+<td colspan='16' rowspan='1' align='left' border='0'>" + txt_city.Text + @" </td>
+</tr>
+
+<tr bgcolor='lightgray'>
+<td colspan='4' rowspan='1'><font color='#3399ff'> Postcode: </font></td>
+<td colspan='16' rowspan='1' align='left' border='0'>" + txt_postcode.Text + @" </td>
+</tr>
+
+<tr bgcolor='whitesmoke'>
+<td colspan='4' rowspan='1'><font color='#3399ff'>Telephone: </font></td>
+<td colspan='16' rowspan='1' align='left' border='0'>" + txt_telephone.Text + @" </td>
+</tr>
+
+<tr bgcolor='lightgray'>
+<td colspan='4' rowspan='1'><font color='#3399ff'>Occupation: </font></td>
+<td colspan='16' rowspan='1' align='left' border='0'>" + txt_occupation.Text + @" </td>
+</tr>
+
+ </tbody> </table>
+<br>
+
+<table border='0' width='100%'><tbody>
+<tr>
+<td colspan='2' bgcolor='#3399ff' align='center'>
+<font color='white'><h3><b>2. </b></h3></font>
+</td>
+<td colspan='18' bgcolor='gray' align='left'>
+<font color='white'><h3><b>Details of person reporting this accident / incident</b></h3></font>
+</td></tr>
+</tbody></table><br>
+<table border='0' width='100%' border='0' ><tbody>
+
+<tr bgcolor='whitesmoke'>
+<td colspan='4' rowspan='1'><font color='#3399ff'> Name: </font></td>
+<td colspan='16' rowspan='1' align='left' border='0'>" + txt_name2.Text + @" </td>
+</tr>
+
+<tr bgcolor='lightgray'>
+<td colspan='4' rowspan='1'><font color='#3399ff'> Address: </font></td>
+<td colspan='16' rowspan='1' align='left' border='0'>" + txt_Address2.Text + @" </td>
+</tr>
+
+<tr bgcolor='whitesmoke'>
+<td colspan='4' rowspan='1'><font color='#3399ff'> City/Town: </font></td>
+<td colspan='16' rowspan='1' align='left' border='0'>" + txt_city2.Text + @" </td>
+</tr>
+
+<tr bgcolor='lightgray'>
+<td colspan='4' rowspan='1'><font color='#3399ff'> Postcode: </font></td>
+<td colspan='16' rowspan='1' align='left' border='0'>" + txt_postcode2.Text + @" </td>
+</tr>
+
+<tr bgcolor='whitesmoke'>
+<td colspan='4' rowspan='1'><font color='#3399ff'>Telephone: </font></td>
+<td colspan='16' rowspan='1' align='left' border='0'>" + txt_telephone2.Text + @" </td>
+</tr>
+
+<tr bgcolor='lightgray'>
+<td colspan='4' rowspan='1'><font color='#3399ff'>Occupation: </font></td>
+<td colspan='16' rowspan='1' align='left' border='0'>" + txt_occupation2.Text + @" </td>
+</tr>
+
+ </tbody> </table>
+<br>
+<table border='0' width='100%'><tbody>
+<tr>
+<td colspan='2' bgcolor='#3399ff' align='center'>
+<font color='white'><h3><b>3. </b></h3></font>
+</td>
+<td colspan='18' bgcolor='gray' align='left'>
+<font color='white'><h3><b>Details of accident / incident and injury</b></h3></font>
+</td></tr>
+</tbody></table>
+<br>
+<table border='0' width='100%'><tbody>
+<tr bgcolor='whitesmoke'>
+
+<td colspan='3' rowspan='1'><font color='#3399ff'>Date: </font></td>
+<td colspan='7' rowspan='1' align='left' border='0'>" + dat + @" </td>
+
+<td colspan='3' rowspan='1' align='right' ><font color='#3399ff'>Time: </font></td>
+<td colspan='7' rowspan='1' align='left' border='0'>" + timepicker.Time.ToString() + @" </td>
+
+</tr>
+</tbody></table>
+<table border='0' width='100%' border='0' ><tbody>
+
+<tr bgcolor='lightgray'>
+<td colspan='20' rowspan='1' align='left'><font color='#3399ff'> Where did the accident/injury take place? </font></td>
+</tr>
+
+<tr bgcolor='lightgray'>
+<td colspan='20' rowspan='1' align='left' border='0'>" + entry_Where.Text + @" </td>
+</tr>
+
+<tr bgcolor='whitesmoke'>
+<td colspan='20' rowspan='1' align='left'><font color='#3399ff'> How the accident happened, Give the cause if you can? </font></td>
+</tr>
+
+<tr bgcolor='whitesmoke'>
+<td colspan='20' rowspan='1' align='left' border='0'>" + entry_How.Text + @" </td>
+</tr>
+
+<tr bgcolor='lightgray'>
+<td colspan='20' rowspan='1' align='left'><font color='#3399ff'> Details of accident/injury? </font></td>
+</tr>
+
+<tr bgcolor='lightgray'>
+<td colspan='20' rowspan='1' align='left' border='0'>" + entry_Details.Text + @" </td>
+</tr>
+
+
+</table><br/>
+<table style='width: 100%;' border='1'>
+<tbody>
+<tr>
+<td colspan='3' rowspan='1'> Signature(s) </td>
+<td colspan='7' rowspan='2'>  </td>
+<td colspan='2' rowspan='1'> Date: </td>
+<td colspan='3' rowspan='2'> </td>
+<td colspan='2' rowspan='1'> Review Date: </td>
+<td colspan='3' rowspan='2'> </td>
+</tr>
+</tbody>
+</table>");
+
+                sb.Append("</main>");
+
+                StringReader sr = new StringReader(sb.ToString());
+
+                IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(path);
+                IFolder folder = await rootFolder.CreateFolderAsync("HandSAppPdf", CreationCollisionOption.OpenIfExists);
+                string fnam = await InputBox(this.Navigation);
+                if (fnam is null) { return; }
+                else
+
+                { if (fnam == "") { fnam = "Accident record.pdf"; } else { fnam = fnam + ".pdf"; } }
+
+                IFile file = await folder.CreateFileAsync(fnam, CreationCollisionOption.GenerateUniqueName);
+
+                using (var fs = await file.OpenAsync(PCLStorage.FileAccess.ReadAndWrite))
+                {
+                    
+
+                    
+
+                    await DisplayAlert("File Path", file.Path.ToString(), "OK");
+                    //UserDialogs.Instance.ShowSuccess("PDF saved at:" + file.Path.ToString(), 2000);
+
+                }
+            }
+
+            //txt_name.Text = txt_projname.Text = txt_sitename.Text = "";
+
+
         }
         #region SaveDraft
         private async void OnClick_SaveDraft(object sender, EventArgs e)

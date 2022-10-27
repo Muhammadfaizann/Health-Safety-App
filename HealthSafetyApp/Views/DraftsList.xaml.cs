@@ -1,6 +1,8 @@
 ﻿using Acr.UserDialogs;
+using HealthSafetyApp.Helpers;
 using HealthSafetyApp.Views.Topics;
 using PCLStorage;
+using Syncfusion.SfPdfViewer.XForms;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +17,7 @@ namespace HealthSafetyApp.Views
     public partial class DraftsList : ContentPage
     {
         private string topic;
+
         public DraftsList(string topic_nam, int i)
         {
             InitializeComponent();
@@ -237,7 +240,7 @@ namespace HealthSafetyApp.Views
             UserDialogs.Instance.ShowLoading("Please wait..");
             if (topic == "PDFS")
             {
-                // Open_PDF(st.Name);
+                 Open_PDF(st.Name);
                 UserDialogs.Instance.HideLoading();
                 return;
             }
@@ -278,28 +281,38 @@ namespace HealthSafetyApp.Views
             UserDialogs.Instance.HideLoading();
             topic = "";
         }
-        /*private async void Open_PDF(string name)
+        private async void Open_PDF(string name)
         {
-
-
-            IFolder path = await FileSystem.Current.GetFolderFromPathAsync("/storage/emulated/0/HandSAppPdf/");
-            string dbPath = Path.Combine(path.Path, name);
-
-
-            var documentViewer = DependencyService.Get<IDocumentViewer>();
-            var mimeType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-            if (Path.GetExtension(dbPath).ToLower() == ".pdf")
-                mimeType = "application/pdf";
-
             try
             {
-                documentViewer.ShowDocumentFile(dbPath, mimeType);
+
+            IFolder rootFolder = null;
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                rootFolder = await FileSystem.Current.GetFolderFromPathAsync(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/HandSAppPdf/");
+            }
+            else if (Device.RuntimePlatform == Device.Android)
+            {
+                rootFolder = await FileSystem.Current.GetFolderFromPathAsync("/storage/emulated/0/HandSAppPdf/");
+            }
+            string dbPath = Path.Combine(rootFolder.Path, name);
+
+
+
+                /* var mimeType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                 if (Path.GetExtension(dbPath).ToLower() == ".pdf")
+                     mimeType = "application/pdf";*/
+                Task<Stream> streamTask = DependencyService.Get<IDependencyService>().LoadDocumentToViewer(dbPath);
+                Stream fileStream = streamTask.Result as Stream;
+                await Navigation.PushModalAsync(new PDFview("0", fileStream)); 
+
+                
             }
             catch (Exception ex)
             {
 
             }
-        }*/
+        }
     
 
     public class fileenam

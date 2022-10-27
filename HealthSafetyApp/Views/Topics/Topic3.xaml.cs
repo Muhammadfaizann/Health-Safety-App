@@ -8,6 +8,7 @@ using Acr.UserDialogs;
 using System.Globalization;
 using Plugin.Media;
 using PCLStorage;
+using Microsoft.AppCenter.Crashes;
 
 namespace HealthSafetyApp.Views.Topics
 {
@@ -49,17 +50,26 @@ namespace HealthSafetyApp.Views.Topics
                 await PCLReadJson();
             }
         }
-       
+
 
         #region SavePDF
         private async void OnClick_SavePDF(object sender, EventArgs e)
         {
             try
-            {                                            
-                await PCLReportGenaratePdf("/storage/emulated/0/");             
+            {
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    await PCLReportGenaratePdf(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+                }
+                else if (Device.RuntimePlatform == Device.Android)
+                {
+                    await PCLReportGenaratePdf("/storage/emulated/0/");
+                }
             }
-            catch (FormatException) { }
-
+            catch (Exception exception)
+            {
+                Crashes.TrackError(exception);
+            }
         }
         public async Task PCLReportGenaratePdf(string path)
         {

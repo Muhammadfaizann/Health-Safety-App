@@ -171,10 +171,19 @@ namespace HealthSafetyApp.Views.Topics
         {
             try
             {
-                await PCLReportGenaratePdf("/storage/emulated/0/");
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    await PCLReportGenaratePdf(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+                }
+                else if (Device.RuntimePlatform == Device.Android)
+                {
+                    await PCLReportGenaratePdf("/storage/emulated/0/");
+                }
             }
-            catch (FormatException) { }
-
+            catch (Exception exception)
+            {
+                Crashes.TrackError(exception);
+            }
         }
         public async Task PCLReportGenaratePdf(string path)
         {

@@ -12,9 +12,12 @@ namespace HealthSafetyApp.Views.Topics
     {
         string grid_id = "";
         Stream fileStream;
-        public PDFview(string id)
+        public PDFview(string id, Stream stream=null)
         {
-            grid_id = id;
+            if (id == "0")
+                fileStream = stream;
+            else
+                grid_id = id;
             InitializeComponent();
         }
         protected override void OnAppearing()

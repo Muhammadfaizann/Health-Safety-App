@@ -3009,60 +3009,22 @@ namespace HealthSafetyApp.Views.Topics
                 using (var fs = await file.OpenAsync(FileAccess.ReadAndWrite))
                 {
 
-                    var document = new Document(PageSize.A4);//L,R,T,B
-                    HTMLWorker htmlparser = new HTMLWorker(document);
-                    PdfWriter writer = PdfWriter.GetInstance(document, fs);
 
+                    //Create a new PDF document.
+                    PdfDocument document = new PdfDocument();
+                    //Add a page to the document.
+                    PdfPage page = document.Pages.Add();
+                    //Create PDF graphics for the page.
+                    PdfGraphics graphics = page.Graphics;
+                    //Set the standard font.
+                    PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
+                    //Draw the text.
+                    graphics.DrawString("Hello World!!!", font, PdfBrushes.Black, new PointF(0, 0));
+                    //Save the document.
+                    document.Save(fs);
+                    //Close the document.
+                    document.Close(true);
                     
-                    writer.PageEvent = new PDFFooter();
-                    document.Open();
-                    htmlparser.Parse(sr);
-                    var remainingPageSpace = writer.GetVerticalPosition(false) - document.BottomMargin;
-                    if (remainingPageSpace <= (document.PageSize.Height / 3))
-                    {
-                        document.NewPage();
-                    }
-
-                    htmlparser.Parse(sr2);
-                    Label lbl;
-                    double wDif, hDif;
-                    float prcnt = 0;
-                    wDif = hDif = 0;
-                    iTextSharp.text.Image addLogo;
-                    for (int i = 1; i <= 10; i++)
-                    {
-                        lbl = this.FindByName<Label>("img" + i);
-                        if (lbl.Text != null)
-                        {
-                            addLogo = default(iTextSharp.text.Image);
-                            addLogo = iTextSharp.text.Image.GetInstance(lbl.Text);
-
-                            wDif = (PageSize.A4.Width - (PageSize.A4.Width * .05)) / addLogo.Width;
-                            hDif = (PageSize.A4.Height - (PageSize.A4.Height * .05)) / addLogo.Height;
-
-                            if (wDif < 1 || hDif < 1)
-                            {
-                                if (wDif > hDif)
-                                {
-                                    prcnt = float.Parse(hDif.ToString());
-                                }
-                                else
-                                {
-                                    prcnt = float.Parse(wDif.ToString());
-                                }
-
-                                addLogo.ScaleAbsolute(addLogo.Width * prcnt, addLogo.Height * prcnt);
-
-
-                            }
-
-                            addLogo.Alignment = iTextSharp.text.Image.ALIGN_CENTER;
-                            addLogo.Border = iTextSharp.text.Rectangle.BOX;
-                            document.Add(addLogo);
-                        }
-
-                    }
-                    document.Close();
                     await DisplayAlert("File Path", file.Path.ToString(), "OK");
                     //UserDialogs.Instance.ShowSuccess("PDF saved at:" + file.Path.ToString(), 2000);
 
