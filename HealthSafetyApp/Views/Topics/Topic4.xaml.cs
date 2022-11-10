@@ -9,6 +9,10 @@ using System.Globalization;
 using Plugin.Media;
 using PCLStorage;
 using Microsoft.AppCenter.Crashes;
+using iText.Html2pdf.Attach.Impl.Tags;
+using iText.Kernel.Geom;
+using iText.Kernel.Pdf;
+using iText.Html2pdf;
 
 namespace HealthSafetyApp.Views.Topics
 {
@@ -159,59 +163,13 @@ namespace HealthSafetyApp.Views.Topics
         }
         public async Task PCLReportGenaratePdf(string path)
         {
-            string dat = "";
-            var dt = datepicker.Date;
-                       dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
-            //if (Device.OS == TargetPlatform.Windows)
-            //{
-            //    StringBuilder sb = new StringBuilder();
-            //    sb.Append("<header class='headerdiv'>");
-            //    sb.Append("<b><h1 style='color:#000000;font-size:30px;'>Form</h1></b>");
-            //    sb.Append("<br/>");
-            //    sb.Append("<div>");
-            //    sb.Append("<b><p style='color:#0086b7;font-size:16px;'>Name</p></b>");
-            //    sb.Append("<u><p style='font-size:14px;'>" + txt_name.Text + "</p></u>");
-            //    sb.Append("<b><p style='color:#0086b7;font-size:16px;'>Project Name</p></b>");
-            //    sb.Append("<u><p style='font-size:14px;'>" + txt_projname.Text + "</p></u>");
-            //    sb.Append("<b><p style='color:#0086b7;font-size:16px;'>Site Name</p></b>");
-            //    sb.Append("<u><p style='font-size:14px;'>" + txt_sitename.Text + "</p></u>");
-            //    sb.Append("<b><p style='color:#0086b7;font-size:16px;'>Date</p></b>");
-            //    sb.Append("<u><p style='font-size:14px;'>" + dat + "</p></u>");
-            //    sb.Append("<br/>");
-            //    if (chkbx1.IsChecked == true)
-            //    { sb.Append("<p style='font-size:16px;'>(o) " + txt_Check1_text.Text + "</p>"); }
-            //    else
-            //    { sb.Append("<p style='font-size:16px;'>( )  " + txt_Check1_text.Text + "</p>"); }
-            //    if (chkbx2.IsChecked == true)
-            //    { sb.Append("<p style='font-size:16px;'>(o)  " + txt_Check2_text.Text + "</p>"); }
-            //    else
-            //    { sb.Append("<p style='font-size:16px;'>( ) " + txt_Check2_text.Text + "</p>"); }
-
-            //    sb.Append("</div>");
-            //    sb.Append("</header>");
-            //    sb.Append("<br/>");
-            //    sb.Append("<br/>");
-
-
-            //    sb.Append("<main>");
-
-            //    sb.Append("</main>");
-            //    var filepath = "";
-            //    var winwrite = DependencyService.Get<IWPExternalStorageWriter>();
-            //    filepath = await winwrite.CreateFile("hello.html");
-            //    IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(filepath);
-            //    IFolder folder = await rootFolder.CreateFolderAsync("HandSAppPdf", CreationCollisionOption.OpenIfExists);
-            //    IFile file = await folder.CreateFileAsync("Topic3_pdf.html", CreationCollisionOption.GenerateUniqueName);
-            //    await file.WriteAllTextAsync(sb.ToString());
-            //    await DisplayAlert("File Path", file.Path.ToString(), "OK");
-            //}
-#pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
-            if (Device.OS == TargetPlatform.Android)
-#pragma warning restore CS0612 // Type or member is obsolete
-#pragma warning restore CS0618 // Type or member is obsolete
+            try
             {
-                StringBuilder sb=new StringBuilder();
+                string dat = "";
+                var dt = datepicker.Date;
+                dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
+
+                StringBuilder sb = new StringBuilder();
                 //sb.Append("<header>");
                 //sb.Append("</header>");
                 sb.Append("<main>");
@@ -230,7 +188,7 @@ namespace HealthSafetyApp.Views.Topics
 </tr>
 
 </tbody></table>
-<br/>
+
 <table border='0' width='100%' border='1' ><tbody>
 
 <tr>
@@ -255,10 +213,10 @@ namespace HealthSafetyApp.Views.Topics
 
 <tr>
 <td colspan='6' rowspan='1'><font color='#3399ff'>Description: </font></td>
-<td colspan='14' rowspan='1' align='left'>" + txt_Description.Text+ @" </td>
+<td colspan='14' rowspan='1' align='left'>" + txt_Description.Text + @" </td>
 </tr>
  </tbody></table>
-<br>
+
 
 <table border='0' width='100%'><tbody>
 <tr>
@@ -367,7 +325,7 @@ namespace HealthSafetyApp.Views.Topics
                 <tr bgcolor='whitesmoke'>
 
 
-                <td colspan='5' rowspan='1' align='left'>Weight<br><h6>(Consider above factors and identify area subject to load from body map)</h6></td>
+                <td colspan='5' rowspan='1' align='left'>Weight<h6>(Consider above factors and identify area subject to load from body map)</h6></td>
                 <td colspan='5' rowspan='1' align='left' > 
                 <table width='100%'>");
                 if (CB51.Checked) { sb.Append(@"<tr><td><font color='red'><b>[</b></font><b>X</b><font color='red'><b>] &gt; 25kg</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='red'>[ ] &gt; 25kg</font></td></tr>"); }
@@ -440,7 +398,7 @@ namespace HealthSafetyApp.Views.Topics
 
                  </tr>
 
-                </tbody></table><br>");
+                </tbody></table>");
 
                 sb.Append(@"<table border='0' width='100%'><tbody>
                 <tr>
@@ -503,7 +461,7 @@ namespace HealthSafetyApp.Views.Topics
 
                 </tr>
 
-                 </tbody></table><br>
+                 </tbody></table>
 
                 <table border='0' width='100%'><tbody>
                  <tr>
@@ -532,15 +490,15 @@ namespace HealthSafetyApp.Views.Topics
                  <tr bgcolor='whitesmoke'>
 
 
-                 <td colspan='5' rowspan='1' align='left'>Space <br><h6>Access sufficient for size of part</h6></td>
+                 <td colspan='5' rowspan='1' align='left'>Space <h6>Access sufficient for size of part</h6></td>
                  <td colspan='5' rowspan='1' align='left' > 
                  <table  width='100%'>");
-                 if (CB111.Checked) { sb.Append(@"<tr><td><font color='red'><b>[</b></font><b>X</b><font color='red'><b>] Congested</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='red'>[ ] Congested</font></td></tr>"); }
-                 if (CB112.Checked) { sb.Append(@"<tr><td><font color='orange'><b>[</b></font><b>X</b><font color='orange'><b>] Restricted</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='orange'>[ ] Restricted</font></td></tr>"); }
-                 if (CB113.Checked) { sb.Append(@"<tr><td><font color='green'><b>[</b></font><b>X</b><font color='green'><b>] Clear </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='green'>[ ] Clear </font></td></tr>"); }
+                if (CB111.Checked) { sb.Append(@"<tr><td><font color='red'><b>[</b></font><b>X</b><font color='red'><b>] Congested</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='red'>[ ] Congested</font></td></tr>"); }
+                if (CB112.Checked) { sb.Append(@"<tr><td><font color='orange'><b>[</b></font><b>X</b><font color='orange'><b>] Restricted</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='orange'>[ ] Restricted</font></td></tr>"); }
+                if (CB113.Checked) { sb.Append(@"<tr><td><font color='green'><b>[</b></font><b>X</b><font color='green'><b>] Clear </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='green'>[ ] Clear </font></td></tr>"); }
 
 
-                 sb.Append(@"
+                sb.Append(@"
                  </table>
                  </td>
                  <td colspan='10' rowspan='1' align='left'>" + TB11.Text + @"</td>
@@ -553,12 +511,12 @@ namespace HealthSafetyApp.Views.Topics
                  <td colspan='5' rowspan='1' align='left'> Floor condition </td>
                  <td colspan='5' rowspan='1' align='left' > 
                  <table  width='100%'>");
-                 if (CB121.Checked) { sb.Append(@"<tr><td><font color='red'><b>[</b></font><b>X</b><font color='red'><b>] Slippery </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='red'>[ ] Slippery</font></td></tr>"); }
-                 if (CB122.Checked) { sb.Append(@"<tr><td><font color='orange'><b>[</b></font><b>X</b><font color='orange'><b>] Reasonable</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='orange'>[ ] Reasonable</font></td></tr>"); }
-                 if (CB123.Checked) { sb.Append(@"<tr><td><font color='green'><b>[</b></font><b>X</b><font color='green'><b>] Good</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='green'>[ ] Good </font></td></tr>"); }
+                if (CB121.Checked) { sb.Append(@"<tr><td><font color='red'><b>[</b></font><b>X</b><font color='red'><b>] Slippery </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='red'>[ ] Slippery</font></td></tr>"); }
+                if (CB122.Checked) { sb.Append(@"<tr><td><font color='orange'><b>[</b></font><b>X</b><font color='orange'><b>] Reasonable</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='orange'>[ ] Reasonable</font></td></tr>"); }
+                if (CB123.Checked) { sb.Append(@"<tr><td><font color='green'><b>[</b></font><b>X</b><font color='green'><b>] Good</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='green'>[ ] Good </font></td></tr>"); }
 
 
-                 sb.Append(@"
+                sb.Append(@"
 
                  </table>
                  </td>
@@ -572,12 +530,12 @@ namespace HealthSafetyApp.Views.Topics
                  <td colspan='5' rowspan='1' align='left'>Changes in floor level</td>
                  <td colspan='5' rowspan='1' align='left' > 
                  <table  width='100%'>");
-                 if (CB131.Checked) { sb.Append(@"<tr><td><font color='red'><b>[</b></font><b>X</b><font color='red'><b>] Steps</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='red'>[ ] Steps</font></td></tr>"); }
-                 if (CB132.Checked) { sb.Append(@"<tr><td><font color='orange'><b>[</b></font><b>X</b><font color='orange'><b>] Slopes</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='orange'>[ ] Slopes</font></td></tr>"); }
-                 if (CB133.Checked) { sb.Append(@"<tr><td><font color='green'><b>[</b></font><b>X</b><font color='green'><b>] None </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='green'>[ ] None </font></td></tr>"); }
+                if (CB131.Checked) { sb.Append(@"<tr><td><font color='red'><b>[</b></font><b>X</b><font color='red'><b>] Steps</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='red'>[ ] Steps</font></td></tr>"); }
+                if (CB132.Checked) { sb.Append(@"<tr><td><font color='orange'><b>[</b></font><b>X</b><font color='orange'><b>] Slopes</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='orange'>[ ] Slopes</font></td></tr>"); }
+                if (CB133.Checked) { sb.Append(@"<tr><td><font color='green'><b>[</b></font><b>X</b><font color='green'><b>] None </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='green'>[ ] None </font></td></tr>"); }
 
 
-                 sb.Append(@"
+                sb.Append(@"
                  </table>
                  </td>
                  <td colspan='10' rowspan='1' align='left'>" + TB13.Text + @"</td>
@@ -590,9 +548,9 @@ namespace HealthSafetyApp.Views.Topics
                  <td colspan='5' rowspan='1' align='left'> Lighting </td>
                  <td colspan='5' rowspan='1' align='left' > 
                  <table  width='100%'>");
-                 if (CB141.Checked) { sb.Append(@"<tr><td><font color='red'><b>[</b></font><b>X</b><font color='red'><b>] Poor, deep shadow or glare </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='red'>[ ] Poor, deep shadow or glare</font></td></tr>"); }
-                 if (CB142.Checked) { sb.Append(@"<tr><td><font color='orange'><b>[</b></font><b>X</b><font color='orange'><b>] Reasonable, some shadow or glare</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='orange'>[ ] Reasonable, some shadow or glare</font></td></tr>"); }
-                 if (CB143.Checked) { sb.Append(@"<tr><td><font color='green'><b>[</b></font><b>X</b><font color='green'><b>] Good or natural light, no shadow or glare</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='green'>[ ] Good or natural light, no shadow or glare </font></td></tr>"); }
+                if (CB141.Checked) { sb.Append(@"<tr><td><font color='red'><b>[</b></font><b>X</b><font color='red'><b>] Poor, deep shadow or glare </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='red'>[ ] Poor, deep shadow or glare</font></td></tr>"); }
+                if (CB142.Checked) { sb.Append(@"<tr><td><font color='orange'><b>[</b></font><b>X</b><font color='orange'><b>] Reasonable, some shadow or glare</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='orange'>[ ] Reasonable, some shadow or glare</font></td></tr>"); }
+                if (CB143.Checked) { sb.Append(@"<tr><td><font color='green'><b>[</b></font><b>X</b><font color='green'><b>] Good or natural light, no shadow or glare</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='green'>[ ] Good or natural light, no shadow or glare </font></td></tr>"); }
 
 
                 sb.Append(@"
@@ -604,7 +562,7 @@ namespace HealthSafetyApp.Views.Topics
                  </tr>
 
                   </tbody></table>
-                 <br>
+                 
 
                  <table border='0' width='100%'><tbody>
                  <tr>
@@ -630,36 +588,36 @@ namespace HealthSafetyApp.Views.Topics
 
                  </tr>");
 
-                 //<tr bgcolor='whitesmoke'>
+                //<tr bgcolor='whitesmoke'>
 
 
-                 //<td colspan='5' rowspan='1' align='left'>AGE</h6></td>
-                 //<td colspan='5' rowspan='1' align='left' > 
-                 //<table  width='100%'>");
-                 //if (CB111.Checked) { sb.Append(@"<tr><td><font color='red'><b>[</b></font><b>X</b><font color='red'><b>] Congested</b></td></tr>"); } else { sb.Append(@"<tr><td><font color='red'>[ ] Congested</td></tr>"); }
-                 //if (CB112.Checked) { sb.Append(@"<tr><td><font color='orange'><b>[</b></font><b>X</b><font color='orange'><b>] Restricted</b></td></tr>"); } else { sb.Append(@"<tr><td><font color='orange'>[ ] Restricted</td></tr>"); }
-                 //if (CB151.Checked) { sb.Append(@"<tr><td><font color='green'><b>[</b></font><b>X</b><font color='green'><b>] Assume fit and able bodied </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='green'>[ ] Assume fit and able bodied </font></td></tr>"); }
+                //<td colspan='5' rowspan='1' align='left'>AGE</h6></td>
+                //<td colspan='5' rowspan='1' align='left' > 
+                //<table  width='100%'>");
+                //if (CB111.Checked) { sb.Append(@"<tr><td><font color='red'><b>[</b></font><b>X</b><font color='red'><b>] Congested</b></td></tr>"); } else { sb.Append(@"<tr><td><font color='red'>[ ] Congested</td></tr>"); }
+                //if (CB112.Checked) { sb.Append(@"<tr><td><font color='orange'><b>[</b></font><b>X</b><font color='orange'><b>] Restricted</b></td></tr>"); } else { sb.Append(@"<tr><td><font color='orange'>[ ] Restricted</td></tr>"); }
+                //if (CB151.Checked) { sb.Append(@"<tr><td><font color='green'><b>[</b></font><b>X</b><font color='green'><b>] Assume fit and able bodied </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='green'>[ ] Assume fit and able bodied </font></td></tr>"); }
 
 
-                 //sb.Append(@"
-                 //</table>
-                 //</td>
-                 //<td colspan='10' rowspan='1' align='left'>" + TB15.Text + @"</td>
+                //sb.Append(@"
+                //</table>
+                //</td>
+                //<td colspan='10' rowspan='1' align='left'>" + TB15.Text + @"</td>
 
-                 //</tr>
+                //</tr>
 
-sb.Append(@" <tr bgcolor='lightgray'>
+                sb.Append(@" <tr bgcolor='lightgray'>
 
 
                  <td colspan='5' rowspan='1' align='left'>Physical status </td>
                  <td colspan='5' rowspan='1' align='left' > 
                  <table  width='100%'>");
-                 if (CB161.Checked) { sb.Append(@"<tr><td><font color='red'><b>[</b></font><b>X</b><font color='red'><b>] Unfit and with medical condition </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='red'>[ ] Unfit and with medical condition</font></td></tr>"); }
-                 if (CB162.Checked) { sb.Append(@"<tr><td><font color='orange'><b>[</b></font><b>X</b><font color='orange'><b>] Unfit but no medical condition</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='orange'>[ ] Unfit but no medical condition</font></td></tr>"); }
-                 if (CB163.Checked) { sb.Append(@"<tr><td><font color='green'><b>[</b></font><b>X</b><font color='green'><b>] Fit and no medical condition</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='green'>[ ] Fit and no medical condition </font></td></tr>"); }
+                if (CB161.Checked) { sb.Append(@"<tr><td><font color='red'><b>[</b></font><b>X</b><font color='red'><b>] Unfit and with medical condition </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='red'>[ ] Unfit and with medical condition</font></td></tr>"); }
+                if (CB162.Checked) { sb.Append(@"<tr><td><font color='orange'><b>[</b></font><b>X</b><font color='orange'><b>] Unfit but no medical condition</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='orange'>[ ] Unfit but no medical condition</font></td></tr>"); }
+                if (CB163.Checked) { sb.Append(@"<tr><td><font color='green'><b>[</b></font><b>X</b><font color='green'><b>] Fit and no medical condition</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='green'>[ ] Fit and no medical condition </font></td></tr>"); }
 
 
-                 sb.Append(@"
+                sb.Append(@"
 
                  </table>
                  </td>
@@ -673,12 +631,12 @@ sb.Append(@" <tr bgcolor='lightgray'>
                  <td colspan='5' rowspan='1' align='left'>Personal protective equipment (PPE)</h6></td>
                  <td colspan='5' rowspan='1' align='left' > 
                  <table  width='100%'>");
-                 if (CB171.Checked) { sb.Append(@"<tr><td><font color='red'><b>[</b></font><b>X</b><font color='red'><b>] PPE required and not provided</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='red'>[ ] PPE required and not provided</font></td></tr>"); }
-                 if (CB172.Checked) { sb.Append(@"<tr><td><font color='orange'><b>[</b></font><b>X</b><font color='orange'><b>] N/A</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='orange'>[ ] N/A </font></td></tr>"); }
-                 if (CB173.Checked) { sb.Append(@"<tr><td><font color='green'><b>[</b></font><b>X</b><font color='green'><b>] Appropriate PPE available </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='green'>[ ] Appropriate PPE available </font></td></tr>"); }
+                if (CB171.Checked) { sb.Append(@"<tr><td><font color='red'><b>[</b></font><b>X</b><font color='red'><b>] PPE required and not provided</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='red'>[ ] PPE required and not provided</font></td></tr>"); }
+                if (CB172.Checked) { sb.Append(@"<tr><td><font color='orange'><b>[</b></font><b>X</b><font color='orange'><b>] N/A</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='orange'>[ ] N/A </font></td></tr>"); }
+                if (CB173.Checked) { sb.Append(@"<tr><td><font color='green'><b>[</b></font><b>X</b><font color='green'><b>] Appropriate PPE available </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='green'>[ ] Appropriate PPE available </font></td></tr>"); }
 
 
-                 sb.Append(@"
+                sb.Append(@"
                  </table>
                  </td>
                  <td colspan='10' rowspan='1' align='left'>" + TB17.Text + @"</td>
@@ -691,12 +649,12 @@ sb.Append(@" <tr bgcolor='lightgray'>
                  <td colspan='5' rowspan='1' align='left'> Training </td>
                  <td colspan='5' rowspan='1' align='left' > 
                  <table width='100%'>");
-                 if (CB181.Checked) { sb.Append(@"<tr><td><font color='red'><b>[</b></font><b>X</b><font color='red'><b>] No training given </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='red'>[ ] No training given </font></td></tr>"); }
-                 if (CB182.Checked) { sb.Append(@"<tr><td><font color='orange'><b>[</b></font><b>X</b><font color='orange'><b>] General training given</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='orange'>[ ] General training given </font></td></tr>"); }
-                 if (CB183.Checked) { sb.Append(@"<tr><td><font color='green'><b>[</b></font><b>X</b><font color='green'><b>] Specific training given </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='green'>[ ] Specific training given </font></td></tr>"); }
+                if (CB181.Checked) { sb.Append(@"<tr><td><font color='red'><b>[</b></font><b>X</b><font color='red'><b>] No training given </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='red'>[ ] No training given </font></td></tr>"); }
+                if (CB182.Checked) { sb.Append(@"<tr><td><font color='orange'><b>[</b></font><b>X</b><font color='orange'><b>] General training given</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='orange'>[ ] General training given </font></td></tr>"); }
+                if (CB183.Checked) { sb.Append(@"<tr><td><font color='green'><b>[</b></font><b>X</b><font color='green'><b>] Specific training given </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='green'>[ ] Specific training given </font></td></tr>"); }
 
 
-                 sb.Append(@"
+                sb.Append(@"
 
                  </table>
                  </td>
@@ -710,19 +668,19 @@ sb.Append(@" <tr bgcolor='lightgray'>
                  <td colspan='5' rowspan='1' align='left'>Teamwork</h6></td>
                  <td colspan='5' rowspan='1' align='left' > 
                  <table width='100%'>");
-                 if (CB191.Checked) { sb.Append(@"<tr><td><font color='red'><b>[</b></font><b>X</b><font color='red'><b>] Manning less than process or not available </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='red'>[ ] Manning less than process or not available</font></td></tr>"); }
-                 if (CB192.Checked) { sb.Append(@"<tr><td><font color='orange'><b>[</b></font><b>X</b><font color='orange'><b>] N/A</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='orange'>[ ] N/A</font></td></tr>"); }
-                 if (CB193.Checked) { sb.Append(@"<tr><td><font color='green'><b>[</b></font><b>X</b><font color='green'><b>] Manning available in line with the process </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='green'>[ ] Manning available in line with the process </font></td></tr>"); }
+                if (CB191.Checked) { sb.Append(@"<tr><td><font color='red'><b>[</b></font><b>X</b><font color='red'><b>] Manning less than process or not available </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='red'>[ ] Manning less than process or not available</font></td></tr>"); }
+                if (CB192.Checked) { sb.Append(@"<tr><td><font color='orange'><b>[</b></font><b>X</b><font color='orange'><b>] N/A</b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='orange'>[ ] N/A</font></td></tr>"); }
+                if (CB193.Checked) { sb.Append(@"<tr><td><font color='green'><b>[</b></font><b>X</b><font color='green'><b>] Manning available in line with the process </b></font></td></tr>"); } else { sb.Append(@"<tr><td><font color='green'>[ ] Manning available in line with the process </font></td></tr>"); }
 
 
-                 sb.Append(@"
+                sb.Append(@"
                  </table>
                  </td>
                  <td colspan='10' rowspan='1' align='left'>" + TB19.Text + @"</td>
 
                  </tr>");
-                 sb.Append(@"</tbody></table>
-                <br>
+                sb.Append(@"</tbody></table>
+                
                  <table width='100%'>
                  <tr><font color='white'>
                  <td colspan='8' bgcolor='gray'> Totals (Counts)</td>
@@ -732,7 +690,7 @@ sb.Append(@" <tr bgcolor='lightgray'>
                  </font>
                  </tr>
                  </table>
-                 <br>
+                 
                  <table width='100%'>
                  <tr>
                  <td colspan='20' bgcolor='whitesmoke' align='center' ><font color='red' size='8 px'><i>
@@ -748,7 +706,7 @@ sb.Append(@" <tr bgcolor='lightgray'>
 
                 </table >
 
-                <br/>
+                
 <table style='width: 100%;' border='1'>
 <tbody>
 <tr>
@@ -765,11 +723,37 @@ sb.Append(@" <tr bgcolor='lightgray'>
 
                 sb.Append("</main>");
 
-                StringReader sr=new StringReader(sb.ToString());
+                StringReader sr = new StringReader(sb.ToString());
+
+                IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(path);
+                IFolder folder = await rootFolder.CreateFolderAsync("HandSAppPdf", CreationCollisionOption.OpenIfExists);
+
+                string fnam = await InputBox(this.Navigation);
+                if (fnam is null) { return; }
+                else
+                { if (fnam == "") { fnam = "Manual handling risk Assessment.pdf"; } else { fnam = fnam + ".pdf"; } }
+
+                IFile file = await folder.CreateFileAsync(fnam, CreationCollisionOption.GenerateUniqueName);
+
+                using (var fs = await file.OpenAsync(PCLStorage.FileAccess.ReadAndWrite))
+                {
+                    ConverterProperties properties = new ConverterProperties();
+                    PdfWriter writer = new PdfWriter(fs);
+                    PdfDocument pdfDocument = new PdfDocument(writer);
+                    pdfDocument.SetDefaultPageSize(PageSize.A4);
+                    var doc = HtmlConverter.ConvertToDocument(sb.ToString(), pdfDocument, properties);
+                    doc.Close();
+                    await DisplayAlert("File Path", file.Path.ToString(), "OK");
+
+                }
+
+
+                txt_name.Text = txt_projname.Text = txt_sitename.Text = "";
+            }
+            catch (Exception ex)
+            {
 
             }
-
-            txt_name.Text=txt_projname.Text=txt_sitename.Text="";
 
 
         }
@@ -777,7 +761,7 @@ sb.Append(@" <tr bgcolor='lightgray'>
 
 
         #region SaveDraft
-      private async void OnClick_SaveDraft(object sender, EventArgs e)
+        private async void OnClick_SaveDraft(object sender, EventArgs e)
         {
             try
             {

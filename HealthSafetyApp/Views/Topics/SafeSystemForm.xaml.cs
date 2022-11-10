@@ -4,6 +4,10 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
+using iText.Html2pdf;
+using iText.Html2pdf.Attach.Impl.Tags;
+using iText.Kernel.Geom;
+using iText.Kernel.Pdf;
 using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using PCLStorage;
@@ -58,12 +62,12 @@ namespace HealthSafetyApp.Views.Topics
                 file = await FileSystem.Current.LocalStorage.GetFileAsync("/storage/emulated/0/HandSAppDrafts/" + filname);
             }
 
-                using (var stream = await file.OpenAsync(PCLStorage.FileAccess.Read))
-                using (var reader = new StreamReader(stream))
-                {
-                    FileText = await reader.ReadToEndAsync();
-                }
-            
+            using (var stream = await file.OpenAsync(PCLStorage.FileAccess.Read))
+            using (var reader = new StreamReader(stream))
+            {
+                FileText = await reader.ReadToEndAsync();
+            }
+
 
             DraftFields account = JsonConvert.DeserializeObject<DraftFields>(FileText);
             txt_name.Text = account.Name1;
@@ -507,147 +511,102 @@ namespace HealthSafetyApp.Views.Topics
         }
         public async Task PCLReportGenaratePdf(string path)
         {
-            string dat = "";
-            var dt = datepicker.Date;
-            dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
-            string HeadText = headlines.Text;
-            if (!(HeadText is null))
+            try
             {
-                HeadText = HeadText.Replace("\r\n", "<br>").Replace("\n", "<br>").Replace("\r", "<br>");
+                string dat = "";
+                var dt = datepicker.Date;
+                dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
+                string HeadText = headlines.Text;
+                if (!(HeadText is null))
+                {
+                    HeadText = HeadText.Replace("\r\n", "").Replace("\n", "").Replace("\r", "");
 
-            }
-
-            //for(Int16 i=1; i <= HeadText.Length; i++)
-            //{
-            //    await DisplayAlert("File Path", HeadText.Substring(i,1) , "OK");
-            //}
-            //if (Device.OS == TargetPlatform.Windows)
-            //{
-            //    StringBuilder sb = new StringBuilder();
-            //    sb.Append("<header class='headerdiv'>");
-            //    sb.Append("<b><h1 style='color:#000000;font-size:30px;'>Form</h1></b>");
-            //    sb.Append("<br/>");
-            //    sb.Append("<div>");
-            //    sb.Append("<b><p style='color:#0086b7;font-size:16px;'>Name</p></b>");
-            //    sb.Append("<u><p style='font-size:14px;'>" + txt_name.Text + "</p></u>");
-            //    sb.Append("<b><p style='color:#0086b7;font-size:16px;'>Project Name</p></b>");
-            //    sb.Append("<u><p style='font-size:14px;'>" + txt_projname.Text + "</p></u>");
-            //    sb.Append("<b><p style='color:#0086b7;font-size:16px;'>Site Name</p></b>");
-
-            //    sb.Append("<b><p style='color:#0086b7;font-size:16px;'>Date</p></b>");
-            //    sb.Append("<u><p style='font-size:14px;'>" + dat + "</p></u>");
-            //    sb.Append("<br/>");
-
-
-            //    sb.Append("</div>");
-            //    sb.Append("</header>");
-            //    sb.Append("<br/>");
-            //    sb.Append("<br/>");
-
-
-            //    sb.Append("<main>");
-
-            //    sb.Append("</main>");
-            //    var filepath = "";
-            //    var winwrite = DependencyService.Get<IWPExternalStorageWriter>();
-            //    filepath = await winwrite.CreateFile("hello.html");
-            //    IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(filepath);
-            //    IFolder folder = await rootFolder.CreateFolderAsync("KashAppPdf", CreationCollisionOption.OpenIfExists);
-            //    IFile file = await folder.CreateFileAsync("Topic6_pdf.html", CreationCollisionOption.GenerateUniqueName);
-            //    await file.WriteAllTextAsync(sb.ToString());
-            //    await DisplayAlert("File Path", file.Path.ToString(), "OK");
-            //}
-#pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
-            if (Device.OS == TargetPlatform.Android)
-#pragma warning restore CS0612 // Type or member is obsolete
-#pragma warning restore CS0618 // Type or member is obsolete
-            {
+                }
                 StringBuilder sb = new StringBuilder();
                 sb.Append("<main>");
                 sb.Append(@"<table border='0' width='100%'><tbody>
-<tr>
-<td colspan='10' bgcolor='gray' align='center'>
-<font color='white'><h3><b>Safe systems of work</b></h3></font></center>
-</td></tr>
-<tr>
-<td colspan='10' bgcolor='silver' align='right'>
-<p style='color:#ffffff;font-size:5px;'><i>Created using safe systems of work tool © @The Health And Safety App </i></p>
-</td>
+                <tr>
+                <td colspan='10' bgcolor='gray' align='center'>
+                <font color='white'><h3><b>Safe systems of work</b></h3></font></center>
+                </td></tr>
+                <tr>
+                <td colspan='10' bgcolor='silver' align='right'>
+                <p style='color:#ffffff;font-size:5px;'><i>Created using safe systems of work tool © @The Health And Safety App </i></p>
+                </td>
 
-</tr>
-</tbody></table>
-<br/>
-<table border='0' width='100%'><tbody>
+                </tr>
+                </tbody></table>
+                
+                <table border='0' width='100%'><tbody>
 
-<tr>
-<td colspan='20' align='left'>
-<font color='#3399ff'><h3><b>Assessor name:</b></h3></font>
-</td>
-</tr>
+                <tr>
+                <td colspan='20' align='left'>
+                <font color='#3399ff'><h3><b>Assessor name:</b></h3></font>
+                </td>
+                </tr>
 
-<tr>
-<td colspan='20' align='left'>
-<font><h3>" + txt_name.Text + @"</h3></font>
-</td>
-</tr>
+                <tr>
+                <td colspan='20' align='left'>
+                <font><h3>" + txt_name.Text + @"</h3></font>
+                </td>
+                </tr>
 
-<tr>
-<td colspan='20' align='left'>
-<font color='#3399ff'><h3><b>Risk assessment topic name:</b></h3></font>
-</td>
-</tr>
+                <tr>
+                <td colspan='20' align='left'>
+                <font color='#3399ff'><h3><b>Risk assessment topic name:</b></h3></font>
+                </td>
+                </tr>
 
-<tr>
-<td colspan='20' align='left'>
-<font><h3>" + txt_projname.Text + @"</h3></font>
-</td>
-</tr>
+                <tr>
+                <td colspan='20' align='left'>
+                <font><h3>" + txt_projname.Text + @"</h3></font>
+                </td>
+                </tr>
 
-<tr>
-<td colspan='20' align='left'>
-<font color='#3399ff'><h3><b>Date:</b></h3></font>
-</td>
-</tr>
+                <tr>
+                <td colspan='20' align='left'>
+                <font color='#3399ff'><h3><b>Date:</b></h3></font>
+                </td>
+                </tr>
 
-<tr>
-<td colspan='20' align='left'>
-<font><h3>" + dat + @"</h3></font>
-</td>
-</tr>
+                <tr>
+                <td colspan='20' align='left'>
+                <font><h3>" + dat + @"</h3></font>
+                </td>
+                </tr>
 
-<tr bgcolor='#3399ff'>
-<td colspan='20' align='Center'>
-<font color='white'><h3><b>Safe systems/Method statment</b></h3></font>
-</td>
-</tr>
+                <tr bgcolor='#3399ff'>
+                <td colspan='20' align='Center'>
+                <font color='white'><h3><b>Safe systems/Method statment</b></h3></font>
+                </td>
+                </tr>
 
-<tr>
-<td colspan='20' align='left'>
-<p>");
+                <tr>
+                <td colspan='20' align='left'>
+                <p>");
                 sb.Append(HeadText);
 
                 sb.Append(@"</p>
-</td>
+                </td>
 
-</tr>
+                </tr>
 
-</tbody></table>
-<br/>
+                </tbody></table>
+                
 
 
-<table style='width: 100%;' border='1'>
-<tbody>
-<tr>
-<td colspan='3' rowspan='1'> Signature(s) </td>
-<td colspan='7' rowspan='2'>  </td>
-<td colspan='2' rowspan='1'> Date: </td>
-<td colspan='3' rowspan='2'> </td>
-<td colspan='2' rowspan='1'> Review Date: </td>
-<td colspan='3' rowspan='2'> </td>
-</tr>
-</tbody>
-</table>");
+                <table style='width: 100%;' border='1'>
+                <tbody>
+                <tr>
+                <td colspan='3' rowspan='1'> Signature(s) </td>
+                <td colspan='7' rowspan='2'>  </td>
+                <td colspan='2' rowspan='1'> Date: </td>
+                <td colspan='3' rowspan='2'> </td>
+                <td colspan='2' rowspan='1'> Review Date: </td>
+                <td colspan='3' rowspan='2'> </td>
+                </tr>
+                </tbody>
+                </table>");
                 sb.Replace(System.Environment.NewLine, "\n");
                 StringReader sr = new StringReader(sb.ToString());
 
@@ -663,22 +622,27 @@ namespace HealthSafetyApp.Views.Topics
 
                 using (var fs = await file.OpenAsync(PCLStorage.FileAccess.ReadAndWrite))
                 {
-                    
 
+                    ConverterProperties properties = new ConverterProperties();
+                    PdfWriter writer = new PdfWriter(fs);
+                    PdfDocument pdfDocument = new PdfDocument(writer);
+                    pdfDocument.SetDefaultPageSize(PageSize.A4);
+                    var doc = HtmlConverter.ConvertToDocument(sb.ToString(), pdfDocument, properties);
+                    doc.Close();
+                    await DisplayAlert("File Path", file.Path.ToString(), "OK");
 
                 }
+                //txt_name.Text = txt_projname.Text = "";
             }
+            catch (Exception ex)
+            {
 
-
-            txt_name.Text = txt_projname.Text = "";
-
-
+            }
+        
         }
 
+
     }
-
-
-    
     #endregion
 
 }

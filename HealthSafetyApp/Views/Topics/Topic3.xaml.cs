@@ -9,6 +9,10 @@ using System.Globalization;
 using Plugin.Media;
 using PCLStorage;
 using Microsoft.AppCenter.Crashes;
+using iText.Html2pdf.Attach.Impl.Tags;
+using iText.Kernel.Geom;
+using iText.Kernel.Pdf;
+using iText.Html2pdf;
 
 namespace HealthSafetyApp.Views.Topics
 {
@@ -73,15 +77,12 @@ namespace HealthSafetyApp.Views.Topics
         }
         public async Task PCLReportGenaratePdf(string path)
         {
-            string dat = "";
-            var dt = datepicker.Date;
-                       dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);            
-#pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
-            if (Device.OS == TargetPlatform.Android)
-#pragma warning restore CS0612 // Type or member is obsolete
-#pragma warning restore CS0618 // Type or member is obsolete
+            try
             {
+                string dat = "";
+                var dt = datepicker.Date;
+                dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
+
                 StringBuilder sb = new StringBuilder();
                 sb.Append("<header class='headerdiv'>");
 
@@ -137,7 +138,7 @@ namespace HealthSafetyApp.Views.Topics
 <td colspan='10' rowspan='1'> " + dat + @" </td>
 </tr>
 
-<br/><br/>
+
 <hr>
 
 
@@ -148,7 +149,7 @@ namespace HealthSafetyApp.Views.Topics
 
 <tr>
 <td colspan='2' rowspan='1' >
-<td colspan='8' rowspan='1'> " + Cmb_Space.SelectedItem  + @" </td>
+<td colspan='8' rowspan='1'> " + Cmb_Space.SelectedItem + @" </td>
 </tr>
 
 <tr>
@@ -213,7 +214,7 @@ namespace HealthSafetyApp.Views.Topics
 
                 </table>
 
-<br><br>
+
 
 <table width='100%' bordercolor='gray'>
 <tr border='1'>
@@ -265,7 +266,7 @@ namespace HealthSafetyApp.Views.Topics
 
 </table>
 
-<br>
+
 
 <table width='100%'>
 <tr border='1'>
@@ -305,7 +306,7 @@ namespace HealthSafetyApp.Views.Topics
 </tr>
 </table>
 
-<br>
+
 
 <table width='100%'>
 <tr border='1'>
@@ -357,7 +358,7 @@ namespace HealthSafetyApp.Views.Topics
 
 </table>
 
-<br>
+
 <table width='100%'>
 <tr border='1'>
 <td colspan='2' rowspan='1' bgcolor='#3399ff'><font color='white'>2.4</font></td>
@@ -387,7 +388,7 @@ namespace HealthSafetyApp.Views.Topics
 
 </table>
 
-<br>
+
 <table width='100%'>
 <tr border='1'>
 <td colspan='2' rowspan='1' bgcolor='#3399ff'><font color='white'>2.5</font></td>
@@ -407,7 +408,7 @@ namespace HealthSafetyApp.Views.Topics
 
 
 </table>
-<br>
+
 <table width='100%'>
 <tr border='1'>
 <td colspan='2' rowspan='1' bgcolor='#3399ff'><font color='white'>2.6</font></td>
@@ -437,7 +438,7 @@ namespace HealthSafetyApp.Views.Topics
 
 </table>
 
-<br>
+
 <table width='100%'>
 <tr border='1'>
 <td colspan='2' rowspan='1' bgcolor='#3399ff'><font color='white'>2.7</font></td>
@@ -526,7 +527,7 @@ namespace HealthSafetyApp.Views.Topics
 </tr>
 
 </table>
-<br/>
+
 <table style='width: 100%;' border='1'>
 <tbody>
 <tr>
@@ -540,15 +541,40 @@ namespace HealthSafetyApp.Views.Topics
 </tbody>
 </table>
 ");
-                
+
                 sb.Append("</main> ");
 
                 StringReader sr = new StringReader(sb.ToString());
 
-                
+                IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(path);
+                IFolder folder = await rootFolder.CreateFolderAsync("HandSAppPdf", CreationCollisionOption.OpenIfExists);
+                string fnam = await InputBox(this.Navigation);
+                if (fnam is null) { return; }
+                else
+                { if (fnam == "") { fnam = "Work station assessment.pdf"; } else { fnam = fnam + ".pdf"; } }
+
+
+                IFile file = await folder.CreateFileAsync(fnam, CreationCollisionOption.GenerateUniqueName);
+
+                using (var fs = await file.OpenAsync(PCLStorage.FileAccess.ReadAndWrite))
+                {
+                    ConverterProperties properties = new ConverterProperties();
+                    PdfWriter writer = new PdfWriter(fs);
+                    PdfDocument pdfDocument = new PdfDocument(writer);
+                    pdfDocument.SetDefaultPageSize(PageSize.A4);
+                    var doc = HtmlConverter.ConvertToDocument(sb.ToString(), pdfDocument, properties);
+                    doc.Close();
+                    await DisplayAlert("File Path", file.Path.ToString(), "OK");
+
+                }
+
+
+                txt_name.Text = txt_projname.Text = txt_sitename.Text = "";
             }
-           
-            txt_name.Text = txt_projname.Text = txt_sitename.Text = "";
+            catch (Exception ex)
+            {
+
+            }
 
 
         }

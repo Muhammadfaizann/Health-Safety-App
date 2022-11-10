@@ -113,7 +113,7 @@
         </Grid.ColumnDefinitions>
                 <Button Grid.Column="0" Text="Open Drafts" FontSize="Micro"  ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray"  HorizontalOptions="FillAndExpand" Image="fillableform1_pictures_icon.png" Clicked="OnClick_OpenDraft"  />
                 <Button Grid.Column="1" Text="Save as Draft" FontSize="Micro" ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" HorizontalOptions="FillAndExpand" Image="fillableform1_save_icon.png" Clicked="OnClick_SaveDraft"/>
-                <Button Grid.Column="2" Text="Save as PDF" FontSize="Micro" ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" HorizontalOptions="FillAndExpand" Image="fillableform1_pdf_icon.png" />
+                <Button Grid.Column="2" Text="Save as PDF" FontSize="Micro" ContentLayout="Top,0" BorderRadius="5" BorderColor="Gray" BackgroundColor="LightGray" TextColor="Gray" HorizontalOptions="FillAndExpand" Image="fillableform1_pdf_icon.png" Clicked="OnClick_SavePDF" />
             </Grid>
 
     </Grid>

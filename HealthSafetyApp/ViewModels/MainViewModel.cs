@@ -1,5 +1,6 @@
 ﻿using HealthSafetyApp.Helpers;
 using HealthSafetyApp.Models;
+using Microsoft.AppCenter.Crashes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -47,8 +48,16 @@ namespace HealthSafetyApp.ViewModels
 
         public MainViewModel()
         {
-            Teams = DummyDataProvider.GetTeams();
-            RefreshCommand = new Command(CmdRefresh);
+            try
+            {
+                Teams = DummyDataProvider.GetTeams();
+                RefreshCommand = new Command(CmdRefresh);
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+            }
+           
         }
 
         private async void CmdRefresh()

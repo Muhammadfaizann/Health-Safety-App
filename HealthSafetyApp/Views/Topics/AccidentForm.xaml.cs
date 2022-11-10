@@ -13,6 +13,10 @@ using static System.Net.WebRequestMethods;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Entry = Xamarin.Forms.Entry;
 using System.Text;
+using iText.Html2pdf.Attach.Impl.Tags;
+using iText.Kernel.Geom;
+using iText.Kernel.Pdf;
+using iText.Html2pdf;
 
 namespace HealthSafetyApp.Views.Topics
 {
@@ -314,58 +318,12 @@ namespace HealthSafetyApp.Views.Topics
         }
         public async Task PCLReportGenaratePdf(string path)
         {
-            string dat = "";
-            var dt = datepicker.Date;
-            dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
-            //            if (Device.OS == TargetPlatform.Windows)
-            //            {
-            //                StringBuilder sb = new StringBuilder();
-            //                sb.Append("<header class='headerdiv'>");
-            //                sb.Append("<b><h1 style='color:#000000;font-size:30px;'>Form</h1></b>");
-            //                sb.Append("<br/>");
-            //                sb.Append("<div>");
-            //                sb.Append("<b><p style='color:#0086b7;font-size:16px;'>Name</p></b>");
-            //                sb.Append("<u><p style='font-size:14px;'>" + txt_name.Text + "</p></u>");
-            //                sb.Append("<b><p style='color:#0086b7;font-size:16px;'>Project Name</p></b>");
-            //                sb.Append("<u><p style='font-size:14px;'>" + txt_projname.Text + "</p></u>");
-            //                sb.Append("<b><p style='color:#0086b7;font-size:16px;'>Site Name</p></b>");
-            //                sb.Append("<u><p style='font-size:14px;'>" + txt_sitename.Text + "</p></u>");
-            //                sb.Append("<b><p style='color:#0086b7;font-size:16px;'>Date</p></b>");
-            //                sb.Append("<u><p style='font-size:14px;'>" + dat + "</p></u>");
-            //                sb.Append("<br/>");
-            //                if (chkbx1.IsChecked == true)
-            //                { sb.Append("<p style='font-size:16px;'>(o) " + txt_Check1_text.Text + "</p>"); }
-            //                else
-            //                { sb.Append("<p style='font-size:16px;'>( )  " + txt_Check1_text.Text + "</p>"); }
-            //                if (chkbx2.IsChecked == true)
-            //                { sb.Append("<p style='font-size:16px;'>(o)  " + txt_Check2_text.Text + "</p>"); }
-            //                else
-            //                { sb.Append("<p style='font-size:16px;'>( ) " + txt_Check2_text.Text + "</p>"); }
-
-            //                sb.Append("</div>");
-            //                sb.Append("</header>");
-            //                sb.Append("<br/>");
-            //                sb.Append("<br/>");
-
-
-            //                sb.Append("<main>");
-
-            //                sb.Append("</main>");
-            //                var filepath = "";
-            //                var winwrite = DependencyService.Get<IWPExternalStorageWriter>();
-            //                filepath = await winwrite.CreateFile("hello.html");
-            //                IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(filepath);
-            //                IFolder folder = await rootFolder.CreateFolderAsync("HandSAppPdf", CreationCollisionOption.OpenIfExists);
-            //                IFile file = await folder.CreateFileAsync("Topic3_pdf.html", CreationCollisionOption.GenerateUniqueName);
-            //                await file.WriteAllTextAsync(sb.ToString());
-            //                await DisplayAlert("File Path", file.Path.ToString(), "OK");
-            //            }
-#pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
-            if (Device.OS == TargetPlatform.Android)
-#pragma warning restore CS0612 // Type or member is obsolete
-#pragma warning restore CS0618 // Type or member is obsolete
+            try
             {
+                string dat = "";
+                var dt = datepicker.Date;
+                dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
+
                 StringBuilder sb = new StringBuilder();
 
 
@@ -382,7 +340,7 @@ namespace HealthSafetyApp.Views.Topics
 
 </tr>
 </tbody></table>
-<br>
+
 <table border='0' width='100%'><tbody>
 <tr>
 <td colspan='2' bgcolor='#3399ff' align='center'>
@@ -392,7 +350,7 @@ namespace HealthSafetyApp.Views.Topics
 <font color='white'><h3><b>About the person involved with accident / incident </b></h3></font>
 </td></tr>
 </tbody></table>
-<br>
+
 <table border='0' width='100%' border='0' ><tbody>
 
 <tr bgcolor='whitesmoke'>
@@ -426,7 +384,7 @@ namespace HealthSafetyApp.Views.Topics
 </tr>
 
  </tbody> </table>
-<br>
+
 
 <table border='0' width='100%'><tbody>
 <tr>
@@ -436,7 +394,7 @@ namespace HealthSafetyApp.Views.Topics
 <td colspan='18' bgcolor='gray' align='left'>
 <font color='white'><h3><b>Details of person reporting this accident / incident</b></h3></font>
 </td></tr>
-</tbody></table><br>
+</tbody></table>
 <table border='0' width='100%' border='0' ><tbody>
 
 <tr bgcolor='whitesmoke'>
@@ -470,7 +428,7 @@ namespace HealthSafetyApp.Views.Topics
 </tr>
 
  </tbody> </table>
-<br>
+
 <table border='0' width='100%'><tbody>
 <tr>
 <td colspan='2' bgcolor='#3399ff' align='center'>
@@ -480,7 +438,7 @@ namespace HealthSafetyApp.Views.Topics
 <font color='white'><h3><b>Details of accident / incident and injury</b></h3></font>
 </td></tr>
 </tbody></table>
-<br>
+
 <table border='0' width='100%'><tbody>
 <tr bgcolor='whitesmoke'>
 
@@ -519,7 +477,7 @@ namespace HealthSafetyApp.Views.Topics
 </tr>
 
 
-</table><br/>
+</table>
 <table style='width: 100%;' border='1'>
 <tbody>
 <tr>
@@ -549,17 +507,23 @@ namespace HealthSafetyApp.Views.Topics
 
                 using (var fs = await file.OpenAsync(PCLStorage.FileAccess.ReadAndWrite))
                 {
-                    
-
-                    
-
+                    ConverterProperties properties = new ConverterProperties();
+                    PdfWriter writer = new PdfWriter(fs);
+                    PdfDocument pdfDocument = new PdfDocument(writer);
+                    pdfDocument.SetDefaultPageSize(PageSize.A4);
+                    var doc = HtmlConverter.ConvertToDocument(sb.ToString(), pdfDocument, properties);
+                    doc.Close();
                     await DisplayAlert("File Path", file.Path.ToString(), "OK");
-                    //UserDialogs.Instance.ShowSuccess("PDF saved at:" + file.Path.ToString(), 2000);
 
                 }
-            }
 
-            //txt_name.Text = txt_projname.Text = txt_sitename.Text = "";
+
+                //txt_name.Text = txt_projname.Text = txt_sitename.Text = "";
+            }
+            catch (Exception ex)
+            {
+
+            }
 
 
         }

@@ -13,23 +13,31 @@ using Plugin.Media;
 
 using HealthSafetyApp.Helpers;
 using Microsoft.AppCenter.Crashes;
-using Syncfusion.Pdf;
-using Syncfusion.Pdf.Parsing;
-using Syncfusion.Pdf.Graphics;
-using Syncfusion.Pdf.Grid;
-using Syncfusion.Drawing;
+
 using Xamarin.Essentials;
 using PCLStorage;
 using SkiaSharp;
 using HealthSafetyApp.Models;
 using FileSystem = PCLStorage.FileSystem;
 using FileAccess = PCLStorage.FileAccess;
+using iText.Html2pdf;
+using iText.Kernel.Pdf;
+using iText.Kernel.Geom;
+using iText.Layout;
+using iText.Layout.Element;
+using Newtonsoft.Json.Linq;
+using System.ComponentModel;
+using static System.Net.WebRequestMethods;
+using HealthSafetyApp.ViewModels;
+using Org.BouncyCastle.Crypto;
 
 namespace HealthSafetyApp.Views.Topics
 {
     public partial class Topic1 : ContentPage
     {
-        private string fileText;
+        private List<Team> Teams = new List<Team>();
+
+private string fileText;
         int a_up, b_up, c_up, a_low, b_low, c_low, a_new, b_new, c_new, a_new1, b_new1, c_new1, a_new2, b_new2, c_new2 = 0;
         int a_up1, b_up1, c_up1, a_low1, b_low1, c_low1 = 0;
 
@@ -336,6 +344,99 @@ namespace HealthSafetyApp.Views.Topics
                 this.Title = "Dynamic risk assessment tool";
 
                 img_count = 0;
+                Teams.Add(new Team
+                {
+                    SNo = 5,
+                    Name = 0,
+                    Win = 5,
+                    Loose = 10,
+                    Percentage = 20,
+                    Conf = "43 - 9",
+                    Div = "25",
+                    Home = 15,
+                    Road = "34 - 7",
+                    Last10 = "8 - 2",
+                    Streak = 25,
+                    Logo = "Fatality, Disabling injury, etc"
+                });
+                Teams.Add(new Team
+                {
+                    SNo = 4,
+                    Name = 0,
+                    Win = 4,
+                    Loose = 8,
+                    Percentage = 16,
+                    Conf = "43 - 9",
+                    Div = "14 - 2",
+                    Home = 12,
+                    Road = "27 - 14",
+                    Last10 = "6 - 4",
+                    Streak = 20,
+                    Logo = "Major injury or illness"
+                });
+                Teams.Add(new Team
+                {
+                    SNo = 3,
+                    Name = 0,
+                    Win = 3,
+                    Loose = 6,
+                    Percentage = 12,
+                    Conf = "37 - 15",
+                    Div = "13 - 3",
+                    Home = 9,
+                    Road = "23 - 18",
+                    Last10 = "5 - 5",
+                    Streak = 15,
+                    Logo = "7 day Injury or illness"
+
+                });
+                Teams.Add(new Team
+                {
+                    SNo = 2,
+                    Name = 0,
+                    Win = 2,
+                    Loose = 4,
+                    Percentage = 8,
+                    Conf = "31 - 21",
+                    Div = "9 - 7",
+                    Home = 6,
+                    Road = "24 - 17",
+                    Last10 = "8 - 2",
+                    Streak = 10,
+                    Logo = "Minor injury or illness"
+                });
+                Teams.Add(new Team
+                {
+                    SNo = 1,
+                    Name = 0,
+                    Win = 1,
+                    Loose = 2,
+                    Percentage = 4,
+                    Conf = "29 - 23",
+                    Div = "11 - 5",
+                    Home = 3,
+                    Road = "16 - 25",
+                    Last10 = "7 - 3",
+                    Streak = 5,
+                    Logo = "First aid injury or illness"
+                });
+                Teams.Add(new Team
+                {
+                    SNo = 0,
+                    Name = 0,
+                    Win = 0,
+                    Loose = 0,
+                    Percentage = 0,
+                    Conf = "27 - 25",
+                    Div = "7 - 9",
+                    Home = 0,
+                    Road = "19 - 22",
+                    Last10 = "7 - 3",
+                    Streak = 0,
+                    Logo = "No injury or illness"
+                });
+
+
             }
             catch (Exception exception)
             {
@@ -358,7 +459,7 @@ namespace HealthSafetyApp.Views.Topics
                 
                     base.OnAppearing();
                     //Xamarin.Forms.DataGrid.DataGridComponent.Init();
-                    BindingContext = new ViewModels.MainViewModel();
+                    
                     if (pick_a_up.SelectedItem is null) { pick_a_up.SelectedIndex = 0; }
                     if (pick_b_up.SelectedItem is null) { pick_b_up.SelectedIndex = 0; }
                     if (pick_a_low.SelectedItem is null) { pick_a_low.SelectedIndex = 0; }
@@ -2238,6 +2339,7 @@ namespace HealthSafetyApp.Views.Topics
         {
             try
             {
+                
                 if (Device.RuntimePlatform == Device.iOS)
                 {
                      await PCLReportGenaratePdf(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
@@ -2261,669 +2363,619 @@ namespace HealthSafetyApp.Views.Topics
                 var dt = datepicker.Date;
                 dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
                 StringBuilder sb = new StringBuilder();
-                StringBuilder sb2 = new StringBuilder();
                 sb.Append("<header class='headerdiv'>");
                 sb.Append("</div>");
                 sb.Append("</header>");
                 sb.Append("<main>");
-
-                sb.Append(@"<br/><table width = '100%' ><tbody>
-                             
-                            <tr bgcolor='gray'>
-                            <td align='Center'>
-                            <font color='white'><b> Maintenance Dynamic / Point of Work Risk Assessment</b> </font>
-                            </td>
-                            </tr> 
-                        <tr>
-                        <td  bgcolor='silver' align='right'>
-                        <p style='color:#ffffff;font-size:5px;'><i>Created using Dynamic Risk Assessment tool © @The Health And Safety App </i></p>
-                        </td>
-
-                        </tr>
-                        </tbody></table>
-
-                        <center>
-                        
-                        <table style='border-collapse: collapse;'  Width='98%'><tbody>
-                        <tr>          
-                        <td colspan='2' align='left'><b> Name:</b></td>                     
-                        <td colspan='3' align='left' border-bottom ='1'>" + txt_name.Text + @"</td>                                 
-                        <td colspan='2' align='left'><b>Location Name:</b></td>
-                        <td colspan='3' style='border-bottom: 1pt solid black;' align='left' >" + txt_projname.Text + @" </td>                                                       
-                        </tr>
-                                                       
-                        <tr>
-                        <td colspan='2' align='left'><b> Task Description: </b></td>
-                        <td colspan='3' align='left'>" + txt_sitename.Text + @"</td>
-                        <td colspan='2' align='left'> <b> Date:</b></td>                                                                                       
-                        <td colspan='3' align='left'>" + dat + @" </td>                                                                                             
-                        </tr>    
-                        
-                        <tr>
-                        <td colspan='10' align='left'><b> <br/> </b></td>                                                                                
-                        </tr>             
-
-                        </tbody>      
-
-                        </table>                                                                                             
-                        </center> ");
-
-
+                sb.Append("<table width = '100%' ><tbody> <tr bgcolor=grey><td align='Center'><font color='black'><b> Maintenance Dynamic / Point of Work Risk Assessment</b> </font></td></tr>  <tr> <td  bgcolor='silver' align='right'> <p style='color:#ffffff;font-size:5px;'><i>Created using Dynamic Risk Assessment tool © @The Health And Safety App </i></p> </td> </tr> </tbody></table>");
+                sb.Append(@"<center>
+                        <table style='border-collapse: collapse;'  Width='98%'><tbody>
+                        <tr>          
+                        <td colspan='2' align='left'><b> Name:</b></td>                     
+                        <td colspan='3' align='left' border-bottom ='1'>" + txt_name.Text + @"</td>                                 
+                        <td colspan='2' align='left'><b>Location Name:</b></td>
+                        <td colspan='3' style='border-bottom: 0pt solid black;' align='left' >" + txt_projname.Text + @" </td>                                                       
+                        </tr>                          
+                        <tr>
+                        <td colspan='2' align='left'><b> Task Description: </b></td>
+                        <td colspan='3' align='left'>" + txt_sitename.Text + @"</td>
+                        <td colspan='2' align='left'> <b> Date:</b></td>                                                                                       
+                        <td colspan='3' align='left'>" + dat + @" </td>                                                                                             
+                        </tr>    
+                        <tr>
+                        <td colspan='10' align='left'><b>  </b></td>                                                                                
+                        </tr>             
+                        </tbody>      
+                        </table>                                                                                             
+                    </center>");
                 sb.Append(@"<table border='0' style='border-collapse:collapse;' width='100%'>
-                        <tr> 
-                            <th colspan='4' bgcolor='#3399ff'  align = 'center'><b><font color='white'> Step 1. Stop</font></b></th>
-                            <th colspan='16' bgcolor='gray' align = 'center'><b> Before starting work think through the task</b></th>                          
-                        </tr>  
-                        </table> 
-                        
-                        <table style ='border:solid 1px;' style='width:100%'>      
-                        <tr bgcolor='silver'>       
-                            <th colspan='17' align='left'><b>Questions </b></th>
-                            <th colspan='3' align='right'><b>Yes/No/NA</b></th>                                   
-                        </tr>         
-                        </table>
+                        <tr> 
+                            <th colspan='4' bgcolor='#3399ff'  align='center'><b><font color='white'> Step 1. Stop</font></b></th>
+                            <th colspan='16' bgcolor='gray' style='text-align:center;'  ><b> Before starting work think through the task</b></th>                          
+                        </tr>  
+                        </table> 
+                        
+                        <table style ='border:solid 0px; width:100%' bgcolor='silver'>      
+                            <tr>       
+                            <th colspan='17' align='left'><b>Questions </b></th>
+                            <th colspan='3' style='text-align:right;'><b>Yes/No/NA</b></th>
+                        </tr>     
+                        </table>");
+                sb.Append(@"<table style='border:solid 0px;' width='100%'>
+                        <tr>
+                            <td colspan='1' align='left'><b> 1. </b></td>
+                            <td colspan='16' align='left'><b> Are you fit and suitably competent to carry out the task(s) ?</b></td>
+                            <td colspan='3' align='right'><b>" + pick_1.SelectedItem + @"</b></td>
+                        </tr>");
+                sb.Append(@"
+                        <tr bgcolor='whitesmoke' style='display: block; border-bottom: 0px solid #000;'>
+                            <td colspan='1' align='left'><b> 2. </b></td >
+                            <td colspan='16' align='left'><b> Do you have the relevant permit and documentation ?</b></td>
+                            <td colspan='3' align='right'><b>"+ pick_2.SelectedItem + @"</b></td>
+                        </tr>");
+                sb.Append(@"<tr>
+                            <td colspan='1' align='left'><b> 3. </b></td >
+                            <td colspan='16' align='left'><b> Do you have the correct PPE and tools for the task(s) ? </b></td>
+                            <td colspan='3' align='right'><b>" + pick_3.SelectedItem + @"</b></td>
+                        </tr>
+                        <tr bgcolor='whitesmoke' style='display: block; border-bottom: 0px solid #000;'>
+                            <td colspan='1' align='left'><b> 4. </b></td >
+                            <td colspan='16' align='left'><b> Do you have suitable access into the work area ?</b></td>
+                            <td colspan='3' align='right'><b>" + pick_4.SelectedItem + @"</b></td>
+                        </tr>
+                        <tr style='display: block; border-bottom: 0px solid #000;'>
+                            <td colspan='20' align='left'><i> ! If you have answered no to any of the above , please inform your team leader. </i></td>
+                        </tr>
+                        </table>");
+                            sb.Append(@"<table border='0' style='border-collapse:collapse;' border=0 width='100%'>
+                                            <tr> 
+                                                <th colspan='4' bgcolor='#3399ff'  align='center'><b><font color='white'> Step 2. Think </font></b></th>
+                                                <th colspan='16' bgcolor='gray' style='text-align:center;'><b> Spot the Hazards </b></th>                          
+                                            </tr>  
+                                            </table> 
+                                             <table style ='border:solid 0px; width:100%' bgcolor='silver'>      
+                            <tr>       
+                            <th colspan='17' align='left'><b>Hazard </b></th>
+                            <th colspan='3' style='text-align:right;'><b>Yes/No</b></th>
+                        </tr>     
+                        </table>
 
-                        <table style='border:solid 1px;' width='100%'>
-                        
-                        <tr>
-                            <td colspan='1' align='left'><b> 1. </b></td >
-                            <td colspan='16' align='left'><b> Are you fit and suitably competent to carry out the task(s) ?</b></td>
-                            <td colspan='3' align='right'><b>" + pick_1.SelectedItem + @"</b></td>
-                        </tr>
-
-
-                        <tr bgcolor='whitesmoke' style='display: block; border-bottom: 1px solid #000;'>
-                            <td colspan='1' align='left'><b> 2. </b></td >
-                            <td colspan='16' align='left'><b> Do you have the relevant permit and documentation ?</b></td>
-                            <td colspan='3' align='right'><b>" + pick_2.SelectedItem + @"</b></td>
-                        </tr>
-                        
-                        <tr>
-                            <td colspan='1' align='left'><b> 3. </b></td >
-                            <td colspan='16' align='left'><b> Do you have the correct PPE and tools for the task(s) ? </b></td>
-                            <td colspan='3' align='right'><b>" + pick_3.SelectedItem + @"</b></td>
-                        </tr>
-
-                         <tr bgcolor='whitesmoke' style='display: block; border-bottom: 1px solid #000;'>
-                            <td colspan='1' align='left'><b> 4. </b></td >
-                            <td colspan='16' align='left'><b> Do you have suitable access into the work area ?</b></td>
-                            <td colspan='3' align='right'><b>" + pick_4.SelectedItem + @"</b></td>
-                        </tr>
-
-                        <tr style='display: block; border-bottom: 1px solid #000;'>
-                           
-                            <td colspan='20' align='left'><i> ! If you have answered no to any of the above , please inform your team leader. </i></td>
-                            
-                        </tr>
-                        
-                         <tr style='display: block; border-bottom: 1px solid #000;'>
-                           
-                            <td colspan='20' align='left'><br/></td>
-                            
-                        </tr>
-
-                        </table >");
-
-                sb.Append(@"<table border='0' style='border-collapse:collapse;' border=0 width='100%'>
-                        <tr> 
-                            <th colspan='4' bgcolor='#3399ff'  align='center'><b><font color='white'> Step 2. Think </font></b></th>
-                            <th colspan='16' bgcolor='gray' align = 'center'><b> Spot the Hazards </b></th>                          
-                        </tr>  
-                        </table> 
-                        
-                        <table style ='border:solid 1px;' style='width:100%'>      
-                        <tr bgcolor='silver'>       
-                            <th colspan='17' align='left'><b>Hazard </b></th>
-                            <th colspan='3' align='right'><b>Yes/No</b></th>                                   
-                        </tr>         
-                        </table>
-
-                        <table style='border:solid 1px;' width='100%'>
-                        
-                        <tr>
-                            <td colspan='1' align='left'><b> 1. </b></td >
-                            <td colspan='16' align='left'><b> Slip, Trip and Fall</b></td>
-                            <td colspan='3' align='right'><b>" + pick2_1.SelectedItem + @"</b></td>
-                        </tr>
+                        <table style='border:solid 0px;' width='100%'>
+                        
+                        <tr>
+                            <td colspan='1' align='left'><b> 1. </b></td >
+                            <td colspan='16' align='left'><b> Slip, Trip and Fall</b></td>
+                            <td colspan='3' align='right'><b>" + pick2_1.SelectedItem + @"</b></td>
+                        </tr>
 
 
-                        <tr bgcolor='whitesmoke' style='display: block; border-bottom: 1px solid #000;'>
-                            <td colspan='1' align='left'><b> 2. </b></td >
-                            <td colspan='16' align='left'><b> Work at height </b></td>
-                            <td colspan='3' align='right'><b>" + pick2_2.SelectedItem + @"</b></td>
-                        </tr>
-                        
-                        <tr>
-                            <td colspan='1' align='left'><b> 3. </b></td >
-                            <td colspan='16' align='left'><b> Risk of fall from height</b></td>
-                            <td colspan='3' align='right'><b>" + pick2_3.SelectedItem + @" </b></td>
-                        </tr>
+                        <tr bgcolor='whitesmoke' style='display: block; border-bottom: 0px solid #000;'>
+                            <td colspan='1' align='left'><b> 2. </b></td >
+                            <td colspan='16' align='left'><b> Work at height </b></td>
+                            <td colspan='3' align='right'><b>" + pick2_2.SelectedItem + @"</b></td>
+                        </tr>
+                        
+                        <tr>
+                            <td colspan='1' align='left'><b> 3. </b></td >
+                            <td colspan='16' align='left'><b> Risk of fall from height</b></td>
+                            <td colspan='3' align='right'><b>" + pick2_3.SelectedItem + @" </b></td>
+                        </tr>
 
-                         <tr bgcolor='whitesmoke' style='display: block; border-bottom: 1px solid #000;'>
-                            <td colspan='1' align='left'><b> 4. </b></td >
-                            <td colspan='16' align='left'><b> Lifting operation / Cranes</b></td>
-                            <td colspan='3' align='right'><b>" + pick2_4.SelectedItem + @"</b></td>
-                        </tr>
+                         <tr bgcolor='whitesmoke' style='display: block; border-bottom: 0px solid #000;'>
+                            <td colspan='1' align='left'><b> 4. </b></td >
+                            <td colspan='16' align='left'><b> Lifting operation / Cranes</b></td>
+                            <td colspan='3' align='right'><b>" + pick2_4.SelectedItem + @"</b></td>
+                        </tr>
 
-                        <tr>
-                            <td colspan='1' align='left'><b> 5. </b></td >
-                            <td colspan='16' align='left'><b> Falling / Ejected Objects</b></td>
-                            <td colspan='3' align='right'><b>" + pick2_5.SelectedItem + @"</b></td>
-                        </tr>
+                        <tr>
+                            <td colspan='1' align='left'><b> 5. </b></td >
+                            <td colspan='16' align='left'><b> Falling / Ejected Objects</b></td>
+                            <td colspan='3' align='right'><b>" + pick2_5.SelectedItem + @"</b></td>
+                        </tr>
 
-                         <tr bgcolor='whitesmoke' style='display: block; border-bottom: 1px solid #000;'>
-                            <td colspan='1' align='left'><b> 6. </b></td >
-                            <td colspan='16' align='left'><b> Moving Vehicles</b></td>
-                            <td colspan='3' align='right'><b>" + pick2_6.SelectedItem + @"</b></td>
-                        </tr>
+                         <tr bgcolor='whitesmoke' style='display: block; border-bottom: 0px solid #000;'>
+                            <td colspan='1' align='left'><b> 6. </b></td >
+                            <td colspan='16' align='left'><b> Moving Vehicles</b></td>
+                            <td colspan='3' align='right'><b>" + pick2_6.SelectedItem + @"</b></td>
+                        </tr>
 
-                        <tr>
-                            <td colspan='1' align='left'><b> 7. </b></td >
-                            <td colspan='16' align='left'><b>Overturning / Collapse</b></td>
-                            <td colspan='3' align='right'><b>" + pick2_7.SelectedItem + @"</b></td>
-                        </tr>
+                        <tr>
+                            <td colspan='1' align='left'><b> 7. </b></td >
+                            <td colspan='16' align='left'><b>Overturning / Collapse</b></td>
+                            <td colspan='3' align='right'><b>" + pick2_7.SelectedItem + @"</b></td>
+                        </tr>
 
-                         <tr bgcolor='whitesmoke' style='display: block; border-bottom: 1px solid #000;'>
-                            <td colspan='1' align='left'><b> 8. </b></td >
-                            <td colspan='16' align='left'><b>Electricity (HV/LV)</b></td>
-                            <td colspan='3' align='right'><b>" + pick2_8.SelectedItem + @"</b></td>
-                        </tr>
+                         <tr bgcolor='whitesmoke' style='display: block; border-bottom: 0px solid #000;'>
+                            <td colspan='1' align='left'><b> 8. </b></td >
+                            <td colspan='16' align='left'><b>Electricity (HV/LV)</b></td>
+                            <td colspan='3' align='right'><b>" + pick2_8.SelectedItem + @"</b></td>
+                        </tr>
 
-                        <tr>
-                            <td colspan='1' align='left'><b> 9. </b></td >
-                            <td colspan='16' align='left'><b>Pressurised equipment</b></td>
-                            <td colspan='3' align='right'><b>" + pick2_9.SelectedItem + @"</b></td>
-                        </tr>
-
-
-                        <tr bgcolor='whitesmoke' style='display: block; border-bottom: 1px solid #000;'>
-                            <td colspan='1' align='left'><b> 10. </b></td >
-                            <td colspan='16' align='left'><b> Sharp Objects </b></td>
-                            <td colspan='3' align='right'><b>" + pick2_10.SelectedItem + @"</b></td>
-                        </tr>
-                        
-                        <tr>
-                            <td colspan='1' align='left'><b> 11. </b></td >
-                            <td colspan='16' align='left'><b>Manual Handling / Ergonomics</b></td>
-                            <td colspan='3' align='right'><b>" + pick2_11.SelectedItem + @"</b></td>
-                        </tr>
-
-                         <tr bgcolor='whitesmoke' style='display: block; border-bottom: 1px solid #000;'>
-                            <td colspan='1' align='left'><b> 12. </b></td >
-                            <td colspan='16' align='left'><b>Confined / Restricted space</b></td>
-                            <td colspan='3' align='right'><b>" + pick2_12.SelectedItem + @"</b></td>
-                        </tr>
-
-                        <tr>
-                            <td colspan='1' align='left'><b> 13. </b></td >
-                            <td colspan='16' align='left'><b> Poor lighting</b></td>
-                            <td colspan='3' align='right'><b>" + pick2_13.SelectedItem + @"</b></td>
-                        </tr>
-
-                         <tr bgcolor='whitesmoke' style='display: block; border-bottom: 1px solid #000;'>
-                            <td colspan='1' align='left'><b> 14. </b></td >
-                            <td colspan='16' align='left'><b> Fire / Explosion Risk</b></td>
-                            <td colspan='3' align='right'><b>" + pick2_14.SelectedItem + @"</b></td>
-                        </tr>
-
-                        <tr>
-                            <td colspan='1' align='left'><b> 15. </b></td >
-                            <td colspan='16' align='left'><b>Dust, Fumes, Gases, Vapours</b></td>
-                            <td colspan='3' align='right'><b>" + pick2_15.SelectedItem + @"</b></td>
-                        </tr>
-
-                         <tr bgcolor='whitesmoke' style='display: block; border-bottom: 1px solid #000;'>
-                            <td colspan='1' align='left'><b> 16. </b></td >
-                            <td colspan='16' align='left'><b>Hazardous material</b></td>
-                            <td colspan='3' align='right'><b>" + pick2_16.SelectedItem + @"</b></td>
-                        </tr>
-
-                         <tr>
-                            <td colspan='1' align='left'><b> 17. </b></td >
-                            <td colspan='16' align='left'><b>Noise</b></td>
-                            <td colspan='3' align='right'><b>" + pick2_17.SelectedItem + @"</b></td>
-                        </tr>
+                        <tr>
+                            <td colspan='1' align='left'><b> 9. </b></td >
+                            <td colspan='16' align='left'><b>Pressurised equipment</b></td>
+                            <td colspan='3' align='right'><b>" + pick2_9.SelectedItem + @"</b></td>
+                        </tr>
 
 
-                        <tr bgcolor='whitesmoke' style='display: block; border-bottom: 1px solid #000;'>
-                            <td colspan='1' align='left'><b> 18. </b></td >
-                            <td colspan='16' align='left'><b> Vibration </b></td>
-                            <td colspan='3' align='right'><b>" + pick2_18.SelectedItem + @"</b></td>
-                        </tr>
-                        
-                        <tr>
-                            <td colspan='1' align='left'><b> 19. </b></td >
-                            <td colspan='16' align='left'><b>High/Low humidity </b></td>
-                            <td colspan='3' align='right'><b>" + pick2_19.SelectedItem + @"</b></td>
-                        </tr>
+                        <tr bgcolor='whitesmoke' style='display: block; border-bottom: 0px solid #000;'>
+                            <td colspan='1' align='left'><b> 10. </b></td >
+                            <td colspan='16' align='left'><b> Sharp Objects </b></td>
+                            <td colspan='3' align='right'><b>" + pick2_10.SelectedItem + @"</b></td>
+                        </tr>
+                        
+                        <tr>
+                            <td colspan='1' align='left'><b> 11. </b></td >
+                            <td colspan='16' align='left'><b>Manual Handling / Ergonomics</b></td>
+                            <td colspan='3' align='right'><b>" + pick2_11.SelectedItem + @"</b></td>
+                        </tr>
 
-                         <tr bgcolor='whitesmoke' style='display: block; border-bottom: 1px solid #000;'>
-                            <td colspan='1' align='left'><b> 20. </b></td >
-                            <td colspan='16' align='left'><b>Hot/Cold temperatures</b></td>
-                            <td colspan='3' align='right'><b>" + pick2_20.SelectedItem + @"</b></td>
-                        </tr>
+                         <tr bgcolor='whitesmoke' style='display: block; border-bottom: 0px solid #000;'>
+                            <td colspan='1' align='left'><b> 12. </b></td >
+                            <td colspan='16' align='left'><b>Confined / Restricted space</b></td>
+                            <td colspan='3' align='right'><b>" + pick2_12.SelectedItem + @"</b></td>
+                        </tr>
 
-                        <tr>
-                            <td colspan='1' align='left'><b> 21. </b></td >
-                            <td colspan='16' align='left'><b>Lone working</b></td>
-                            <td colspan='3' align='right'><b>" + pick2_21.SelectedItem + @"</b></td>
-                        </tr>
+                        <tr>
+                            <td colspan='1' align='left'><b> 13. </b></td >
+                            <td colspan='16' align='left'><b> Poor lighting</b></td>
+                            <td colspan='3' align='right'><b>" + pick2_13.SelectedItem + @"</b></td>
+                        </tr>
 
-                         <tr bgcolor='whitesmoke' style='display: block; border-bottom: 1px solid #000;'>
-                            <td colspan='1' align='left'><b> 22. </b></td >
-                            <td colspan='16' align='left'><b>Specialist equipment required </b></td>
-                            <td colspan='3' align='right'><b>" + pick2_22.SelectedItem + @"</b></td>
-                        </tr>
+                         <tr bgcolor='whitesmoke' style='display: block; border-bottom: 0px solid #000;'>
+                            <td colspan='1' align='left'><b> 14. </b></td >
+                            <td colspan='16' align='left'><b> Fire / Explosion Risk</b></td>
+                            <td colspan='3' align='right'><b>" + pick2_14.SelectedItem + @"</b></td>
+                        </tr>
 
-                       
+                        <tr>
+                            <td colspan='1' align='left'><b> 15. </b></td >
+                            <td colspan='16' align='left'><b>Dust, Fumes, Gases, Vapours</b></td>
+                            <td colspan='3' align='right'><b>" + pick2_15.SelectedItem + @"</b></td>
+                        </tr>
 
-                        <tr  style='display: block; border-bottom: 1px solid #000;'>
-                            <td colspan='1' align='left'><b> 24. </b></td >
-                            <td colspan='16' align='left'><b>Risk to you from others </b></td>
-                            <td colspan='3' align='right'><b>" + pick2_24.SelectedItem + @"</b></td>
-                        </tr>
+                         <tr bgcolor='whitesmoke' style='display: block; border-bottom: 0px solid #000;'>
+                            <td colspan='1' align='left'><b> 16. </b></td >
+                            <td colspan='16' align='left'><b>Hazardous material</b></td>
+                            <td colspan='3' align='right'><b>" + pick2_16.SelectedItem + @"</b></td>
+                        </tr>
 
-                        <tr>
-                            <td colspan='20'>
-                            <table width='100%'>
-                            <tr>
-                            <td colspan='1' align='left'><b> 25. </b></td >
-                            <td colspan='3' align='left'><b>Others:</b></td>
-                            <td colspan='10' align='right'><b>" + step2_other.Text + @"</b></td>
-                            </tr>
-                            </table>
-                            </td>
-                        </tr>
+                         <tr>
+                            <td colspan='1' align='left'><b> 17. </b></td >
+                            <td colspan='16' align='left'><b>Noise</b></td>
+                            <td colspan='3' align='right'><b>" + pick2_17.SelectedItem + @"</b></td>
+                        </tr>
 
-                        <tr style='display: block; border-bottom: 1px solid #000;'>
-                           
-                            <td colspan='20' align='left'><i> ! Where hazard is identified it should be covered by a generic or specific Risk Assessment </i></td>
-                            
-                        </tr>
-                        
-                        <tr style='display: block; border-bottom: 1px solid #000;'>
-                           
-                            <td colspan='17' align='left'><h4>Are you and your colleagues safe?</h4></td>
-                            <td colspan='3' align='right'><b>" + pick3_1.SelectedItem + @"</b></td>
-                        </tr>
 
-                         <tr style='display: block; border-bottom: 1px solid #000;'>
-                           
-                            <td colspan='20' align='left'><br/></td>
-                            
-                        </tr>
+                        <tr bgcolor='whitesmoke' style='display: block; border-bottom: 0px solid #000;'>
+                            <td colspan='1' align='left'><b> 18. </b></td >
+                            <td colspan='16' align='left'><b> Vibration </b></td>
+                            <td colspan='3' align='right'><b>" + pick2_18.SelectedItem + @"</b></td>
+                        </tr>
+                        
+                        <tr>
+                            <td colspan='1' align='left'><b> 19. </b></td >
+                            <td colspan='16' align='left'><b>High/Low humidity </b></td>
+                            <td colspan='3' align='right'><b>" + pick2_19.SelectedItem + @"</b></td>
+                        </tr>
 
-                        </table>");
+                         <tr bgcolor='whitesmoke' style='display: block; border-bottom: 0px solid #000;'>
+                            <td colspan='1' align='left'><b> 20. </b></td >
+                            <td colspan='16' align='left'><b>Hot/Cold temperatures</b></td>
+                            <td colspan='3' align='right'><b>" + pick2_20.SelectedItem + @"</b></td>
+                        </tr>
 
+                        <tr>
+                            <td colspan='1' align='left'><b> 21. </b></td >
+                            <td colspan='16' align='left'><b>Lone working</b></td>
+                            <td colspan='3' align='right'><b>" + pick2_21.SelectedItem + @"</b></td>
+                        </tr>
+
+                         <tr bgcolor='whitesmoke' style='display: block; border-bottom: 0px solid #000;'>
+                            <td colspan='1' align='left'><b> 22. </b></td >
+                            <td colspan='16' align='left'><b>Specialist equipment required </b></td>
+                            <td colspan='3' align='right'><b>" + pick2_22.SelectedItem + @"</b></td>
+                        </tr>
+
+                       
+
+                        <tr  style='display: block; border-bottom: 0px solid #000;'>
+                            <td colspan='1' align='left'><b> 24. </b></td >
+                            <td colspan='16' align='left'><b>Risk to you from others </b></td>
+                            <td colspan='3' align='right'><b>" + pick2_24.SelectedItem + @"</b></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan='20'>
+                            <table width='100%'>
+                            <tr>
+                            <td colspan='1' align='left'><b> 25. </b></td >
+                            <td colspan='3' align='left'><b>Others:</b></td>
+                            <td colspan='10' align='right'><b>" + step2_other.Text + @"</b></td>
+                            </tr>
+                            </table>
+                            </td>
+                        </tr>
+
+                        <tr style='display: block; border-bottom: 0px solid #000;'>
+                           
+                            <td colspan='20' align='left'><i> ! Where hazard is identified it should be covered by a generic or specific Risk Assessment </i></td>
+                            
+                        </tr>
+                        
+                        <tr style='display: block; border-bottom: 0px solid #000;'>
+                           
+                            <td colspan='17' align='left'><h4>Are you and your colleagues safe?</h4></td>
+                            <td colspan='3' align='right'><b>" + pick3_1.SelectedItem + @"</b></td>
+                        </tr>
+
+                         
+
+                        </table>");
                 sb.Append(@"<table border='1' style='border-collapse:collapse;' border=1 width='100%'>
-                        <tr> 
-                            <th colspan='4' bgcolor='#3399ff'  align = 'center'><b><font color='white'> Step 3. Action </font></b></th>
-                            <th colspan='16' bgcolor='gray' align = 'center'><b> Assess the risk of any significant hazards identified earlier  </b></th>                          
-                        </tr>  
-                      <font size='2'>
-                        <tr bgcolork='silver'>       
-                            <th colspan='14' align='left'><b>Hazard identified/ Control Measures </b></th>
-                            <th colspan='2' align='center'><b><font size='12px'> Likelihood</font> </b></th>
-                            <th colspan='2' align='center'><b><font size='12px'> Severity </font></b></th>   
-                            <th colspan='2' align='center'><b> <font size='12px'>Residual Risk </font></b></th> 
-                        </tr>         
-                    </font>
-                        <tr>
-                        <td>
-                            <table border='0'>
-                            <tr>
-                                <td valign='center' align='left'><b> 1. </b></td >
-                             </tr>                          
-                           </table>
-                        </td>
-                        <td colspan='19'>
-                            <table border='0'>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_fill1.Text + @" </b></td>
-                                    <td colspan='2' align='center'>" + pick_a_up.SelectedItem + @"</td>
-                                    <td colspan='2' align='center'>" + pick_b_up.SelectedItem + @"</td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up_color + ";'>" + txt_resultup.Text + @"</td>
-                                </tr>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_fill2.Text + @" </b></td>
-                                    <td colspan='2' align='center'>" + pick_a_low.SelectedItem + @" </td>
-                                    <td colspan='2' align='center'>" + pick_b_low.SelectedItem + @" </td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low_color + ";'> " + txt_resultlow.Text + @" </td>
-                                </tr>
-                            </table>
-                        </td>
-                        </tr>");
-
+                        <tr> 
+                            <th colspan='4' bgcolor='#3399ff'  align = 'center'><b><font color='white'> Step 3. Action </font></b></th>
+                            <th colspan='16' bgcolor='gray' align = 'center'><b> Assess the risk of any significant hazards identified earlier  </b></th>                          
+                        </tr>  
+                      <font size='2'>
+                        <tr bgcolork='silver'>       
+                            <th colspan='14' align='left'><b>Hazard identified/ Control Measures </b></th>
+                            <th colspan='2' align='center'><b><font size='12px'> Likelihood</font> </b></th>
+                            <th colspan='2' align='center'><b><font size='12px'> Severity </font></b></th>   
+                            <th colspan='2' align='center'><b> <font size='12px'>Residual Risk </font></b></th> 
+                        </tr>         
+                    </font>
+                        <tr>
+                        <td>
+                            <table border='0'>
+                            <tr>
+                                <td valign='center' align='left'><b> 1. </b></td >
+                             </tr>                          
+                           </table>
+                        </td>
+                        <td colspan='19'>
+                            <table border='0'>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_fill1.Text + @" </b></td>
+                                    <td colspan='2' align='center'>" + pick_a_up.SelectedItem + @"</td>
+                                    <td colspan='2' align='center'>" + pick_b_up.SelectedItem + @"</td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up_color + ";'>" + txt_resultup.Text + @"</td>
+                                </tr>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_fill2.Text + @" </b></td>
+                                    <td colspan='2' align='center'>" + pick_a_low.SelectedItem + @" </td>
+                                    <td colspan='2' align='center'>" + pick_b_low.SelectedItem + @" </td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low_color + ";'> " + txt_resultlow.Text + @" </td>
+                                </tr>
+                            </table>
+                        </td>
+                        </tr>");
                 if (fill_text_11.IsVisible == true)
                 {
                     sb.Append(@"<tr bgcolor='whitesmoke'>
-                        <td>
-                            <table border='0'>
-                            <tr>
-                                <td valign='center' align='left'><b> 2. </b></td >
-                             </tr>                          
-                           </table>
-                        </td>
-                        <td colspan='19'>
-                            <table border='0'>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_Check_text11.Text + @" </b></td>
-                                    <td colspan='2' align='center'>" + pick_a_up1.SelectedItem + @"</td>
-                                    <td colspan='2' align='center'>" + pick_b_up1.SelectedItem + @"</td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up1_color + ";'>" + txt_resultup1.Text + @"</td>
-                                </tr>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_Check_text12.Text + @"  </b></td>
-                                    <td colspan='2' align='center'>" + pick_a_low1.SelectedItem + @" </td>
-                                    <td colspan='2' align='center'>" + pick_b_low1.SelectedItem + @" </td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low1_color + ";'>" + txt_resultlow1.Text + @"</td>
-                                </tr>
-                            </table>
-                        </td>
-                        </tr>");
+                        <td>
+                            <table border='0'>
+                            <tr>
+                                <td valign='center' align='left'><b> 2. </b></td >
+                             </tr>                          
+                           </table>
+                        </td>
+                        <td colspan='19'>
+                            <table border='0'>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_Check_text11.Text + @" </b></td>
+                                    <td colspan='2' align='center'>" + pick_a_up1.SelectedItem + @"</td>
+                                    <td colspan='2' align='center'>" + pick_b_up1.SelectedItem + @"</td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up1_color + ";'>" + txt_resultup1.Text + @"</td>
+                                </tr>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_Check_text12.Text + @"  </b></td>
+                                    <td colspan='2' align='center'>" + pick_a_low1.SelectedItem + @" </td>
+                                    <td colspan='2' align='center'>" + pick_b_low1.SelectedItem + @" </td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low1_color + ";'>" + txt_resultlow1.Text + @"</td>
+                                </tr>
+                            </table>
+                        </td>
+                        </tr>");
 
                 }
                 if (fill_text_21.IsVisible == true)
                 {
                     sb.Append(@"<tr>
-                        <td>
-                            <table border='0'>
-                            <tr>
-                                <td valign='center' align='left'><b> 3. </b></td >
-                             </tr>                          
-                           </table>
-                        </td>
-                        <td colspan='19'>
-                            <table border='0'>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_Check_text21.Text + @" </b></td>
-                                    <td colspan='2' align='center'>" + pick_a_up2.SelectedItem + @"</td>
-                                    <td colspan='2' align='center'>" + pick_b_up2.SelectedItem + @"</td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up2_color + ";'>" + txt_resultup2.Text + @"</td>
-                                </tr>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_Check_text22.Text + @" </b></td>
-                                    <td colspan='2' align='center'> " + pick_a_low2.SelectedItem + @" </td>
-                                    <td colspan='2' align='center'> " + pick_b_low2.SelectedItem + @" </td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low2_color + ";'>" + txt_resultlow2.Text + @"</td>
-                                </tr>
-                            </table>
-                        </td>
-                        </tr>");
+                        <td>
+                            <table border='0'>
+                            <tr>
+                                <td valign='center' align='left'><b> 3. </b></td >
+                             </tr>                          
+                           </table>
+                        </td>
+                        <td colspan='19'>
+                            <table border='0'>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_Check_text21.Text + @" </b></td>
+                                    <td colspan='2' align='center'>" + pick_a_up2.SelectedItem + @"</td>
+                                    <td colspan='2' align='center'>" + pick_b_up2.SelectedItem + @"</td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up2_color + ";'>" + txt_resultup2.Text + @"</td>
+                                </tr>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_Check_text22.Text + @" </b></td>
+                                    <td colspan='2' align='center'> " + pick_a_low2.SelectedItem + @" </td>
+                                    <td colspan='2' align='center'> " + pick_b_low2.SelectedItem + @" </td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low2_color + ";'>" + txt_resultlow2.Text + @"</td>
+                                </tr>
+                            </table>
+                        </td>
+                        </tr>");
 
                 }
                 if (fill_text_31.IsVisible == true)
                 {
                     sb.Append(@"<tr bgcolor='whitesmoke'>
-                        <td>
-                            <table border='0'>
-                            <tr>
-                                <td valign='center' align='left'><b> 4. </b></td >
-                             </tr>                          
-                           </table>
-                        </td>
-                        <td colspan='19'>
-                            <table border='0'>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_Check_text31.Text + @" </b></td>
-                                    <td colspan='2' align='center'>" + pick_a_up3.SelectedItem + @"</td>
-                                    <td colspan='2' align='center'>" + pick_b_up3.SelectedItem + @"</td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up3_color + ";'>" + txt_resultup3.Text + @"</td>
-                                </tr>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_Check_text32.Text + @" </b></td>
-                                    <td colspan='2' align='center'> " + pick_a_low3.SelectedItem + @" </td>
-                                    <td colspan='2' align='center'> " + pick_b_low3.SelectedItem + @" </td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low3_color + ";'>" + txt_resultlow3.Text + @"</td>
-                                </tr>
-                            </table>
-                        </td>
-                        </tr>");
+                        <td>
+                            <table border='0'>
+                            <tr>
+                                <td valign='center' align='left'><b> 4. </b></td >
+                             </tr>                          
+                           </table>
+                        </td>
+                        <td colspan='19'>
+                            <table border='0'>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_Check_text31.Text + @" </b></td>
+                                    <td colspan='2' align='center'>" + pick_a_up3.SelectedItem + @"</td>
+                                    <td colspan='2' align='center'>" + pick_b_up3.SelectedItem + @"</td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up3_color + ";'>" + txt_resultup3.Text + @"</td>
+                                </tr>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_Check_text32.Text + @" </b></td>
+                                    <td colspan='2' align='center'> " + pick_a_low3.SelectedItem + @" </td>
+                                    <td colspan='2' align='center'> " + pick_b_low3.SelectedItem + @" </td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low3_color + ";'>" + txt_resultlow3.Text + @"</td>
+                                </tr>
+                            </table>
+                        </td>
+                        </tr>");
 
                 }
                 if (fill_text_41.IsVisible == true)
                 {
                     sb.Append(@"<tr>
-                        <td>
-                            <table border='0'>
-                            <tr>
-                                <td valign='center' align='left'><b> 5. </b></td >
-                             </tr>                          
-                           </table>
-                        </td>
-                        <td colspan='19'>
-                            <table border='0'>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_Check_text41.Text + @" </b></td>
-                                    <td colspan='2' align='center'>" + pick_a_up4.SelectedItem + @"</td>
-                                    <td colspan='2' align='center'>" + pick_b_up4.SelectedItem + @"</td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up4_color + ";'>" + txt_resultup4.Text + @"</td>
-                                </tr>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_Check_text42.Text + @" </b></td>
-                                    <td colspan='2' align='center'> " + pick_a_low4.SelectedItem + @" </td>
-                                    <td colspan='2' align='center'> " + pick_b_low4.SelectedItem + @" </td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low4_color + ";'>" + txt_resultlow4.Text + @"</td>
-                                </tr>
-                            </table>
-                        </td>
-                        </tr>");
+                        <td>
+                            <table border='0'>
+                            <tr>
+                                <td valign='center' align='left'><b> 5. </b></td >
+                             </tr>                          
+                           </table>
+                        </td>
+                        <td colspan='19'>
+                            <table border='0'>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_Check_text41.Text + @" </b></td>
+                                    <td colspan='2' align='center'>" + pick_a_up4.SelectedItem + @"</td>
+                                    <td colspan='2' align='center'>" + pick_b_up4.SelectedItem + @"</td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up4_color + ";'>" + txt_resultup4.Text + @"</td>
+                                </tr>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_Check_text42.Text + @" </b></td>
+                                    <td colspan='2' align='center'> " + pick_a_low4.SelectedItem + @" </td>
+                                    <td colspan='2' align='center'> " + pick_b_low4.SelectedItem + @" </td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low4_color + ";'>" + txt_resultlow4.Text + @"</td>
+                                </tr>
+                            </table>
+                        </td>
+                        </tr>");
 
                 }
                 if (fill_text_51.IsVisible == true)
                 {
                     sb.Append(@"<tr bgcolor='whitesmoke'>
-                        <td>
-                            <table border='0'>
-                            <tr>
-                                <td valign='center' align='left'><b> 6. </b></td >
-                             </tr>                          
-                           </table>
-                        </td>
-                        <td colspan='19'>
-                            <table border='0'>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_Check_text51.Text + @" </b></td>
-                                    <td colspan='2' align='center'>" + pick_a_up5.SelectedItem + @"</td>
-                                    <td colspan='2' align='center'>" + pick_b_up5.SelectedItem + @"</td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up5_color + ";'>" + txt_resultup5.Text + @"</td>
-                                </tr>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_Check_text52.Text + @" </b></td>
-                                    <td colspan='2' align='center'> " + pick_a_low5.SelectedItem + @" </td>
-                                    <td colspan='2' align='center'> " + pick_b_low5.SelectedItem + @" </td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low5_color + ";'>" + txt_resultlow5.Text + @"</td>
-                                </tr>
-                            </table>
-                        </td>
-                        </tr>");
+                        <td>
+                            <table border='0'>
+                            <tr>
+                                <td valign='center' align='left'><b> 6. </b></td >
+                             </tr>                          
+                           </table>
+                        </td>
+                        <td colspan='19'>
+                            <table border='0'>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_Check_text51.Text + @" </b></td>
+                                    <td colspan='2' align='center'>" + pick_a_up5.SelectedItem + @"</td>
+                                    <td colspan='2' align='center'>" + pick_b_up5.SelectedItem + @"</td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up5_color + ";'>" + txt_resultup5.Text + @"</td>
+                                </tr>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_Check_text52.Text + @" </b></td>
+                                    <td colspan='2' align='center'> " + pick_a_low5.SelectedItem + @" </td>
+                                    <td colspan='2' align='center'> " + pick_b_low5.SelectedItem + @" </td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low5_color + ";'>" + txt_resultlow5.Text + @"</td>
+                                </tr>
+                            </table>
+                        </td>
+                        </tr>");
 
                 }
                 if (fill_text_61.IsVisible == true)
                 {
                     sb.Append(@"<tr>
-                        <td>
-                            <table border='0'>
-                            <tr>
-                                <td valign='center' align='left'><b> 7. </b></td >
-                             </tr>                          
-                           </table>
-                        </td>
-                        <td colspan='19'>
-                            <table border='0'>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_Check_text61.Text + @" </b></td>
-                                    <td colspan='2' align='center'>" + pick_a_up6.SelectedItem + @"</td>
-                                    <td colspan='2' align='center'>" + pick_b_up6.SelectedItem + @"</td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up6_color + ";'>" + txt_resultup6.Text + @"</td>
-                                </tr>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_Check_text62.Text + @" </b></td>
-                                    <td colspan='2' align='center'> " + pick_a_low6.SelectedItem + @" </td>
-                                    <td colspan='2' align='center'> " + pick_b_low6.SelectedItem + @" </td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low6_color + ";'>" + txt_resultlow6.Text + @"</td>
-                                </tr>
-                            </table>
-                        </td>
-                        </tr>");
+                        <td>
+                            <table border='0'>
+                            <tr>
+                                <td valign='center' align='left'><b> 7. </b></td >
+                             </tr>                          
+                           </table>
+                        </td>
+                        <td colspan='19'>
+                            <table border='0'>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_Check_text61.Text + @" </b></td>
+                                    <td colspan='2' align='center'>" + pick_a_up6.SelectedItem + @"</td>
+                                    <td colspan='2' align='center'>" + pick_b_up6.SelectedItem + @"</td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up6_color + ";'>" + txt_resultup6.Text + @"</td>
+                                </tr>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_Check_text62.Text + @" </b></td>
+                                    <td colspan='2' align='center'> " + pick_a_low6.SelectedItem + @" </td>
+                                    <td colspan='2' align='center'> " + pick_b_low6.SelectedItem + @" </td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low6_color + ";'>" + txt_resultlow6.Text + @"</td>
+                                </tr>
+                            </table>
+                        </td>
+                        </tr>");
 
                 }
                 if (fill_text_71.IsVisible == true)
                 {
                     sb.Append(@"<tr bgcolor='whitesmoke'>
-                        <td>
-                            <table border='0'>
-                            <tr>
-                                <td valign='center' align='left'><b> 8. </b></td >
-                             </tr>                          
-                           </table>
-                        </td>
-                        <td colspan='19'>
-                            <table border='0'>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_Check_text71.Text + @" </b></td>
-                                    <td colspan='2' align='center'>" + pick_a_up7.SelectedItem + @"</td>
-                                    <td colspan='2' align='center'>" + pick_b_up7.SelectedItem + @"</td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up7_color + ";'>" + txt_resultup7.Text + @"</td>
-                                </tr>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_Check_text72.Text + @" </b></td>
-                                    <td colspan='2' align='center'> " + pick_a_low7.SelectedItem + @" </td>
-                                    <td colspan='2' align='center'> " + pick_b_low7.SelectedItem + @" </td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low7_color + ";'>" + txt_resultlow7.Text + @"</td>
-                                </tr>
-                            </table>
-                        </td>
-                        </tr>");
+                        <td>
+                            <table border='0'>
+                            <tr>
+                                <td valign='center' align='left'><b> 8. </b></td >
+                             </tr>                          
+                           </table>
+                        </td>
+                        <td colspan='19'>
+                            <table border='0'>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_Check_text71.Text + @" </b></td>
+                                    <td colspan='2' align='center'>" + pick_a_up7.SelectedItem + @"</td>
+                                    <td colspan='2' align='center'>" + pick_b_up7.SelectedItem + @"</td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up7_color + ";'>" + txt_resultup7.Text + @"</td>
+                                </tr>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_Check_text72.Text + @" </b></td>
+                                    <td colspan='2' align='center'> " + pick_a_low7.SelectedItem + @" </td>
+                                    <td colspan='2' align='center'> " + pick_b_low7.SelectedItem + @" </td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low7_color + ";'>" + txt_resultlow7.Text + @"</td>
+                                </tr>
+                            </table>
+                        </td>
+                        </tr>");
 
                 }
                 if (fill_text_81.IsVisible == true)
                 {
                     sb.Append(@"<tr>
-                        <td>
-                            <table border='0'>
-                            <tr>
-                                <td valign='center' align='left'><b> 9. </b></td >
-                             </tr>                          
-                           </table>
-                        </td>
-                        <td colspan='19'>
-                            <table border='0'>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_Check_text81.Text + @" </b></td>
-                                    <td colspan='2' align='center'>" + pick_a_up8.SelectedItem + @"</td>
-                                    <td colspan='2' align='center'>" + pick_b_up8.SelectedItem + @"</td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up8_color + ";'>" + txt_resultup8.Text + @"</td>
-                                </tr>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_Check_text82.Text + @" </b></td>
-                                    <td colspan='2' align='center'> " + pick_a_low8.SelectedItem + @" </td>
-                                    <td colspan='2' align='center'> " + pick_b_low8.SelectedItem + @" </td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low8_color + ";'>" + txt_resultlow8.Text + @"</td>
-                                </tr>
-                            </table>
-                        </td>
-                        </tr>");
+                        <td>
+                            <table border='0'>
+                            <tr>
+                                <td valign='center' align='left'><b> 9. </b></td >
+                             </tr>                          
+                           </table>
+                        </td>
+                        <td colspan='19'>
+                            <table border='0'>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_Check_text81.Text + @" </b></td>
+                                    <td colspan='2' align='center'>" + pick_a_up8.SelectedItem + @"</td>
+                                    <td colspan='2' align='center'>" + pick_b_up8.SelectedItem + @"</td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up8_color + ";'>" + txt_resultup8.Text + @"</td>
+                                </tr>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_Check_text82.Text + @" </b></td>
+                                    <td colspan='2' align='center'> " + pick_a_low8.SelectedItem + @" </td>
+                                    <td colspan='2' align='center'> " + pick_b_low8.SelectedItem + @" </td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low8_color + ";'>" + txt_resultlow8.Text + @"</td>
+                                </tr>
+                            </table>
+                        </td>
+                        </tr>");
 
                 }
                 if (fill_text_91.IsVisible == true)
                 {
                     sb.Append(@"<tr bgcolor='whitesmoke'>
-                        <td>
-                            <table border='0'>
-                            <tr>
-                                <td valign='center' align='left'><b> 10. </b></td >
-                             </tr>                          
-                           </table>
-                        </td>
-                        <td colspan='19'>
-                            <table border='0'>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_Check_text91.Text + @" </b></td>
-                                    <td colspan='2' align='center'>" + pick_a_up9.SelectedItem + @"</td>
-                                    <td colspan='2' align='center'>" + pick_b_up9.SelectedItem + @"</td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up9_color + ";'>" + txt_resultup9.Text + @"</td>
-                                </tr>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_Check_text92.Text + @" </b></td>
-                                    <td colspan='2' align='center'> " + pick_a_low9.SelectedItem + @" </td>
-                                    <td colspan='2' align='center'> " + pick_b_low9.SelectedItem + @" </td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low9_color + ";'>" + txt_resultlow9.Text + @"</td>
-                                </tr>
-                            </table>
-                        </td>
-                        </tr>");
+                        <td>
+                            <table border='0'>
+                            <tr>
+                                <td valign='center' align='left'><b> 10. </b></td >
+                             </tr>                          
+                           </table>
+                        </td>
+                        <td colspan='19'>
+                            <table border='0'>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_Check_text91.Text + @" </b></td>
+                                    <td colspan='2' align='center'>" + pick_a_up9.SelectedItem + @"</td>
+                                    <td colspan='2' align='center'>" + pick_b_up9.SelectedItem + @"</td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up9_color + ";'>" + txt_resultup9.Text + @"</td>
+                                </tr>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_Check_text92.Text + @" </b></td>
+                                    <td colspan='2' align='center'> " + pick_a_low9.SelectedItem + @" </td>
+                                    <td colspan='2' align='center'> " + pick_b_low9.SelectedItem + @" </td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low9_color + ";'>" + txt_resultlow9.Text + @"</td>
+                                </tr>
+                            </table>
+                        </td>
+                        </tr>");
 
                 }
                 if (fill_text_101.IsVisible == true)
                 {
                     sb.Append(@"<tr>
-                        <td>
-                            <table border='0'>
-                            <tr>
-                                <td valign='center' align='left'><b> 11. </b></td >
-                             </tr>                          
-                           </table>
-                        </td>
-                        <td colspan='19'>
-                            <table border='0'>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_Check_text101.Text + @" </b></td>
-                                    <td colspan='2' align='center'>" + pick_a_up10.SelectedItem + @"</td>
-                                    <td colspan='2' align='center'>" + pick_b_up10.SelectedItem + @"</td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up10_color + ";'>" + txt_resultup10.Text + @"</td>
-                                </tr>
-                                <tr>
-                                    <td colspan='13' align='left'><b> " + txt_Check_text102.Text + @" </b></td>
-                                    <td colspan='2' align='center'> " + pick_a_low10.SelectedItem + @" </td>
-                                    <td colspan='2' align='center'> " + pick_b_low10.SelectedItem + @" </td>
-                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low10_color + ";'>" + txt_resultlow10.Text + @"</td>
-                                </tr>
-                            </table>
-                        </td>
-                        </tr>");
+                        <td>
+                            <table border='0'>
+                            <tr>
+                                <td valign='center' align='left'><b> 11. </b></td >
+                             </tr>                          
+                           </table>
+                        </td>
+                        <td colspan='19'>
+                            <table border='0'>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_Check_text101.Text + @" </b></td>
+                                    <td colspan='2' align='center'>" + pick_a_up10.SelectedItem + @"</td>
+                                    <td colspan='2' align='center'>" + pick_b_up10.SelectedItem + @"</td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_up10_color + ";'>" + txt_resultup10.Text + @"</td>
+                                </tr>
+                                <tr>
+                                    <td colspan='13' align='left'><b> " + txt_Check_text102.Text + @" </b></td>
+                                    <td colspan='2' align='center'> " + pick_a_low10.SelectedItem + @" </td>
+                                    <td colspan='2' align='center'> " + pick_b_low10.SelectedItem + @" </td>
+                                    <td colspan='2' align='center' style='font-size:14px;color:" + c_low10_color + ";'>" + txt_resultlow10.Text + @"</td>
+                                </tr>
+                            </table>
+                        </td>
+                        </tr>");
 
                 }
                 sb.Append("</table>");
-                sb.Append("<br/><br/>");
-                sb.Append("</main>");
-                sb2.Append("<main>");
-                sb2.Append("<table border='1' width='95%'  align='center' style='width=70%; border: solid gray 1px; border-collapse: collapse;' >");
-                sb2.Append("<thead >");
-                sb2.Append("<tr bgcolor='gray'>");
-                sb2.Append("<th valign='center' style = 'padding:20px; border: solid black 1px;' colspan='10'><font color='white'><b>Likelihood</b></font></th >");
-                sb2.Append("</tr >");
-                sb2.Append("</thead >");
-                sb2.Append("<thead >");
-                sb2.Append("<tr bgcolor='silver' >");
-                sb2.Append("<th colspan='4' style = 'padding:20px; border: solid black 1px;'><b></b></th >");
-                sb2.Append("<th  style = 'padding:20px; border: solid black 1px;'> Zero to very low </th >");
-                sb2.Append("<th  style = 'padding:20px; border: solid black 1px;'> Very Unlikely </th >");
-                sb2.Append("<th  style = 'padding:20px; border: solid black 1px;'> Unlikely </th >");
-                sb2.Append("<th  style = 'padding:20px; border: solid black 1px;'> Likely </th >");
-                sb2.Append("<th  style = 'padding:20px; border: solid black 1px;'> Very Likely </th >");
-                sb2.Append("<th  style = 'padding:20px; border: solid black 1px;'> Almost Certain </th >");
-                sb2.Append("</tr >");
-                sb2.Append("<tr bgcolor='whitesmoke'>");
-                sb2.Append("<th colspan='4' style = 'padding:20px; border: solid black 1px;'><b>SEVERITY</b></th >");
-                sb2.Append("<th  style = 'padding:20px; border: solid black 1px;'>0</th >");
-                sb2.Append("<th  style = 'padding:20px; border: solid black 1px;'>1</th >");
-                sb2.Append("<th  style = 'padding:20px; border: solid black 1px;'>2</th >");
-                sb2.Append("<th  style = 'padding:20px; border: solid black 1px;'>3</th >");
-                sb2.Append("<th  style = 'padding:20px; border: solid black 1px;'>4</th >");
-                sb2.Append("<th  style = 'padding:20px; border: solid black 1px;'>5</th >");
-                sb2.Append("</tr >");
-                sb2.Append("</thead >");
-                sb2.Append("<tbody >");
-                sb2.Append("<tr >");
+                sb.Append("<table border='1' width='95%'  align='center' style='width=70%; border: solid gray 1px; border-collapse: collapse;' >");
+                sb.Append("<thead >");
+                sb.Append("<tr bgcolor='gray'>");
+                sb.Append("<th valign='center' style = 'padding:20px; border: solid black 1px;' colspan='10'><font color='black'><b>Likelihood</b></font></th >");
+                sb.Append("</tr >");
+                sb.Append("</thead >");
+                sb.Append("<thead >");
+                sb.Append("<tr bgcolor='silver' >");
+                sb.Append("<th colspan='4' style = 'padding:20px; border: solid black 1px;'><b></b></th >");
+                sb.Append("<th  style = 'padding:20px; border: solid black 1px;'> Zero to very low </th >");
+                sb.Append("<th  style = 'padding:20px; border: solid black 1px;'> Very Unlikely </th >");
+                sb.Append("<th  style = 'padding:20px; border: solid black 1px;'> Unlikely </th >");
+                sb.Append("<th  style = 'padding:20px; border: solid black 1px;'> Likely </th >");
+                sb.Append("<th  style = 'padding:20px; border: solid black 1px;'> Very Likely </th >");
+                sb.Append("<th  style = 'padding:20px; border: solid black 1px;'> Almost Certain </th >");
+                sb.Append("</tr >");
+                sb.Append("<tr bgcolor='whitesmoke'>");
+                sb.Append("<th colspan='4' style = 'padding:20px; border: solid black 1px;'><b>SEVERITY</b></th >");
+                sb.Append("<th  style = 'padding:20px; border: solid black 1px;'>0</th >");
+                sb.Append("<th  style = 'padding:20px; border: solid black 1px;'>1</th >");
+                sb.Append("<th  style = 'padding:20px; border: solid black 1px;'>2</th >");
+                sb.Append("<th  style = 'padding:20px; border: solid black 1px;'>3</th >");
+                sb.Append("<th  style = 'padding:20px; border: solid black 1px;'>4</th >");
+                sb.Append("<th  style = 'padding:20px; border: solid black 1px;'>5</th >");
+                sb.Append("</tr >");
+                sb.Append("</thead >");
+                sb.Append("<tbody >");
                 string colWin = "";
                 string colLoose = "";
                 string colHome = "";
                 string colPercentage = "";
                 string colName = "";
                 string colStreak = "";
-                var abc = DummyDataProvider.GetTeams();
-                foreach (var def in abc)
+                
+                foreach (var def in Teams)
                 {
 
                     if (def.Name < 3)
@@ -2962,38 +3014,33 @@ namespace HealthSafetyApp.Views.Topics
                         colPercentage = "#f22626";
                     if (def.Streak > 6)
                         colStreak = "#f22626";
-                    sb2.Append("<td colspan='3'  align = 'left' style = 'padding:20px;border: solid black 1px;' >" + def.Logo + "</td > ");
-                    sb2.Append("<td  align = 'center' style = 'padding:20px;border: solid black 1px;' >" + def.SNo + "</td > ");
-                    sb2.Append("<td bgcolor=" + colName + " align = 'center' style = 'padding:20px;border: solid black 1px;' >" + def.Name + " </td > ");
-                    sb2.Append("<td bgcolor=" + colWin + " align = 'center' style = 'padding:20px;border: solid black 1px;' >" + def.Win + " </td > ");
-                    sb2.Append("<td bgcolor=" + colLoose + " align = 'center' style = 'padding:20px;border: solid black 1px;' >" + def.Loose + " </td >");
-                    sb2.Append("<td bgcolor=" + colHome + " align = 'center' style = 'padding:20px;border: solid black 1px;' >" + def.Home + " </td >");
-                    sb2.Append("<td bgcolor=" + colPercentage + " align = 'center' style = 'padding:20px;border: solid black 1px;' >" + def.Percentage + " </td >");
-                    sb2.Append("<td bgcolor=" + colStreak + " align = 'center' style = 'padding:20px;border: solid black 1px;' >" + def.Streak + " </td >");
+                    sb.Append("<tr >");
+                    sb.Append("<td colspan='3'  align = 'left' style = 'padding:20px;border: solid black 1px;' >" + def.Logo + "</td > ");
+                    sb.Append("<td  align = 'center' style = 'padding:20px;border: solid black 1px;' >" + def.SNo + "</td > ");
+                    sb.Append("<td bgcolor=" + colName + " align = 'center' style = 'padding:20px;border: solid black 1px;' >" + def.Name + " </td > ");
+                    sb.Append("<td bgcolor=" + colWin + " align = 'center' style = 'padding:20px;border: solid black 1px;' >" + def.Win + " </td > ");
+                    sb.Append("<td bgcolor=" + colLoose + " align = 'center' style = 'padding:20px;border: solid black 1px;' >" + def.Loose + " </td >");
+                    sb.Append("<td bgcolor=" + colHome + " align = 'center' style = 'padding:20px;border: solid black 1px;' >" + def.Home + " </td >");
+                    sb.Append("<td bgcolor=" + colPercentage + " align = 'center' style = 'padding:20px;border: solid black 1px;' >" + def.Percentage + " </td >");
+                    sb.Append("<td bgcolor=" + colStreak + " align = 'center' style = 'padding:20px;border: solid black 1px;' >" + def.Streak + " </td >");
+                    sb.Append("</tr >");
                 }
-                sb2.Append("</tr >");
-                sb2.Append("</tbody >");
-                sb2.Append("</table >");
-
-                sb2.Append(@"<br><table style='width: 100%;' border='1'>
-                    <tbody>
-                    <tr>
-                    <td colspan='3' rowspan='1'> Signature(s) </td>
-                    <td colspan='7' rowspan='2'>  </td>
-                    <td colspan='2' rowspan='1'> Date: </td>
-                    <td colspan='3' rowspan='2'> </td>
-                    <td colspan='2' rowspan='1'> Review Date: </td>
-                    <td colspan='3' rowspan='2'> </td>
-                    </tr>
-                    </tbody>
-                    </table>");
-                sb2.Append("</main>");
-
-
-                StringReader sr = new StringReader(sb.ToString());
-                StringReader sr2 = new StringReader(sb2.ToString());
                 
-
+                sb.Append("</tbody >");
+                sb.Append("</table >");
+                sb.Append(@"<table style='width: 100%;' border='1'>
+                <tbody>
+                <tr>
+                <td colspan='3' rowspan='1'> Signature(s) </td>
+                <td colspan='7' rowspan='2'>  </td>
+                <td colspan='2' rowspan='1'> Date: </td>
+                <td colspan='3' rowspan='2'> </td>
+                <td colspan='2' rowspan='1'> Review Date: </td>
+                <td colspan='3' rowspan='2'> </td>
+                </tr>
+                </tbody>
+                </table>");
+                sb.Append(" </main");
                 IFolder rootFolder = await PCLStorage.FileSystem.Current.GetFolderFromPathAsync(path);
                 IFolder folder = await rootFolder.CreateFolderAsync("HandSAppPdf", CreationCollisionOption.OpenIfExists);
 
@@ -3008,31 +3055,18 @@ namespace HealthSafetyApp.Views.Topics
 
                 using (var fs = await file.OpenAsync(FileAccess.ReadAndWrite))
                 {
-
-
-                    //Create a new PDF document.
-                    PdfDocument document = new PdfDocument();
-                    //Add a page to the document.
-                    PdfPage page = document.Pages.Add();
-                    //Create PDF graphics for the page.
-                    PdfGraphics graphics = page.Graphics;
-                    //Set the standard font.
-                    PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
-                    //Draw the text.
-                    graphics.DrawString("Hello World!!!", font, PdfBrushes.Black, new PointF(0, 0));
-                    //Save the document.
-                    document.Save(fs);
-                    //Close the document.
-                    document.Close(true);
-                    
+                    ConverterProperties properties = new ConverterProperties();
+                    PdfWriter writer = new PdfWriter(fs);
+                    PdfDocument pdfDocument = new PdfDocument(writer);
+                    pdfDocument.SetDefaultPageSize(PageSize.A4);
+                    var doc = HtmlConverter.ConvertToDocument(sb.ToString(), pdfDocument, properties);
+                    doc.Close();
                     await DisplayAlert("File Path", file.Path.ToString(), "OK");
-                    //UserDialogs.Instance.ShowSuccess("PDF saved at:" + file.Path.ToString(), 2000);
-
                 }
             }
             catch (Exception ex)
             {
-
+                Crashes.TrackError(ex);
             }
 
     }
@@ -3048,6 +3082,7 @@ namespace HealthSafetyApp.Views.Topics
         {
             try
             {
+               
                 if (Device.RuntimePlatform == Device.iOS)
                 {
                     await PCLGenarateJson(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
@@ -3056,219 +3091,228 @@ namespace HealthSafetyApp.Views.Topics
                 {
                     await PCLGenarateJson("/storage/emulated/0/");
                 }
-                
+
             }
-            catch (FormatException) { }
+            catch (Exception ex) {
+                Crashes.TrackError(ex);
+            }
         }
         public async Task PCLGenarateJson(string path)
         {
-            string dat = "";
-            var dt = datepicker.Date;
-            dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
-                            IFile file;
-                            DraftFields s = new DraftFields
-                            {
-                                Name1 = txt_name.Text,
-                                ProjectName = txt_projname.Text,
-                                SiteName = txt_sitename.Text,
-                                Date = dat,
+            try
+            {
+                string dat = "";
+                var dt = datepicker.Date;
+                dat = dt.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern);
+                IFile file;
+                DraftFields s = new DraftFields
+                {
+                    Name1 = txt_name.Text,
+                    ProjectName = txt_projname.Text,
+                    SiteName = txt_sitename.Text,
+                    Date = dat,
 
-                                pick1 = pick_1.Items[pick_1.SelectedIndex],
-                                pick2 = pick_2.Items[pick_2.SelectedIndex],
-                                pick3 = pick_3.Items[pick_3.SelectedIndex],
-                                pick4 = pick_4.Items[pick_4.SelectedIndex],
+                    pick1 = pick_1.Items[pick_1.SelectedIndex],
+                    pick2 = pick_2.Items[pick_2.SelectedIndex],
+                    pick3 = pick_3.Items[pick_3.SelectedIndex],
+                    pick4 = pick_4.Items[pick_4.SelectedIndex],
 
-                                pick2_1 = pick2_1.Items[pick2_1.SelectedIndex],
-                                pick2_2 = pick2_2.Items[pick2_2.SelectedIndex],
-                                pick2_3 = pick2_3.Items[pick2_3.SelectedIndex],
-                                pick2_4 = pick2_4.Items[pick2_4.SelectedIndex],
-                                pick2_5 = pick2_5.Items[pick2_5.SelectedIndex],
-                                pick2_6 = pick2_6.Items[pick2_6.SelectedIndex],
-                                pick2_7 = pick2_7.Items[pick2_7.SelectedIndex],
-                                pick2_8 = pick2_8.Items[pick2_8.SelectedIndex],
+                    pick2_1 = pick2_1.Items[pick2_1.SelectedIndex],
+                    pick2_2 = pick2_2.Items[pick2_2.SelectedIndex],
+                    pick2_3 = pick2_3.Items[pick2_3.SelectedIndex],
+                    pick2_4 = pick2_4.Items[pick2_4.SelectedIndex],
+                    pick2_5 = pick2_5.Items[pick2_5.SelectedIndex],
+                    pick2_6 = pick2_6.Items[pick2_6.SelectedIndex],
+                    pick2_7 = pick2_7.Items[pick2_7.SelectedIndex],
+                    pick2_8 = pick2_8.Items[pick2_8.SelectedIndex],
 
-                                pick2_9 = pick2_9.Items[pick2_9.SelectedIndex],
-                                pick2_10 = pick2_10.Items[pick2_10.SelectedIndex],
-                                pick2_11 = pick2_11.Items[pick2_11.SelectedIndex],
-                                pick2_12 = pick2_12.Items[pick2_12.SelectedIndex],
-                                pick2_13 = pick2_13.Items[pick2_13.SelectedIndex],
-                                pick2_14 = pick2_14.Items[pick2_14.SelectedIndex],
-                                pick2_15 = pick2_15.Items[pick2_15.SelectedIndex],
-                                pick2_16 = pick2_16.Items[pick2_16.SelectedIndex],
+                    pick2_9 = pick2_9.Items[pick2_9.SelectedIndex],
+                    pick2_10 = pick2_10.Items[pick2_10.SelectedIndex],
+                    pick2_11 = pick2_11.Items[pick2_11.SelectedIndex],
+                    pick2_12 = pick2_12.Items[pick2_12.SelectedIndex],
+                    pick2_13 = pick2_13.Items[pick2_13.SelectedIndex],
+                    pick2_14 = pick2_14.Items[pick2_14.SelectedIndex],
+                    pick2_15 = pick2_15.Items[pick2_15.SelectedIndex],
+                    pick2_16 = pick2_16.Items[pick2_16.SelectedIndex],
 
 
-                                pick2_17 = pick2_17.Items[pick2_17.SelectedIndex],
-                                pick2_18 = pick2_18.Items[pick2_18.SelectedIndex],
-                                pick2_19 = pick2_19.Items[pick2_19.SelectedIndex],
-                                pick2_20 = pick2_20.Items[pick2_20.SelectedIndex],
-                                pick2_21 = pick2_21.Items[pick2_21.SelectedIndex],
-                                pick2_22 = pick2_22.Items[pick2_22.SelectedIndex],
-                                pick2_23 = pick2_23.Items[pick2_23.SelectedIndex],
-                                pick2_24 = pick2_24.Items[pick2_24.SelectedIndex],
+                    pick2_17 = pick2_17.Items[pick2_17.SelectedIndex],
+                    pick2_18 = pick2_18.Items[pick2_18.SelectedIndex],
+                    pick2_19 = pick2_19.Items[pick2_19.SelectedIndex],
+                    pick2_20 = pick2_20.Items[pick2_20.SelectedIndex],
+                    pick2_21 = pick2_21.Items[pick2_21.SelectedIndex],
+                    pick2_22 = pick2_22.Items[pick2_22.SelectedIndex],
+                    pick2_23 = pick2_23.Items[pick2_23.SelectedIndex],
+                    pick2_24 = pick2_24.Items[pick2_24.SelectedIndex],
 
-                                step2_other = step2_other.Text,
-                                pick3_1 = pick3_1.Items[pick3_1.SelectedIndex],
+                    step2_other = step2_other.Text,
+                    pick3_1 = pick3_1.Items[pick3_1.SelectedIndex],
 
-                                fillable_txt1 = txt_fill1.Text,
-                                fillable_txt2 = txt_fill2.Text,
-                                fillable_txt3 = txt_Check_text11.Text,
-                                fillable_txt4 = txt_Check_text12.Text,
-                                fillable_txt5 = txt_Check_text21.Text,
-                                fillable_txt6 = txt_Check_text22.Text,
-                                fillable_txt7 = txt_Check_text31.Text,
-                                fillable_txt8 = txt_Check_text32.Text,
-                                fillable_txt9 = txt_Check_text41.Text,
-                                fillable_txt10 = txt_Check_text42.Text,
-                                fillable_txt11 = txt_Check_text51.Text,
-                                fillable_txt12 = txt_Check_text52.Text,
-                                fillable_txt13 = txt_Check_text61.Text,
-                                fillable_txt14 = txt_Check_text62.Text,
-                                fillable_txt15 = txt_Check_text71.Text,
-                                fillable_txt16 = txt_Check_text72.Text,
-                                fillable_txt17 = txt_Check_text81.Text,
-                                fillable_txt18 = txt_Check_text82.Text,
-                                fillable_txt19 = txt_Check_text91.Text,
-                                fillable_txt20 = txt_Check_text92.Text,
-                                fillable_txt21 = txt_Check_text101.Text,
-                                fillable_txt22 = txt_Check_text102.Text,
-                                a_up = a_up.ToString(),
-                                b_up = b_up.ToString(),
-                                c_up = c_up.ToString(),
-                                a_low = a_low.ToString(),
-                                b_low = b_low.ToString(),
-                                c_low = c_low.ToString(),
-                                a_new = a_new.ToString(),
-                                b_new = b_new.ToString(),
-                                c_new = c_new.ToString(),
-                                a_new1 = a_new1.ToString(),
-                                b_new1 = b_new1.ToString(),
-                                c_new1 = c_new1.ToString(),
-                                a_new2 = a_new2.ToString(),
-                                b_new2 = b_new2.ToString(),
-                                c_new2 = c_new2.ToString(),
-                                a_up1 = a_up1.ToString(),
-                                b_up1 = b_up1.ToString(),
-                                c_up1 = c_up1.ToString(),
-                                a_low1 = a_low1.ToString(),
-                                b_low1 = b_low1.ToString(),
-                                c_low1 = c_low1.ToString(),
+                    fillable_txt1 = txt_fill1.Text,
+                    fillable_txt2 = txt_fill2.Text,
+                    fillable_txt3 = txt_Check_text11.Text,
+                    fillable_txt4 = txt_Check_text12.Text,
+                    fillable_txt5 = txt_Check_text21.Text,
+                    fillable_txt6 = txt_Check_text22.Text,
+                    fillable_txt7 = txt_Check_text31.Text,
+                    fillable_txt8 = txt_Check_text32.Text,
+                    fillable_txt9 = txt_Check_text41.Text,
+                    fillable_txt10 = txt_Check_text42.Text,
+                    fillable_txt11 = txt_Check_text51.Text,
+                    fillable_txt12 = txt_Check_text52.Text,
+                    fillable_txt13 = txt_Check_text61.Text,
+                    fillable_txt14 = txt_Check_text62.Text,
+                    fillable_txt15 = txt_Check_text71.Text,
+                    fillable_txt16 = txt_Check_text72.Text,
+                    fillable_txt17 = txt_Check_text81.Text,
+                    fillable_txt18 = txt_Check_text82.Text,
+                    fillable_txt19 = txt_Check_text91.Text,
+                    fillable_txt20 = txt_Check_text92.Text,
+                    fillable_txt21 = txt_Check_text101.Text,
+                    fillable_txt22 = txt_Check_text102.Text,
+                    a_up = a_up.ToString(),
+                    b_up = b_up.ToString(),
+                    c_up = c_up.ToString(),
+                    a_low = a_low.ToString(),
+                    b_low = b_low.ToString(),
+                    c_low = c_low.ToString(),
+                    a_new = a_new.ToString(),
+                    b_new = b_new.ToString(),
+                    c_new = c_new.ToString(),
+                    a_new1 = a_new1.ToString(),
+                    b_new1 = b_new1.ToString(),
+                    c_new1 = c_new1.ToString(),
+                    a_new2 = a_new2.ToString(),
+                    b_new2 = b_new2.ToString(),
+                    c_new2 = c_new2.ToString(),
+                    a_up1 = a_up1.ToString(),
+                    b_up1 = b_up1.ToString(),
+                    c_up1 = c_up1.ToString(),
+                    a_low1 = a_low1.ToString(),
+                    b_low1 = b_low1.ToString(),
+                    c_low1 = c_low1.ToString(),
 
-                                a_up2 = a_up2.ToString(),
-                                b_up2 = b_up2.ToString(),
-                                c_up2 = c_up2.ToString(),
-                                a_low2 = a_low2.ToString(),
-                                b_low2 = b_low2.ToString(),
-                                c_low2 = c_low2.ToString(),
+                    a_up2 = a_up2.ToString(),
+                    b_up2 = b_up2.ToString(),
+                    c_up2 = c_up2.ToString(),
+                    a_low2 = a_low2.ToString(),
+                    b_low2 = b_low2.ToString(),
+                    c_low2 = c_low2.ToString(),
 
-                                a_up3 = a_up3.ToString(),
-                                b_up3 = b_up3.ToString(),
-                                c_up3 = c_up3.ToString(),
-                                a_low3 = a_low3.ToString(),
-                                b_low3 = b_low3.ToString(),
-                                c_low3 = c_low3.ToString(),
+                    a_up3 = a_up3.ToString(),
+                    b_up3 = b_up3.ToString(),
+                    c_up3 = c_up3.ToString(),
+                    a_low3 = a_low3.ToString(),
+                    b_low3 = b_low3.ToString(),
+                    c_low3 = c_low3.ToString(),
 
-                                a_up4 = a_up4.ToString(),
-                                b_up4 = b_up4.ToString(),
-                                c_up4 = c_up4.ToString(),
-                                a_low4 = a_low4.ToString(),
-                                b_low4 = b_low4.ToString(),
-                                c_low4 = c_low4.ToString(),
+                    a_up4 = a_up4.ToString(),
+                    b_up4 = b_up4.ToString(),
+                    c_up4 = c_up4.ToString(),
+                    a_low4 = a_low4.ToString(),
+                    b_low4 = b_low4.ToString(),
+                    c_low4 = c_low4.ToString(),
 
-                                a_up5 = a_up5.ToString(),
-                                b_up5 = b_up5.ToString(),
-                                c_up5 = c_up5.ToString(),
-                                a_low5 = a_low5.ToString(),
-                                b_low5 = b_low5.ToString(),
-                                c_low5 = c_low5.ToString(),
+                    a_up5 = a_up5.ToString(),
+                    b_up5 = b_up5.ToString(),
+                    c_up5 = c_up5.ToString(),
+                    a_low5 = a_low5.ToString(),
+                    b_low5 = b_low5.ToString(),
+                    c_low5 = c_low5.ToString(),
 
-                                a_up6 = a_up6.ToString(),
-                                b_up6 = b_up6.ToString(),
-                                c_up6 = c_up6.ToString(),
-                                a_low6 = a_low6.ToString(),
-                                b_low6 = b_low6.ToString(),
-                                c_low6 = c_low6.ToString(),
+                    a_up6 = a_up6.ToString(),
+                    b_up6 = b_up6.ToString(),
+                    c_up6 = c_up6.ToString(),
+                    a_low6 = a_low6.ToString(),
+                    b_low6 = b_low6.ToString(),
+                    c_low6 = c_low6.ToString(),
 
-                                a_up7 = a_up7.ToString(),
-                                b_up7 = b_up7.ToString(),
-                                c_up7 = c_up7.ToString(),
-                                a_low7 = a_low7.ToString(),
-                                b_low7 = b_low7.ToString(),
-                                c_low7 = c_low7.ToString(),
+                    a_up7 = a_up7.ToString(),
+                    b_up7 = b_up7.ToString(),
+                    c_up7 = c_up7.ToString(),
+                    a_low7 = a_low7.ToString(),
+                    b_low7 = b_low7.ToString(),
+                    c_low7 = c_low7.ToString(),
 
-                                a_up8 = a_up8.ToString(),
-                                b_up8 = b_up8.ToString(),
-                                c_up8 = c_up8.ToString(),
-                                a_low8 = a_low8.ToString(),
-                                b_low8 = b_low8.ToString(),
-                                c_low8 = c_low8.ToString(),
+                    a_up8 = a_up8.ToString(),
+                    b_up8 = b_up8.ToString(),
+                    c_up8 = c_up8.ToString(),
+                    a_low8 = a_low8.ToString(),
+                    b_low8 = b_low8.ToString(),
+                    c_low8 = c_low8.ToString(),
 
-                                a_up9 = a_up9.ToString(),
-                                b_up9 = b_up9.ToString(),
-                                c_up9 = c_up9.ToString(),
-                                a_low9 = a_low9.ToString(),
-                                b_low9 = b_low9.ToString(),
-                                c_low9 = c_low9.ToString(),
+                    a_up9 = a_up9.ToString(),
+                    b_up9 = b_up9.ToString(),
+                    c_up9 = c_up9.ToString(),
+                    a_low9 = a_low9.ToString(),
+                    b_low9 = b_low9.ToString(),
+                    c_low9 = c_low9.ToString(),
 
-                                a_up10 = a_up10.ToString(),
-                                b_up10 = b_up10.ToString(),
-                                c_up10 = c_up10.ToString(),
-                                a_low10 = a_low10.ToString(),
-                                b_low10 = b_low10.ToString(),
-                                c_low10 = c_low10.ToString(),
-                                add_btn1 = txt_fill1.IsVisible,
-                                add_btn2 = fill_text_11.IsVisible,
-                                add_btn3 = fill_text_21.IsVisible,
-                                add_btn4 = fill_text_31.IsVisible,
-                                add_btn5 = fill_text_41.IsVisible,
-                                add_btn6 = fill_text_51.IsVisible,
-                                add_btn7 = fill_text_61.IsVisible,
-                                add_btn8 = fill_text_71.IsVisible,
-                                add_btn9 = fill_text_81.IsVisible,
-                                add_btn10 = fill_text_91.IsVisible,
-                                add_btn11 = fill_text_101.IsVisible,
-                                img1 = img1.Text,
-                                img2 = img2.Text,
-                                img3 = img3.Text,
-                                img4 = img4.Text,
-                                img5 = img5.Text,
-                                img6 = img6.Text,
-                                img7 = img7.Text,
-                                img8 = img8.Text,
-                                img9 = img9.Text,
-                                img10 = img10.Text,
+                    a_up10 = a_up10.ToString(),
+                    b_up10 = b_up10.ToString(),
+                    c_up10 = c_up10.ToString(),
+                    a_low10 = a_low10.ToString(),
+                    b_low10 = b_low10.ToString(),
+                    c_low10 = c_low10.ToString(),
+                    add_btn1 = txt_fill1.IsVisible,
+                    add_btn2 = fill_text_11.IsVisible,
+                    add_btn3 = fill_text_21.IsVisible,
+                    add_btn4 = fill_text_31.IsVisible,
+                    add_btn5 = fill_text_41.IsVisible,
+                    add_btn6 = fill_text_51.IsVisible,
+                    add_btn7 = fill_text_61.IsVisible,
+                    add_btn8 = fill_text_71.IsVisible,
+                    add_btn9 = fill_text_81.IsVisible,
+                    add_btn10 = fill_text_91.IsVisible,
+                    add_btn11 = fill_text_101.IsVisible,
+                    img1 = img1.Text,
+                    img2 = img2.Text,
+                    img3 = img3.Text,
+                    img4 = img4.Text,
+                    img5 = img5.Text,
+                    img6 = img6.Text,
+                    img7 = img7.Text,
+                    img8 = img8.Text,
+                    img9 = img9.Text,
+                    img10 = img10.Text,
 
-                                CheckBox1data = txt_Check2_text.Text,
-                                CheckBox2data = txt_Check2_text.Text,
-                                Teams = DummyDataProvider.GetTeams()
-                            };
+                    CheckBox1data = txt_Check2_text.Text,
+                    CheckBox2data = txt_Check2_text.Text,
+                    Teams = this.Teams
+                };
 
-                            string jsonContents = JsonConvert.SerializeObject(s);
+                string jsonContents = JsonConvert.SerializeObject(s);
 
-                            IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(path);
-                            IFolder folder = await rootFolder.CreateFolderAsync("HandSAppDrafts", CreationCollisionOption.OpenIfExists);
-                            if (filname != "1")
-                            { file = await folder.CreateFileAsync(filname, CreationCollisionOption.ReplaceExisting); }
-                            else
-                            {
-                                string fnam = await InputBox(this.Navigation);
-                                if (fnam is null) { return; }
-                                else
-                                {
-                                    if (fnam == "") { fnam = "Draft_DRA.json"; } else { fnam = fnam + "_DRA.json"; }
-                                }
-                                file = await folder.CreateFileAsync(fnam, CreationCollisionOption.GenerateUniqueName);
-                            }
-                            using (var fs = await file.OpenAsync(FileAccess.ReadAndWrite))
-                            {
-                                using (StreamWriter textWriter = new StreamWriter(fs))
-                                {
-                                    textWriter.Write(jsonContents);
+                IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(path);
+                IFolder folder = await rootFolder.CreateFolderAsync("HandSAppDrafts", CreationCollisionOption.OpenIfExists);
+                if (filname != "1")
+                { file = await folder.CreateFileAsync(filname, CreationCollisionOption.ReplaceExisting); }
+                else
+                {
+                    string fnam = await InputBox(this.Navigation);
+                    if (fnam is null) { return; }
+                    else
+                    {
+                        if (fnam == "") { fnam = "Draft_DRA.json"; } else { fnam = fnam + "_DRA.json"; }
+                    }
+                    file = await folder.CreateFileAsync(fnam, CreationCollisionOption.GenerateUniqueName);
+                }
+                using (var fs = await file.OpenAsync(FileAccess.ReadAndWrite))
+                {
+                    using (StreamWriter textWriter = new StreamWriter(fs))
+                    {
+                        textWriter.Write(jsonContents);
 
-                                }
+                    }
 
-                            }
-                            await DisplayAlert("File Path", file.Path.ToString(), "OK");
-                            //UserDialogs.Instance.ShowSuccess("Draft saved at:" + file.Path.ToString(), 2000);
+                }
+                await DisplayAlert("File Path", file.Path.ToString(), "OK");
+                //UserDialogs.Instance.ShowSuccess("Draft saved at:" + file.Path.ToString(), 2000);
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+            }
                         
         }
 
