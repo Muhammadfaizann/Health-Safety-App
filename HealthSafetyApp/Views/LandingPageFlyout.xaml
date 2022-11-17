@@ -8,7 +8,7 @@
    <ScrollView>
             <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="20" Spacing="10">
-                <Image  Source="TM.png" VerticalOptions="Center" HorizontalOptions="Start"/>
+                <Image  Source="Frame_30.png" VerticalOptions="Center" HorizontalOptions="Start"/>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" >
                     <BoxView HeightRequest="0.5" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black" />
                     <Label Text="Contact Us">

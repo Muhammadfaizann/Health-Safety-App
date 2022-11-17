@@ -8,7 +8,7 @@
              >
     <StackLayout Padding="40,0,40,40" VerticalOptions="Center"  
                      HorizontalOptions="FillAndExpand" x:DataType="vm:LoginViewModel">
-        <Image  Source="TM.png" VerticalOptions="Start" HorizontalOptions="Center"/>
+        <Image  Source="Frame_30.png" VerticalOptions="Start" HorizontalOptions="Center"/>
         <Label Text="Hello" FontSize="40" HorizontalOptions="Start"
                FontFamily="PoppinsBold" TextColor="{StaticResource HealthSafetyGreen}"
                FontAttributes="Bold"/>

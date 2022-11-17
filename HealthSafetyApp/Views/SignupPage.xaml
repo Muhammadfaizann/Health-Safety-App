@@ -9,7 +9,7 @@
              x:Class="HealthSafetyApp.Views.SignupPage">
     
   <Grid RowDefinitions="auto,auto,auto,auto">
-       <Grid Grid.Row="0" ColumnDefinitions="50,*" HeightRequest="40" Margin="10,10,10,0">
+       <Grid Grid.Row="0" ColumnDefinitions="50,*" HeightRequest="40" Margin="10,30,10,0">
             <Image Grid.Column="0" HorizontalOptions="Center" >
                         <Image.Source>
                             <FontImageSource
@@ -24,7 +24,7 @@
             </Image>
         </Grid>
        
-        <Image Grid.Row="1" Source="TM.png" VerticalOptions="Start" HorizontalOptions="Center"/>
+        <Image Grid.Row="1" Source="Frame_30.png" VerticalOptions="Start" HorizontalOptions="Center"/>
       
         <Grid
             Grid.Row="2"
