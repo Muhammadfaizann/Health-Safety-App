@@ -15,7 +15,7 @@
                                 FontFamily="fontAwesomeSolid"
                                 Glyph="{x:Static fontAwesone:FontAwesomeIcons.Bars}"
                                 Size="Large"
-                                Color="Black" />
+                                Color="Black"/>
                         </Image.Source>
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="MenuBarTapped"></TapGestureRecognizer>
